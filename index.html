@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banda Sainath | Agricultural Economist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #1c2330;
+    --accent: #3fb950;
+    --accent2: #58a6ff;
+    --gold: #d4a843;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --border: #30363d;
+    --card: #161b22;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 48px;
+    background: rgba(13,17,23,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Animated background */
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(63,185,80,0.08) 0%, transparent 70%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  #hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(88,166,255,0.06) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite reverse;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+  }
+
+  .hero-text { position: relative; z-index: 1; }
+
+  .hero-badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(63,185,80,0.35);
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 8px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent2);
+    letter-spacing: 0.06em;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-bio {
+    color: var(--muted);
+    font-size: 0.97rem;
+    max-width: 520px;
+    margin-bottom: 36px;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #0d1117;
+    font-weight: 500;
+  }
+  .btn-primary:hover { background: #56d364; transform: translateY(-1px); }
+  .btn-outline {
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: transparent;
+  }
+  .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); transform: translateY(-1px); }
+
+  .hero-photo-side {
+    position: relative; z-index: 1;
+    animation: fadeUp 0.6s 0.2s ease both;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .photo-frame {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 3px solid var(--border);
+    overflow: hidden;
+    background: var(--bg3);
+    position: relative;
+    box-shadow: 0 0 0 8px rgba(63,185,80,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: var(--muted);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+  }
+  .stat-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .stat-card:hover { border-color: var(--accent); }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 90px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.4;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin-bottom: 40px;
+    line-height: 1.2;
+  }
+
+  /* ── RESEARCH INTERESTS ── */
+  .interests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .interest-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .interest-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s;
+  }
+  .interest-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .interest-card:hover::before { transform: scaleY(1); }
+  .interest-icon { font-size: 1.8rem; margin-bottom: 10px; }
+  .interest-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .interest-desc { font-size: 0.85rem; color: var(--muted); }
+
+  /* ── EDUCATION ── */
+  .edu-timeline { display: flex; flex-direction: column; gap: 20px; }
+  .edu-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .edu-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--gold);
+    padding-top: 4px;
+    letter-spacing: 0.05em;
+  }
+  .edu-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    transition: border-color 0.2s;
+  }
+  .edu-card:hover { border-color: var(--accent2); }
+  .edu-degree {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .edu-inst { font-size: 0.88rem; color: var(--muted); margin-bottom: 6px; }
+  .edu-grade {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    background: rgba(63,185,80,0.1);
+    padding: 2px 8px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  /* ── PUBLICATIONS ── */
+  .pub-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .pub-filter {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.73rem;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--muted);
+    background: transparent;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+  .pub-filter.active, .pub-filter:hover {
+    border-color: var(--accent2);
+    color: var(--accent2);
+    background: rgba(88,166,255,0.07);
+  }
+
+  .pub-list { display: flex; flex-direction: column; gap: 14px; }
+  .pub-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    transition: border-color 0.2s;
+  }
+  .pub-item:hover { border-color: var(--border); border-left: 3px solid var(--accent2); padding-left: 21px; }
+  .pub-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.67rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .type-article { background: rgba(88,166,255,0.1); color: var(--accent2); }
+  .type-policy { background: rgba(212,168,67,0.1); color: var(--gold); }
+  .type-note { background: rgba(63,185,80,0.1); color: var(--accent); }
+  .type-chapter { background: rgba(188,140,255,0.1); color: #bc8cff; }
+  .type-submitted { background: rgba(139,148,158,0.1); color: var(--muted); }
+
+  .pub-title { font-size: 0.95rem; color: var(--text); line-height: 1.5; margin-bottom: 6px; }
+  .pub-journal { font-size: 0.82rem; color: var(--muted); font-style: italic; }
+  .pub-naas {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    margin-left: 8px;
+  }
+
+  /* ── AWARDS ── */
+  .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .award-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .award-card:hover { border-color: var(--gold); }
+  .award-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .award-text { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .skill-chip {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .skill-chip:hover { border-color: var(--accent); color: var(--accent); background: rgba(63,185,80,0.05); }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--bg2);
+    border-radius: 16px;
+    padding: 60px;
+    margin: 0 48px 90px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  #contact::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(63,185,80,0.06) 0%, transparent 70%);
+  }
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 48px;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── DIVIDER ── */
+  .full-divider {
+    height: 1px;
+    background: var(--border);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links { gap: 16px; }
+    .nav-links a { font-size: 0.68rem; }
+    #hero { padding: 100px 20px 60px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-photo-side { order: -1; }
+    section { padding: 60px 20px; }
+    #contact { padding: 40px 24px; margin: 0 20px 60px; }
+    .edu-item { grid-template-columns: 80px 1fr; }
+    footer { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Banda Sainath</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="resources.html" style="color:var(--accent);">Resources</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="padding-top:120px; max-width:100%;">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="hero-badge">Scientist · ICAR ARS</div>
+      <h1 class="hero-name">Banda <em>Sainath</em></h1>
+      <div class="hero-title">Agricultural Economist · ICAR-RCER, Patna</div>
+      <p class="hero-bio">
+        Agricultural economist specializing in environmental economics, ecosystem services, carbon farming & carbon credits, and livestock economics. Currently working on Carbon Credits in Smallholder Agriculture at ICAR Research Complex for Eastern Region, Patna, Bihar.
+      </p>
+      <div class="hero-links">
+        <a href="mailto:Sainath.banda@icar.org.in" class="btn btn-primary">✉ Contact Me</a>
+        <a href="https://scholar.google.com/citations?hl=en&user=gn7DyzAAAAAJ" target="_blank" class="btn btn-outline">Google Scholar</a>
+        <a href="https://www.researchgate.net/profile/Banda-Sainath" target="_blank" class="btn btn-outline">ResearchGate</a>
+        <a href="https://www.linkedin.com/in/banda-sainath-ars-agrileconomist-" target="_blank" class="btn btn-outline">LinkedIn</a>
+      </div>
+    </div>
+    <div class="hero-photo-side">
+      <div class="photo-frame">BS</div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number">11+</span>
+          <span class="stat-label">Publications</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">7+</span>
+          <span class="stat-label">Book Chapters</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">AIR 11</span>
+          <span class="stat-label">ICAR-SRF</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ABOUT -->
+<section id="about" class="fade-in">
+  <div class="section-label">Profile</div>
+  <h2 class="section-title">About Me</h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;">
+    <div>
+      <p style="color:var(--muted); margin-bottom:16px; font-size:0.97rem;">
+        I am a Scientist (ICAR-ARS) in the Division of Socio-Economics and Extension, ICAR Research Complex for Eastern Region, Patna, Bihar. My work sits at the intersection of natural resource economics, environmental policy, and sustainable agriculture.
+      </p>
+      <p style="color:var(--muted); margin-bottom:16px; font-size:0.97rem;">
+        My Ph.D. research focuses on the <em style="color:var(--text);">"Economic analysis of externalities of urban and peri-urban dairies in Hyderabad"</em> at ICAR-National Dairy Research Institute, Karnal.
+      </p>
+      <p style="color:var(--muted); font-size:0.97rem;">
+        Prior to ICAR, I gained industry experience as an Associate Manager at ITC (campus recruitment), and my M.Sc. research at UAS Bengaluru focused on estimating groundwater and surface water costs and use efficiency under the Godavari Command Area.
+      </p>
+    </div>
+    <div>
+      <div style="background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:24px;">
+        <div style="font-family:'DM Mono',monospace; font-size:0.72rem; color:var(--accent); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:16px;">Skills & Tools</div>
+        <div class="skills-grid">
+          <div class="skill-chip">Python</div>
+          <div class="skill-chip">R</div>
+          <div class="skill-chip">SQL</div>
+          <div class="skill-chip">Econometrics</div>
+          <div class="skill-chip">CGE Modelling</div>
+          <div class="skill-chip">ARIMA</div>
+          <div class="skill-chip">Logit/Tobit</div>
+          <div class="skill-chip">Meta-frontier</div>
+          <div class="skill-chip">NRE Tools</div>
+          <div class="skill-chip">AHP</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- RESEARCH INTERESTS -->
+<section id="research" class="fade-in">
+  <div class="section-label">Focus Areas</div>
+  <h2 class="section-title">Research Interests</h2>
+  <div class="interests-grid">
+    <div class="interest-card">
+      <div class="interest-icon">🌱</div>
+      <div class="interest-title">Carbon Farming & Green Credits</div>
+      <div class="interest-desc">Designing voluntary carbon credit frameworks for smallholder farmers; evaluating financial viability and policy effectiveness of carbon markets in India.</div>
+    </div>
+    <div class="interest-card">
+      <div class="interest-icon">🌿</div>
+      <div class="interest-title">Ecosystem Services</div>
+      <div class="interest-desc">Multi-dimensional valuation of ecosystem services and disservices from agricultural systems, including livestock and indigenous breeds.</div>
+    </div>
+    <div class="interest-card">
+      <div class="interest-icon">💧</div>
+      <div class="interest-title">Environmental Impact Assessment</div>
+      <div class="interest-desc">Estimating externality costs of irrigation and urban dairies; analysing negative externalities on farmer profitability and natural resources.</div>
+    </div>
+    <div class="interest-card">
+      <div class="interest-icon">🐄</div>
+      <div class="interest-title">Livestock Economics</div>
+      <div class="interest-desc">Economic analysis of dairy systems, milk flow patterns, livestock product consumption trends, and policy implications for the dairy sector.</div>
+    </div>
+    <div class="interest-card">
+      <div class="interest-icon">📊</div>
+      <div class="interest-title">Trade & Policy Modelling</div>
+      <div class="interest-desc">Computable General Equilibrium (CGE) modelling of trade policy shocks; distributional consequences of tariffs on India's agro-economy.</div>
+    </div>
+    <div class="interest-card">
+      <div class="interest-icon">🌾</div>
+      <div class="interest-title">Smallholder Agriculture</div>
+      <div class="interest-desc">Market integration, marketing channel choice, and socio-economic implications of climate stress for resource-poor farmers in Eastern India.</div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- EDUCATION -->
+<section id="education" class="fade-in">
+  <div class="section-label">Academic Background</div>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-timeline">
+    <div class="edu-item">
+      <div class="edu-year">2020 –<br>Present</div>
+      <div class="edu-card">
+        <div class="edu-degree">Doctor of Philosophy — Agricultural Economics</div>
+        <div class="edu-inst">ICAR-National Dairy Research Institute, Karnal, Haryana</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
+          <span class="edu-grade">CGPA 8.35</span>
+          <span style="font-family:'DM Mono',monospace; font-size:0.75rem; color:var(--muted); padding:2px 8px;">Institute Scholarship Recipient</span>
+        </div>
+        <div style="margin-top:10px; font-size:0.85rem; color:var(--muted);">
+          <em>Thesis:</em> "Economic analysis of externalities of urban and peri-urban dairies in Hyderabad"
+        </div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">2017 – 2019</div>
+      <div class="edu-card">
+        <div class="edu-degree">Master's Degree — Agricultural Economics</div>
+        <div class="edu-inst">College of Agriculture, GKVK, UAS Bengaluru, Karnataka</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
+          <span class="edu-grade">CGPA 9.43</span>
+          <span style="font-family:'DM Mono',monospace; font-size:0.75rem; color:var(--gold); padding:2px 8px;">🥇 Gold Medalist</span>
+        </div>
+        <div style="margin-top:10px; font-size:0.85rem; color:var(--muted);">
+          <em>Thesis:</em> "An economic analysis of different water use regimes in Godavari command area of Telangana"
+        </div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">2013 – 2017</div>
+      <div class="edu-card">
+        <div class="edu-degree">Bachelor's Degree — B.Sc. Agriculture</div>
+        <div class="edu-inst">Professor Jayashankar Telangana State Agricultural University, Rajendranagar, Hyderabad</div>
+        <span class="edu-grade">CGPA 8.88</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- PUBLICATIONS -->
+<section id="publications" class="fade-in">
+  <div class="section-label">Scholarly Work</div>
+  <h2 class="section-title">Publications</h2>
+
+  <div class="pub-filters">
+    <button class="pub-filter active" onclick="filterPubs('all', this)">All</button>
+    <button class="pub-filter" onclick="filterPubs('article', this)">Research Articles</button>
+    <button class="pub-filter" onclick="filterPubs('policy', this)">Policy Papers</button>
+    <button class="pub-filter" onclick="filterPubs('chapter', this)">Book Chapters</button>
+    <button class="pub-filter" onclick="filterPubs('submitted', this)">Under Review</button>
+  </div>
+
+  <div class="pub-list" id="pubList">
+
+    <div class="pub-item" data-type="article">
+      <span class="pub-type type-article">Research Article</span>
+      <div class="pub-title"><strong>Sainath, B.</strong>, Singh, A. (2026). Prioritizing Strategies for Sustainable Urban Dairy Management: Evidence using the Analytical Hierarchy Process.</div>
+      <div class="pub-journal">Indian Journal of Dairy Science <span class="pub-naas">NAAS 6.20</span></div>
+    </div>
+
+    <div class="pub-item" data-type="article">
+      <span class="pub-type type-article">Research Article</span>
+      <div class="pub-title">Mohapatra, S., <strong>Sainath, B.</strong>, KC, A., et al. (2025). Application of blockchain technology in the agri-food system: a systematic bibliometric visualization analysis and policy imperatives.</div>
+      <div class="pub-journal">Journal of Agribusiness in Developing and Emerging Economies, 15(2), 288–310. <span class="pub-naas">IF 2.3</span></div>
+    </div>
+
+    <div class="pub-item" data-type="article">
+      <span class="pub-type type-article">Research Article</span>
+      <div class="pub-title">Mukherjee, A., Roy, S., Pradhan, K., ...<strong>Sainath, B.</strong>, et al. (2025). Current challenges and solutions for the sustainability of Farmers Producer Organisations through the grassroots organizational ecosystem.</div>
+      <div class="pub-journal">Current Science, 128(7), 699. <span class="pub-naas">NAAS 7.0</span></div>
+    </div>
+
+    <div class="pub-item" data-type="article">
+      <span class="pub-type type-article">Research Article</span>
+      <div class="pub-title">Kumar, A., Kumar, R., Sarkar, S., ...<strong>Sainath, B.</strong>, et al. (2025). Comparative assessment of energy-cum-carbon flow of diverse tillage production systems for cleaner and sustainable crop production in the middle Indo-Gangetic Plains.</div>
+      <div class="pub-journal">Frontiers in Sustainable Food Systems, 9, 1597449. <span class="pub-naas">NAAS 9.10</span></div>
+    </div>
+
+    <div class="pub-item" data-type="article">
+      <span class="pub-type type-article">Research Article</span>
+      <div class="pub-title"><strong>Sainath, B.</strong> & Murthy, P.S. (2021). Economic Analysis of Irrigation Water under Different Water Use Regimes in Godavari Command Area.</div>
+      <div class="pub-journal">Economic Affairs, 66(2), 305–310.</div>
+    </div>
+
+    <div class="pub-item" data-type="article">
+      <span class="pub-type type-article">Research Article</span>
+      <div class="pub-title">Singh, D.K., Kumar, U., Sarma, K., Raman, R.K., & <strong>Sainath, B.</strong> Systems, Extent and Constraints of Tenant Farming in Bihar: An Exploratory Study.</div>
+      <div class="pub-journal">Journal of AgriSearch, 12(1), 49–53. <span class="pub-naas">NAAS 4.95</span></div>
+    </div>
+
+    <div class="pub-item" data-type="policy">
+      <span class="pub-type type-policy">Policy Paper</span>
+      <div class="pub-title"><strong>Sainath, B.</strong>, Reddy, A.A., Pal, B.D., Kumar, A., et al. (2025). Distributional Consequences of U.S. Tariff Shocks on India's Economy: Insights from a Computable General Equilibrium Model.</div>
+      <div class="pub-journal">Policy Paper No. 04/2025. ICAR-NIBSM, ICAR-RCER & IFPRI. ISBN: 978-93-5602-740-4.</div>
+    </div>
+
+    <div class="pub-item" data-type="policy">
+      <span class="pub-type type-policy">Policy Brief</span>
+      <div class="pub-title"><strong>Sainath, B.</strong>, Pal, B.D., Kumar, A., et al. (2025). From global trade shocks to rural livelihoods: Sectoral analysis of U.S. reciprocal tariffs on India's agro-economy.</div>
+      <div class="pub-journal">Policy Brief RCER/Policy/2025/01. ICAR-RCER & IFPRI.</div>
+    </div>
+
+    <div class="pub-item" data-type="note">
+      <span class="pub-type type-note">Research Note</span>
+      <div class="pub-title">Khurana, A., <strong>Sainath, B.</strong>, & Adeeth Cariappa, A.G. (2023). Carbon farming in India: Case studies from Maharashtra and Telangana.</div>
+      <div class="pub-journal">TAFSSA Research Note 10. Transforming Agrifood Systems in South Asia.</div>
+    </div>
+
+    <div class="pub-item" data-type="chapter">
+      <span class="pub-type type-chapter">Book Chapter</span>
+      <div class="pub-title"><strong>Sainath, B.</strong>, Asadullah, M., Kumar, U., & Mukherjee, A. (2025). Socioeconomic Implications of Heat and Drought Stress on Indian Agriculture.</div>
+      <div class="pub-journal">In: Drought and Heat Stress in Agriculture: Implications, Mitigation and Policy Approaches (pp. 483–500). Springer Nature Singapore.</div>
+    </div>
+
+    <div class="pub-item" data-type="submitted">
+      <span class="pub-type type-submitted">Under Review</span>
+      <div class="pub-title"><strong>Sainath, B.</strong> Irrigation Dynamics of Head and Tail End Farmers: An Exploration of Godavari Command Area.</div>
+      <div class="pub-journal">The Australian Journal of Agricultural and Resource Economics (Submitted March 2026)</div>
+    </div>
+
+    <div class="pub-item" data-type="submitted">
+      <span class="pub-type type-submitted">Under Review</span>
+      <div class="pub-title"><strong>Sainath, B.</strong> A Discrete Choice Experiment-based framework for designing farmer-centric voluntary carbon credit programs: A Policy perspective.</div>
+      <div class="pub-journal">Journal of Environmental Management</div>
+    </div>
+
+    <div class="pub-item" data-type="submitted">
+      <span class="pub-type type-submitted">Under Review</span>
+      <div class="pub-title"><strong>Sainath, B.</strong> Do Cash Transfers Promote Inclusive Growth? Evidence from an Economy-Wide Model of India.</div>
+      <div class="pub-journal">Journal of Rural Studies</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- AWARDS -->
+<section id="awards" class="fade-in">
+  <div class="section-label">Recognition</div>
+  <h2 class="section-title">Fellowships & Awards</h2>
+  <div class="awards-grid">
+    <div class="award-card">
+      <div class="award-icon">🥇</div>
+      <div class="award-text">UAS Bengaluru <strong>Gold Medal</strong> for General Merit + 5 Sponsor Medals at 54th Convocation (Master's)</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🏆</div>
+      <div class="award-text"><strong>All India Rank 16th</strong> in ICAR-JRF; ICAR Fellowship recipient during Master's Programme</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🎖️</div>
+      <div class="award-text"><strong>All India Rank 11th</strong> in ICAR-SRF Examination (2020)</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">📜</div>
+      <div class="award-text"><strong>UGC-NET Qualified</strong> in Economics — 2020 and 2022</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🎗️</div>
+      <div class="award-text">Institute Scholarship, ICAR-NDRI Karnal for Ph.D. in Agricultural Economics (since Nov 2020)</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">✍️</div>
+      <div class="award-text"><strong>Best Article Award</strong> from Agriculture and Food e-Newsletter (2020)</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🏅</div>
+      <div class="award-text"><strong>Best Presentation Award</strong> at PAVER-2025 National Seminar, ICAR-RCER Patna (February 2025)</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🌏</div>
+      <div class="award-text">Participant, <strong>Geography of Food</strong> International Summer School, Slovenia, Europe</div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact" style="max-width:1100px; margin:0 auto; padding:90px 48px;">
+  <div style="background:var(--bg2); border:1px solid var(--border); border-radius:16px; padding:60px; text-align:center; position:relative; overflow:hidden;">
+    <div style="position:absolute; top:-100px; left:50%; transform:translateX(-50%); width:400px; height:400px; background:radial-gradient(circle, rgba(63,185,80,0.05) 0%, transparent 70%);"></div>
+    <div class="section-label" style="justify-content:center;">Get in Touch</div>
+    <h2 class="section-title" style="margin-bottom:12px;">Let's Connect</h2>
+    <p style="color:var(--muted); max-width:480px; margin:0 auto 32px; font-size:0.95rem;">
+      Interested in collaborations on carbon markets, environmental economics, or agricultural policy? I'd love to hear from you.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:Sainath.banda@icar.org.in" class="btn btn-primary">✉ Sainath.banda@icar.org.in</a>
+      <a href="mailto:sainathbanda1995@gmail.com" class="btn btn-outline">sainathbanda1995@gmail.com</a>
+    </div>
+    <div class="contact-links" style="margin-top:16px;">
+      <a href="https://scholar.google.com/citations?hl=en&user=gn7DyzAAAAAJ" target="_blank" class="btn btn-outline">🎓 Google Scholar</a>
+      <a href="https://www.researchgate.net/profile/Banda-Sainath" target="_blank" class="btn btn-outline">🔬 ResearchGate</a>
+      <a href="https://www.linkedin.com/in/banda-sainath-ars-agrileconomist-" target="_blank" class="btn btn-outline">💼 LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2025 Banda Sainath · Scientist, ICAR-RCER Patna · Built with ♥
+</footer>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Publication filter
+  function filterPubs(type, btn) {
+    document.querySelectorAll('.pub-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.pub-item').forEach(item => {
+      item.style.display = (type === 'all' || item.dataset.type === type) ? 'block' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>
