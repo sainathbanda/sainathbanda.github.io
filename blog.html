@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog & Notes | Banda Sainath</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #1c2330;
+    --accent: #3fb950;
+    --accent2: #58a6ff;
+    --gold: #d4a843;
+    --rose: #f78166;
+    --purple: #bc8cff;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --border: #30363d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 48px;
+    background: rgba(13,17,23,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+  .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.77rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+  .page-hero {
+    padding: 140px 48px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .breadcrumb { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 20px; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb span { margin: 0 8px; }
+  .page-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3rem); margin-bottom: 14px; }
+  .page-title em { font-style: italic; color: var(--gold); }
+  .page-desc { color: var(--muted); font-size: 0.97rem; max-width: 600px; }
+
+  /* ── FILTER TAGS ── */
+  .tag-filters { display: flex; gap: 10px; flex-wrap: wrap; margin: 32px 0 48px; }
+  .tag-btn {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem; padding: 6px 14px;
+    border-radius: 20px; border: 1px solid var(--border); color: var(--muted);
+    background: transparent; cursor: pointer; letter-spacing: 0.06em; transition: all 0.2s;
+  }
+  .tag-btn.active, .tag-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(63,185,80,0.07); }
+
+  /* ── BLOG LAYOUT ── */
+  .blog-wrap { max-width: 1100px; margin: 0 auto; padding: 0 48px 90px; }
+
+  /* Featured post */
+  .post-featured {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 40px;
+    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    transition: border-color 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .post-featured:hover { border-color: var(--accent); }
+
+  .featured-label {
+    font-family: 'DM Mono', monospace; font-size: 0.67rem;
+    color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase;
+    border: 1px solid rgba(212,168,67,0.3); padding: 3px 10px; border-radius: 3px;
+    display: inline-block; margin-bottom: 14px;
+  }
+  .post-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; line-height: 1.25; margin-bottom: 12px; color: var(--text); }
+  .post-excerpt { font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+  .post-meta { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .post-date { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+  .post-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.67rem; padding: 2px 8px;
+    border-radius: 3px; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .tag-carbon { background: rgba(63,185,80,0.1); color: var(--accent); }
+  .tag-policy { background: rgba(212,168,67,0.1); color: var(--gold); }
+  .tag-methods { background: rgba(88,166,255,0.1); color: var(--accent2); }
+  .tag-career { background: rgba(188,140,255,0.1); color: var(--purple); }
+  .tag-livestock { background: rgba(247,129,102,0.1); color: var(--rose); }
+  .tag-water { background: rgba(57,211,83,0.1); color: #39d353; }
+
+  .featured-visual {
+    background: var(--bg3);
+    border-radius: 10px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    border: 1px solid var(--border);
+  }
+
+  /* Post grid */
+  .post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+
+  .post-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 26px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.22s;
+    position: relative;
+  }
+  .post-card:hover { border-color: var(--accent2); transform: translateY(-2px); }
+  .post-card-emoji { font-size: 1.8rem; }
+  .post-card-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; line-height: 1.3; color: var(--text); }
+  .post-card-excerpt { font-size: 0.83rem; color: var(--muted); line-height: 1.55; flex: 1; }
+
+  /* Coming soon card */
+  .post-card.coming-soon { opacity: 0.55; cursor: default; }
+  .post-card.coming-soon:hover { transform: none; border-color: var(--border); }
+  .soon-badge {
+    position: absolute; top: 14px; right: 14px;
+    font-family: 'DM Mono', monospace; font-size: 0.62rem;
+    background: var(--bg3); border: 1px solid var(--border);
+    color: var(--muted); padding: 2px 8px; border-radius: 3px;
+    letter-spacing: 0.08em;
+  }
+
+  /* Newsletter */
+  .newsletter-box {
+    background: linear-gradient(135deg, rgba(63,185,80,0.06), rgba(88,166,255,0.06));
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 40px;
+    text-align: center;
+    margin-top: 48px;
+  }
+  .newsletter-box h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 10px; }
+  .newsletter-box p { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
+  .newsletter-form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .newsletter-form input {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 6px;
+    padding: 10px 18px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    color: var(--text); outline: none; width: 280px; transition: border-color 0.2s;
+  }
+  .newsletter-form input:focus { border-color: var(--accent); }
+  .newsletter-form input::placeholder { color: var(--muted); }
+  .btn-subscribe {
+    background: var(--accent); color: #0d1117; font-family: 'DM Mono', monospace;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; padding: 10px 22px;
+    border: none; border-radius: 6px; cursor: pointer; transition: background 0.2s;
+  }
+  .btn-subscribe:hover { background: #56d364; }
+
+  .section-divider { height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  footer { border-top: 1px solid var(--border); padding: 28px 48px; text-align: center; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; }
+
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .page-hero, .blog-wrap { padding-left: 20px; padding-right: 20px; }
+    .post-featured { grid-template-columns: 1fr; }
+    .featured-visual { display: none; }
+    footer { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Banda Sainath</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#publications">Publications</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Blog & Notes</div>
+  <h1 class="page-title">Blog & <em>Notes</em></h1>
+  <p class="page-desc">Thoughts on agricultural economics, carbon markets, research methods, and career insights. Written for students and early-career researchers navigating the field.</p>
+
+  <div class="tag-filters">
+    <button class="tag-btn active" onclick="filterPosts('all', this)">All</button>
+    <button class="tag-btn" onclick="filterPosts('carbon', this)">Carbon & Climate</button>
+    <button class="tag-btn" onclick="filterPosts('policy', this)">Policy</button>
+    <button class="tag-btn" onclick="filterPosts('methods', this)">Methods</button>
+    <button class="tag-btn" onclick="filterPosts('career', this)">Career</button>
+    <button class="tag-btn" onclick="filterPosts('livestock', this)">Livestock</button>
+  </div>
+</div>
+
+<div class="blog-wrap">
+
+  <!-- FEATURED POST -->
+  <a href="#" class="post-featured fade-in" data-tags="carbon policy">
+    <div>
+      <span class="featured-label">✦ Featured Post</span>
+      <div class="post-title">Carbon Credits in Indian Agriculture: Where We Are, What's Changing, and How to Make It Work for Farmers</div>
+      <div class="post-excerpt">India's carbon credit landscape is evolving rapidly. From the launch of the domestic Carbon Credit Trading Scheme (CCTS) to grassroots projects in Maharashtra and Telangana — this post breaks down the current state, key challenges for smallholder inclusion, and what researchers and policymakers need to focus on next.</div>
+      <div class="post-meta">
+        <span class="post-date">March 2025</span>
+        <span class="post-tag tag-carbon">Carbon</span>
+        <span class="post-tag tag-policy">Policy</span>
+        <span class="post-date">· 8 min read</span>
+      </div>
+    </div>
+    <div class="featured-visual">🌱</div>
+  </a>
+
+  <!-- POST GRID -->
+  <div class="post-grid">
+
+    <a href="#" class="post-card fade-in" data-tags="career">
+      <div class="post-card-emoji">🎯</div>
+      <div class="post-card-title">How I Cracked ICAR-SRF (AIR 11): My Preparation Strategy</div>
+      <div class="post-card-excerpt">A honest breakdown of how I prepared for ICAR-SRF — resources I used, topics I focused on, time management tips, and what I'd do differently.</div>
+      <div class="post-meta">
+        <span class="post-date">Feb 2025</span>
+        <span class="post-tag tag-career">Career</span>
+        <span class="post-date">· 6 min read</span>
+      </div>
+    </a>
+
+    <a href="#" class="post-card fade-in" data-tags="methods">
+      <div class="post-card-emoji">📊</div>
+      <div class="post-card-title">Bibliometric Analysis Using VOSviewer: A Step-by-Step Guide</div>
+      <div class="post-card-excerpt">Walk-through of how to conduct a bibliometric analysis from scratch — from downloading data from Web of Science to producing publication-ready visualisations in VOSviewer.</div>
+      <div class="post-meta">
+        <span class="post-date">Jan 2025</span>
+        <span class="post-tag tag-methods">Methods</span>
+        <span class="post-date">· 10 min read</span>
+      </div>
+    </a>
+
+    <a href="#" class="post-card fade-in" data-tags="carbon">
+      <div class="post-card-emoji">♻️</div>
+      <div class="post-card-title">What Is a Carbon Credit? A Plain-Language Guide for Farmers and Researchers</div>
+      <div class="post-card-excerpt">Breaking down carbon credits, how they're measured, verified, and traded — and what it means for a smallholder farmer in Bihar or Telangana to participate.</div>
+      <div class="post-meta">
+        <span class="post-date">Dec 2024</span>
+        <span class="post-tag tag-carbon">Carbon</span>
+        <span class="post-date">· 7 min read</span>
+      </div>
+    </a>
+
+    <a href="#" class="post-card fade-in" data-tags="livestock">
+      <div class="post-card-emoji">🐄</div>
+      <div class="post-card-title">Beyond Milk: Valuing the Full Ecosystem Services of the Murrah Buffalo</div>
+      <div class="post-card-excerpt">Murrah buffaloes provide far more than milk — draught power, manure, cultural value, and carbon sequestration. This post explores a multi-dimensional valuation framework.</div>
+      <div class="post-meta">
+        <span class="post-date">Nov 2024</span>
+        <span class="post-tag tag-livestock">Livestock</span>
+        <span class="post-date">· 9 min read</span>
+      </div>
+    </a>
+
+    <a href="#" class="post-card fade-in" data-tags="policy">
+      <div class="post-card-emoji">🌐</div>
+      <div class="post-card-title">How U.S. Tariffs Affect Indian Farmers: Insights from a CGE Model</div>
+      <div class="post-card-excerpt">Our recent policy paper modelled the distributional consequences of U.S. tariff shocks on India's economy. Here's what the numbers say about rural livelihoods and agricultural sectors.</div>
+      <div class="post-meta">
+        <span class="post-date">Oct 2024</span>
+        <span class="post-tag tag-policy">Policy</span>
+        <span class="post-date">· 8 min read</span>
+      </div>
+    </a>
+
+    <a href="#" class="post-card fade-in" data-tags="methods">
+      <div class="post-card-emoji">🔢</div>
+      <div class="post-card-title">Running a Propensity Score Match in R: A Practical Guide for Agricultural Researchers</div>
+      <div class="post-card-excerpt">Step-by-step tutorial on PSM using R's MatchIt package — from checking covariate balance to interpreting ATT. Illustrated with an agricultural technology adoption example.</div>
+      <div class="post-meta">
+        <span class="post-date">Sep 2024</span>
+        <span class="post-tag tag-methods">Methods</span>
+        <span class="post-date">· 12 min read</span>
+      </div>
+    </a>
+
+    <a href="#" class="post-card fade-in" data-tags="career">
+      <div class="post-card-emoji">✍️</div>
+      <div class="post-card-title">How to Write a Research Paper: A Guide for M.Sc. Students in Agricultural Economics</div>
+      <div class="post-card-excerpt">From choosing a research question to responding to reviewer comments — a practical, honest guide to writing and publishing your first journal article in agricultural economics.</div>
+      <div class="post-meta">
+        <span class="post-date">Aug 2024</span>
+        <span class="post-tag tag-career">Career</span>
+        <span class="post-date">· 11 min read</span>
+      </div>
+    </a>
+
+    <a href="#" class="post-card fade-in" data-tags="carbon policy">
+      <div class="post-card-emoji">🌾</div>
+      <div class="post-card-title">Conservation Agriculture & Carbon: Opportunities for Smallholders in Eastern India</div>
+      <div class="post-card-excerpt">Can zero-tillage and cover cropping generate meaningful carbon credits for small farmers in Bihar? A look at the evidence, the barriers, and what policy support is needed.</div>
+      <div class="post-meta">
+        <span class="post-date">Jul 2024</span>
+        <span class="post-tag tag-carbon">Carbon</span>
+        <span class="post-tag tag-policy">Policy</span>
+        <span class="post-date">· 9 min read</span>
+      </div>
+    </a>
+
+    <!-- COMING SOON CARDS -->
+    <div class="post-card coming-soon fade-in">
+      <span class="soon-badge">Coming Soon</span>
+      <div class="post-card-emoji">💧</div>
+      <div class="post-card-title">Estimating the True Cost of Irrigation Water: Methods & Policy Implications</div>
+      <div class="post-card-excerpt">A deep dive into NRE methods for valuing groundwater and surface water — scarcity value, externality cost, and user cost. Based on my M.Sc. research in Godavari Command Area.</div>
+      <div class="post-meta"><span class="post-tag tag-water">Water</span><span class="post-tag tag-methods">Methods</span></div>
+    </div>
+
+    <div class="post-card coming-soon fade-in">
+      <span class="soon-badge">Coming Soon</span>
+      <div class="post-card-emoji">🏙️</div>
+      <div class="post-card-title">The Hidden Costs of Urban Dairies: Externalities You Don't See in the Price of Milk</div>
+      <div class="post-card-excerpt">Urban and peri-urban dairies in cities like Hyderabad generate significant external costs — pollution, disease burden, land use conflicts. Here's how economists measure them.</div>
+      <div class="post-meta"><span class="post-tag tag-livestock">Livestock</span><span class="post-tag tag-policy">Policy</span></div>
+    </div>
+
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter-box fade-in">
+    <h3>Stay Updated</h3>
+    <p>New posts on carbon markets, agricultural policy, and research methods. No spam — just useful content for researchers and students.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="your@email.com">
+      <button class="btn-subscribe" onclick="alert('Thank you! I will be in touch soon.')">Subscribe →</button>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  © 2025 Banda Sainath · <a href="index.html" style="color:var(--accent); text-decoration:none;">← Back to Home</a> · <a href="resources.html" style="color:var(--accent2); text-decoration:none;">Resources</a>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function filterPosts(tag, btn) {
+    document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.post-card, .post-featured').forEach(card => {
+      const tags = card.dataset.tags || '';
+      card.style.display = (tag === 'all' || tags.includes(tag)) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>
