@@ -4,101 +4,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog & Notes | Banda Sainath</title>
+
+<!-- Google Analytics — replace G-XXXXXXXXXX with your Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0d1117;
-    --bg2: #161b22;
-    --bg3: #1c2330;
-    --accent: #3fb950;
-    --accent2: #58a6ff;
-    --gold: #d4a843;
-    --rose: #f78166;
-    --purple: #bc8cff;
-    --text: #e6edf3;
-    --muted: #8b949e;
-    --border: #30363d;
+    --bg: #0d1117; --bg2: #161b22; --bg3: #1c2330;
+    --accent: #3fb950; --accent2: #58a6ff; --gold: #d4a843;
+    --rose: #f78166; --purple: #bc8cff;
+    --text: #e6edf3; --muted: #8b949e; --border: #30363d;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.7; overflow-x: hidden; }
 
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 18px 48px;
-    background: rgba(13,17,23,0.88);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 18px 48px; background: rgba(13,17,23,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
   .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); text-decoration: none; }
-  .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
   .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.77rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover, .nav-links a.active { color: var(--accent); }
 
-  .page-hero {
-    padding: 140px 48px 60px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+  .page-hero { padding: 140px 48px 50px; max-width: 1100px; margin: 0 auto; }
   .breadcrumb { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 20px; }
   .breadcrumb a { color: var(--accent); text-decoration: none; }
   .breadcrumb span { margin: 0 8px; }
-  .page-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3rem); margin-bottom: 14px; }
+  .page-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3rem); margin-bottom: 12px; }
   .page-title em { font-style: italic; color: var(--gold); }
-  .page-desc { color: var(--muted); font-size: 0.97rem; max-width: 600px; }
+  .page-desc { color: var(--muted); font-size: 0.97rem; max-width: 600px; margin-bottom: 32px; }
 
-  /* ── FILTER TAGS ── */
-  .tag-filters { display: flex; gap: 10px; flex-wrap: wrap; margin: 32px 0 48px; }
-  .tag-btn {
-    font-family: 'DM Mono', monospace; font-size: 0.72rem; padding: 6px 14px;
-    border-radius: 20px; border: 1px solid var(--border); color: var(--muted);
-    background: transparent; cursor: pointer; letter-spacing: 0.06em; transition: all 0.2s;
-  }
+  .tag-filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 48px; }
+  .tag-btn { font-family: 'DM Mono', monospace; font-size: 0.72rem; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border); color: var(--muted); background: transparent; cursor: pointer; letter-spacing: 0.06em; transition: all 0.2s; }
   .tag-btn.active, .tag-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(63,185,80,0.07); }
 
-  /* ── BLOG LAYOUT ── */
-  .blog-wrap { max-width: 1100px; margin: 0 auto; padding: 0 48px 90px; }
-
-  /* Featured post */
-  .post-featured {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 40px;
-    margin-bottom: 32px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: center;
-    transition: border-color 0.2s;
-    text-decoration: none;
-    color: inherit;
-  }
-  .post-featured:hover { border-color: var(--accent); }
-
-  .featured-label {
-    font-family: 'DM Mono', monospace; font-size: 0.67rem;
-    color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase;
-    border: 1px solid rgba(212,168,67,0.3); padding: 3px 10px; border-radius: 3px;
-    display: inline-block; margin-bottom: 14px;
-  }
-  .post-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; line-height: 1.25; margin-bottom: 12px; color: var(--text); }
-  .post-excerpt { font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
-  .post-meta { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-  .post-date { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); }
-  .post-tag {
-    font-family: 'DM Mono', monospace; font-size: 0.67rem; padding: 2px 8px;
-    border-radius: 3px; letter-spacing: 0.06em; text-transform: uppercase;
-  }
+  .post-tag { font-family: 'DM Mono', monospace; font-size: 0.67rem; padding: 2px 8px; border-radius: 3px; letter-spacing: 0.06em; text-transform: uppercase; }
   .tag-carbon { background: rgba(63,185,80,0.1); color: var(--accent); }
   .tag-policy { background: rgba(212,168,67,0.1); color: var(--gold); }
   .tag-methods { background: rgba(88,166,255,0.1); color: var(--accent2); }
@@ -106,88 +53,59 @@
   .tag-livestock { background: rgba(247,129,102,0.1); color: var(--rose); }
   .tag-water { background: rgba(57,211,83,0.1); color: #39d353; }
 
-  .featured-visual {
-    background: var(--bg3);
-    border-radius: 10px;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 5rem;
-    border: 1px solid var(--border);
-  }
+  .blog-wrap { max-width: 820px; margin: 0 auto; padding: 0 48px 90px; }
 
-  /* Post grid */
-  .post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  .post-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 14px; background: var(--bg2); overflow: hidden; transition: border-color 0.2s; }
+  .post-item.open { border-color: var(--accent2); }
+  .post-item.coming-soon { opacity: 0.5; pointer-events: none; }
+  .post-item.hidden { display: none; }
 
-  .post-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 26px;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: all 0.22s;
-    position: relative;
-  }
-  .post-card:hover { border-color: var(--accent2); transform: translateY(-2px); }
-  .post-card-emoji { font-size: 1.8rem; }
-  .post-card-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; line-height: 1.3; color: var(--text); }
-  .post-card-excerpt { font-size: 0.83rem; color: var(--muted); line-height: 1.55; flex: 1; }
+  .post-header { display: flex; align-items: center; gap: 18px; padding: 22px 26px; cursor: pointer; user-select: none; transition: background 0.15s; }
+  .post-header:hover { background: rgba(255,255,255,0.02); }
+  .post-emoji { font-size: 1.6rem; flex-shrink: 0; }
+  .post-header-text { flex: 1; }
+  .post-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--text); line-height: 1.3; margin-bottom: 6px; }
+  .post-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .post-date { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); }
+  .post-chevron { flex-shrink: 0; font-size: 1rem; color: var(--muted); transition: transform 0.3s ease; font-style: normal; }
+  .post-item.open .post-chevron { transform: rotate(180deg); color: var(--accent2); }
 
-  /* Coming soon card */
-  .post-card.coming-soon { opacity: 0.55; cursor: default; }
-  .post-card.coming-soon:hover { transform: none; border-color: var(--border); }
-  .soon-badge {
-    position: absolute; top: 14px; right: 14px;
-    font-family: 'DM Mono', monospace; font-size: 0.62rem;
-    background: var(--bg3); border: 1px solid var(--border);
-    color: var(--muted); padding: 2px 8px; border-radius: 3px;
-    letter-spacing: 0.08em;
-  }
+  .post-body { max-height: 0; overflow: hidden; transition: max-height 0.45s ease, padding 0.3s ease; padding: 0 26px; }
+  .post-item.open .post-body { max-height: 3000px; padding: 0 26px 28px; }
+  .post-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
 
-  /* Newsletter */
-  .newsletter-box {
-    background: linear-gradient(135deg, rgba(63,185,80,0.06), rgba(88,166,255,0.06));
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 40px;
-    text-align: center;
-    margin-top: 48px;
-  }
-  .newsletter-box h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 10px; }
+  .post-body h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text); margin: 20px 0 8px; }
+  .post-body p { color: var(--muted); font-size: 0.93rem; line-height: 1.75; margin-bottom: 14px; }
+  .post-body ul { padding-left: 20px; margin-bottom: 14px; }
+  .post-body ul li { color: var(--muted); font-size: 0.93rem; line-height: 1.75; margin-bottom: 6px; }
+  .post-body strong { color: var(--text); }
+  .post-body em { color: var(--gold); font-style: italic; }
+  .post-body code { font-family: 'DM Mono', monospace; font-size: 0.82rem; background: var(--bg3); padding: 2px 6px; border-radius: 4px; color: var(--accent2); }
+  .post-body blockquote { border-left: 3px solid var(--accent); padding: 10px 18px; margin: 16px 0; background: rgba(63,185,80,0.05); border-radius: 0 8px 8px 0; font-style: italic; color: var(--text); font-size: 0.95rem; }
+  .key-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+  .key-title { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+  .soon-badge { font-family: 'DM Mono', monospace; font-size: 0.65rem; background: var(--bg3); border: 1px solid var(--border); color: var(--muted); padding: 2px 8px; border-radius: 3px; }
+
+  .newsletter-box { background: linear-gradient(135deg, rgba(63,185,80,0.06), rgba(88,166,255,0.06)); border: 1px solid var(--border); border-radius: 14px; padding: 40px; text-align: center; margin-top: 48px; }
+  .newsletter-box h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 10px; }
   .newsletter-box p { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
   .newsletter-form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-  .newsletter-form input {
-    background: var(--bg2); border: 1px solid var(--border); border-radius: 6px;
-    padding: 10px 18px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
-    color: var(--text); outline: none; width: 280px; transition: border-color 0.2s;
-  }
+  .newsletter-form input { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 18px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text); outline: none; width: 280px; transition: border-color 0.2s; }
   .newsletter-form input:focus { border-color: var(--accent); }
   .newsletter-form input::placeholder { color: var(--muted); }
-  .btn-subscribe {
-    background: var(--accent); color: #0d1117; font-family: 'DM Mono', monospace;
-    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; padding: 10px 22px;
-    border: none; border-radius: 6px; cursor: pointer; transition: background 0.2s;
-  }
+  .btn-subscribe { background: var(--accent); color: #0d1117; font-family: 'DM Mono', monospace; font-size: 0.78rem; font-weight: 500; padding: 10px 22px; border: none; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
   .btn-subscribe:hover { background: #56d364; }
 
-  .section-divider { height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
-
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s; }
+  .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.5s, transform 0.5s; }
   .fade-in.visible { opacity: 1; transform: none; }
-
-  footer { border-top: 1px solid var(--border); padding: 28px 48px; text-align: center; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; }
+  footer { border-top: 1px solid var(--border); padding: 28px 48px; text-align: center; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); }
 
   @media (max-width: 768px) {
     nav { padding: 14px 20px; }
     .page-hero, .blog-wrap { padding-left: 20px; padding-right: 20px; }
-    .post-featured { grid-template-columns: 1fr; }
-    .featured-visual { display: none; }
+    .post-header { padding: 16px 18px; gap: 12px; }
+    .post-body { padding: 0 18px; }
+    .post-item.open .post-body { padding: 0 18px 22px; }
     footer { padding: 20px; }
   }
 </style>
@@ -208,151 +126,231 @@
 <div class="page-hero">
   <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Blog & Notes</div>
   <h1 class="page-title">Blog & <em>Notes</em></h1>
-  <p class="page-desc">Thoughts on agricultural economics, carbon markets, research methods, and career insights. Written for students and early-career researchers navigating the field.</p>
-
+  <p class="page-desc">Thoughts on agricultural economics, carbon markets, research methods, and career insights. Click any post to read inline.</p>
   <div class="tag-filters">
-    <button class="tag-btn active" onclick="filterPosts('all', this)">All</button>
-    <button class="tag-btn" onclick="filterPosts('carbon', this)">Carbon & Climate</button>
-    <button class="tag-btn" onclick="filterPosts('policy', this)">Policy</button>
-    <button class="tag-btn" onclick="filterPosts('methods', this)">Methods</button>
-    <button class="tag-btn" onclick="filterPosts('career', this)">Career</button>
-    <button class="tag-btn" onclick="filterPosts('livestock', this)">Livestock</button>
+    <button class="tag-btn active" onclick="filterPosts('all',this)">All</button>
+    <button class="tag-btn" onclick="filterPosts('carbon',this)">Carbon & Climate</button>
+    <button class="tag-btn" onclick="filterPosts('policy',this)">Policy</button>
+    <button class="tag-btn" onclick="filterPosts('methods',this)">Methods</button>
+    <button class="tag-btn" onclick="filterPosts('career',this)">Career</button>
+    <button class="tag-btn" onclick="filterPosts('livestock',this)">Livestock</button>
   </div>
 </div>
 
 <div class="blog-wrap">
 
-  <!-- FEATURED POST -->
-  <a href="#" class="post-featured fade-in" data-tags="carbon policy">
-    <div>
-      <span class="featured-label">✦ Featured Post</span>
-      <div class="post-title">Carbon Credits in Indian Agriculture: Where We Are, What's Changing, and How to Make It Work for Farmers</div>
-      <div class="post-excerpt">India's carbon credit landscape is evolving rapidly. From the launch of the domestic Carbon Credit Trading Scheme (CCTS) to grassroots projects in Maharashtra and Telangana — this post breaks down the current state, key challenges for smallholder inclusion, and what researchers and policymakers need to focus on next.</div>
-      <div class="post-meta">
-        <span class="post-date">March 2025</span>
-        <span class="post-tag tag-carbon">Carbon</span>
-        <span class="post-tag tag-policy">Policy</span>
-        <span class="post-date">· 8 min read</span>
+  <div class="post-item fade-in" data-tags="carbon policy">
+    <div class="post-header" onclick="togglePost(this)">
+      <div class="post-emoji">🌱</div>
+      <div class="post-header-text">
+        <div class="post-title">Carbon Credits in Indian Agriculture: Where We Are, What's Changing, and How to Make It Work for Farmers</div>
+        <div class="post-meta"><span class="post-date">March 2025</span><span class="post-tag tag-carbon">Carbon</span><span class="post-tag tag-policy">Policy</span><span class="post-date">· 8 min read</span></div>
       </div>
+      <i class="post-chevron">▾</i>
     </div>
-    <div class="featured-visual">🌱</div>
-  </a>
-
-  <!-- POST GRID -->
-  <div class="post-grid">
-
-    <a href="#" class="post-card fade-in" data-tags="career">
-      <div class="post-card-emoji">🎯</div>
-      <div class="post-card-title">How I Cracked ICAR-SRF (AIR 11): My Preparation Strategy</div>
-      <div class="post-card-excerpt">A honest breakdown of how I prepared for ICAR-SRF — resources I used, topics I focused on, time management tips, and what I'd do differently.</div>
-      <div class="post-meta">
-        <span class="post-date">Feb 2025</span>
-        <span class="post-tag tag-career">Career</span>
-        <span class="post-date">· 6 min read</span>
+    <div class="post-body">
+      <div class="post-divider"></div>
+      <p>India's carbon credit landscape is evolving rapidly. From the launch of the domestic <strong>Carbon Credit Trading Scheme (CCTS)</strong> under the Energy Conservation Act to grassroots voluntary carbon projects in Maharashtra and Telangana — this is a pivotal moment for agricultural carbon markets in India.</p>
+      <h3>Where We Are Today</h3>
+      <p>India has committed to net-zero by 2070 and reducing emissions intensity by 45% by 2030. Agriculture contributes roughly <strong>14% of India's GHG emissions</strong>, but also holds enormous sequestration potential through zero tillage, cover cropping, agroforestry, and better livestock management. The domestic carbon market is still nascent — the Bureau of Energy Efficiency (BEE) is developing the Indian Carbon Market (ICM) framework, with the first compliance sectors going live around 2026. Agriculture will likely remain in the <strong>voluntary segment</strong> near-term.</p>
+      <blockquote>"The question is not whether Indian farmers can generate carbon credits — they can. The question is whether the system is designed to include them." — 6th International Agronomy Congress, 2025</blockquote>
+      <h3>Key Challenges for Smallholder Inclusion</h3>
+      <div class="key-box">
+        <div class="key-title">The Three Core Barriers</div>
+        <ul>
+          <li><strong>MRV (Measurement, Reporting & Verification):</strong> Smallholder plots are tiny and scattered, making remote sensing and soil sampling expensive per credit generated.</li>
+          <li><strong>Aggregation:</strong> Individual farmers can't transact directly — they need aggregators (FPOs, NGOs, companies) which creates principal-agent problems and erodes farmer income share.</li>
+          <li><strong>Permanence & Additionality:</strong> Proving reductions are real and permanent is methodologically hard for subsistence farmers who may switch practices due to drought or price shocks.</li>
+        </ul>
       </div>
-    </a>
-
-    <a href="#" class="post-card fade-in" data-tags="methods">
-      <div class="post-card-emoji">📊</div>
-      <div class="post-card-title">Bibliometric Analysis Using VOSviewer: A Step-by-Step Guide</div>
-      <div class="post-card-excerpt">Walk-through of how to conduct a bibliometric analysis from scratch — from downloading data from Web of Science to producing publication-ready visualisations in VOSviewer.</div>
-      <div class="post-meta">
-        <span class="post-date">Jan 2025</span>
-        <span class="post-tag tag-methods">Methods</span>
-        <span class="post-date">· 10 min read</span>
-      </div>
-    </a>
-
-    <a href="#" class="post-card fade-in" data-tags="carbon">
-      <div class="post-card-emoji">♻️</div>
-      <div class="post-card-title">What Is a Carbon Credit? A Plain-Language Guide for Farmers and Researchers</div>
-      <div class="post-card-excerpt">Breaking down carbon credits, how they're measured, verified, and traded — and what it means for a smallholder farmer in Bihar or Telangana to participate.</div>
-      <div class="post-meta">
-        <span class="post-date">Dec 2024</span>
-        <span class="post-tag tag-carbon">Carbon</span>
-        <span class="post-date">· 7 min read</span>
-      </div>
-    </a>
-
-    <a href="#" class="post-card fade-in" data-tags="livestock">
-      <div class="post-card-emoji">🐄</div>
-      <div class="post-card-title">Beyond Milk: Valuing the Full Ecosystem Services of the Murrah Buffalo</div>
-      <div class="post-card-excerpt">Murrah buffaloes provide far more than milk — draught power, manure, cultural value, and carbon sequestration. This post explores a multi-dimensional valuation framework.</div>
-      <div class="post-meta">
-        <span class="post-date">Nov 2024</span>
-        <span class="post-tag tag-livestock">Livestock</span>
-        <span class="post-date">· 9 min read</span>
-      </div>
-    </a>
-
-    <a href="#" class="post-card fade-in" data-tags="policy">
-      <div class="post-card-emoji">🌐</div>
-      <div class="post-card-title">How U.S. Tariffs Affect Indian Farmers: Insights from a CGE Model</div>
-      <div class="post-card-excerpt">Our recent policy paper modelled the distributional consequences of U.S. tariff shocks on India's economy. Here's what the numbers say about rural livelihoods and agricultural sectors.</div>
-      <div class="post-meta">
-        <span class="post-date">Oct 2024</span>
-        <span class="post-tag tag-policy">Policy</span>
-        <span class="post-date">· 8 min read</span>
-      </div>
-    </a>
-
-    <a href="#" class="post-card fade-in" data-tags="methods">
-      <div class="post-card-emoji">🔢</div>
-      <div class="post-card-title">Running a Propensity Score Match in R: A Practical Guide for Agricultural Researchers</div>
-      <div class="post-card-excerpt">Step-by-step tutorial on PSM using R's MatchIt package — from checking covariate balance to interpreting ATT. Illustrated with an agricultural technology adoption example.</div>
-      <div class="post-meta">
-        <span class="post-date">Sep 2024</span>
-        <span class="post-tag tag-methods">Methods</span>
-        <span class="post-date">· 12 min read</span>
-      </div>
-    </a>
-
-    <a href="#" class="post-card fade-in" data-tags="career">
-      <div class="post-card-emoji">✍️</div>
-      <div class="post-card-title">How to Write a Research Paper: A Guide for M.Sc. Students in Agricultural Economics</div>
-      <div class="post-card-excerpt">From choosing a research question to responding to reviewer comments — a practical, honest guide to writing and publishing your first journal article in agricultural economics.</div>
-      <div class="post-meta">
-        <span class="post-date">Aug 2024</span>
-        <span class="post-tag tag-career">Career</span>
-        <span class="post-date">· 11 min read</span>
-      </div>
-    </a>
-
-    <a href="#" class="post-card fade-in" data-tags="carbon policy">
-      <div class="post-card-emoji">🌾</div>
-      <div class="post-card-title">Conservation Agriculture & Carbon: Opportunities for Smallholders in Eastern India</div>
-      <div class="post-card-excerpt">Can zero-tillage and cover cropping generate meaningful carbon credits for small farmers in Bihar? A look at the evidence, the barriers, and what policy support is needed.</div>
-      <div class="post-meta">
-        <span class="post-date">Jul 2024</span>
-        <span class="post-tag tag-carbon">Carbon</span>
-        <span class="post-tag tag-policy">Policy</span>
-        <span class="post-date">· 9 min read</span>
-      </div>
-    </a>
-
-    <!-- COMING SOON CARDS -->
-    <div class="post-card coming-soon fade-in">
-      <span class="soon-badge">Coming Soon</span>
-      <div class="post-card-emoji">💧</div>
-      <div class="post-card-title">Estimating the True Cost of Irrigation Water: Methods & Policy Implications</div>
-      <div class="post-card-excerpt">A deep dive into NRE methods for valuing groundwater and surface water — scarcity value, externality cost, and user cost. Based on my M.Sc. research in Godavari Command Area.</div>
-      <div class="post-meta"><span class="post-tag tag-water">Water</span><span class="post-tag tag-methods">Methods</span></div>
+      <h3>What Researchers Need to Focus On</h3>
+      <p>Based on my research on carbon credit projects in Maharashtra and Telangana (TAFSSA/CIMMYT), here are the pressing gaps: discrete choice experiments on <strong>farmer preferences</strong> for program design; cost-benefit analysis of MRV technologies at village scale; equity analysis of who gets included; and policy integration with existing schemes like <strong>PM-KUSUM and PKVY</strong>. If you're a student looking for a topic — carbon farming economics is wide open and highly fundable right now.</p>
     </div>
-
-    <div class="post-card coming-soon fade-in">
-      <span class="soon-badge">Coming Soon</span>
-      <div class="post-card-emoji">🏙️</div>
-      <div class="post-card-title">The Hidden Costs of Urban Dairies: Externalities You Don't See in the Price of Milk</div>
-      <div class="post-card-excerpt">Urban and peri-urban dairies in cities like Hyderabad generate significant external costs — pollution, disease burden, land use conflicts. Here's how economists measure them.</div>
-      <div class="post-meta"><span class="post-tag tag-livestock">Livestock</span><span class="post-tag tag-policy">Policy</span></div>
-    </div>
-
   </div>
 
-  <!-- NEWSLETTER -->
+  <div class="post-item fade-in" data-tags="career">
+    <div class="post-header" onclick="togglePost(this)">
+      <div class="post-emoji">🎯</div>
+      <div class="post-header-text">
+        <div class="post-title">How I Cracked ICAR-SRF (AIR 11): My Preparation Strategy</div>
+        <div class="post-meta"><span class="post-date">Feb 2025</span><span class="post-tag tag-career">Career</span><span class="post-date">· 6 min read</span></div>
+      </div>
+      <i class="post-chevron">▾</i>
+    </div>
+    <div class="post-body">
+      <div class="post-divider"></div>
+      <p>A lot of students ask me how I prepared. I secured <strong>All India Rank 11</strong> in ICAR-SRF (2020), having earlier secured <strong>AIR 16 in ICAR-JRF</strong>. Here's exactly what I did.</p>
+      <h3>Understand the Pattern First</h3>
+      <p>ICAR-SRF for Agricultural Economics is a 2-hour objective exam covering: Production Economics, Farm Management, Agricultural Finance & Cooperation, Marketing, Price Analysis, NRE, Trade Policy, and Research Methodology. Map every topic to the official syllabus before studying.</p>
+      <div class="key-box">
+        <div class="key-title">Core Study Material I Used</div>
+        <ul>
+          <li><strong>AgriMoon e-courses</strong> — free, comprehensive. I read every Agricultural Economics module.</li>
+          <li><strong>ICAR e-Courses (IASRI)</strong> — especially Research Methodology and Statistics</li>
+          <li><strong>Previous Year Papers</strong> — the single most important resource. Do at least 5 years under timed conditions.</li>
+          <li><strong>Penson, Capps & Rosson</strong> — production economics foundations</li>
+          <li><strong>Johl & Kapur</strong> — Farm Business Management</li>
+        </ul>
+      </div>
+      <h3>Daily Routine (Last 3 Months)</h3>
+      <ul>
+        <li>Morning (2 hrs): New topic from notes/e-courses</li>
+        <li>Afternoon (1 hr): Previous year questions on that topic</li>
+        <li>Evening (1 hr): Revision of previous day's material</li>
+        <li>Weekend: Full mock test + analysis of mistakes</li>
+      </ul>
+      <blockquote>Focus on understanding concepts, not memorising. ICAR exams test application, not recall. Consistency over intensity — 4 focused hours beats 10 scattered ones.</blockquote>
+      <p>Feel free to reach out if you have specific questions about preparation — happy to help.</p>
+    </div>
+  </div>
+
+  <div class="post-item fade-in" data-tags="methods">
+    <div class="post-header" onclick="togglePost(this)">
+      <div class="post-emoji">📊</div>
+      <div class="post-header-text">
+        <div class="post-title">Bibliometric Analysis Using VOSviewer: A Step-by-Step Guide</div>
+        <div class="post-meta"><span class="post-date">Jan 2025</span><span class="post-tag tag-methods">Methods</span><span class="post-date">· 10 min read</span></div>
+      </div>
+      <i class="post-chevron">▾</i>
+    </div>
+    <div class="post-body">
+      <div class="post-divider"></div>
+      <p>Bibliometric analysis is increasingly popular in agricultural economics. Our blockchain in agri-food paper (published in <em>JADEE</em>, IF 2.3) used this method. Here's how to do it from scratch.</p>
+      <h3>Step 1 — Build Your Search Query</h3>
+      <p>Go to <strong>Web of Science</strong> or <strong>Scopus</strong>. Build a Boolean query — e.g. for carbon farming: <code>("carbon credit*" OR "carbon farming") AND ("agriculture" OR "smallholder")</code>. Export all records as plain text (.txt for WoS) or .csv for Scopus — select <strong>"Full Record and Cited References"</strong>.</p>
+      <h3>Step 2 — Import into VOSviewer</h3>
+      <ul>
+        <li>Open VOSviewer → "Create a map based on bibliographic data"</li>
+        <li>Select your data source → upload your file</li>
+        <li>Choose analysis: Co-authorship, Co-citation, or <strong>Keyword Co-occurrence</strong> (most common)</li>
+        <li>Set minimum keyword occurrence to <strong>5</strong> for datasets of 200-500 papers</li>
+      </ul>
+      <div class="key-box">
+        <div class="key-title">Reading the Map</div>
+        <ul>
+          <li><strong>Clusters (colours):</strong> Research themes — keywords that appear together</li>
+          <li><strong>Node size:</strong> Frequency — bigger = more common</li>
+          <li><strong>Line thickness:</strong> Strength of co-occurrence between two keywords</li>
+          <li><strong>Distance:</strong> Closer = more strongly related</li>
+        </ul>
+      </div>
+      <h3>Step 3 — Deeper Analysis with bibliometrix in R</h3>
+      <p>VOSviewer is great for visualisation but <code>bibliometrix</code> in R gives you annual publication trends, top authors, top journals, h-index of the field, and Bradford's Law. Install with <code>install.packages("bibliometrix")</code> and run <code>biblioshiny()</code> for an interactive dashboard. The combination of both tools covers a complete bibliometric paper.</p>
+    </div>
+  </div>
+
+  <div class="post-item fade-in" data-tags="livestock">
+    <div class="post-header" onclick="togglePost(this)">
+      <div class="post-emoji">🐄</div>
+      <div class="post-header-text">
+        <div class="post-title">Beyond Milk: Valuing the Full Ecosystem Services of the Murrah Buffalo</div>
+        <div class="post-meta"><span class="post-date">Nov 2024</span><span class="post-tag tag-livestock">Livestock</span><span class="post-date">· 9 min read</span></div>
+      </div>
+      <i class="post-chevron">▾</i>
+    </div>
+    <div class="post-body">
+      <div class="post-divider"></div>
+      <p>When we value a Murrah buffalo, we almost always look at milk yield and milk price alone. But this misses the picture dramatically. A Murrah buffalo is a multi-dimensional asset providing provisioning, regulating, and cultural ecosystem services.</p>
+      <div class="key-box">
+        <div class="key-title">Full Bundle of Ecosystem Services</div>
+        <ul>
+          <li><strong>Provisioning:</strong> Milk, meat (end of life), hide, bones</li>
+          <li><strong>Regulating:</strong> Dung for biogas and organic fertiliser, carbon sequestration through soil health improvement</li>
+          <li><strong>Cultural:</strong> Religious significance, social status, cultural identity in rural communities</li>
+          <li><strong>Supporting:</strong> Nutrient cycling, soil structure improvement</li>
+        </ul>
+      </div>
+      <h3>Why This Matters for Policy</h3>
+      <p>Valuing only milk <strong>systematically undervalues the Murrah buffalo</strong> and leads to under-investment in conservation and welfare. Insurance schemes, credit products, and breed improvement programs are all calibrated to milk value alone. A comprehensive valuation framework changes this calculus.</p>
+      <h3>Methodological Approach</h3>
+      <p>My ongoing research uses a multi-dimensional framework combining: <strong>market price method</strong> for milk and dung; <strong>benefit transfer</strong> for carbon sequestration; and <strong>contingent valuation</strong> for cultural services. Some services (cultural, spiritual) resist full monetisation — but they still deserve documentation even if not fully priced.</p>
+      <blockquote>True economic valuation of livestock must go beyond the farmgate price. The Murrah's contribution to rural livelihoods is far greater than any single metric captures.</blockquote>
+    </div>
+  </div>
+
+  <div class="post-item fade-in" data-tags="policy">
+    <div class="post-header" onclick="togglePost(this)">
+      <div class="post-emoji">🌐</div>
+      <div class="post-header-text">
+        <div class="post-title">How U.S. Tariffs Affect Indian Farmers: Insights from a CGE Model</div>
+        <div class="post-meta"><span class="post-date">Oct 2024</span><span class="post-tag tag-policy">Policy</span><span class="post-date">· 8 min read</span></div>
+      </div>
+      <i class="post-chevron">▾</i>
+    </div>
+    <div class="post-body">
+      <div class="post-divider"></div>
+      <p>When the U.S. announces reciprocal tariffs, most debate focuses on industry and IT. But what does it mean for a paddy farmer in Bihar or a cotton grower in Telangana? Our policy paper (ICAR-RCER & IFPRI, 2025) used a <strong>Computable General Equilibrium (CGE) model</strong> to find out.</p>
+      <h3>What is a CGE Model?</h3>
+      <p>A CGE model represents the entire economy as interconnected markets — production, consumption, trade, and factor markets — that simultaneously clear at equilibrium prices. Shock one part (a 26% tariff) and the model calculates ripple effects across <strong>all sectors, all income groups, all regions</strong>.</p>
+      <div class="key-box">
+        <div class="key-title">Key Findings</div>
+        <ul>
+          <li>Agriculture faces <strong>indirect but significant effects</strong> — labour moves from export-affected industries into agriculture, depressing wages</li>
+          <li>Export-oriented commodities like <strong>marine products, spices, and rice</strong> face direct demand reduction</li>
+          <li>Rural households in bottom income quintiles are <strong>disproportionately affected</strong> through lower real wages</li>
+          <li>Bigger impact is on <strong>farm income, not food prices</strong></li>
+        </ul>
+      </div>
+      <p>CGE is the right tool when the shock is economy-wide and you care about distributional consequences. The limitation: CGE models require strong assumptions about substitution elasticities — always be transparent about these. The full paper is available through ICAR-RCER, Patna — write to me for a copy.</p>
+    </div>
+  </div>
+
+  <div class="post-item fade-in" data-tags="methods career">
+    <div class="post-header" onclick="togglePost(this)">
+      <div class="post-emoji">✍️</div>
+      <div class="post-header-text">
+        <div class="post-title">How to Write Your First Research Paper: A Guide for M.Sc. Students</div>
+        <div class="post-meta"><span class="post-date">Aug 2024</span><span class="post-tag tag-methods">Methods</span><span class="post-tag tag-career">Career</span><span class="post-date">· 11 min read</span></div>
+      </div>
+      <i class="post-chevron">▾</i>
+    </div>
+    <div class="post-body">
+      <div class="post-divider"></div>
+      <p>Nobody teaches you how to write a research paper — you're expected to figure it out. Here's the framework I wish I'd had as an M.Sc. student.</p>
+      <h3>Start with a Research Question, Not Data</h3>
+      <p>The most common mistake: starting with data instead of a question. A good research question is <strong>specific, answerable with available data, and contributes something new</strong> — even if small. Not "what affects crop yield" but "does access to irrigation affect wheat yield among marginal farmers in X district."</p>
+      <div class="key-box">
+        <div class="key-title">The IMRaD Structure</div>
+        <ul>
+          <li><strong>Introduction:</strong> Why does this matter? What gap are you filling?</li>
+          <li><strong>Methods:</strong> How did you collect data? What model and why?</li>
+          <li><strong>Results:</strong> What did you find? Tables, figures — facts only, no interpretation.</li>
+          <li><strong>Discussion:</strong> What do results mean? Compare to literature. Limitations?</li>
+          <li><strong>Conclusion:</strong> So what? What should policymakers do?</li>
+        </ul>
+      </div>
+      <h3>Write Methods First, Introduction Last</h3>
+      <p>Counterintuitively, write: Methods → Results → Discussion → Conclusion → Introduction → Abstract. The introduction is easiest once you know exactly what you found.</p>
+      <h3>Responding to Reviewers</h3>
+      <p>Use a response table: reviewer comment | your response | changes made. Never argue aggressively — thank them, address the concern, explain your reasoning calmly.</p>
+      <blockquote>A rejection is not a failure — it is feedback. Almost every paper that eventually gets published was rejected at least once first.</blockquote>
+    </div>
+  </div>
+
+  <!-- COMING SOON -->
+  <div class="post-item coming-soon fade-in">
+    <div class="post-header">
+      <div class="post-emoji">💧</div>
+      <div class="post-header-text">
+        <div class="post-title">Estimating the True Cost of Irrigation Water: Methods & Policy Implications</div>
+        <div class="post-meta"><span class="soon-badge">Coming Soon</span><span class="post-tag tag-water">Water</span><span class="post-tag tag-methods">Methods</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-item coming-soon fade-in">
+    <div class="post-header">
+      <div class="post-emoji">🏙️</div>
+      <div class="post-header-text">
+        <div class="post-title">The Hidden Costs of Urban Dairies: Externalities You Don't See in the Price of Milk</div>
+        <div class="post-meta"><span class="soon-badge">Coming Soon</span><span class="post-tag tag-livestock">Livestock</span><span class="post-tag tag-policy">Policy</span></div>
+      </div>
+    </div>
+  </div>
+
   <div class="newsletter-box fade-in">
     <h3>Stay Updated</h3>
-    <p>New posts on carbon markets, agricultural policy, and research methods. No spam — just useful content for researchers and students.</p>
+    <p>New posts on carbon markets, agricultural policy, and research methods. No spam — useful content for researchers and students.</p>
     <div class="newsletter-form">
       <input type="email" placeholder="your@email.com">
       <button class="btn-subscribe" onclick="alert('Thank you! I will be in touch soon.')">Subscribe →</button>
@@ -362,23 +360,32 @@
 </div>
 
 <footer>
-  © 2025 Banda Sainath · <a href="index.html" style="color:var(--accent); text-decoration:none;">← Back to Home</a> · <a href="resources.html" style="color:var(--accent2); text-decoration:none;">Resources</a>
+  © 2025 Banda Sainath &nbsp;·&nbsp;
+  <a href="index.html" style="color:var(--accent); text-decoration:none;">← Home</a> &nbsp;·&nbsp;
+  <a href="resources.html" style="color:var(--accent2); text-decoration:none;">Resources</a>
 </footer>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  function togglePost(header) {
+    const item = header.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.post-item.open').forEach(p => p.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
 
   function filterPosts(tag, btn) {
     document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    document.querySelectorAll('.post-card, .post-featured').forEach(card => {
-      const tags = card.dataset.tags || '';
-      card.style.display = (tag === 'all' || tags.includes(tag)) ? '' : 'none';
+    document.querySelectorAll('.post-item:not(.coming-soon)').forEach(item => {
+      const tags = item.dataset.tags || '';
+      item.classList.toggle('hidden', tag !== 'all' && !tags.includes(tag));
     });
   }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
