@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="mxHYk3PITQRd54OTSWHV68Gr4SqV7jMlZDDD4PDqAgg" />
+<title>Research Library | Banda Sainath</title>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-589QFCEYJX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-589QFCEYJX');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117; --bg2: #161b22; --bg3: #1c2330;
+    --accent: #3fb950; --accent2: #58a6ff; --gold: #d4a843;
+    --rose: #f78166; --purple: #bc8cff; --teal: #39d353;
+    --text: #e6edf3; --muted: #8b949e; --border: #30363d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 18px 48px; background: rgba(13,17,23,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 8px; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); text-decoration: none; }
+  .nav-links { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
+  .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+  /* HERO */
+  .page-hero { padding: 130px 48px 40px; max-width: 1100px; margin: 0 auto; }
+  .breadcrumb { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 20px; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb span { margin: 0 8px; }
+  .page-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 10px; }
+  .page-title em { font-style: italic; color: var(--gold); }
+  .page-desc { color: var(--muted); font-size: 0.95rem; max-width: 680px; margin-bottom: 14px; }
+  .legal-note { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--rose); background: rgba(247,129,102,0.08); border: 1px solid rgba(247,129,102,0.2); border-radius: 6px; padding: 8px 14px; display: inline-block; margin-bottom: 32px; }
+
+  /* UNIFIED SEARCH */
+  .unified-search { max-width: 1100px; margin: 0 auto; padding: 0 48px 32px; }
+  .search-hero { background: linear-gradient(135deg, rgba(63,185,80,0.08), rgba(88,166,255,0.06)); border: 1px solid var(--border); border-radius: 14px; padding: 32px; margin-bottom: 32px; }
+  .search-hero-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 6px; }
+  .search-hero-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; }
+  .search-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .search-row input { flex: 1; min-width: 200px; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text); outline: none; transition: border-color 0.2s; }
+  .search-row input:focus { border-color: var(--accent); }
+  .search-row input::placeholder { color: var(--muted); }
+  .search-engines { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .eng-btn { display: inline-flex; align-items: center; gap: 6px; font-family: 'DM Mono', monospace; font-size: 0.72rem; padding: 7px 14px; border-radius: 6px; border: 1px solid var(--border); color: var(--muted); background: var(--bg2); cursor: pointer; letter-spacing: 0.04em; transition: all 0.2s; text-decoration: none; }
+  .eng-btn:hover { transform: translateY(-1px); }
+  .eng-btn.gs:hover { border-color: var(--accent2); color: var(--accent2); }
+  .eng-btn.rg:hover { border-color: var(--teal); color: var(--teal); }
+  .eng-btn.pm:hover { border-color: var(--rose); color: var(--rose); }
+  .eng-btn.sd:hover { border-color: var(--gold); color: var(--gold); }
+  .eng-btn.ss:hover { border-color: var(--purple); color: var(--purple); }
+  .eng-btn.base:hover { border-color: var(--accent); color: var(--accent); }
+  .eng-btn.doaj:hover { border-color: var(--accent); color: var(--accent); }
+  .eng-btn.core:hover { border-color: var(--accent2); color: var(--accent2); }
+
+  /* MAIN CONTENT */
+  .main-content { max-width: 1100px; margin: 0 auto; padding: 0 48px 80px; }
+
+  /* SECTION HEADERS */
+  .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .sec-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .sec-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
+  .sec-sub { font-size: 0.82rem; color: var(--muted); }
+  .sec-count { margin-left: auto; font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); background: var(--bg2); border: 1px solid var(--border); padding: 3px 10px; border-radius: 10px; }
+
+  /* LIBRARY GRID */
+  .lib-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin-bottom: 40px; }
+  .lib-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; text-decoration: none; display: flex; flex-direction: column; gap: 8px; transition: all 0.22s; position: relative; overflow: hidden; }
+  .lib-card::after { content: '↗'; position: absolute; top: 14px; right: 14px; font-size: 0.85rem; color: var(--muted); opacity: 0; transition: opacity 0.2s, transform 0.2s; transform: translate(-4px, 4px); }
+  .lib-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+  .lib-card:hover::after { opacity: 1; transform: translate(0,0); }
+  .lib-card-top { display: flex; align-items: flex-start; gap: 12px; }
+  .lib-emoji { font-size: 1.6rem; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+  .lib-name { font-size: 0.95rem; font-weight: 500; color: var(--text); line-height: 1.3; }
+  .lib-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+  .lib-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+  .lib-tag { font-family: 'DM Mono', monospace; font-size: 0.63rem; padding: 2px 7px; border-radius: 3px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .tag-free { background: rgba(63,185,80,0.12); color: var(--accent); }
+  .tag-india { background: rgba(247,129,102,0.12); color: var(--rose); }
+  .tag-global { background: rgba(88,166,255,0.12); color: var(--accent2); }
+  .tag-books { background: rgba(212,168,67,0.12); color: var(--gold); }
+  .tag-articles { background: rgba(188,140,255,0.12); color: var(--purple); }
+  .tag-legal { background: rgba(57,211,83,0.12); color: var(--teal); }
+  .tag-paid { background: rgba(139,148,158,0.12); color: var(--muted); }
+
+  /* SPECIAL — hover colors */
+  .card-blue:hover { border-color: var(--accent2); }
+  .card-green:hover { border-color: var(--accent); }
+  .card-gold:hover { border-color: var(--gold); }
+  .card-purple:hover { border-color: var(--purple); }
+  .card-rose:hover { border-color: var(--rose); }
+
+  /* TIP BOX */
+  .tip-box { background: rgba(63,185,80,0.06); border: 1px solid rgba(63,185,80,0.2); border-radius: 10px; padding: 16px 20px; margin-bottom: 22px; display: flex; gap: 12px; }
+  .tip-box .tip-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+  .tip-box p { font-size: 0.87rem; color: var(--muted); }
+  .tip-box strong { color: var(--accent); }
+
+  /* HOW TO ACCESS SECTION */
+  .how-to { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 40px; }
+  .how-to h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 16px; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .step { background: var(--bg3); border-radius: 8px; padding: 16px; }
+  .step-num { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 6px; }
+  .step h4 { font-size: 0.9rem; font-weight: 500; margin-bottom: 4px; }
+  .step p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+  .divider { height: 1px; background: var(--border); margin: 0 0 32px; }
+  .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.5s, transform 0.5s; }
+  .fade-in.visible { opacity: 1; transform: none; }
+  footer { border-top: 1px solid var(--border); padding: 28px 48px; text-align: center; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .page-hero, .unified-search, .main-content { padding-left: 20px; padding-right: 20px; }
+    .lib-grid { grid-template-columns: 1fr; }
+    footer { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Banda Sainath</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#publications">Publications</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="naas.html">NAAS Checker</a></li>
+    <li><a href="methods.html">Methods</a></li>
+    <li><a href="library.html" class="active">Library</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="Banda_Sainath_CV.pdf" target="_blank" style="background:var(--gold);color:#0d1117;padding:6px 14px;border-radius:4px;font-weight:500;">📄 CV</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Research Library</div>
+  <h1 class="page-title">Research <em>Library</em></h1>
+  <p class="page-desc">Free and legal access to research articles, books, datasets, and academic resources. Everything a researcher in Agricultural & Environmental Economics needs — in one place.</p>
+  <div class="legal-note">⚠️ This page lists only legal, free, or institutionally-licensed resources. Always respect copyright and publisher terms of service.</div>
+</div>
+
+<!-- UNIFIED SEARCH -->
+<div class="unified-search">
+  <div class="search-hero fade-in">
+    <div class="search-hero-title">🔍 Search Across Multiple Engines</div>
+    <div class="search-hero-sub">Type your topic or paper title and click any engine to search directly</div>
+    <div class="search-row">
+      <input type="text" id="uniSearch" placeholder="e.g. carbon credits smallholder farmers India..." onkeydown="if(event.key==='Enter') searchEngine('gs')">
+    </div>
+    <div class="search-engines">
+      <a class="eng-btn gs" onclick="searchEngine('gs')">🎓 Google Scholar</a>
+      <a class="eng-btn ss" onclick="searchEngine('ss')">🔬 Semantic Scholar</a>
+      <a class="eng-btn base" onclick="searchEngine('base')">📚 BASE</a>
+      <a class="eng-btn core" onclick="searchEngine('core')">🌐 CORE</a>
+      <a class="eng-btn doaj" onclick="searchEngine('doaj')">📖 DOAJ</a>
+      <a class="eng-btn pm" onclick="searchEngine('pm')">🧬 PubMed</a>
+      <a class="eng-btn rg" onclick="searchEngine('rg')">🔭 ResearchGate</a>
+      <a class="eng-btn sd" onclick="searchEngine('sd')">📰 ScienceDirect</a>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+  <!-- HOW TO ACCESS PAYWALLED PAPERS -->
+  <div class="how-to fade-in">
+    <h3>💡 How to Access Paywalled Papers Legally (as an ICAR Scientist)</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">METHOD 01</div>
+        <h4>ICAR-NAARM e-Library</h4>
+        <p>ICAR scientists get free access to thousands of journals via ICAR's institutional subscriptions through NAARM library. Email your institute librarian for login credentials.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">METHOD 02</div>
+        <h4>Email the Author</h4>
+        <p>Find the corresponding author's email (on the paper or ResearchGate) and email them directly. Authors are legally allowed to share their own papers — most respond within 48 hours.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">METHOD 03</div>
+        <h4>Unpaywall Browser Extension</h4>
+        <p>Install the free Unpaywall extension in Chrome. It automatically finds legal free versions of papers you're viewing. Works on 50%+ of all papers.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">METHOD 04</div>
+        <h4>ResearchGate / Academia.edu</h4>
+        <p>Many authors upload their papers to ResearchGate or Academia.edu. Search the exact paper title — often a free PDF is available from the authors themselves.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">METHOD 05</div>
+        <h4>Preprint Servers</h4>
+        <p>Check bioRxiv, SSRN, EconStor, or AgEcon Search for preprint (pre-publication) versions of papers. Usually the same content, freely available.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">METHOD 06</div>
+        <h4>National Digital Library (NDL)</h4>
+        <p>India's NDL (ndl.gov.in) provides free access to millions of resources including e-books, theses, and journal articles for Indian researchers and students.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: ARTICLE SEARCH ENGINES -->
+  <div class="divider"></div>
+  <div class="sec-header fade-in">
+    <div class="sec-icon" style="background:rgba(88,166,255,0.1);">🔬</div>
+    <div><div class="sec-title">Article Search Engines</div><div class="sec-sub">Find and access research papers across millions of articles</div></div>
+    <div class="sec-count">12 tools</div>
+  </div>
+  <div class="tip-box fade-in">
+    <span class="tip-icon">💡</span>
+    <p><strong>Best strategy:</strong> Search Google Scholar first for relevance, then check CORE or BASE for a free PDF. Use Semantic Scholar for citation maps and related paper discovery.</p>
+  </div>
+  <div class="lib-grid fade-in">
+
+    <a href="https://scholar.google.com" target="_blank" class="lib-card card-blue">
+      <div class="lib-card-top"><div class="lib-emoji">🎓</div><div class="lib-name">Google Scholar</div></div>
+      <div class="lib-desc">The most comprehensive academic search engine. Search 200M+ papers across all disciplines. Shows citation counts, related articles, and often links to free PDFs. Start every literature search here.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-articles">Articles</span></div>
+    </a>
+
+    <a href="https://www.semanticscholar.org" target="_blank" class="lib-card card-purple">
+      <div class="lib-card-top"><div class="lib-emoji">🧠</div><div class="lib-name">Semantic Scholar</div></div>
+      <div class="lib-desc">AI-powered research tool by Allen Institute. Shows citation influence, related papers, and key figures. Excellent for finding highly cited papers in your field and mapping research networks.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-articles">Articles</span></div>
+    </a>
+
+    <a href="https://core.ac.uk" target="_blank" class="lib-card card-green">
+      <div class="lib-card-top"><div class="lib-emoji">🌐</div><div class="lib-name">CORE</div></div>
+      <div class="lib-desc">World's largest aggregator of open access research — 200M+ papers with free PDFs. Aggregates from institutional repositories worldwide. Great for finding free full-text versions of paywalled papers.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://www.base-search.net" target="_blank" class="lib-card card-blue">
+      <div class="lib-card-top"><div class="lib-emoji">📚</div><div class="lib-name">BASE — Bielefeld Academic Search</div></div>
+      <div class="lib-desc">300M+ documents from 10,000+ content providers. Strong coverage of European and institutional repositories. Filters for open access content. Excellent complement to Google Scholar.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://doaj.org" target="_blank" class="lib-card card-green">
+      <div class="lib-card-top"><div class="lib-emoji">📖</div><div class="lib-name">DOAJ — Directory of Open Access Journals</div></div>
+      <div class="lib-desc">Curated directory of 20,000+ peer-reviewed open access journals. All content is free and legal. Excellent for finding high-quality open access journals in agricultural economics and environmental science.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://ageconsearch.umn.edu" target="_blank" class="lib-card card-gold">
+      <div class="lib-card-top"><div class="lib-emoji">🌾</div><div class="lib-name">AgEcon Search</div></div>
+      <div class="lib-desc">Free full-text repository specifically for agricultural and applied economics literature. Working papers, conference papers, and journal articles. Best specialised search engine for your field.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-articles">Agri-Econ</span></div>
+    </a>
+
+    <a href="https://www.ncbi.nlm.nih.gov/pmc/" target="_blank" class="lib-card card-rose">
+      <div class="lib-card-top"><div class="lib-emoji">🧬</div><div class="lib-name">PubMed Central</div></div>
+      <div class="lib-desc">Free full-text archive of biomedical and life sciences literature. Useful for livestock health, dairy science, and environmental health papers. 8M+ free articles.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://www.researchgate.net" target="_blank" class="lib-card card-blue">
+      <div class="lib-card-top"><div class="lib-emoji">🔭</div><div class="lib-name">ResearchGate</div></div>
+      <div class="lib-desc">Social network for researchers where authors upload their own papers. Request full-text directly from authors. Great for finding preprints and connecting with researchers in your field.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-articles">Articles</span></div>
+    </a>
+
+    <a href="https://www.sciencedirect.com" target="_blank" class="lib-card card-gold">
+      <div class="lib-card-top"><div class="lib-emoji">📰</div><div class="lib-name">ScienceDirect (Elsevier)</div></div>
+      <div class="lib-desc">Elsevier's platform hosting 18M+ articles across 2,500+ journals. Many articles are open access. ICAR library subscription gives full access. Covers ecological economics, food policy, environmental management.</div>
+      <div class="lib-tags"><span class="lib-tag tag-paid">Subscription</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-india">ICAR Access</span></div>
+    </a>
+
+    <a href="https://link.springer.com" target="_blank" class="lib-card card-purple">
+      <div class="lib-card-top"><div class="lib-emoji">🌿</div><div class="lib-name">SpringerLink</div></div>
+      <div class="lib-desc">Springer Nature's platform with 13M+ documents. Strong in agricultural sciences, environmental economics, and sustainability. Many open access articles. Access via ICAR library.</div>
+      <div class="lib-tags"><span class="lib-tag tag-paid">Subscription</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-india">ICAR Access</span></div>
+    </a>
+
+    <a href="https://onlinelibrary.wiley.com" target="_blank" class="lib-card card-blue">
+      <div class="lib-card-top"><div class="lib-emoji">📑</div><div class="lib-name">Wiley Online Library</div></div>
+      <div class="lib-desc">Wiley's platform with 6M+ articles. Home to Agricultural Economics, AJAE, and AJARE. Strong open access collection. Access via ICAR institutional subscription.</div>
+      <div class="lib-tags"><span class="lib-tag tag-paid">Subscription</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-india">ICAR Access</span></div>
+    </a>
+
+    <a href="https://www.tandfonline.com" target="_blank" class="lib-card card-rose">
+      <div class="lib-card-top"><div class="lib-emoji">📋</div><div class="lib-name">Taylor & Francis Online</div></div>
+      <div class="lib-desc">Taylor & Francis platform covering climate policy, agroecology, development studies, and environmental science. Over 2,700 journals with growing open access collection.</div>
+      <div class="lib-tags"><span class="lib-tag tag-paid">Subscription</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-articles">Articles</span></div>
+    </a>
+
+  </div>
+
+  <!-- SECTION 2: FREE BOOK LIBRARIES -->
+  <div class="divider"></div>
+  <div class="sec-header fade-in">
+    <div class="sec-icon" style="background:rgba(212,168,67,0.1);">📚</div>
+    <div><div class="sec-title">Free Book Libraries</div><div class="sec-sub">Legal access to textbooks, academic books, and reading materials</div></div>
+    <div class="sec-count">10 libraries</div>
+  </div>
+  <div class="tip-box fade-in">
+    <span class="tip-icon">💡</span>
+    <p><strong>For students:</strong> National Digital Library of India (NDL) is your best friend — it's free, legal, and has millions of books and theses specifically for Indian students and researchers. Sign up with your institute email.</p>
+  </div>
+  <div class="lib-grid fade-in">
+
+    <a href="https://ndl.iitkgp.ac.in" target="_blank" class="lib-card card-green">
+      <div class="lib-card-top"><div class="lib-emoji">🇮🇳</div><div class="lib-name">National Digital Library of India (NDL)</div></div>
+      <div class="lib-desc">India's premier digital library with 90M+ learning resources — textbooks, theses, journals, audio-visual content. Free for all Indian students and researchers. Register with your institute email. Curated by IIT Kharagpur.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-india">India</span><span class="lib-tag tag-books">Books</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://archive.org/details/texts" target="_blank" class="lib-card card-blue">
+      <div class="lib-card-top"><div class="lib-emoji">🏛️</div><div class="lib-name">Internet Archive — Open Library</div></div>
+      <div class="lib-desc">Millions of free books — out-of-copyright classics and borrowable modern books. Great for older agricultural economics textbooks, classic NRE texts, and development economics literature. Borrow books for 1-hour periods.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-books">Books</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://www.gutenberg.org" target="_blank" class="lib-card card-gold">
+      <div class="lib-card-top"><div class="lib-emoji">📜</div><div class="lib-name">Project Gutenberg</div></div>
+      <div class="lib-desc">60,000+ free public domain ebooks. Excellent for classical economics texts — Adam Smith's Wealth of Nations, Alfred Marshall's Principles of Economics, J.S. Mill, and more. All legally free forever.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-books">Books</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://www.worldcat.org" target="_blank" class="lib-card card-purple">
+      <div class="lib-card-top"><div class="lib-emoji">🌍</div><div class="lib-name">WorldCat</div></div>
+      <div class="lib-desc">Find books in libraries near you. Search the world's largest library catalog (2B+ items). Locate which libraries hold a specific book — request interlibrary loans through your institute's library.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-books">Books</span></div>
+    </a>
+
+    <a href="https://books.google.com" target="_blank" class="lib-card card-blue">
+      <div class="lib-card-top"><div class="lib-emoji">📗</div><div class="lib-name">Google Books</div></div>
+      <div class="lib-desc">Search millions of books. Full view for public domain books; preview for others. Excellent for quickly checking if a specific chapter or section of a textbook covers your topic before requesting it.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free Preview</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-books">Books</span></div>
+    </a>
+
+    <a href="https://muse.jhu.edu/browse/open_access" target="_blank" class="lib-card card-rose">
+      <div class="lib-card-top"><div class="lib-emoji">🏫</div><div class="lib-name">Project MUSE — Open Access</div></div>
+      <div class="lib-desc">Humanities and social sciences books and journals from university presses. Growing open access collection. Good for development economics, rural sociology, and agricultural policy books.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Partly Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-books">Books</span></div>
+    </a>
+
+    <a href="https://www.oapen.org" target="_blank" class="lib-card card-green">
+      <div class="lib-card-top"><div class="lib-emoji">🔓</div><div class="lib-name">OAPEN — Open Access Books</div></div>
+      <div class="lib-desc">Open Access Publishing in European Networks — free peer-reviewed academic books. Strong collection in social sciences, economics, and environmental studies. All books freely downloadable as PDF.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-books">Books</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://openknowledge.worldbank.org" target="_blank" class="lib-card card-gold">
+      <div class="lib-card-top"><div class="lib-emoji">🏦</div><div class="lib-name">World Bank Open Knowledge</div></div>
+      <div class="lib-desc">Free access to all World Bank books, reports, working papers, and datasets. Thousands of publications on agricultural development, rural poverty, food security, and trade policy. All free PDF download.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-books">Books</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://www.fao.org/publications/en/" target="_blank" class="lib-card card-green">
+      <div class="lib-card-top"><div class="lib-emoji">🌱</div><div class="lib-name">FAO Publications</div></div>
+      <div class="lib-desc">All FAO books, reports, and statistical yearbooks freely available. The State of Food and Agriculture (SOFA), World Food Situation, and thousands of technical guides on agriculture and NRM. Essential reference library.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-books">Books</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://www.springer.com/gp/open-access/springer-open-books" target="_blank" class="lib-card card-purple">
+      <div class="lib-card-top"><div class="lib-emoji">🌿</div><div class="lib-name">SpringerOpen Books</div></div>
+      <div class="lib-desc">Free open access books from Springer Nature. Growing collection of peer-reviewed academic books in agriculture, environment, and economics. All downloadable as free PDF.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-books">Books</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+  </div>
+
+  <!-- SECTION 3: THESIS & DISSERTATIONS -->
+  <div class="divider"></div>
+  <div class="sec-header fade-in">
+    <div class="sec-icon" style="background:rgba(188,140,255,0.1);">🎓</div>
+    <div><div class="sec-title">Theses & Dissertations</div><div class="sec-sub">Access Ph.D. and M.Sc. theses from India and globally</div></div>
+    <div class="sec-count">6 repositories</div>
+  </div>
+  <div class="lib-grid fade-in">
+
+    <a href="https://shodhganga.inflibnet.ac.in" target="_blank" class="lib-card card-green">
+      <div class="lib-card-top"><div class="lib-emoji">🇮🇳</div><div class="lib-name">Shodhganga — Indian Theses</div></div>
+      <div class="lib-desc">INFLIBNET's repository of 600,000+ Indian Ph.D. theses from 400+ universities. Best source for Indian M.Sc. and Ph.D. theses in agricultural economics, NRM, dairy science. Free full-text download.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-india">India</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://krishikosh.egranth.ac.in" target="_blank" class="lib-card card-gold">
+      <div class="lib-card-top"><div class="lib-emoji">🌾</div><div class="lib-name">KrishiKosh — ICAR Institutional Repository</div></div>
+      <div class="lib-desc">ICAR's institutional repository with theses, reports, and publications from all ICAR institutes. Includes theses from ICAR-NDRI, IARI, NAARM, and other ICAR institutes. Direct relevance to your field.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-india">India</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://www.proquest.com/dissertations-theses" target="_blank" class="lib-card card-blue">
+      <div class="lib-card-top"><div class="lib-emoji">🌐</div><div class="lib-name">ProQuest Dissertations & Theses</div></div>
+      <div class="lib-desc">World's largest database of dissertations and theses — 5M+ from 3,000+ universities globally. Previews free; full access via institutional subscription. Check if ICAR-NAARM library has access.</div>
+      <div class="lib-tags"><span class="lib-tag tag-paid">Paid/Library</span><span class="lib-tag tag-global">Global</span></div>
+    </a>
+
+    <a href="https://ethos.bl.uk" target="_blank" class="lib-card card-purple">
+      <div class="lib-card-top"><div class="lib-emoji">🇬🇧</div><div class="lib-name">EThOS — British Library Theses</div></div>
+      <div class="lib-desc">Free access to UK doctoral theses from British universities. Strong collection in agricultural economics, environmental policy, and development economics. Many available as immediate free download.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://dart-europe.org" target="_blank" class="lib-card card-blue">
+      <div class="lib-card-top"><div class="lib-emoji">🇪🇺</div><div class="lib-name">DART-Europe — European Theses</div></div>
+      <div class="lib-desc">Portal providing access to 700,000+ open access European doctoral theses from 28 countries. Free full-text. Useful for comparative agricultural economics and European environmental policy research.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Europe</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://ndltd.org" target="_blank" class="lib-card card-rose">
+      <div class="lib-card-top"><div class="lib-emoji">🌏</div><div class="lib-name">NDLTD — Global Theses</div></div>
+      <div class="lib-desc">Networked Digital Library of Theses and Dissertations — search theses from 1,000+ member institutions worldwide. Good discovery tool to find thesis work done on your research topics globally.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span></div>
+    </a>
+
+  </div>
+
+  <!-- SECTION 4: PREPRINTS & WORKING PAPERS -->
+  <div class="divider"></div>
+  <div class="sec-header fade-in">
+    <div class="sec-icon" style="background:rgba(57,211,83,0.1);">📄</div>
+    <div><div class="sec-title">Preprints & Working Papers</div><div class="sec-sub">Latest research before formal publication — often free</div></div>
+    <div class="sec-count">8 servers</div>
+  </div>
+  <div class="lib-grid fade-in">
+
+    <a href="https://papers.ssrn.com" target="_blank" class="lib-card card-blue">
+      <div class="lib-card-top"><div class="lib-emoji">📊</div><div class="lib-name">SSRN — Social Science Research Network</div></div>
+      <div class="lib-desc">World's leading social sciences preprint server. Thousands of economics, agricultural policy, and environmental economics working papers. Many Nobel laureates post here first. Free download.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-articles">Economics</span></div>
+    </a>
+
+    <a href="https://www.nber.org/papers" target="_blank" class="lib-card card-gold">
+      <div class="lib-card-top"><div class="lib-emoji">🏛️</div><div class="lib-name">NBER Working Papers</div></div>
+      <div class="lib-desc">National Bureau of Economic Research working papers — the gold standard in economics research. Abstracts free; full papers $5 or free after 18 months. Essential for development economics and agricultural policy.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Partly Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-articles">Economics</span></div>
+    </a>
+
+    <a href="https://ageconsearch.umn.edu" target="_blank" class="lib-card card-green">
+      <div class="lib-card-top"><div class="lib-emoji">🌾</div><div class="lib-name">AgEcon Search Working Papers</div></div>
+      <div class="lib-desc">Free working papers specifically in agricultural and applied economics from IFPRI, FAO, World Bank, and university departments. Best source for grey literature in your exact field.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-articles">Agri-Econ</span></div>
+    </a>
+
+    <a href="https://www.econstor.eu" target="_blank" class="lib-card card-purple">
+      <div class="lib-card-top"><div class="lib-emoji">💶</div><div class="lib-name">EconStor</div></div>
+      <div class="lib-desc">Free repository of economics working papers and journal articles from 200+ institutions — ZEW, DIW, IZA, and more. Strong in development economics and agricultural trade. All free full-text download.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://www.ifpri.org/publications" target="_blank" class="lib-card card-gold">
+      <div class="lib-card-top"><div class="lib-emoji">🌐</div><div class="lib-name">IFPRI Publications</div></div>
+      <div class="lib-desc">All IFPRI discussion papers, reports, policy briefs, and books — free download. Leading source for food policy, agricultural development, and rural economics research in South Asia and globally.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://cgspace.cgiar.org" target="_blank" class="lib-card card-green">
+      <div class="lib-card-top"><div class="lib-emoji">🌱</div><div class="lib-name">CGSpace — CGIAR Repository</div></div>
+      <div class="lib-desc">CGIAR's open access repository with 80,000+ publications from CIMMYT, IRRI, ICRISAT, IFPRI, and other centers. All free. Carbon farming, climate-smart agriculture, and smallholder research heavily covered.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://www.iza.org/publications/dp" target="_blank" class="lib-card card-blue">
+      <div class="lib-card-top"><div class="lib-emoji">💼</div><div class="lib-name">IZA Discussion Papers</div></div>
+      <div class="lib-desc">IZA Institute of Labor Economics — 15,000+ free discussion papers on labour, development, and welfare economics. Relevant for rural employment, agricultural wages, and farm household income research.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://repec.org" target="_blank" class="lib-card card-rose">
+      <div class="lib-card-top"><div class="lib-emoji">📈</div><div class="lib-name">RePEc — Research Papers in Economics</div></div>
+      <div class="lib-desc">Decentralized database of economics research — 4M+ papers from 3,000+ archives. Strong working paper coverage. Use IDEAS.repec.org as the search interface for the full database.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-global">Global</span><span class="lib-tag tag-articles">Economics</span></div>
+    </a>
+
+  </div>
+
+  <!-- SECTION 5: BROWSER TOOLS -->
+  <div class="divider"></div>
+  <div class="sec-header fade-in">
+    <div class="sec-icon" style="background:rgba(247,129,102,0.1);">🔧</div>
+    <div><div class="sec-title">Must-Have Browser Tools</div><div class="sec-sub">Extensions and tools that make accessing papers easier</div></div>
+    <div class="sec-count">5 tools</div>
+  </div>
+  <div class="lib-grid fade-in">
+
+    <a href="https://unpaywall.org" target="_blank" class="lib-card card-green">
+      <div class="lib-card-top"><div class="lib-emoji">🔓</div><div class="lib-name">Unpaywall</div></div>
+      <div class="lib-desc">Free Chrome/Firefox extension that automatically finds legal free versions of paywalled papers. A green tab appears when a free version exists. Works on 50%+ of all papers. Install this immediately — it will save you hundreds of hours.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://www.zotero.org" target="_blank" class="lib-card card-blue">
+      <div class="lib-card-top"><div class="lib-emoji">📋</div><div class="lib-name">Zotero</div></div>
+      <div class="lib-desc">Free reference manager with browser extension. Save papers with one click, auto-generate citations, organize your library, and sync across devices. The standard tool for thesis writing and literature management.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Free</span><span class="lib-tag tag-legal">Legal</span></div>
+    </a>
+
+    <a href="https://www.connectedpapers.com" target="_blank" class="lib-card card-purple">
+      <div class="lib-card-top"><div class="lib-emoji">🕸️</div><div class="lib-name">Connected Papers</div></div>
+      <div class="lib-desc">Paste any paper and see a visual map of related papers. Instantly find seminal works, recent follow-ups, and related literature. Free for 5 graphs/month. Invaluable for building your literature review.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Freemium</span><span class="lib-tag tag-global">Global</span></div>
+    </a>
+
+    <a href="https://www.litmaps.com" target="_blank" class="lib-card card-gold">
+      <div class="lib-card-top"><div class="lib-emoji">🗺️</div><div class="lib-name">Litmaps</div></div>
+      <div class="lib-desc">Visual citation mapping — see how papers are connected through citations. Track new papers citing your seed paper. Great for monitoring your research area and finding papers you may have missed.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Freemium</span><span class="lib-tag tag-global">Global</span></div>
+    </a>
+
+    <a href="https://www.elicit.com" target="_blank" class="lib-card card-rose">
+      <div class="lib-card-top"><div class="lib-emoji">🤖</div><div class="lib-name">Elicit — AI Research Assistant</div></div>
+      <div class="lib-desc">AI tool that finds relevant papers, extracts key information, and summarizes findings. Ask research questions in plain English and get structured summaries from real papers. Excellent for literature review scoping.</div>
+      <div class="lib-tags"><span class="lib-tag tag-free">Freemium</span><span class="lib-tag tag-global">Global</span></div>
+    </a>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2025 Banda Sainath &nbsp;·&nbsp;
+  <a href="index.html" style="color:var(--accent); text-decoration:none;">← Home</a> &nbsp;·&nbsp;
+  <a href="resources.html" style="color:var(--accent2); text-decoration:none;">Resources</a> &nbsp;·&nbsp;
+  <a href="naas.html" style="color:var(--gold); text-decoration:none;">NAAS Checker</a>
+</footer>
+
+<script>
+  // Search engine redirect
+  function searchEngine(engine) {
+    const q = encodeURIComponent(document.getElementById('uniSearch').value.trim());
+    if (!q) { document.getElementById('uniSearch').focus(); return; }
+    const urls = {
+      gs:   `https://scholar.google.com/scholar?q=${q}`,
+      ss:   `https://www.semanticscholar.org/search?q=${q}&sort=Relevance`,
+      base: `https://www.base-search.net/Search/Results?lookfor=${q}&name=&oaboost=1`,
+      core: `https://core.ac.uk/search?q=${q}`,
+      doaj: `https://doaj.org/search/articles?source=%7B%22query%22%3A%7B%22query_string%22%3A%7B%22query%22%3A%22${q}%22%7D%7D%7D`,
+      pm:   `https://pubmed.ncbi.nlm.nih.gov/?term=${q}`,
+      rg:   `https://www.researchgate.net/search?q=${q}`,
+      sd:   `https://www.sciencedirect.com/search?qs=${q}`,
+    };
+    if (urls[engine]) window.open(urls[engine], '_blank');
+  }
+
+  // Enter key on search
+  document.getElementById('uniSearch').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') searchEngine('gs');
+  });
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

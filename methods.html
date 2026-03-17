@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="mxHYk3PITQRd54OTSWHV68Gr4SqV7jMlZDDD4PDqAgg" />
+<title>Methodology Encyclopedia | Banda Sainath</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-589QFCEYJX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-589QFCEYJX');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2330;--accent:#3fb950;--accent2:#58a6ff;--gold:#d4a843;--rose:#f78166;--purple:#bc8cff;--teal:#39d353;--text:#e6edf3;--muted:#8b949e;--border:#30363d;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:16px 48px;background:rgba(13,17,23,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);flex-wrap:wrap;gap:8px;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);text-decoration:none;}
+.nav-links{display:flex;gap:16px;list-style:none;flex-wrap:wrap;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);}
+
+/* HERO */
+.page-hero{padding:120px 48px 32px;max-width:1200px;margin:0 auto;}
+.breadcrumb{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);margin-bottom:16px;}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{margin:0 8px;}
+.page-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:10px;}
+.page-title em{font-style:italic;color:var(--gold);}
+.page-desc{color:var(--muted);font-size:0.93rem;max-width:680px;margin-bottom:24px;}
+
+/* SEARCH + FILTER */
+.toolbar{max-width:1200px;margin:0 auto;padding:0 48px 24px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.search-wrap{position:relative;flex:1;min-width:220px;}
+.search-wrap input{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:11px 44px 11px 16px;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--text);outline:none;transition:border-color 0.2s;}
+.search-wrap input:focus{border-color:var(--accent);}
+.search-wrap input::placeholder{color:var(--muted);}
+.search-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--muted);}
+.cat-tabs{display:flex;gap:8px;flex-wrap:wrap;}
+.cat-tab{font-family:'DM Mono',monospace;font-size:0.7rem;padding:7px 14px;border-radius:20px;border:1px solid var(--border);color:var(--muted);background:transparent;cursor:pointer;letter-spacing:0.05em;transition:all 0.2s;}
+.cat-tab.active,.cat-tab:hover{color:var(--text);border-color:var(--accent2);background:rgba(88,166,255,0.08);}
+
+/* MAIN LAYOUT */
+.main{max-width:1200px;margin:0 auto;padding:0 48px 80px;display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:start;}
+@media(max-width:900px){.main{grid-template-columns:1fr;}}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:80px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;max-height:calc(100vh - 100px);overflow-y:auto;}
+.sidebar-title{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px;}
+.method-list{list-style:none;}
+.method-list li a{display:block;padding:7px 10px;border-radius:6px;text-decoration:none;font-size:0.83rem;color:var(--muted);transition:all 0.15s;border-left:2px solid transparent;}
+.method-list li a:hover{color:var(--text);background:rgba(255,255,255,0.04);border-left-color:var(--border);}
+.method-list li a.active-link{color:var(--accent2);background:rgba(88,166,255,0.08);border-left-color:var(--accent2);}
+.method-list .cat-heading{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;padding:12px 10px 4px;opacity:0.7;}
+
+/* METHOD CARDS */
+.methods-grid{display:flex;flex-direction:column;gap:20px;}
+.method-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color 0.2s;}
+.method-card:target{border-color:var(--accent2);}
+.method-card-header{padding:22px 26px 16px;cursor:pointer;user-select:none;}
+.method-card-header:hover{background:rgba(255,255,255,0.02);}
+.method-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:10px;}
+.method-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.method-header-text{flex:1;}
+.method-name{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--text);margin-bottom:4px;}
+.method-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;}
+.m-tag{font-family:'DM Mono',monospace;font-size:0.63rem;padding:2px 8px;border-radius:3px;letter-spacing:0.05em;}
+.tag-econometrics{background:rgba(88,166,255,0.1);color:var(--accent2);}
+.tag-impact{background:rgba(63,185,80,0.1);color:var(--accent);}
+.tag-survey{background:rgba(212,168,67,0.1);color:var(--gold);}
+.tag-timeseries{background:rgba(188,140,255,0.1);color:var(--purple);}
+.tag-spatial{background:rgba(247,129,102,0.1);color:var(--rose);}
+.tag-valuation{background:rgba(57,211,83,0.1);color:var(--teal);}
+.tag-ml{background:rgba(139,148,158,0.1);color:var(--muted);}
+.method-excerpt{font-size:0.85rem;color:var(--muted);line-height:1.55;}
+.method-chevron{font-size:0.9rem;color:var(--muted);transition:transform 0.3s;flex-shrink:0;margin-top:4px;}
+.method-card.open .method-chevron{transform:rotate(180deg);color:var(--accent2);}
+
+/* METHOD BODY */
+.method-body{max-height:0;overflow:hidden;transition:max-height 0.5s ease;}
+.method-card.open .method-body{max-height:4000px;}
+.method-content{padding:0 26px 28px;border-top:1px solid var(--border);}
+
+/* TABS */
+.tab-nav{display:flex;gap:0;margin:20px 0 0;border-bottom:1px solid var(--border);}
+.tab-btn{font-family:'DM Mono',monospace;font-size:0.72rem;padding:8px 16px;color:var(--muted);cursor:pointer;background:transparent;border:none;border-bottom:2px solid transparent;letter-spacing:0.06em;transition:all 0.2s;margin-bottom:-1px;}
+.tab-btn.active{color:var(--accent2);border-bottom-color:var(--accent2);}
+.tab-btn:hover{color:var(--text);}
+.tab-pane{display:none;padding-top:20px;}
+.tab-pane.active{display:block;}
+
+/* CONTENT STYLES */
+.method-content h4{font-family:'DM Sans',sans-serif;font-weight:500;font-size:0.9rem;color:var(--accent2);margin:16px 0 6px;text-transform:uppercase;letter-spacing:0.06em;font-size:0.78rem;}
+.method-content p{font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:10px;}
+.method-content ul{padding-left:18px;margin-bottom:12px;}
+.method-content ul li{font-size:0.87rem;color:var(--muted);line-height:1.6;margin-bottom:4px;}
+.method-content strong{color:var(--text);}
+.method-content em{color:var(--gold);}
+
+/* INFO GRID */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px;}
+.info-box{background:var(--bg3);border-radius:8px;padding:12px 14px;}
+.info-label{font-family:'DM Mono',monospace;font-size:0.63rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;}
+.info-val{font-size:0.85rem;color:var(--text);font-weight:500;}
+
+/* ASSUMPTIONS */
+.assume-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.assume-item{display:flex;gap:10px;align-items:flex-start;background:var(--bg3);border-radius:8px;padding:10px 14px;font-size:0.85rem;}
+.assume-item .check{color:var(--accent);flex-shrink:0;margin-top:2px;}
+.assume-item .warn{color:var(--gold);flex-shrink:0;margin-top:2px;}
+
+/* CODE BLOCKS */
+.code-block{position:relative;background:#010409;border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden;}
+.code-header{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;background:var(--bg3);border-bottom:1px solid var(--border);}
+.code-lang{font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;}
+.copy-btn{font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--muted);cursor:pointer;background:transparent;border:1px solid var(--border);padding:3px 10px;border-radius:4px;transition:all 0.2s;}
+.copy-btn:hover{color:var(--accent);border-color:var(--accent);}
+.code-block pre{padding:16px;overflow-x:auto;font-family:'DM Mono',monospace;font-size:0.78rem;line-height:1.6;color:#e6edf3;}
+.code-block pre .kw{color:#ff7b72;}
+.code-block pre .fn{color:#d2a8ff;}
+.code-block pre .str{color:#a5d6ff;}
+.code-block pre .cm{color:#8b949e;font-style:italic;}
+.code-block pre .num{color:#79c0ff;}
+.code-block pre .op{color:#ff7b72;}
+
+/* REFERENCES */
+.ref-list{list-style:none;padding:0;}
+.ref-list li{font-size:0.82rem;color:var(--muted);padding:8px 0;border-bottom:1px solid rgba(48,54,61,0.5);line-height:1.5;}
+.ref-list li:last-child{border-bottom:none;}
+.ref-list a{color:var(--accent2);text-decoration:none;}
+.ref-list a:hover{text-decoration:underline;}
+
+/* DIFFICULTY */
+.difficulty{display:flex;gap:4px;align-items:center;margin-top:6px;}
+.diff-dot{width:8px;height:8px;border-radius:50%;}
+.diff-dot.filled{background:var(--accent);}
+.diff-dot.empty{background:var(--border);}
+.diff-label{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);margin-left:6px;}
+
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.5s,transform 0.5s;}
+.fade-in.visible{opacity:1;transform:none;}
+.hidden-card{display:none;}
+footer{border-top:1px solid var(--border);padding:24px 48px;text-align:center;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);}
+@media(max-width:768px){nav{padding:12px 20px;}.page-hero,.toolbar,.main{padding-left:20px;padding-right:20px;}.method-content{padding:0 16px 20px;}.method-card-header{padding:16px;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Banda Sainath</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#publications">Publications</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="naas.html">NAAS</a></li>
+    <li><a href="library.html">Library</a></li>
+    <li><a href="methods.html" class="active">Methods</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="Banda_Sainath_CV.pdf" target="_blank" style="background:var(--gold);color:#0d1117;padding:5px 12px;border-radius:4px;font-weight:500;font-size:0.72rem;">📄 CV</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Methodology Encyclopedia</div>
+  <h1 class="page-title">Methodology <em>Encyclopedia</em></h1>
+  <p class="page-desc">A comprehensive reference for quantitative methods in Agricultural & Environmental Economics — with assumptions, when to use, software guidance, and ready-to-run code in R, STATA, and Python.</p>
+</div>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <input type="text" id="methodSearch" placeholder="Search methods, e.g. DiD, PSM, Tobit, ARIMA..." oninput="filterMethods()">
+    <span class="search-icon">🔍</span>
+  </div>
+  <div class="cat-tabs">
+    <button class="cat-tab active" onclick="setCat('all',this)">All</button>
+    <button class="cat-tab" onclick="setCat('econometrics',this)">Econometrics</button>
+    <button class="cat-tab" onclick="setCat('impact',this)">Impact Eval</button>
+    <button class="cat-tab" onclick="setCat('survey',this)">Survey Methods</button>
+    <button class="cat-tab" onclick="setCat('timeseries',this)">Time Series</button>
+    <button class="cat-tab" onclick="setCat('valuation',this)">Valuation</button>
+    <button class="cat-tab" onclick="setCat('ml',this)">ML & Data Sci</button>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-title">Quick Navigate</div>
+  <ul class="method-list" id="sidebarList">
+    <li class="cat-heading">Econometrics</li>
+    <li><a href="#ols">OLS Regression</a></li>
+    <li><a href="#logit">Logit & Probit</a></li>
+    <li><a href="#tobit">Tobit Model</a></li>
+    <li><a href="#panel">Panel Data (FE/RE)</a></li>
+    <li><a href="#iv">IV / 2SLS</a></li>
+    <li><a href="#meta">Meta-Frontier</a></li>
+    <li class="cat-heading">Impact Evaluation</li>
+    <li><a href="#did">Diff-in-Differences</a></li>
+    <li><a href="#psm">Propensity Score Matching</a></li>
+    <li><a href="#rdd">Regression Discontinuity</a></li>
+    <li><a href="#rct">RCT / Experimental</a></li>
+    <li class="cat-heading">Survey & Choice</li>
+    <li><a href="#dce">Discrete Choice Experiment</a></li>
+    <li><a href="#ahp">Analytical Hierarchy Process</a></li>
+    <li><a href="#cv">Contingent Valuation</a></li>
+    <li><a href="#fuzzy">Fuzzy-AHP</a></li>
+    <li class="cat-heading">Time Series</li>
+    <li><a href="#arima">ARIMA / SARIMA</a></li>
+    <li><a href="#var">VAR / VECM</a></li>
+    <li><a href="#garch">ARCH / GARCH</a></li>
+    <li><a href="#prophet">Facebook Prophet</a></li>
+    <li class="cat-heading">Valuation Methods</li>
+    <li><a href="#hpm">Hedonic Price Method</a></li>
+    <li><a href="#cba">Cost-Benefit Analysis</a></li>
+    <li><a href="#emv">Ecosystem Services Valuation</a></li>
+    <li class="cat-heading">ML & Data Science</li>
+    <li><a href="#rf">Random Forest</a></li>
+    <li><a href="#bibliometric">Bibliometric Analysis</a></li>
+    <li><a href="#cge">CGE Modelling</a></li>
+  </ul>
+</aside>
+
+<!-- METHODS -->
+<div class="methods-grid" id="methodsGrid">
+
+<!-- ══ OLS ══ -->
+<div class="method-card fade-in" id="ols" data-cat="econometrics" data-keywords="ols ordinary least squares regression linear">
+  <div class="method-card-header" onclick="toggleCard(this)">
+    <div class="method-top">
+      <div class="method-icon" style="background:rgba(88,166,255,0.1);">📈</div>
+      <div class="method-header-text">
+        <div class="method-name">Ordinary Least Squares (OLS) Regression</div>
+        <div class="difficulty"><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot empty"></div><div class="diff-dot empty"></div><div class="diff-dot empty"></div><div class="diff-label">Beginner–Intermediate</div></div>
+        <div class="method-tags"><span class="m-tag tag-econometrics">Econometrics</span></div>
+      </div>
+      <span class="method-chevron">▾</span>
+    </div>
+    <div class="method-excerpt">The foundation of econometrics. Estimates the linear relationship between a continuous dependent variable and one or more independent variables. Starting point for almost all empirical research in agricultural economics.</div>
+  </div>
+  <div class="method-body"><div class="method-content">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab(this,'ols-overview')">Overview</button>
+      <button class="tab-btn" onclick="showTab(this,'ols-assumptions')">Assumptions</button>
+      <button class="tab-btn" onclick="showTab(this,'ols-stata')">STATA</button>
+      <button class="tab-btn" onclick="showTab(this,'ols-r')">R</button>
+      <button class="tab-btn" onclick="showTab(this,'ols-python')">Python</button>
+    </div>
+    <div class="tab-pane active" id="ols-overview">
+      <div class="info-grid">
+        <div class="info-box"><div class="info-label">Use When</div><div class="info-val">Dependent variable is continuous</div></div>
+        <div class="info-box"><div class="info-label">Data Type</div><div class="info-val">Cross-section, Panel</div></div>
+        <div class="info-box"><div class="info-label">Software</div><div class="info-val">STATA, R, Python, Excel</div></div>
+        <div class="info-box"><div class="info-label">Output</div><div class="info-val">Coefficients, R², p-values</div></div>
+      </div>
+      <h4>When to Use</h4>
+      <p>Use OLS when your <strong>dependent variable is continuous</strong> (e.g. farm income, crop yield, milk production, water use efficiency) and you want to estimate the effect of one or more independent variables. It is the workhorse of empirical economics.</p>
+      <h4>Common Applications in Agri-Economics</h4>
+      <ul>
+        <li>Determinants of farm income / crop yield</li>
+        <li>Effect of irrigation on productivity</li>
+        <li>Impact of technology adoption on output</li>
+        <li>Price analysis and cost of production studies</li>
+      </ul>
+      <h4>Key Limitations</h4>
+      <p>OLS breaks down when: dependent variable is binary or censored; errors are heteroskedastic; there is multicollinearity; or endogeneity exists. Always run diagnostic tests before reporting results.</p>
+    </div>
+    <div class="tab-pane" id="ols-assumptions">
+      <div class="assume-list">
+        <div class="assume-item"><span class="check">✓</span><div><strong>Linearity</strong> — relationship between X and Y is linear. Test: residual vs fitted plot.</div></div>
+        <div class="assume-item"><span class="check">✓</span><div><strong>No perfect multicollinearity</strong> — independent variables are not perfectly correlated. Test: VIF &lt; 10.</div></div>
+        <div class="assume-item"><span class="check">✓</span><div><strong>Homoskedasticity</strong> — constant variance of errors. Test: Breusch-Pagan test. Fix: robust standard errors.</div></div>
+        <div class="assume-item"><span class="check">✓</span><div><strong>No autocorrelation</strong> — errors are uncorrelated. Test: Durbin-Watson (time series). Fix: HAC standard errors.</div></div>
+        <div class="assume-item"><span class="warn">⚠</span><div><strong>No endogeneity</strong> — regressors uncorrelated with error term. If violated, use IV/2SLS instead.</div></div>
+        <div class="assume-item"><span class="warn">⚠</span><div><strong>Normal errors</strong> — needed for inference in small samples. Large samples: CLT applies.</div></div>
+      </div>
+    </div>
+    <div class="tab-pane" id="ols-stata">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">STATA</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="cm">* Basic OLS regression</span>
+<span class="kw">reg</span> farm_income land_size irrigation education age, <span class="kw">robust</span>
+
+<span class="cm">* View results</span>
+<span class="kw">outreg2</span> using results.doc, replace word
+
+<span class="cm">* Check multicollinearity</span>
+<span class="kw">vif</span>
+
+<span class="cm">* Breusch-Pagan test for heteroskedasticity</span>
+<span class="kw">estat hettest</span>
+
+<span class="cm">* Ramsey RESET test for functional form</span>
+<span class="kw">estat ovtest</span>
+
+<span class="cm">* Standardised coefficients (beta coefficients)</span>
+<span class="kw">reg</span> farm_income land_size irrigation education, <span class="kw">beta</span>
+
+<span class="cm">* OLS with clustered standard errors</span>
+<span class="kw">reg</span> farm_income land_size irrigation, <span class="kw">vce(cluster</span> district_id<span class="kw">)</span></pre>
+      </div>
+    </div>
+    <div class="tab-pane" id="ols-r">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">R</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="cm"># Install packages (first time only)</span>
+<span class="fn">install.packages</span>(<span class="str">c("lmtest","sandwich","car","stargazer")</span>)
+<span class="fn">library</span>(lmtest); <span class="fn">library</span>(sandwich); <span class="fn">library</span>(car)
+
+<span class="cm"># Basic OLS</span>
+model &lt;- <span class="fn">lm</span>(farm_income ~ land_size + irrigation + education + age, 
+           data = mydata)
+<span class="fn">summary</span>(model)
+
+<span class="cm"># Robust standard errors (HC3)</span>
+<span class="fn">coeftest</span>(model, vcov = <span class="fn">vcovHC</span>(model, type = <span class="str">"HC3"</span>))
+
+<span class="cm"># VIF for multicollinearity</span>
+<span class="fn">vif</span>(model)
+
+<span class="cm"># Breusch-Pagan test</span>
+<span class="fn">bptest</span>(model)
+
+<span class="cm"># Publication-ready table</span>
+<span class="fn">library</span>(stargazer)
+<span class="fn">stargazer</span>(model, type = <span class="str">"text"</span>, out = <span class="str">"results.doc"</span>)</pre>
+      </div>
+    </div>
+    <div class="tab-pane" id="ols-python">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> statsmodels.formula.api <span class="kw">as</span> smf
+<span class="kw">from</span> statsmodels.stats.outliers_influence <span class="kw">import</span> variance_inflation_factor
+
+<span class="cm"># Load data</span>
+df = pd.<span class="fn">read_csv</span>(<span class="str">"farm_data.csv"</span>)
+
+<span class="cm"># OLS with robust standard errors</span>
+model = smf.<span class="fn">ols</span>(<span class="str">'farm_income ~ land_size + irrigation + education + age'</span>, 
+               data=df).<span class="fn">fit</span>(cov_type=<span class="str">'HC3'</span>)
+<span class="fn">print</span>(model.<span class="fn">summary</span>())
+
+<span class="cm"># VIF for multicollinearity check</span>
+X = df[[<span class="str">'land_size'</span>, <span class="str">'irrigation'</span>, <span class="str">'education'</span>]]
+vif = pd.<span class="fn">DataFrame</span>()
+vif[<span class="str">"feature"</span>] = X.columns
+vif[<span class="str">"VIF"</span>] = [<span class="fn">variance_inflation_factor</span>(X.values, i) <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(X.shape[<span class="num">1</span>])]
+<span class="fn">print</span>(vif)</pre>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══ LOGIT/PROBIT ══ -->
+<div class="method-card fade-in" id="logit" data-cat="econometrics" data-keywords="logit probit binary logistic regression adoption">
+  <div class="method-card-header" onclick="toggleCard(this)">
+    <div class="method-top">
+      <div class="method-icon" style="background:rgba(188,140,255,0.1);">🎯</div>
+      <div class="method-header-text">
+        <div class="method-name">Logit & Probit Models</div>
+        <div class="difficulty"><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot empty"></div><div class="diff-dot empty"></div><div class="diff-dot empty"></div><div class="diff-label">Intermediate</div></div>
+        <div class="method-tags"><span class="m-tag tag-econometrics">Econometrics</span></div>
+      </div>
+      <span class="method-chevron">▾</span>
+    </div>
+    <div class="method-excerpt">Used when the dependent variable is binary (0/1). Estimates probability of adoption, participation, or occurrence. Logit uses logistic distribution; Probit uses normal distribution. Most common in technology adoption studies.</div>
+  </div>
+  <div class="method-body"><div class="method-content">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab(this,'logit-overview')">Overview</button>
+      <button class="tab-btn" onclick="showTab(this,'logit-assumptions')">Assumptions</button>
+      <button class="tab-btn" onclick="showTab(this,'logit-stata')">STATA</button>
+      <button class="tab-btn" onclick="showTab(this,'logit-r')">R</button>
+      <button class="tab-btn" onclick="showTab(this,'logit-python')">Python</button>
+    </div>
+    <div class="tab-pane active" id="logit-overview">
+      <div class="info-grid">
+        <div class="info-box"><div class="info-label">Use When</div><div class="info-val">Dependent variable is binary (0/1)</div></div>
+        <div class="info-box"><div class="info-label">Output</div><div class="info-val">Odds ratios / Marginal effects</div></div>
+        <div class="info-box"><div class="info-label">Key Statistic</div><div class="info-val">McFadden's R², LR test</div></div>
+        <div class="info-box"><div class="info-label">Report</div><div class="info-val">Marginal effects (not coefficients)</div></div>
+      </div>
+      <h4>When to Use</h4>
+      <p>Use when your dependent variable takes only <strong>two values</strong>: adoption (yes/no), participation (yes/no), credit access (yes/no), organic farming (yes/no). Never use OLS for binary outcomes — it gives predicted values outside [0,1].</p>
+      <h4>Logit vs Probit</h4>
+      <p><strong>Logit:</strong> easier to interpret (odds ratios), slightly thicker tails. <strong>Probit:</strong> theoretically preferred when errors are normally distributed. In practice, results are nearly identical — use Logit for most agricultural economics work.</p>
+      <h4>Critical: Always Report Marginal Effects</h4>
+      <p>Raw coefficients from Logit/Probit are not interpretable directly. Always compute and report <em>Average Marginal Effects (AME)</em> which show the change in probability for a unit change in X.</p>
+    </div>
+    <div class="tab-pane" id="logit-assumptions">
+      <div class="assume-list">
+        <div class="assume-item"><span class="check">✓</span><div><strong>Binary outcome</strong> — DV must be 0 or 1 (not ordered, not count).</div></div>
+        <div class="assume-item"><span class="check">✓</span><div><strong>No perfect multicollinearity</strong> — test with VIF on auxiliary OLS.</div></div>
+        <div class="assume-item"><span class="check">✓</span><div><strong>Large sample</strong> — ML estimation needs n &gt; 100. Rule: 10 observations per predictor.</div></div>
+        <div class="assume-item"><span class="warn">⚠</span><div><strong>No separation</strong> — if a predictor perfectly predicts the outcome, estimation fails. Check with <code>tab X outcome</code> in STATA.</div></div>
+        <div class="assume-item"><span class="warn">⚠</span><div><strong>No endogeneity</strong> — if present, use IV Probit or Bivariate Probit.</div></div>
+      </div>
+    </div>
+    <div class="tab-pane" id="logit-stata">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">STATA</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="cm">* Logit model</span>
+<span class="kw">logit</span> adoption land_size credit_access extension_contact age education, <span class="kw">robust</span>
+
+<span class="cm">* Average Marginal Effects (AME) — always report these</span>
+<span class="kw">margins</span>, dydx(*)
+
+<span class="cm">* Probit model</span>
+<span class="kw">probit</span> adoption land_size credit_access extension_contact age, <span class="kw">robust</span>
+<span class="kw">margins</span>, dydx(*)
+
+<span class="cm">* Goodness of fit</span>
+<span class="kw">estat</span> gof
+
+<span class="cm">* Classification table (sensitivity/specificity)</span>
+<span class="kw">estat</span> classification
+
+<span class="cm">* Ordered Logit (for ordinal DV: low/medium/high)</span>
+<span class="kw">ologit</span> satisfaction income land_size education
+<span class="kw">margins</span>, dydx(*) predict(outcome(<span class="num">1</span>))</pre>
+      </div>
+    </div>
+    <div class="tab-pane" id="logit-r">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">R</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="fn">library</span>(margins); <span class="fn">library</span>(stargazer)
+
+<span class="cm"># Logit model</span>
+logit_model &lt;- <span class="fn">glm</span>(adoption ~ land_size + credit_access + education + age,
+                   data = mydata, family = <span class="fn">binomial</span>(link = <span class="str">"logit"</span>))
+<span class="fn">summary</span>(logit_model)
+
+<span class="cm"># Average Marginal Effects</span>
+<span class="fn">summary</span>(<span class="fn">margins</span>(logit_model))
+
+<span class="cm"># Odds ratios</span>
+<span class="fn">exp</span>(<span class="fn">coef</span>(logit_model))
+
+<span class="cm"># McFadden's R²</span>
+<span class="fn">library</span>(pscl)
+<span class="fn">pR2</span>(logit_model)[<span class="str">"McFadden"</span>]
+
+<span class="cm"># Probit model</span>
+probit_model &lt;- <span class="fn">glm</span>(adoption ~ land_size + credit_access + education,
+                    data = mydata, family = <span class="fn">binomial</span>(link = <span class="str">"probit"</span>))</pre>
+      </div>
+    </div>
+    <div class="tab-pane" id="logit-python">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="kw">import</span> statsmodels.api <span class="kw">as</span> sm
+<span class="kw">from</span> statsmodels.discrete.discrete_model <span class="kw">import</span> Logit, Probit
+
+X = sm.<span class="fn">add_constant</span>(df[[<span class="str">'land_size'</span>,<span class="str">'credit_access'</span>,<span class="str">'education'</span>,<span class="str">'age'</span>]])
+y = df[<span class="str">'adoption'</span>]
+
+<span class="cm"># Logit model</span>
+logit = <span class="fn">Logit</span>(y, X).<span class="fn">fit</span>()
+<span class="fn">print</span>(logit.<span class="fn">summary</span>())
+
+<span class="cm"># Marginal effects at mean</span>
+<span class="fn">print</span>(logit.<span class="fn">get_margeff</span>().<span class="fn">summary</span>())
+
+<span class="cm"># Average marginal effects</span>
+<span class="fn">print</span>(logit.<span class="fn">get_margeff</span>(at=<span class="str">'overall'</span>).<span class="fn">summary</span>())</pre>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══ TOBIT ══ -->
+<div class="method-card fade-in" id="tobit" data-cat="econometrics" data-keywords="tobit censored truncated corner solution">
+  <div class="method-card-header" onclick="toggleCard(this)">
+    <div class="method-top">
+      <div class="method-icon" style="background:rgba(212,168,67,0.1);">✂️</div>
+      <div class="method-header-text">
+        <div class="method-name">Tobit Model</div>
+        <div class="difficulty"><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot empty"></div><div class="diff-dot empty"></div><div class="diff-label">Intermediate</div></div>
+        <div class="method-tags"><span class="m-tag tag-econometrics">Econometrics</span></div>
+      </div>
+      <span class="method-chevron">▾</span>
+    </div>
+    <div class="method-excerpt">Used when the dependent variable is censored — many observations are piled at zero or an upper limit. Classic example: expenditure on fertiliser (many farmers spend zero). OLS underestimates effects in censored data.</div>
+  </div>
+  <div class="method-body"><div class="method-content">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab(this,'tobit-overview')">Overview</button>
+      <button class="tab-btn" onclick="showTab(this,'tobit-stata')">STATA</button>
+      <button class="tab-btn" onclick="showTab(this,'tobit-r')">R</button>
+    </div>
+    <div class="tab-pane active" id="tobit-overview">
+      <div class="info-grid">
+        <div class="info-box"><div class="info-label">Use When</div><div class="info-val">DV censored at 0 or upper limit</div></div>
+        <div class="info-box"><div class="info-label">Common Issue</div><div class="info-val">Many zeros in DV</div></div>
+        <div class="info-box"><div class="info-label">Alternative</div><div class="info-val">Double-hurdle model (Cragg)</div></div>
+        <div class="info-box"><div class="info-label">Key Output</div><div class="info-val">Marginal effects for E(y|y>0)</div></div>
+      </div>
+      <h4>When to Use</h4>
+      <p>Use Tobit when your dependent variable has a <strong>pile-up of observations at zero</strong> (left-censored) and positive values beyond that. Examples in agricultural economics: fertiliser expenditure, pesticide use, credit amount borrowed, remittances sent.</p>
+      <h4>Tobit vs Double-Hurdle</h4>
+      <p><strong>Tobit:</strong> assumes the same process drives both the decision to participate AND the level. <strong>Double-Hurdle (Cragg):</strong> separates the participation decision (Probit) from the level decision (truncated regression). Double-hurdle is more realistic for most agricultural data.</p>
+    </div>
+    <div class="tab-pane" id="tobit-stata">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">STATA</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="cm">* Standard Tobit (left-censored at 0)</span>
+<span class="kw">tobit</span> fertiliser_exp land_size income education, ll(<span class="num">0</span>)
+
+<span class="cm">* Marginal effects</span>
+<span class="kw">margins</span>, dydx(*)
+
+<span class="cm">* Right-censored Tobit</span>
+<span class="kw">tobit</span> market_share price quality, ul(<span class="num">100</span>)
+
+<span class="cm">* Double-hurdle model (requires -craggit- package)</span>
+<span class="cm">* ssc install craggit</span>
+<span class="kw">craggit</span> fertiliser_exp land_size income education credit_access
+
+<span class="cm">* Two-part model alternative</span>
+<span class="kw">probit</span> fertiliser_use land_size income education  <span class="cm">/* participation */</span>
+<span class="kw">reg</span> fertiliser_exp land_size income education <span class="kw">if</span> fertiliser_use==<span class="num">1</span>  <span class="cm">/* level */</span></pre>
+      </div>
+    </div>
+    <div class="tab-pane" id="tobit-r">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">R</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="fn">library</span>(AER)  <span class="cm"># contains tobit()</span>
+<span class="fn">library</span>(censReg)
+
+<span class="cm"># Standard Tobit</span>
+tobit_model &lt;- <span class="fn">tobit</span>(fertiliser_exp ~ land_size + income + education,
+                     left = <span class="num">0</span>, data = mydata)
+<span class="fn">summary</span>(tobit_model)
+
+<span class="cm"># Marginal effects</span>
+<span class="fn">library</span>(margins)
+<span class="fn">summary</span>(<span class="fn">margins</span>(tobit_model))
+
+<span class="cm"># censReg package (more features)</span>
+cens_model &lt;- <span class="fn">censReg</span>(fertiliser_exp ~ land_size + income + education,
+                       left = <span class="num">0</span>, data = mydata)
+<span class="fn">margEff</span>(cens_model)</pre>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══ PANEL DATA ══ -->
+<div class="method-card fade-in" id="panel" data-cat="econometrics" data-keywords="panel fixed effects random effects hausman FE RE">
+  <div class="method-card-header" onclick="toggleCard(this)">
+    <div class="method-top">
+      <div class="method-icon" style="background:rgba(63,185,80,0.1);">🗃️</div>
+      <div class="method-header-text">
+        <div class="method-name">Panel Data — Fixed & Random Effects</div>
+        <div class="difficulty"><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot empty"></div><div class="diff-dot empty"></div><div class="diff-label">Intermediate</div></div>
+        <div class="method-tags"><span class="m-tag tag-econometrics">Econometrics</span></div>
+      </div>
+      <span class="method-chevron">▾</span>
+    </div>
+    <div class="method-excerpt">Panel data has observations for the same units over multiple time periods. Fixed Effects (FE) controls for unobserved unit-level heterogeneity. Random Effects (RE) is more efficient if heterogeneity is uncorrelated with regressors.</div>
+  </div>
+  <div class="method-body"><div class="method-content">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab(this,'panel-overview')">Overview</button>
+      <button class="tab-btn" onclick="showTab(this,'panel-stata')">STATA</button>
+      <button class="tab-btn" onclick="showTab(this,'panel-r')">R</button>
+    </div>
+    <div class="tab-pane active" id="panel-overview">
+      <div class="info-grid">
+        <div class="info-box"><div class="info-label">Data Required</div><div class="info-val">Same units × multiple time periods</div></div>
+        <div class="info-box"><div class="info-label">FE Advantage</div><div class="info-val">Controls time-invariant confounders</div></div>
+        <div class="info-box"><div class="info-label">Key Test</div><div class="info-val">Hausman test (FE vs RE)</div></div>
+        <div class="info-box"><div class="info-label">Best Package</div><div class="info-val">plm (R), xtreg (STATA)</div></div>
+      </div>
+      <h4>FE vs RE — Which to Choose?</h4>
+      <p><strong>Fixed Effects:</strong> Use when you suspect the unit-level unobservables (farmer ability, soil quality) are correlated with your regressors. FE removes all time-invariant variation — you cannot estimate effects of time-invariant variables (gender, caste).</p>
+      <p><strong>Random Effects:</strong> Use when unobservables are uncorrelated with regressors. More efficient. Can estimate time-invariant variable effects.</p>
+      <p><strong>Hausman Test:</strong> Always run this. If significant (p &lt; 0.05) → use FE. If not significant → RE is acceptable.</p>
+    </div>
+    <div class="tab-pane" id="panel-stata">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">STATA</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="cm">* Declare panel data</span>
+<span class="kw">xtset</span> farmer_id year
+
+<span class="cm">* Fixed Effects</span>
+<span class="kw">xtreg</span> yield rainfall fertiliser price, <span class="kw">fe robust</span>
+
+<span class="cm">* Random Effects</span>
+<span class="kw">xtreg</span> yield rainfall fertiliser price, <span class="kw">re robust</span>
+
+<span class="cm">* Hausman test (store FE and RE first)</span>
+<span class="kw">xtreg</span> yield rainfall fertiliser, <span class="kw">fe</span>
+<span class="kw">estimates store</span> fe_model
+<span class="kw">xtreg</span> yield rainfall fertiliser, <span class="kw">re</span>
+<span class="kw">estimates store</span> re_model
+<span class="kw">hausman</span> fe_model re_model
+
+<span class="cm">* Two-way FE (unit + time fixed effects)</span>
+<span class="kw">xtreg</span> yield rainfall fertiliser i.year, <span class="kw">fe robust</span>
+
+<span class="cm">* First difference estimator</span>
+<span class="kw">xtreg</span> D.yield D.rainfall D.fertiliser, <span class="kw">fe</span></pre>
+      </div>
+    </div>
+    <div class="tab-pane" id="panel-r">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">R</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="fn">library</span>(plm); <span class="fn">library</span>(lmtest)
+
+<span class="cm"># Declare panel data</span>
+pdata &lt;- <span class="fn">pdata.frame</span>(mydata, index = <span class="fn">c</span>(<span class="str">"farmer_id"</span>, <span class="str">"year"</span>))
+
+<span class="cm"># Fixed Effects</span>
+fe_model &lt;- <span class="fn">plm</span>(yield ~ rainfall + fertiliser + price,
+                data = pdata, model = <span class="str">"within"</span>)
+<span class="fn">coeftest</span>(fe_model, vcov = <span class="fn">vcovHC</span>(fe_model, type = <span class="str">"HC3"</span>))
+
+<span class="cm"># Random Effects</span>
+re_model &lt;- <span class="fn">plm</span>(yield ~ rainfall + fertiliser + price,
+                data = pdata, model = <span class="str">"random"</span>)
+
+<span class="cm"># Hausman test</span>
+<span class="fn">phtest</span>(fe_model, re_model)
+
+<span class="cm"># Two-way FE</span>
+twfe &lt;- <span class="fn">plm</span>(yield ~ rainfall + fertiliser,
+            data = pdata, model = <span class="str">"within"</span>, effect = <span class="str">"twoways"</span>)</pre>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══ DiD ══ -->
+<div class="method-card fade-in" id="did" data-cat="impact" data-keywords="difference in differences DiD treatment control policy evaluation causal">
+  <div class="method-card-header" onclick="toggleCard(this)">
+    <div class="method-top">
+      <div class="method-icon" style="background:rgba(63,185,80,0.1);">🔀</div>
+      <div class="method-header-text">
+        <div class="method-name">Difference-in-Differences (DiD)</div>
+        <div class="difficulty"><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot empty"></div><div class="diff-dot empty"></div><div class="diff-label">Intermediate–Advanced</div></div>
+        <div class="method-tags"><span class="m-tag tag-impact">Impact Evaluation</span></div>
+      </div>
+      <span class="method-chevron">▾</span>
+    </div>
+    <div class="method-excerpt">Estimates causal effect of a policy/intervention by comparing the change in outcomes before and after treatment between a treatment group and a control group. Gold standard for policy evaluation when RCT is not feasible.</div>
+  </div>
+  <div class="method-body"><div class="method-content">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab(this,'did-overview')">Overview</button>
+      <button class="tab-btn" onclick="showTab(this,'did-assumptions')">Assumptions</button>
+      <button class="tab-btn" onclick="showTab(this,'did-stata')">STATA</button>
+      <button class="tab-btn" onclick="showTab(this,'did-r')">R</button>
+    </div>
+    <div class="tab-pane active" id="did-overview">
+      <div class="info-grid">
+        <div class="info-box"><div class="info-label">Identifies</div><div class="info-val">Causal ATT</div></div>
+        <div class="info-box"><div class="info-label">Requires</div><div class="info-val">Pre & post data, treatment & control</div></div>
+        <div class="info-box"><div class="info-label">Key Assumption</div><div class="info-val">Parallel trends</div></div>
+        <div class="info-box"><div class="info-label">Modern Extension</div><div class="info-val">Callaway-Sant'Anna (staggered DiD)</div></div>
+      </div>
+      <h4>The DiD Logic</h4>
+      <p>DiD = (Post_treatment − Pre_treatment) − (Post_control − Pre_control). By subtracting the control group's trend, we remove the confounding effect of time. The key identifying assumption is that both groups would have followed <em>parallel trends</em> in absence of treatment.</p>
+      <h4>Applications in Agri-Economics</h4>
+      <ul>
+        <li>Impact of PM-KISAN cash transfers on farm income</li>
+        <li>Effect of minimum support price change on crop area</li>
+        <li>Impact of irrigation scheme on productivity</li>
+        <li>Effect of FPO formation on farmer income</li>
+      </ul>
+      <h4>Modern DiD (Post-2020)</h4>
+      <p>With <strong>staggered treatment adoption</strong> (different units treated at different times), the classical 2x2 DiD estimator is biased. Use <strong>Callaway-Sant'Anna (2021)</strong> or <strong>Sun-Abraham (2021)</strong> estimators instead.</p>
+    </div>
+    <div class="tab-pane" id="did-assumptions">
+      <div class="assume-list">
+        <div class="assume-item"><span class="check">✓</span><div><strong>Parallel Trends</strong> — most critical. Pre-treatment trends must be parallel between groups. Test: event study plot; visual inspection of pre-treatment periods.</div></div>
+        <div class="assume-item"><span class="check">✓</span><div><strong>No anticipation</strong> — treatment group should not change behaviour before treatment occurs.</div></div>
+        <div class="assume-item"><span class="check">✓</span><div><strong>SUTVA</strong> — no spillovers between treatment and control groups.</div></div>
+        <div class="assume-item"><span class="warn">⚠</span><div><strong>Compositional stability</strong> — the composition of treatment/control groups should not change over time.</div></div>
+      </div>
+    </div>
+    <div class="tab-pane" id="did-stata">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">STATA</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="cm">* Basic DiD — interaction term approach</span>
+<span class="kw">gen</span> did = treated * post
+<span class="kw">reg</span> outcome treated post did controls, <span class="kw">robust</span>
+<span class="cm">* Coefficient on -did- is the ATT</span>
+
+<span class="cm">* DiD with fixed effects (preferred)</span>
+<span class="kw">xtset</span> unit_id year
+<span class="kw">xtreg</span> outcome treated##post controls i.year, <span class="kw">fe robust</span>
+
+<span class="cm">* Event study plot</span>
+<span class="kw">gen</span> rel_time = year - treatment_year
+<span class="kw">xtreg</span> outcome i.rel_time controls, <span class="kw">fe robust</span>
+<span class="kw">coefplot</span>, vertical yline(<span class="num">0</span>) xline(<span class="num">-0.5</span>) <span class="cm">/* Visual parallel trends test */</span>
+
+<span class="cm">* Staggered DiD — Callaway-Sant'Anna</span>
+<span class="cm">* ssc install csdid</span>
+<span class="kw">csdid</span> outcome controls, ivar(unit_id) time(year) gvar(first_treated)
+<span class="kw">csdid_plot</span></pre>
+      </div>
+    </div>
+    <div class="tab-pane" id="did-r">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">R</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="fn">library</span>(fixest)   <span class="cm"># for feols (fast FE)</span>
+<span class="fn">library</span>(did)      <span class="cm"># Callaway-Sant'Anna</span>
+
+<span class="cm"># Basic DiD with TWFE</span>
+did_model &lt;- <span class="fn">feols</span>(outcome ~ treated:post | unit_id + year,
+                   data = mydata, vcov = <span class="str">"cluster"</span>)
+<span class="fn">summary</span>(did_model)
+
+<span class="cm"># Event study (iplot from fixest)</span>
+es &lt;- <span class="fn">feols</span>(outcome ~ <span class="fn">i</span>(rel_time, treated, ref = <span class="num">-1</span>) | unit_id + year,
+            data = mydata)
+<span class="fn">iplot</span>(es, main = <span class="str">"Event Study — Parallel Trends Test"</span>)
+
+<span class="cm"># Callaway-Sant'Anna (staggered DiD)</span>
+cs &lt;- <span class="fn">att_gt</span>(yname = <span class="str">"outcome"</span>, tname = <span class="str">"year"</span>, 
+            idname = <span class="str">"unit_id"</span>, gname = <span class="str">"first_treated"</span>,
+            data = mydata, control_group = <span class="str">"nevertreated"</span>)
+<span class="fn">summary</span>(<span class="fn">aggte</span>(cs, type = <span class="str">"dynamic"</span>))
+<span class="fn">ggdid</span>(cs)</pre>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══ PSM ══ -->
+<div class="method-card fade-in" id="psm" data-cat="impact" data-keywords="propensity score matching PSM ATT treatment effect selection bias">
+  <div class="method-card-header" onclick="toggleCard(this)">
+    <div class="method-top">
+      <div class="method-icon" style="background:rgba(88,166,255,0.1);">🎲</div>
+      <div class="method-header-text">
+        <div class="method-name">Propensity Score Matching (PSM)</div>
+        <div class="difficulty"><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot empty"></div><div class="diff-dot empty"></div><div class="diff-label">Intermediate–Advanced</div></div>
+        <div class="method-tags"><span class="m-tag tag-impact">Impact Evaluation</span></div>
+      </div>
+      <span class="method-chevron">▾</span>
+    </div>
+    <div class="method-excerpt">Controls for selection bias by matching treated units to similar untreated units based on observable characteristics. Estimates Average Treatment Effect on the Treated (ATT). Widely used in technology adoption and programme evaluation.</div>
+  </div>
+  <div class="method-body"><div class="method-content">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab(this,'psm-overview')">Overview</button>
+      <button class="tab-btn" onclick="showTab(this,'psm-stata')">STATA</button>
+      <button class="tab-btn" onclick="showTab(this,'psm-r')">R</button>
+    </div>
+    <div class="tab-pane active" id="psm-overview">
+      <div class="info-grid">
+        <div class="info-box"><div class="info-label">Identifies</div><div class="info-val">ATT (Average Treatment Effect on Treated)</div></div>
+        <div class="info-box"><div class="info-label">Key Assumption</div><div class="info-val">Conditional independence (CIA)</div></div>
+        <div class="info-box"><div class="info-label">Matching Methods</div><div class="info-val">Nearest neighbour, Kernel, Radius</div></div>
+        <div class="info-box"><div class="info-label">Sensitivity Test</div><div class="info-val">Rosenbaum bounds</div></div>
+      </div>
+      <h4>Steps in PSM</h4>
+      <ul>
+        <li><strong>Step 1:</strong> Estimate propensity score using Logit/Probit on all relevant covariates</li>
+        <li><strong>Step 2:</strong> Match treated to control units using nearest neighbour / kernel matching</li>
+        <li><strong>Step 3:</strong> Check covariate balance after matching (standardised bias &lt; 10%)</li>
+        <li><strong>Step 4:</strong> Estimate ATT on matched sample</li>
+        <li><strong>Step 5:</strong> Rosenbaum bounds sensitivity analysis</li>
+      </ul>
+      <h4>PSM vs DiD</h4>
+      <p>PSM requires only cross-sectional data but relies on the strong CIA assumption (no unobservables). DiD requires panel data but controls for time-invariant unobservables. <strong>PSM+DiD combined</strong> is the most robust approach when panel data is available.</p>
+    </div>
+    <div class="tab-pane" id="psm-stata">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">STATA</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="cm">* Install psmatch2</span>
+<span class="cm">* ssc install psmatch2</span>
+
+<span class="cm">* Step 1: Estimate propensity score</span>
+<span class="kw">logit</span> treated land_size age education credit_access market_distance
+
+<span class="cm">* Step 2: Nearest-neighbour matching (1:1, with replacement)</span>
+<span class="kw">psmatch2</span> treated land_size age education credit_access, ///
+         outcome(farm_income) n(<span class="num">1</span>) common
+
+<span class="cm">* Step 3: Check balance</span>
+<span class="kw">pstest</span> land_size age education credit_access, both
+
+<span class="cm">* Kernel matching</span>
+<span class="kw">psmatch2</span> treated land_size age education, ///
+         outcome(farm_income) kernel bwidth(<span class="num">0.06</span>)
+
+<span class="cm">* Rosenbaum bounds sensitivity test</span>
+<span class="cm">* ssc install rbounds</span>
+<span class="kw">rbounds</span> farm_income, gamma(<span class="num">1</span>(<span class="num">.1</span>)<span class="num">2</span>)</pre>
+      </div>
+    </div>
+    <div class="tab-pane" id="psm-r">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">R</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="fn">library</span>(MatchIt); <span class="fn">library</span>(cobalt)
+
+<span class="cm"># PSM — nearest neighbour 1:1</span>
+match_out &lt;- <span class="fn">matchit</span>(treated ~ land_size + age + education + credit_access,
+                     data = mydata, method = <span class="str">"nearest"</span>, ratio = <span class="num">1</span>,
+                     distance = <span class="str">"logit"</span>)
+<span class="fn">summary</span>(match_out)  <span class="cm"># check balance</span>
+
+<span class="cm"># Plot balance</span>
+<span class="fn">love.plot</span>(match_out, threshold = <span class="num">0.1</span>)
+
+<span class="cm"># Get matched data</span>
+matched_data &lt;- <span class="fn">match.data</span>(match_out)
+
+<span class="cm"># Estimate ATT on matched sample</span>
+att_model &lt;- <span class="fn">lm</span>(farm_income ~ treated + land_size + age + education,
+                data = matched_data, weights = weights)
+<span class="fn">coeftest</span>(att_model, vcov = <span class="fn">vcovHC</span>(att_model))
+
+<span class="cm"># Kernel matching</span>
+match_kern &lt;- <span class="fn">matchit</span>(treated ~ land_size + age + education,
+                      data = mydata, method = <span class="str">"full"</span>, distance = <span class="str">"logit"</span>)</pre>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══ DCE ══ -->
+<div class="method-card fade-in" id="dce" data-cat="survey" data-keywords="discrete choice experiment DCE willingness to pay WTP stated preference">
+  <div class="method-card-header" onclick="toggleCard(this)">
+    <div class="method-top">
+      <div class="method-icon" style="background:rgba(212,168,67,0.1);">🗳️</div>
+      <div class="method-header-text">
+        <div class="method-name">Discrete Choice Experiment (DCE)</div>
+        <div class="difficulty"><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot empty"></div><div class="diff-label">Advanced</div></div>
+        <div class="method-tags"><span class="m-tag tag-survey">Survey Methods</span></div>
+      </div>
+      <span class="method-chevron">▾</span>
+    </div>
+    <div class="method-excerpt">Stated preference method that asks respondents to choose between alternatives described by attributes. Used to estimate WTP, preference weights, and design optimal programmes. Highly relevant for carbon credit market design and ecosystem services.</div>
+  </div>
+  <div class="method-body"><div class="method-content">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab(this,'dce-overview')">Overview</button>
+      <button class="tab-btn" onclick="showTab(this,'dce-design')">Design</button>
+      <button class="tab-btn" onclick="showTab(this,'dce-r')">R Code</button>
+    </div>
+    <div class="tab-pane active" id="dce-overview">
+      <div class="info-grid">
+        <div class="info-box"><div class="info-label">Theoretical Base</div><div class="info-val">Random Utility Theory</div></div>
+        <div class="info-box"><div class="info-label">Estimation</div><div class="info-val">Conditional Logit, MXL</div></div>
+        <div class="info-box"><div class="info-label">Key Output</div><div class="info-val">WTP, preference weights</div></div>
+        <div class="info-box"><div class="info-label">Design Software</div><div class="info-val">Ngene, R (idefix)</div></div>
+      </div>
+      <h4>DCE Steps</h4>
+      <ul>
+        <li><strong>1. Attribute identification</strong> — qualitative research (FGDs) to identify relevant attributes and levels</li>
+        <li><strong>2. Experimental design</strong> — D-efficient design using Ngene or idefix in R</li>
+        <li><strong>3. Survey instrument</strong> — choice sets with opt-out option; pilot test</li>
+        <li><strong>4. Data collection</strong> — face-to-face interviews recommended for rural India</li>
+        <li><strong>5. Estimation</strong> — Conditional Logit (homogeneous) → Mixed Logit (heterogeneity) → Latent Class</li>
+      </ul>
+      <h4>Applications in Agri-Economics</h4>
+      <ul>
+        <li>Farmer preferences for carbon credit programme design</li>
+        <li>WTP for improved seed varieties</li>
+        <li>Consumer preferences for organic produce</li>
+        <li>Farmer preferences for crop insurance attributes</li>
+      </ul>
+    </div>
+    <div class="tab-pane" id="dce-design">
+      <h4>Experimental Design Guidelines</h4>
+      <p><strong>Number of attributes:</strong> 4–6 maximum (cognitive burden increases rapidly beyond this)</p>
+      <p><strong>Number of levels per attribute:</strong> 2–4 levels. More levels = more information but more complex survey.</p>
+      <p><strong>Number of choice sets:</strong> 8–16 per respondent typically. Use Ngene to find D-efficient design.</p>
+      <p><strong>Payment vehicle:</strong> Be specific — "per season per acre" is better than vague payment framing.</p>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">NGENE Script — D-efficient DCE Design</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="cm">; Carbon Credit Programme DCE Design</span>
+<span class="cm">; Attributes: Payment, Duration, Monitoring, Aggregator</span>
+Design
+<span class="kw">alts</span> = alt1, alt2, opt_out
+<span class="kw">rows</span> = <span class="num">16</span>
+<span class="kw">eff</span> = (mnl, d, mean)
+<span class="kw">model</span>:
+U(alt1) = b_pay[<span class="num">0.1</span>]*payment[<span class="num">500</span>,<span class="num">1000</span>,<span class="num">2000</span>] +
+          b_dur[<span class="num">0.2</span>]*duration[<span class="num">1</span>,<span class="num">3</span>,<span class="num">5</span>] +
+          b_mon[<span class="num">-0.1</span>]*monitoring[<span class="num">1</span>,<span class="num">2</span>] +
+          b_agg[<span class="num">0.15</span>]*aggregator[<span class="num">0</span>,<span class="num">1</span>];
+U(alt2) = b_pay*payment + b_dur*duration +
+          b_mon*monitoring + b_agg*aggregator;
+U(opt_out) = asc_opt[<span class="num">0</span>];</pre>
+      </div>
+    </div>
+    <div class="tab-pane" id="dce-r">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">R — Mixed Logit (MXL)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="fn">library</span>(mlogit)
+<span class="fn">library</span>(apollo)  <span class="cm"># advanced DCE estimation</span>
+
+<span class="cm"># Prepare data in long format</span>
+dce_long &lt;- <span class="fn">mlogit.data</span>(dce_data, choice = <span class="str">"choice"</span>,
+                         shape = <span class="str">"long"</span>, alt.var = <span class="str">"alt"</span>)
+
+<span class="cm"># Conditional Logit (base model)</span>
+clogit &lt;- <span class="fn">mlogit</span>(choice ~ payment + duration + monitoring + aggregator | <span class="num">0</span>,
+                 data = dce_long)
+<span class="fn">summary</span>(clogit)
+
+<span class="cm"># WTP calculation</span>
+wtp &lt;- <span class="fn">coef</span>(clogit)[<span class="str">"duration"</span>] / <span class="fn">abs</span>(<span class="fn">coef</span>(clogit)[<span class="str">"payment"</span>])
+<span class="fn">cat</span>(<span class="str">"WTP for 1 extra year contract:"</span>, <span class="fn">round</span>(wtp, <span class="num">2</span>), <span class="str">"INR\n"</span>)
+
+<span class="cm"># Mixed Logit (accounts for preference heterogeneity)</span>
+mxl &lt;- <span class="fn">mlogit</span>(choice ~ payment + duration + monitoring | <span class="num">0</span>,
+              data = dce_long, rpar = <span class="fn">c</span>(duration=<span class="str">"n"</span>, monitoring=<span class="str">"n"</span>),
+              R = <span class="num">500</span>, halton = <span class="kw">NA</span>)
+<span class="fn">summary</span>(mxl)</pre>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══ ARIMA ══ -->
+<div class="method-card fade-in" id="arima" data-cat="timeseries" data-keywords="ARIMA SARIMA time series forecasting price prediction">
+  <div class="method-card-header" onclick="toggleCard(this)">
+    <div class="method-top">
+      <div class="method-icon" style="background:rgba(188,140,255,0.1);">📡</div>
+      <div class="method-header-text">
+        <div class="method-name">ARIMA / SARIMA — Time Series Forecasting</div>
+        <div class="difficulty"><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot empty"></div><div class="diff-dot empty"></div><div class="diff-label">Intermediate–Advanced</div></div>
+        <div class="method-tags"><span class="m-tag tag-timeseries">Time Series</span></div>
+      </div>
+      <span class="method-chevron">▾</span>
+    </div>
+    <div class="method-excerpt">ARIMA (AutoRegressive Integrated Moving Average) models univariate time series for forecasting. SARIMA adds seasonal components. Used for agricultural price forecasting, production trends, and rainfall analysis.</div>
+  </div>
+  <div class="method-body"><div class="method-content">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab(this,'arima-overview')">Overview</button>
+      <button class="tab-btn" onclick="showTab(this,'arima-stata')">STATA</button>
+      <button class="tab-btn" onclick="showTab(this,'arima-r')">R</button>
+      <button class="tab-btn" onclick="showTab(this,'arima-python')">Python</button>
+    </div>
+    <div class="tab-pane active" id="arima-overview">
+      <div class="info-grid">
+        <div class="info-box"><div class="info-label">Parameters</div><div class="info-val">ARIMA(p,d,q)</div></div>
+        <div class="info-box"><div class="info-label">p</div><div class="info-val">AR order (PACF)</div></div>
+        <div class="info-box"><div class="info-label">d</div><div class="info-val">Differencing order</div></div>
+        <div class="info-box"><div class="info-label">q</div><div class="info-val">MA order (ACF)</div></div>
+      </div>
+      <h4>Step-by-Step</h4>
+      <ul>
+        <li><strong>1. Stationarity test:</strong> ADF / KPSS test. If non-stationary → difference the series (d=1 usually)</li>
+        <li><strong>2. Identify p and q:</strong> Plot ACF (→q) and PACF (→p) of stationary series</li>
+        <li><strong>3. Fit model:</strong> Use auto.arima() in R for automatic selection</li>
+        <li><strong>4. Diagnostics:</strong> Ljung-Box test on residuals (should be white noise)</li>
+        <li><strong>5. Forecast:</strong> Out-of-sample forecast with confidence intervals</li>
+      </ul>
+    </div>
+    <div class="tab-pane" id="arima-stata">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">STATA</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="cm">* Declare time series</span>
+<span class="kw">tsset</span> date
+
+<span class="cm">* ADF unit root test</span>
+<span class="kw">dfuller</span> price, trend lags(<span class="num">4</span>)
+<span class="kw">kpss</span> price   <span class="cm">/* KPSS test */</span>
+
+<span class="cm">* ACF and PACF plots</span>
+<span class="kw">ac</span> price, lags(<span class="num">24</span>)
+<span class="kw">pac</span> price, lags(<span class="num">24</span>)
+
+<span class="cm">* Fit ARIMA(1,1,1)</span>
+<span class="kw">arima</span> price, arima(<span class="num">1</span>,<span class="num">1</span>,<span class="num">1</span>)
+
+<span class="cm">* Seasonal ARIMA</span>
+<span class="kw">arima</span> price, sarima(<span class="num">1</span>,<span class="num">1</span>,<span class="num">1</span>)(<span class="num">1</span>,<span class="num">1</span>,<span class="num">1</span>,<span class="num">12</span>)
+
+<span class="cm">* Forecast 12 periods</span>
+<span class="kw">predict</span> price_hat
+<span class="kw">tsappend</span>, add(<span class="num">12</span>)
+<span class="kw">predict</span> forecast, dynamic(.) </pre>
+      </div>
+    </div>
+    <div class="tab-pane" id="arima-r">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">R</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="fn">library</span>(forecast); <span class="fn">library</span>(tseries)
+
+<span class="cm"># ADF test</span>
+<span class="fn">adf.test</span>(price_ts)
+
+<span class="cm"># Auto ARIMA (selects best model automatically)</span>
+model &lt;- <span class="fn">auto.arima</span>(price_ts, seasonal = <span class="kw">TRUE</span>, stepwise = <span class="kw">FALSE</span>)
+<span class="fn">summary</span>(model)
+
+<span class="cm"># Diagnostics</span>
+<span class="fn">checkresiduals</span>(model)  <span class="cm"># Ljung-Box + residual plots</span>
+
+<span class="cm"># Forecast 12 months ahead</span>
+fc &lt;- <span class="fn">forecast</span>(model, h = <span class="num">12</span>)
+<span class="fn">autoplot</span>(fc) + <span class="fn">ggtitle</span>(<span class="str">"Agricultural Price Forecast"</span>)
+
+<span class="cm"># Facebook Prophet (better for seasonal data)</span>
+<span class="fn">library</span>(prophet)
+df_prophet &lt;- data.frame(ds = dates, y = price_series)
+m &lt;- <span class="fn">prophet</span>(df_prophet, yearly.seasonality = <span class="kw">TRUE</span>)
+future &lt;- <span class="fn">make_future_dataframe</span>(m, periods = <span class="num">365</span>)
+forecast &lt;- <span class="fn">predict</span>(m, future)
+<span class="fn">plot</span>(m, forecast)</pre>
+      </div>
+    </div>
+    <div class="tab-pane" id="arima-python">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Python — Prophet</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="kw">from</span> prophet <span class="kw">import</span> Prophet
+<span class="kw">from</span> statsmodels.tsa.stattools <span class="kw">import</span> adfuller
+<span class="kw">from</span> statsmodels.tsa.arima.model <span class="kw">import</span> ARIMA
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+
+<span class="cm"># ADF test</span>
+result = <span class="fn">adfuller</span>(df[<span class="str">'price'</span>])
+<span class="fn">print</span>(<span class="str">f'ADF p-value: {result[1]:.4f}'</span>)
+
+<span class="cm"># ARIMA model</span>
+model = <span class="fn">ARIMA</span>(df[<span class="str">'price'</span>], order=(<span class="num">1</span>,<span class="num">1</span>,<span class="num">1</span>)).<span class="fn">fit</span>()
+<span class="fn">print</span>(model.<span class="fn">summary</span>())
+
+<span class="cm"># Facebook Prophet</span>
+df_p = df[[<span class="str">'date'</span>,<span class="str">'price'</span>]].<span class="fn">rename</span>(columns={<span class="str">'date'</span>:<span class="str">'ds'</span>,<span class="str">'price'</span>:<span class="str">'y'</span>})
+m = <span class="fn">Prophet</span>(yearly_seasonality=<span class="kw">True</span>, weekly_seasonality=<span class="kw">False</span>)
+m.<span class="fn">fit</span>(df_p)
+future = m.<span class="fn">make_future_dataframe</span>(periods=<span class="num">365</span>)
+forecast = m.<span class="fn">predict</span>(future)
+m.<span class="fn">plot</span>(forecast)</pre>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══ AHP ══ -->
+<div class="method-card fade-in" id="ahp" data-cat="survey" data-keywords="AHP analytical hierarchy process multi-criteria priority ranking">
+  <div class="method-card-header" onclick="toggleCard(this)">
+    <div class="method-top">
+      <div class="method-icon" style="background:rgba(247,129,102,0.1);">🏆</div>
+      <div class="method-header-text">
+        <div class="method-name">Analytical Hierarchy Process (AHP)</div>
+        <div class="difficulty"><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot empty"></div><div class="diff-dot empty"></div><div class="diff-label">Intermediate</div></div>
+        <div class="method-tags"><span class="m-tag tag-survey">Survey Methods</span></div>
+      </div>
+      <span class="method-chevron">▾</span>
+    </div>
+    <div class="method-excerpt">Multi-criteria decision analysis method that prioritises alternatives through pairwise comparisons. Used in your own published research for prioritising sustainable urban dairy management strategies. Excellent for policy prioritisation studies.</div>
+  </div>
+  <div class="method-body"><div class="method-content">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab(this,'ahp-overview')">Overview</button>
+      <button class="tab-btn" onclick="showTab(this,'ahp-r')">R Code</button>
+      <button class="tab-btn" onclick="showTab(this,'ahp-python')">Python</button>
+    </div>
+    <div class="tab-pane active" id="ahp-overview">
+      <div class="info-grid">
+        <div class="info-box"><div class="info-label">Scale</div><div class="info-val">Saaty's 1–9 scale</div></div>
+        <div class="info-box"><div class="info-label">Consistency</div><div class="info-val">CR &lt; 0.10 required</div></div>
+        <div class="info-box"><div class="info-label">Output</div><div class="info-val">Priority weights, rankings</div></div>
+        <div class="info-box"><div class="info-label">Extension</div><div class="info-val">Fuzzy-AHP for uncertainty</div></div>
+      </div>
+      <h4>Steps</h4>
+      <ul>
+        <li><strong>1.</strong> Define goal, criteria, and alternatives hierarchically</li>
+        <li><strong>2.</strong> Collect pairwise comparison matrices from experts</li>
+        <li><strong>3.</strong> Calculate priority vectors (eigenvector method)</li>
+        <li><strong>4.</strong> Check Consistency Ratio (CR &lt; 0.10)</li>
+        <li><strong>5.</strong> Aggregate across experts (geometric mean)</li>
+        <li><strong>6.</strong> Calculate overall priority rankings</li>
+      </ul>
+      <h4>Saaty's Comparison Scale</h4>
+      <p>1 = Equal importance · 3 = Moderate superiority · 5 = Strong superiority · 7 = Very strong · 9 = Extreme superiority · 2,4,6,8 = Intermediate values</p>
+    </div>
+    <div class="tab-pane" id="ahp-r">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">R</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="fn">library</span>(ahp)     <span class="cm"># main AHP package</span>
+<span class="fn">library</span>(ahpsurvey) <span class="cm"># for survey-based AHP</span>
+
+<span class="cm"># Define pairwise comparison matrix (criteria)</span>
+<span class="cm"># Saaty scale: 1=equal, 3=moderate, 5=strong, 7=very strong, 9=extreme</span>
+criteria_matrix &lt;- <span class="fn">matrix</span>(<span class="fn">c</span>(
+  <span class="num">1</span>,   <span class="num">3</span>,   <span class="num">5</span>,   <span class="num">7</span>,
+  <span class="num">1</span>/<span class="num">3</span>, <span class="num">1</span>,   <span class="num">3</span>,   <span class="num">5</span>,
+  <span class="num">1</span>/<span class="num">5</span>, <span class="num">1</span>/<span class="num">3</span>, <span class="num">1</span>,   <span class="num">3</span>,
+  <span class="num">1</span>/<span class="num">7</span>, <span class="num">1</span>/<span class="num">5</span>, <span class="num">1</span>/<span class="num">3</span>, <span class="num">1</span>
+), nrow = <span class="num">4</span>, byrow = <span class="kw">TRUE</span>)
+
+<span class="fn">rownames</span>(criteria_matrix) &lt;- <span class="fn">colnames</span>(criteria_matrix) &lt;- 
+  <span class="fn">c</span>(<span class="str">"Economic"</span>, <span class="str">"Environmental"</span>, <span class="str">"Social"</span>, <span class="str">"Technical"</span>)
+
+<span class="cm"># Calculate priority weights using eigenvector method</span>
+eigenvalues &lt;- <span class="fn">eigen</span>(criteria_matrix)
+weights &lt;- <span class="fn">Re</span>(eigenvalues$vectors[,<span class="num">1</span>]) / <span class="fn">sum</span>(<span class="fn">Re</span>(eigenvalues$vectors[,<span class="num">1</span>]))
+<span class="fn">names</span>(weights) &lt;- <span class="fn">rownames</span>(criteria_matrix)
+<span class="fn">print</span>(<span class="fn">round</span>(weights, <span class="num">4</span>))
+
+<span class="cm"># Consistency Ratio</span>
+lambda_max &lt;- <span class="fn">Re</span>(eigenvalues$values[<span class="num">1</span>])
+n &lt;- <span class="fn">nrow</span>(criteria_matrix)
+CI &lt;- (lambda_max - n) / (n - <span class="num">1</span>)
+RI &lt;- <span class="fn">c</span>(<span class="num">0</span>,<span class="num">0</span>,<span class="num">0.58</span>,<span class="num">0.90</span>,<span class="num">1.12</span>,<span class="num">1.24</span>,<span class="num">1.32</span>,<span class="num">1.41</span>,<span class="num">1.45</span>,<span class="num">1.49</span>)[n]
+CR &lt;- CI / RI
+<span class="fn">cat</span>(<span class="str">"Consistency Ratio:"</span>, <span class="fn">round</span>(CR,<span class="num">4</span>), <span class="cm">if</span>(CR&lt;<span class="num">0.1</span>) <span class="str">"✓ Acceptable"</span> <span class="kw">else</span> <span class="str">"✗ Revise matrix"</span>)</pre>
+      </div>
+    </div>
+    <div class="tab-pane" id="ahp-python">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="kw">def</span> <span class="fn">ahp_weights</span>(matrix):
+    <span class="cm"># Normalize columns then average rows</span>
+    col_sums = matrix.<span class="fn">sum</span>(axis=<span class="num">0</span>)
+    norm = matrix / col_sums
+    weights = norm.<span class="fn">mean</span>(axis=<span class="num">1</span>)
+    
+    <span class="cm"># Consistency check</span>
+    n = matrix.shape[<span class="num">0</span>]
+    weighted_sum = np.<span class="fn">dot</span>(matrix, weights)
+    lambda_max = np.<span class="fn">mean</span>(weighted_sum / weights)
+    CI = (lambda_max - n) / (n - <span class="num">1</span>)
+    RI = [<span class="num">0</span>,<span class="num">0</span>,<span class="num">0.58</span>,<span class="num">0.90</span>,<span class="num">1.12</span>,<span class="num">1.24</span>,<span class="num">1.32</span>,<span class="num">1.41</span>][n-<span class="num">1</span>]
+    CR = CI / RI
+    <span class="kw">return</span> weights, CR
+
+<span class="cm"># Pairwise comparison matrix</span>
+matrix = np.<span class="fn">array</span>([
+    [<span class="num">1</span>,   <span class="num">3</span>,   <span class="num">5</span>,   <span class="num">7</span>],
+    [<span class="num">1</span>/<span class="num">3</span>, <span class="num">1</span>,   <span class="num">3</span>,   <span class="num">5</span>],
+    [<span class="num">1</span>/<span class="num">5</span>, <span class="num">1</span>/<span class="num">3</span>, <span class="num">1</span>,   <span class="num">3</span>],
+    [<span class="num">1</span>/<span class="num">7</span>, <span class="num">1</span>/<span class="num">5</span>, <span class="num">1</span>/<span class="num">3</span>, <span class="num">1</span>]
+])
+
+weights, CR = <span class="fn">ahp_weights</span>(matrix)
+<span class="fn">print</span>(<span class="str">f"Priority weights: {np.round(weights,4)}"</span>)
+<span class="fn">print</span>(<span class="str">f"Consistency Ratio: {CR:.4f} {'✓' if CR<0.1 else '✗ Revise'}"</span>)</pre>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══ CGE ══ -->
+<div class="method-card fade-in" id="cge" data-cat="ml" data-keywords="CGE computable general equilibrium trade policy economy wide GAMS">
+  <div class="method-card-header" onclick="toggleCard(this)">
+    <div class="method-top">
+      <div class="method-icon" style="background:rgba(139,148,158,0.1);">⚙️</div>
+      <div class="method-header-text">
+        <div class="method-name">Computable General Equilibrium (CGE) Modelling</div>
+        <div class="difficulty"><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-label">Expert</div></div>
+        <div class="method-tags"><span class="m-tag tag-ml">Advanced Modelling</span></div>
+      </div>
+      <span class="method-chevron">▾</span>
+    </div>
+    <div class="method-excerpt">Economy-wide simulation model representing all markets simultaneously. Used for analysing trade policy shocks, tariff changes, and distributional consequences across sectors and income groups. Requires GAMS or GEMPACK software.</div>
+  </div>
+  <div class="method-body"><div class="method-content">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab(this,'cge-overview')">Overview</button>
+      <button class="tab-btn" onclick="showTab(this,'cge-resources')">Resources</button>
+    </div>
+    <div class="tab-pane active" id="cge-overview">
+      <div class="info-grid">
+        <div class="info-box"><div class="info-label">Software</div><div class="info-val">GAMS, GEMPACK</div></div>
+        <div class="info-box"><div class="info-label">Data Needed</div><div class="info-val">Social Accounting Matrix (SAM)</div></div>
+        <div class="info-box"><div class="info-label">Standard Model</div><div class="info-val">GTAP, PEP-1-1</div></div>
+        <div class="info-box"><div class="info-label">Training</div><div class="info-val">IFPRI + ICAR-NAARM</div></div>
+      </div>
+      <h4>Components of a CGE Model</h4>
+      <ul>
+        <li><strong>Social Accounting Matrix (SAM):</strong> Data backbone — captures all transactions between sectors, households, government, and rest of world</li>
+        <li><strong>Production functions:</strong> CES/Leontief — how sectors combine labour, capital, land, and intermediates</li>
+        <li><strong>Demand system:</strong> LES or CDE — how households allocate income across goods</li>
+        <li><strong>Closure rules:</strong> Determine which variables are endogenous vs exogenous</li>
+        <li><strong>Elasticities:</strong> Trade (Armington), substitution (CES σ), income elasticities</li>
+      </ul>
+      <h4>Applications</h4>
+      <ul>
+        <li>Impact of US tariff shocks on Indian agriculture (your own published work!)</li>
+        <li>Effect of food subsidy reforms on rural households</li>
+        <li>Trade liberalisation and agricultural competitiveness</li>
+        <li>Carbon tax impact on agricultural sectors</li>
+      </ul>
+    </div>
+    <div class="tab-pane" id="cge-resources">
+      <h4>Learning Resources</h4>
+      <ul>
+        <li><strong>GTAP model:</strong> <a href="https://www.gtap.agecon.purdue.edu" target="_blank" style="color:var(--accent2);">gtap.agecon.purdue.edu</a> — most widely used trade CGE model</li>
+        <li><strong>PEP Network:</strong> <a href="https://www.pep-net.org" target="_blank" style="color:var(--accent2);">pep-net.org</a> — free CGE models for developing countries, ideal for India SAM work</li>
+        <li><strong>GAMS tutorials:</strong> gams.com/learn/ — official GAMS documentation and example models</li>
+        <li><strong>IFPRI training:</strong> IFPRI + ICAR-NAARM run annual CGE training (you attended June 2025!)</li>
+        <li><strong>India SAM:</strong> Contact Ministry of Statistics or NCAER for India Social Accounting Matrix data</li>
+      </ul>
+      <h4>Key Textbooks</h4>
+      <ul>
+        <li>Shoven & Whalley (1992) — Applying General Equilibrium (Cambridge)</li>
+        <li>Hosoe, Gasawa & Hashimoto (2010) — Textbook of Computable General Equilibrium Modeling (Palgrave)</li>
+        <li>Löfgren et al. (2002) — A Standard Computable General Equilibrium Model in GAMS (IFPRI, free PDF)</li>
+      </ul>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══ BIBLIOMETRIC ══ -->
+<div class="method-card fade-in" id="bibliometric" data-cat="ml" data-keywords="bibliometric VOSviewer bibliometrix systematic review scientometrics">
+  <div class="method-card-header" onclick="toggleCard(this)">
+    <div class="method-top">
+      <div class="method-icon" style="background:rgba(57,211,83,0.1);">🕸️</div>
+      <div class="method-header-text">
+        <div class="method-name">Bibliometric Analysis</div>
+        <div class="difficulty"><div class="diff-dot filled"></div><div class="diff-dot filled"></div><div class="diff-dot empty"></div><div class="diff-dot empty"></div><div class="diff-dot empty"></div><div class="diff-label">Intermediate</div></div>
+        <div class="method-tags"><span class="m-tag tag-ml">Data Science</span></div>
+      </div>
+      <span class="method-chevron">▾</span>
+    </div>
+    <div class="method-excerpt">Quantitative analysis of scientific literature — co-authorship, keyword co-occurrence, citation networks. Used in your published blockchain paper (JADEE, IF 2.3). Growing rapidly as a research methodology in agricultural economics.</div>
+  </div>
+  <div class="method-body"><div class="method-content">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab(this,'bib-overview')">Overview</button>
+      <button class="tab-btn" onclick="showTab(this,'bib-r')">R Code</button>
+    </div>
+    <div class="tab-pane active" id="bib-overview">
+      <div class="info-grid">
+        <div class="info-box"><div class="info-label">Data Sources</div><div class="info-val">Web of Science, Scopus</div></div>
+        <div class="info-box"><div class="info-label">Tools</div><div class="info-val">VOSviewer, bibliometrix (R)</div></div>
+        <div class="info-box"><div class="info-label">Analysis Types</div><div class="info-val">Co-authorship, co-citation, keyword</div></div>
+        <div class="info-box"><div class="info-label">Export Format</div><div class="info-val">.txt (WoS), .csv (Scopus)</div></div>
+      </div>
+      <h4>Types of Bibliometric Analysis</h4>
+      <ul>
+        <li><strong>Performance analysis:</strong> Most cited papers, productive authors, leading journals, country output</li>
+        <li><strong>Co-authorship network:</strong> Collaboration patterns between researchers and countries</li>
+        <li><strong>Keyword co-occurrence:</strong> Research themes and intellectual structure of a field</li>
+        <li><strong>Co-citation analysis:</strong> Intellectual foundations of a research area</li>
+        <li><strong>Bibliographic coupling:</strong> Emerging research fronts</li>
+      </ul>
+    </div>
+    <div class="tab-pane" id="bib-r">
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">R — bibliometrix + biblioshiny</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="fn">library</span>(bibliometrix)
+
+<span class="cm"># Load Web of Science export (.txt format)</span>
+M &lt;- <span class="fn">convert2df</span>(file = <span class="str">"wos_export.txt"</span>, dbsource = <span class="str">"wos"</span>, format = <span class="str">"plaintext"</span>)
+
+<span class="cm"># Bibliometric summary</span>
+results &lt;- <span class="fn">biblioAnalysis</span>(M)
+<span class="fn">summary</span>(results, k=<span class="num">10</span>, pause=<span class="kw">FALSE</span>)
+
+<span class="cm"># Most cited papers</span>
+<span class="fn">citations</span>(M, field=<span class="str">"article"</span>, sep=<span class="str">";"</span>)$Cited[<span class="num">1</span>:<span class="num">10</span>]
+
+<span class="cm"># Keyword co-occurrence network</span>
+NetMatrix &lt;- <span class="fn">biblioNetwork</span>(M, analysis=<span class="str">"co-occurrences"</span>, 
+                           network=<span class="str">"keywords"</span>, sep=<span class="str">";"</span>)
+net &lt;- <span class="fn">networkPlot</span>(NetMatrix, normalize=<span class="str">"salton"</span>, n=<span class="num">50</span>,
+                   Title=<span class="str">"Keyword Co-occurrence Network"</span>, 
+                   type=<span class="str">"fruchterman"</span>, labelsize=<span class="num">1.5</span>)
+
+<span class="cm"># Thematic evolution</span>
+<span class="fn">thematicEvolution</span>(M, field=<span class="str">"ID"</span>, years=<span class="fn">c</span>(<span class="num">2010</span>,<span class="num">2015</span>,<span class="num">2020</span>,<span class="num">2024</span>))
+
+<span class="cm"># Interactive Shiny dashboard</span>
+<span class="fn">biblioshiny</span>()  <span class="cm"># Opens browser dashboard</span></pre>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+</div><!-- end methods-grid -->
+</div><!-- end main -->
+
+<footer>
+  © 2025 Banda Sainath &nbsp;·&nbsp;
+  <a href="index.html" style="color:var(--accent);text-decoration:none;">← Home</a> &nbsp;·&nbsp;
+  <a href="methods_selector.html" style="color:var(--accent2);text-decoration:none;">Method Selector →</a>
+</footer>
+
+<script>
+function toggleCard(header) {
+  const card = header.parentElement;
+  const isOpen = card.classList.contains('open');
+  card.classList.toggle('open', !isOpen);
+  // Update sidebar active link
+  document.querySelectorAll('.method-list a').forEach(a => a.classList.remove('active-link'));
+  if (!isOpen) {
+    const link = document.querySelector(`.method-list a[href="#${card.id}"]`);
+    if (link) link.classList.add('active-link');
+  }
+}
+
+function showTab(btn, tabId) {
+  const content = btn.closest('.method-content');
+  content.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  content.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
+
+let currentCat = 'all';
+function setCat(cat, btn) {
+  currentCat = cat;
+  document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterMethods();
+}
+
+function filterMethods() {
+  const q = document.getElementById('methodSearch').value.toLowerCase();
+  document.querySelectorAll('.method-card').forEach(card => {
+    const catMatch = currentCat === 'all' || card.dataset.cat === currentCat;
+    const keywords = (card.dataset.keywords || '') + ' ' + card.querySelector('.method-name').textContent.toLowerCase();
+    const qMatch = !q || keywords.toLowerCase().includes(q);
+    card.classList.toggle('hidden-card', !(catMatch && qMatch));
+  });
+}
+
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+
+// Scroll spy for sidebar
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('.method-list a').forEach(a => a.classList.remove('active-link'));
+      const link = document.querySelector(`.method-list a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active-link');
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.method-card').forEach(card => {
+  observer.observe(card);
+  // fade-in observer
+});
+
+const fadeObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.05 });
+document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+</script>
+</body>
+</html>
