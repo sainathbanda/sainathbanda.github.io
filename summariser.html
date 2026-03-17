@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="mxHYk3PITQRd54OTSWHV68Gr4SqV7jMlZDDD4PDqAgg" />
 <title>Paper Summariser | Banda Sainath</title>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-589QFCEYJX"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-589QFCEYJX">  function toggleTheme(){document.body.classList.toggle('light');const b=document.querySelector('.theme-btn');if(b)b.textContent=document.body.classList.contains('light')?'🌙 Dark':'☀️ Light';}
+  window.addEventListener('scroll',()=>{const bt=document.getElementById('backTop');if(bt)bt.classList.toggle('show',window.scrollY>300);});
+</script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -152,6 +154,15 @@
     .nav-links { display: none; }
     .page-wrap { padding: 90px 20px 60px; }
   }
+
+  body.light{--bg:#f6f8fa;--bg2:#ffffff;--bg3:#f0f2f4;--text:#1c2330;--muted:#57606a;--border:#d0d7de;}
+  body{transition:background 0.3s,color 0.3s;}
+  body.light nav{background:rgba(246,248,250,0.95);}
+  .theme-btn{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+  .theme-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .back-top{position:fixed;bottom:32px;right:32px;z-index:99;width:44px;height:44px;background:var(--accent);color:#0d1117;border:none;border-radius:50%;font-size:1.1rem;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(63,185,80,0.35);transition:all 0.2s;}
+  .back-top:hover{transform:translateY(-3px);}
+  .back-top.show{display:flex;}
 </style>
 </head>
 <body>
@@ -170,6 +181,9 @@
         <li><a href="naas.html">🔢 NAAS Checker</a></li>
         <li><a href="summariser.html" class="active">📄 Paper Summariser</a></li>
         <li><a href="dataviz.html">📊 Data Visualiser</a></li>
+        <li><a href="ideagen.html">💡 Idea Generator</a></li>
+        <li><a href="samplesize.html">🧮 Sample Size Calc</a></li>
+        <li><a href="indiamap.html">🗺 India Map</a></li>
       </ul>
     </li>
     <li><a href="blog.html">Blog</a></li>

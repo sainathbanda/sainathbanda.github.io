@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="mxHYk3PITQRd54OTSWHV68Gr4SqV7jMlZDDD4PDqAgg" />
+<title>Research Idea Generator | Banda Sainath</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-589QFCEYJX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-589QFCEYJX');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2330;--accent:#3fb950;--accent2:#58a6ff;--gold:#d4a843;--text:#e6edf3;--muted:#8b949e;--border:#30363d;}
+body.light{--bg:#f6f8fa;--bg2:#ffffff;--bg3:#f0f2f4;--text:#1c2330;--muted:#57606a;--border:#d0d7de;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;transition:background 0.3s,color 0.3s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;background:rgba(13,17,23,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+body.light nav{background:rgba(246,248,250,0.95);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold);letter-spacing:0.02em;text-decoration:none;}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--muted);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);}
+.nav-dropdown{position:relative;}
+.nav-dropdown>a{display:flex;align-items:center;gap:4px;cursor:pointer;}
+.nav-dropdown>a::after{content:"▾";font-size:0.65rem;transition:transform 0.2s;}
+.nav-dropdown:hover>a::after{transform:rotate(180deg);}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:6px;min-width:200px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,0.4);}
+.nav-dropdown:hover .dropdown-menu{display:block;}
+.dropdown-menu li{list-style:none;}
+.dropdown-menu li a{display:block;padding:9px 14px;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--muted);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;border-radius:5px;transition:background 0.15s,color 0.15s;white-space:nowrap;}
+.dropdown-menu li a:hover,.dropdown-menu li a.active{background:var(--bg3);color:var(--accent);}
+.theme-btn{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent);}
+.back-top{position:fixed;bottom:32px;right:32px;z-index:99;width:44px;height:44px;background:var(--accent);color:#0d1117;border:none;border-radius:50%;font-size:1.1rem;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(63,185,80,0.35);transition:all 0.2s;}
+.back-top:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(63,185,80,0.45);}
+.back-top.show{display:flex;}
+.page-wrap{max-width:900px;margin:0 auto;padding:110px 48px 80px;}
+.breadcrumb{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);margin-bottom:28px;}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{margin:0 8px;}
+.page-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;border:1px solid rgba(63,185,80,0.35);padding:5px 14px;border-radius:2px;margin-bottom:18px;}
+.page-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);line-height:1.2;margin-bottom:10px;}
+.page-subtitle{color:var(--muted);font-size:0.97rem;max-width:640px;margin-bottom:40px;}
+.input-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:20px;}
+.input-card-title{font-family:'DM Mono',monospace;font-size:0.74rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:14px;}
+textarea.main-input{width:100%;min-height:140px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px 18px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.93rem;line-height:1.7;resize:vertical;outline:none;transition:border-color 0.2s;}
+textarea.main-input:focus{border-color:var(--accent2);}
+.options-label{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;margin-top:20px;}
+.chip-row{display:flex;gap:10px;flex-wrap:wrap;}
+.chip{font-family:'DM Mono',monospace;font-size:0.74rem;letter-spacing:0.06em;text-transform:uppercase;padding:7px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;cursor:pointer;color:var(--muted);transition:all 0.2s;user-select:none;}
+.chip.on{background:rgba(63,185,80,0.12);border-color:var(--accent);color:var(--accent);}
+.chip:hover:not(.on){border-color:var(--muted);color:var(--text);}
+.btn-gen{display:inline-flex;align-items:center;gap:10px;padding:13px 32px;background:var(--accent);color:#0d1117;font-family:'DM Mono',monospace;font-size:0.82rem;letter-spacing:0.07em;text-transform:uppercase;border:none;border-radius:6px;cursor:pointer;font-weight:600;transition:all 0.2s;margin-top:22px;}
+.btn-gen:hover{background:#56d364;transform:translateY(-1px);}
+.btn-gen:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.spinner{width:16px;height:16px;border:2px solid rgba(0,0,0,0.2);border-top-color:#0d1117;border-radius:50%;animation:spin 0.7s linear infinite;display:none;}
+.btn-gen.loading .spinner{display:block;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.output{display:none;margin-top:40px;}
+.output.show{display:block;}
+.out-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.out-title{font-family:'Playfair Display',serif;font-size:1.35rem;}
+.copy-btn{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);background:var(--bg2);border:1px solid var(--border);padding:7px 16px;border-radius:5px;cursor:pointer;transition:all 0.2s;letter-spacing:0.06em;text-transform:uppercase;}
+.copy-btn:hover{color:var(--accent2);border-color:var(--accent2);}
+.idea-block{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:26px 30px;margin-bottom:16px;}
+.idea-block+.idea-block{margin-top:0;}
+.block-tag{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:10px;}
+.block-content{color:var(--text);font-size:0.95rem;line-height:1.8;}
+.block-content ol,.block-content ul{padding-left:20px;}
+.block-content li{margin-bottom:7px;}
+.block-content strong{color:var(--accent2);}
+.rq-item{background:var(--bg3);border-left:3px solid var(--accent2);border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:10px;font-size:0.93rem;}
+.hyp-item{background:var(--bg3);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:10px;font-size:0.93rem;}
+.method-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:0.72rem;padding:4px 12px;border-radius:12px;background:rgba(63,185,80,0.1);border:1px solid rgba(63,185,80,0.3);color:var(--accent);margin:3px;}
+.err{background:rgba(248,81,73,0.08);border:1px solid rgba(248,81,73,0.3);border-radius:8px;padding:14px 18px;color:#f85149;font-size:0.88rem;margin-top:14px;display:none;}
+.err.show{display:block;}
+footer{text-align:center;padding:40px 48px;border-top:1px solid var(--border);font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);}
+footer a{color:var(--accent);text-decoration:none;}
+@media(max-width:768px){nav{padding:16px 20px;}.nav-links{display:none;}.page-wrap{padding:90px 20px 60px;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Banda Sainath</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#publications">Publications</a></li>
+    <li class="nav-dropdown">
+      <a href="#" style="color:var(--accent);">Research Tools</a>
+      <ul class="dropdown-menu">
+        <li><a href="resources.html">📚 Resources</a></li>
+        <li><a href="methods.html">📐 Methods</a></li>
+        <li><a href="library.html">🗂 Library</a></li>
+        <li><a href="naas.html">🔢 NAAS Checker</a></li>
+        <li><a href="summariser.html">📄 Paper Summariser</a></li>
+        <li><a href="dataviz.html">📊 Data Visualiser</a></li>
+        <li><a href="ideagen.html" class="active">💡 Idea Generator</a></li>
+        <li><a href="samplesize.html">🧮 Sample Size Calc</a></li>
+        <li><a href="indiamap.html">🗺 India Map</a></li>
+      </ul>
+    </li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><button class="theme-btn" onclick="toggleTheme()">☀️ Light</button></li>
+    <li><a href="Banda_Sainath_CV.pdf" target="_blank" style="background:var(--gold);color:#0d1117;padding:6px 14px;border-radius:4px;font-weight:500;">📄 CV</a></li>
+  </ul>
+</nav>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<div class="page-wrap">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Research Tools<span>/</span>Idea Generator</div>
+  <div class="page-badge">AI-Powered</div>
+  <h1 class="page-title">Research Idea Generator</h1>
+  <p class="page-subtitle">Paste a topic, dataset description, or a broad area of interest. Get structured research questions, testable hypotheses, and suggested econometric methods — tailored for agricultural economics.</p>
+
+  <div class="input-card">
+    <div class="input-card-title">📝 Topic / Dataset / Area of Interest</div>
+    <textarea class="main-input" id="topicInput" placeholder="e.g. 'Impact of PM-KISAN cash transfers on smallholder consumption in Bihar' or 'I have household survey data from 400 farmers in Haryana with income, land size, irrigation access, and credit use variables'"></textarea>
+
+    <div class="options-label">Research Domain</div>
+    <div class="chip-row" id="domainChips">
+      <div class="chip on" data-v="Agricultural Economics" onclick="tog(this,'domainChips')">Agri Economics</div>
+      <div class="chip" data-v="Environmental Economics" onclick="tog(this,'domainChips')">Env. Economics</div>
+      <div class="chip" data-v="Development Economics" onclick="tog(this,'domainChips')">Development</div>
+      <div class="chip" data-v="Policy Analysis" onclick="tog(this,'domainChips')">Policy</div>
+      <div class="chip" data-v="Food Systems" onclick="tog(this,'domainChips')">Food Systems</div>
+      <div class="chip" data-v="Rural Finance" onclick="tog(this,'domainChips')">Rural Finance</div>
+    </div>
+
+    <div class="options-label">Output Type</div>
+    <div class="chip-row" id="typeChips">
+      <div class="chip on" data-v="PhD thesis chapter" onclick="single(this,'typeChips')">PhD Chapter</div>
+      <div class="chip" data-v="journal article" onclick="single(this,'typeChips')">Journal Article</div>
+      <div class="chip" data-v="policy brief" onclick="single(this,'typeChips')">Policy Brief</div>
+      <div class="chip" data-v="MSc dissertation" onclick="single(this,'typeChips')">MSc Dissertation</div>
+    </div>
+
+    <button class="btn-gen" id="genBtn" onclick="generate()">
+      <div class="spinner"></div>
+      <span>💡 Generate Ideas</span>
+    </button>
+  </div>
+
+  <div class="err" id="errBox"></div>
+
+  <div class="output" id="output">
+    <div class="out-header">
+      <div class="out-title">Your Research Blueprint</div>
+      <button class="copy-btn" onclick="copyOut()">⎘ Copy All</button>
+    </div>
+    <div id="outContent"></div>
+  </div>
+</div>
+
+<footer>© 2025 Banda Sainath · <a href="index.html">← Back to Home</a></footer>
+
+<script>
+function toggleTheme(){document.body.classList.toggle('light');const b=document.querySelector('.theme-btn');b.textContent=document.body.classList.contains('light')?'🌙 Dark':'☀️ Light';}
+window.addEventListener('scroll',()=>{const bt=document.getElementById('backTop');bt.classList.toggle('show',window.scrollY>300);});
+function tog(el,g){el.classList.toggle('on');}
+function single(el,g){document.querySelectorAll('#'+g+' .chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
+function getChips(g){return [...document.querySelectorAll('#'+g+' .chip.on')].map(c=>c.dataset.v).join(', ');}
+function showErr(m){const b=document.getElementById('errBox');b.textContent='⚠️ '+m;b.classList.add('show');setTimeout(()=>b.classList.remove('show'),6000);}
+
+async function generate(){
+  const topic=document.getElementById('topicInput').value.trim();
+  if(!topic){showErr('Please describe your topic or dataset.');return;}
+  const domain=getChips('domainChips')||'Agricultural Economics';
+  const type=getChips('typeChips')||'journal article';
+  const btn=document.getElementById('genBtn');
+  btn.classList.add('loading');btn.disabled=true;
+  document.getElementById('output').classList.remove('show');
+
+  const prompt=`You are a senior agricultural economist and research mentor. Based on the user's input, generate a detailed research blueprint.
+
+Domain: ${domain}
+Output type: ${type}
+User input: ${topic}
+
+Respond ONLY with a JSON object (no markdown, no backticks):
+{
+  "gap": "2-3 sentences on the research gap this addresses",
+  "research_questions": [
+    {"rq": "Research question 1", "rationale": "Why this matters"},
+    {"rq": "Research question 2", "rationale": "Why this matters"},
+    {"rq": "Research question 3", "rationale": "Why this matters"}
+  ],
+  "hypotheses": [
+    {"h": "H1: ...", "direction": "positive/negative/ambiguous"},
+    {"h": "H2: ...", "direction": "positive/negative/ambiguous"},
+    {"h": "H3: ...", "direction": "positive/negative/ambiguous"}
+  ],
+  "methods": ["Method 1", "Method 2", "Method 3", "Method 4"],
+  "data_sources": ["Source 1", "Source 2", "Source 3"],
+  "keywords": ["kw1","kw2","kw3","kw4","kw5"],
+  "target_journals": ["Journal 1","Journal 2","Journal 3"],
+  "novelty": "1-2 sentences on what makes this novel"
+}`;
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+    const data=await res.json();
+    if(!res.ok)throw new Error(data.error?.message||'API error');
+    const raw=data.content.find(b=>b.type==='text')?.text||'';
+    const parsed=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    render(parsed);
+  }catch(e){showErr('Generation failed: '+e.message);}
+  finally{btn.classList.remove('loading');btn.disabled=false;}
+}
+
+function render(d){
+  const c=document.getElementById('outContent');
+  c.innerHTML=`
+  <div class="idea-block">
+    <div class="block-tag">🔍 Research Gap</div>
+    <div class="block-content"><p>${d.gap}</p></div>
+  </div>
+  <div class="idea-block">
+    <div class="block-tag">❓ Research Questions</div>
+    <div class="block-content">${(d.research_questions||[]).map(r=>`<div class="rq-item"><strong>RQ:</strong> ${r.rq}<br><small style="color:var(--muted)">${r.rationale}</small></div>`).join('')}</div>
+  </div>
+  <div class="idea-block">
+    <div class="block-tag">🔬 Hypotheses</div>
+    <div class="block-content">${(d.hypotheses||[]).map(h=>`<div class="hyp-item">${h.h} <span style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--gold);margin-left:8px;">[${h.direction}]</span></div>`).join('')}</div>
+  </div>
+  <div class="idea-block">
+    <div class="block-tag">📐 Suggested Methods</div>
+    <div class="block-content">${(d.methods||[]).map(m=>`<span class="method-tag">${m}</span>`).join('')}</div>
+  </div>
+  <div class="idea-block">
+    <div class="block-tag">🗃 Data Sources</div>
+    <div class="block-content"><ul>${(d.data_sources||[]).map(s=>`<li>${s}</li>`).join('')}</ul></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="idea-block">
+      <div class="block-tag">🏷 Keywords</div>
+      <div class="block-content">${(d.keywords||[]).map(k=>`<span class="method-tag" style="background:rgba(88,166,255,0.1);border-color:rgba(88,166,255,0.3);color:var(--accent2)">${k}</span>`).join('')}</div>
+    </div>
+    <div class="idea-block">
+      <div class="block-tag">📰 Target Journals</div>
+      <div class="block-content"><ul>${(d.target_journals||[]).map(j=>`<li style="font-size:0.88rem">${j}</li>`).join('')}</ul></div>
+    </div>
+  </div>
+  <div class="idea-block" style="border-color:rgba(212,168,67,0.4);">
+    <div class="block-tag" style="color:var(--gold)">✨ Novelty Statement</div>
+    <div class="block-content"><p style="font-style:italic">${d.novelty}</p></div>
+  </div>`;
+  document.getElementById('output').classList.add('show');
+  document.getElementById('output').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function copyOut(){
+  navigator.clipboard.writeText(document.getElementById('outContent').innerText).then(()=>{
+    const b=document.querySelector('.copy-btn');b.textContent='✅ Copied!';setTimeout(()=>b.textContent='⎘ Copy All',2000);
+  });
+}
+</script>
+</body>
+</html>

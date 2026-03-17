@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample Size Calculator | Banda Sainath</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-589QFCEYJX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-589QFCEYJX');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2330;--accent:#3fb950;--accent2:#58a6ff;--gold:#d4a843;--text:#e6edf3;--muted:#8b949e;--border:#30363d;}
+body.light{--bg:#f6f8fa;--bg2:#ffffff;--bg3:#f0f2f4;--text:#1c2330;--muted:#57606a;--border:#d0d7de;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;transition:background 0.3s,color 0.3s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;background:rgba(13,17,23,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+body.light nav{background:rgba(246,248,250,0.95);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold);letter-spacing:0.02em;text-decoration:none;}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--muted);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);}
+.nav-dropdown{position:relative;}.nav-dropdown>a{display:flex;align-items:center;gap:4px;cursor:pointer;}
+.nav-dropdown>a::after{content:"▾";font-size:0.65rem;transition:transform 0.2s;}
+.nav-dropdown:hover>a::after{transform:rotate(180deg);}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:6px;min-width:200px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,0.4);}
+.nav-dropdown:hover .dropdown-menu{display:block;}
+.dropdown-menu li{list-style:none;}
+.dropdown-menu li a{display:block;padding:9px 14px;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--muted);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;border-radius:5px;transition:background 0.15s,color 0.15s;white-space:nowrap;}
+.dropdown-menu li a:hover,.dropdown-menu li a.active{background:var(--bg3);color:var(--accent);}
+.theme-btn{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent);}
+.back-top{position:fixed;bottom:32px;right:32px;z-index:99;width:44px;height:44px;background:var(--accent);color:#0d1117;border:none;border-radius:50%;font-size:1.1rem;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(63,185,80,0.35);transition:all 0.2s;}
+.back-top:hover{transform:translateY(-3px);}
+.back-top.show{display:flex;}
+.page-wrap{max-width:960px;margin:0 auto;padding:110px 48px 80px;}
+.breadcrumb{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);margin-bottom:28px;}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{margin:0 8px;}
+.page-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--accent2);letter-spacing:0.12em;text-transform:uppercase;border:1px solid rgba(88,166,255,0.35);padding:5px 14px;border-radius:2px;margin-bottom:18px;}
+.page-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);line-height:1.2;margin-bottom:10px;}
+.page-subtitle{color:var(--muted);font-size:0.97rem;max-width:640px;margin-bottom:40px;}
+
+/* METHOD TABS */
+.method-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:32px;width:fit-content;}
+.mtab{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.07em;text-transform:uppercase;padding:11px 22px;background:transparent;color:var(--muted);border:none;cursor:pointer;transition:all 0.2s;border-right:1px solid var(--border);}
+.mtab:last-child{border-right:none;}
+.mtab.active{background:var(--accent2);color:#0d1117;font-weight:600;}
+.mtab:hover:not(.active){background:var(--bg3);color:var(--text);}
+
+.calc-panel{display:none;}.calc-panel.active{display:block;}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:640px){.calc-grid{grid-template-columns:1fr;}}
+
+.field{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px 22px;}
+.field-label{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;}
+.field-desc{font-size:0.8rem;color:var(--muted);margin-bottom:10px;}
+input[type=number],select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:10px 14px;color:var(--text);font-family:'DM Mono',monospace;font-size:0.9rem;outline:none;transition:border-color 0.2s;}
+input[type=number]:focus,select:focus{border-color:var(--accent2);}
+select option{background:var(--bg2);}
+
+.btn-calc{display:inline-flex;align-items:center;gap:8px;padding:13px 32px;background:var(--accent);color:#0d1117;font-family:'DM Mono',monospace;font-size:0.82rem;letter-spacing:0.07em;text-transform:uppercase;border:none;border-radius:6px;cursor:pointer;font-weight:600;transition:all 0.2s;margin-top:24px;}
+.btn-calc:hover{background:#56d364;transform:translateY(-1px);}
+
+.result-box{display:none;background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:32px;margin-top:28px;}
+.result-box.show{display:block;}
+.result-main{text-align:center;padding:28px 0;border-bottom:1px solid var(--border);margin-bottom:24px;}
+.result-n{font-family:'Playfair Display',serif;font-size:4rem;color:var(--accent);line-height:1;}
+.result-label{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:6px;}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
+.result-stat{background:var(--bg3);border-radius:8px;padding:14px;text-align:center;}
+.rs-val{font-family:'DM Mono',monospace;font-size:1rem;color:var(--accent2);}
+.rs-key{font-size:0.75rem;color:var(--muted);margin-top:3px;}
+.formula-box{background:var(--bg3);border-radius:8px;padding:16px 18px;font-family:'DM Mono',monospace;font-size:0.82rem;color:var(--muted);line-height:1.8;}
+.formula-box strong{color:var(--text);}
+.interpret{margin-top:16px;font-size:0.9rem;color:var(--text);line-height:1.7;padding:14px 18px;background:rgba(63,185,80,0.06);border:1px solid rgba(63,185,80,0.2);border-radius:8px;}
+
+footer{text-align:center;padding:40px 48px;border-top:1px solid var(--border);font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);}
+footer a{color:var(--accent);text-decoration:none;}
+@media(max-width:768px){nav{padding:16px 20px;}.nav-links{display:none;}.page-wrap{padding:90px 20px 60px;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Banda Sainath</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#publications">Publications</a></li>
+    <li class="nav-dropdown">
+      <a href="#" style="color:var(--accent);">Research Tools</a>
+      <ul class="dropdown-menu">
+        <li><a href="resources.html">📚 Resources</a></li>
+        <li><a href="methods.html">📐 Methods</a></li>
+        <li><a href="library.html">🗂 Library</a></li>
+        <li><a href="naas.html">🔢 NAAS Checker</a></li>
+        <li><a href="summariser.html">📄 Paper Summariser</a></li>
+        <li><a href="dataviz.html">📊 Data Visualiser</a></li>
+        <li><a href="ideagen.html">💡 Idea Generator</a></li>
+        <li><a href="samplesize.html" class="active">🧮 Sample Size Calc</a></li>
+        <li><a href="indiamap.html">🗺 India Map</a></li>
+      </ul>
+    </li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><button class="theme-btn" onclick="toggleTheme()">☀️ Light</button></li>
+    <li><a href="Banda_Sainath_CV.pdf" target="_blank" style="background:var(--gold);color:#0d1117;padding:6px 14px;border-radius:4px;font-weight:500;">📄 CV</a></li>
+  </ul>
+</nav>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<div class="page-wrap">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Research Tools<span>/</span>Sample Size Calculator</div>
+  <div class="page-badge">Statistical Tool</div>
+  <h1 class="page-title">Sample Size Calculator</h1>
+  <p class="page-subtitle">Calculate the required sample size for surveys, field experiments, and RCTs. Based on standard statistical formulas used in agricultural economics research.</p>
+
+  <div class="method-tabs">
+    <button class="mtab active" onclick="switchTab('survey',this)">📋 Survey</button>
+    <button class="mtab" onclick="switchTab('rct',this)">🔬 RCT / Experiment</button>
+    <button class="mtab" onclick="switchTab('proportion',this)">📊 Proportion</button>
+    <button class="mtab" onclick="switchTab('cochran',this)">📐 Cochran Formula</button>
+  </div>
+
+  <!-- SURVEY -->
+  <div class="calc-panel active" id="panel-survey">
+    <div class="calc-grid">
+      <div class="field"><div class="field-label">Population Size (N)</div><div class="field-desc">Total farmers / households in your study area. Use 999999 if unknown.</div><input type="number" id="s-N" value="10000" min="1"></div>
+      <div class="field"><div class="field-label">Confidence Level</div><div class="field-desc">Standard: 95% (z=1.96). Use 99% for high-stakes policy research.</div><select id="s-conf"><option value="1.645">90%</option><option value="1.96" selected>95%</option><option value="2.576">99%</option></select></div>
+      <div class="field"><div class="field-label">Margin of Error (e)</div><div class="field-desc">Acceptable error in your estimate (e.g. 0.05 = ±5%).</div><input type="number" id="s-e" value="0.05" step="0.01" min="0.01" max="0.5"></div>
+      <div class="field"><div class="field-label">Expected Proportion (p)</div><div class="field-desc">Expected proportion with the characteristic. Use 0.5 for maximum sample size.</div><input type="number" id="s-p" value="0.5" step="0.05" min="0.01" max="0.99"></div>
+      <div class="field"><div class="field-label">Non-response / Attrition (%)</div><div class="field-desc">Add buffer for non-responses. Typical: 10–20%.</div><input type="number" id="s-nr" value="15" min="0" max="50"></div>
+      <div class="field"><div class="field-label">Design Effect (DEFF)</div><div class="field-desc">For cluster sampling, multiply by DEFF (typically 1.5–2.0). Use 1 for SRS.</div><input type="number" id="s-deff" value="1" step="0.1" min="1"></div>
+    </div>
+    <button class="btn-calc" onclick="calcSurvey()">🧮 Calculate</button>
+    <div class="result-box" id="res-survey"></div>
+  </div>
+
+  <!-- RCT -->
+  <div class="calc-panel" id="panel-rct">
+    <div class="calc-grid">
+      <div class="field"><div class="field-label">Mean of Control Group (μ₁)</div><div class="field-desc">Expected mean outcome in control group.</div><input type="number" id="r-mu1" value="5000" step="any"></div>
+      <div class="field"><div class="field-label">Expected Treatment Effect (Δ)</div><div class="field-desc">Minimum detectable effect (MDE) — smallest meaningful difference.</div><input type="number" id="r-delta" value="500" step="any"></div>
+      <div class="field"><div class="field-label">Standard Deviation (σ)</div><div class="field-desc">Expected SD of outcome variable (from pilot or literature).</div><input type="number" id="r-sd" value="1500" step="any" min="1"></div>
+      <div class="field"><div class="field-label">Significance Level (α)</div><div class="field-desc">Probability of Type I error.</div><select id="r-alpha"><option value="1.645">α=0.10</option><option value="1.96" selected>α=0.05</option><option value="2.576">α=0.01</option></select></div>
+      <div class="field"><div class="field-label">Power (1-β)</div><div class="field-desc">Probability of detecting a true effect. Standard: 80%.</div><select id="r-power"><option value="0.842">80%</option><option value="1.036">85%</option><option value="1.282" selected>90%</option></select></div>
+      <div class="field"><div class="field-label">Number of Arms</div><div class="field-desc">2 = treatment + control. More arms = larger total sample.</div><input type="number" id="r-arms" value="2" min="2" max="6"></div>
+    </div>
+    <button class="btn-calc" onclick="calcRCT()">🧮 Calculate</button>
+    <div class="result-box" id="res-rct"></div>
+  </div>
+
+  <!-- PROPORTION -->
+  <div class="calc-panel" id="panel-proportion">
+    <div class="calc-grid">
+      <div class="field"><div class="field-label">Proportion Group 1 (p₁)</div><div class="field-desc">Expected proportion in control group (e.g. adoption rate).</div><input type="number" id="p-p1" value="0.30" step="0.01" min="0.01" max="0.99"></div>
+      <div class="field"><div class="field-label">Proportion Group 2 (p₂)</div><div class="field-desc">Expected proportion in treatment/comparison group.</div><input type="number" id="p-p2" value="0.45" step="0.01" min="0.01" max="0.99"></div>
+      <div class="field"><div class="field-label">Significance Level</div><select id="p-alpha"><option value="1.645">α=0.10</option><option value="1.96" selected>α=0.05</option><option value="2.576">α=0.01</option></select></div>
+      <div class="field"><div class="field-label">Power</div><select id="p-power"><option value="0.842">80%</option><option value="1.036">85%</option><option value="1.282" selected>90%</option></select></div>
+    </div>
+    <button class="btn-calc" onclick="calcProp()">🧮 Calculate</button>
+    <div class="result-box" id="res-proportion"></div>
+  </div>
+
+  <!-- COCHRAN -->
+  <div class="calc-panel" id="panel-cochran">
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:20px;font-size:0.88rem;color:var(--muted);">
+      The <strong style="color:var(--text)">Cochran (1977)</strong> formula is widely used in agri-economics and social science research. For small populations, the finite population correction is automatically applied.
+    </div>
+    <div class="calc-grid">
+      <div class="field"><div class="field-label">Confidence Level (Z)</div><select id="c-z"><option value="1.645">90% (z=1.645)</option><option value="1.96" selected>95% (z=1.96)</option><option value="2.576">99% (z=2.576)</option></select></div>
+      <div class="field"><div class="field-label">Proportion (p)</div><div class="field-desc">Use 0.5 for maximum / unknown proportion.</div><input type="number" id="c-p" value="0.5" step="0.05" min="0.01" max="0.99"></div>
+      <div class="field"><div class="field-label">Margin of Error (e)</div><input type="number" id="c-e" value="0.05" step="0.01" min="0.01" max="0.3"></div>
+      <div class="field"><div class="field-label">Population Size (N)</div><div class="field-desc">Leave blank or 0 for infinite population.</div><input type="number" id="c-N" value="0" min="0"></div>
+    </div>
+    <button class="btn-calc" onclick="calcCochran()">🧮 Calculate</button>
+    <div class="result-box" id="res-cochran"></div>
+  </div>
+</div>
+
+<footer>© 2025 Banda Sainath · <a href="index.html">← Back to Home</a></footer>
+
+<script>
+function toggleTheme(){document.body.classList.toggle('light');const b=document.querySelector('.theme-btn');b.textContent=document.body.classList.contains('light')?'🌙 Dark':'☀️ Light';}
+window.addEventListener('scroll',()=>{document.getElementById('backTop').classList.toggle('show',window.scrollY>300);});
+function switchTab(id,btn){
+  document.querySelectorAll('.calc-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.mtab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function showResult(id,html){const b=document.getElementById('res-'+id);b.innerHTML=html;b.classList.add('show');b.scrollIntoView({behavior:'smooth',block:'nearest'});}
+
+function statCard(val,key){return`<div class="result-stat"><div class="rs-val">${val}</div><div class="rs-key">${key}</div></div>`;}
+
+function calcSurvey(){
+  const N=+document.getElementById('s-N').value;
+  const z=+document.getElementById('s-conf').value;
+  const e=+document.getElementById('s-e').value;
+  const p=+document.getElementById('s-p').value;
+  const nr=+document.getElementById('s-nr').value/100;
+  const deff=+document.getElementById('s-deff').value;
+  const n0=Math.ceil((z*z*p*(1-p))/(e*e));
+  const nFPC=N>0?Math.ceil(n0/(1+(n0-1)/N)):n0;
+  const nDeff=Math.ceil(nFPC*deff);
+  const nFinal=Math.ceil(nDeff/(1-nr));
+  showResult('survey',`<div class="result-main"><div class="result-n">${nFinal}</div><div class="result-label">Required Sample Size</div></div>
+  <div class="result-grid">${statCard(n0,'Base (n₀)')+''+statCard(nFPC,'After FPC')+''+statCard(nDeff,'After DEFF')+''+statCard(Math.ceil(nFinal*nr),'Non-response buffer')+''+statCard(nFinal,'Final n')+''+statCard(((nFinal/N)*100).toFixed(1)+'%','% of Population')}</div>
+  <div class="formula-box"><strong>Formula:</strong> n₀ = Z²·p·q / e² = ${z}²×${p}×${1-p} / ${e}² = ${n0}<br>FPC applied: n = n₀/(1+(n₀-1)/N)<br>With DEFF(${deff}) & non-response(${nr*100}%): n_final = ${nFinal}</div>
+  <div class="interpret">📌 You need to survey <strong>${nFinal} respondents</strong> to estimate a proportion of ${p} within ±${(e*100).toFixed(0)}% at ${document.getElementById('s-conf').options[document.getElementById('s-conf').selectedIndex].text} confidence.</div>`);
+}
+
+function calcRCT(){
+  const mu1=+document.getElementById('r-mu1').value;
+  const delta=+document.getElementById('r-delta').value;
+  const sd=+document.getElementById('r-sd').value;
+  const za=+document.getElementById('r-alpha').value;
+  const zb=+document.getElementById('r-power').value;
+  const arms=+document.getElementById('r-arms').value;
+  const nPerArm=Math.ceil(2*sd*sd*(za+zb)*(za+zb)/(delta*delta));
+  const total=nPerArm*arms;
+  const cohen_d=(Math.abs(delta)/sd).toFixed(3);
+  showResult('rct',`<div class="result-main"><div class="result-n">${nPerArm}</div><div class="result-label">Per Arm · ${total} Total (${arms} arms)</div></div>
+  <div class="result-grid">${statCard(nPerArm,'Per Arm')+''+statCard(total,'Total N')+''+statCard(cohen_d,"Cohen's d")}</div>
+  <div class="formula-box"><strong>Formula:</strong> n = 2σ²(z_α + z_β)² / Δ²<br>= 2×${sd}²×(${za}+${zb})² / ${delta}²<br>= <strong>${nPerArm} per arm</strong></div>
+  <div class="interpret">📌 For an MDE of <strong>${delta}</strong> (Cohen's d = ${cohen_d}), you need <strong>${nPerArm} units per arm</strong> — ${total} total across ${arms} arms.</div>`);
+}
+
+function calcProp(){
+  const p1=+document.getElementById('p-p1').value;
+  const p2=+document.getElementById('p-p2').value;
+  const za=+document.getElementById('p-alpha').value;
+  const zb=+document.getElementById('p-power').value;
+  const pbar=(p1+p2)/2;
+  const n=Math.ceil((za*Math.sqrt(2*pbar*(1-pbar))+zb*Math.sqrt(p1*(1-p1)+p2*(1-p2)))**2/((p2-p1)**2));
+  showResult('proportion',`<div class="result-main"><div class="result-n">${n}</div><div class="result-label">Per Group · ${n*2} Total</div></div>
+  <div class="result-grid">${statCard(n,'Per Group')+''+statCard(n*2,'Total N')+''+statCard(Math.abs(p2-p1).toFixed(2),'Diff in proportions')}</div>
+  <div class="formula-box"><strong>Detecting:</strong> p₁=${p1} vs p₂=${p2} (Δ=${Math.abs(p2-p1).toFixed(2)})</div>
+  <div class="interpret">📌 To detect a difference of ${Math.abs(p2-p1).toFixed(2)} between adoption rates of ${p1} and ${p2}, you need <strong>${n} units per group</strong> (${n*2} total).</div>`);
+}
+
+function calcCochran(){
+  const z=+document.getElementById('c-z').value;
+  const p=+document.getElementById('c-p').value;
+  const e=+document.getElementById('c-e').value;
+  const N=+document.getElementById('c-N').value;
+  const n0=Math.ceil((z*z*p*(1-p))/(e*e));
+  const nFinal=(N>0&&N<99999)?Math.ceil(n0/(1+(n0-1)/N)):n0;
+  const fpc=N>0?'Applied':'Not applied (infinite pop.)';
+  showResult('cochran',`<div class="result-main"><div class="result-n">${nFinal}</div><div class="result-label">Cochran Sample Size</div></div>
+  <div class="result-grid">${statCard(n0,'n₀ (Cochran)')+''+statCard(nFinal,'Final n (with FPC)')+''+statCard(fpc,'FPC')}</div>
+  <div class="formula-box"><strong>Cochran (1977):</strong> n₀ = Z²·p·q / e²<br>= ${z}²×${p}×${(1-p).toFixed(2)} / ${e}² = ${n0}<br>${N>0?`FPC: n = n₀/(1+(n₀-1)/N) = ${nFinal}`:'No FPC (large/unknown population)'}</div>
+  <div class="interpret">📌 Using the Cochran formula, your required sample size is <strong>${nFinal}</strong>${N>0?' (after finite population correction for N='+N+')':''}. This is the most commonly cited formula in agri-economics dissertations.</div>`);
+}
+</script>
+</body>
+</html>
