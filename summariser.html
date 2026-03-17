@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="mxHYk3PITQRd54OTSWHV68Gr4SqV7jMlZDDD4PDqAgg" />
+<title>Paper Summariser | Banda Sainath</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-589QFCEYJX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-589QFCEYJX');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- PDF.js for PDF reading -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<!-- Mammoth for DOCX reading -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<style>
+  :root {
+    --bg: #0d1117; --bg2: #161b22; --bg3: #1c2330;
+    --accent: #3fb950; --accent2: #58a6ff; --gold: #d4a843;
+    --text: #e6edf3; --muted: #8b949e; --border: #30363d; --card: #161b22;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 18px 48px; background: rgba(13,17,23,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--gold); letter-spacing: 0.02em; text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+  .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > a { display: flex; align-items: center; gap: 4px; cursor: pointer; }
+  .nav-dropdown > a::after { content: "▾"; font-size: 0.65rem; transition: transform 0.2s; }
+  .nav-dropdown:hover > a::after { transform: rotate(180deg); }
+  .dropdown-menu { display: none; position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 6px; min-width: 180px; z-index: 200; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  .nav-dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu li { list-style: none; }
+  .dropdown-menu li a { display: block; padding: 9px 14px; font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; transition: background 0.15s, color 0.15s; white-space: nowrap; }
+  .dropdown-menu li a:hover, .dropdown-menu li a.active { background: var(--bg3); color: var(--accent); }
+
+  /* PAGE */
+  .page-wrap { max-width: 900px; margin: 0 auto; padding: 110px 48px 80px; }
+  .breadcrumb { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 32px; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb span { margin: 0 8px; }
+  .page-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent2); letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid rgba(88,166,255,0.35); padding: 5px 14px; border-radius: 2px; margin-bottom: 18px; }
+  .page-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; margin-bottom: 10px; }
+  .page-subtitle { color: var(--muted); font-size: 0.97rem; max-width: 620px; margin-bottom: 40px; }
+
+  /* TABS */
+  .tab-row { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 28px; width: fit-content; }
+  .tab-btn { font-family: 'DM Mono', monospace; font-size: 0.76rem; letter-spacing: 0.07em; text-transform: uppercase; padding: 10px 22px; background: transparent; color: var(--muted); border: none; cursor: pointer; transition: all 0.2s; border-right: 1px solid var(--border); }
+  .tab-btn:last-child { border-right: none; }
+  .tab-btn.active { background: var(--accent); color: #0d1117; font-weight: 600; }
+  .tab-btn:hover:not(.active) { background: var(--bg3); color: var(--text); }
+
+  /* INPUT AREAS */
+  .input-panel { display: none; }
+  .input-panel.active { display: block; }
+
+  .drop-zone {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 52px 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s;
+    background: var(--bg2);
+    position: relative;
+  }
+  .drop-zone:hover, .drop-zone.drag-over { border-color: var(--accent); background: rgba(63,185,80,0.04); }
+  .drop-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .drop-icon { font-size: 2.4rem; margin-bottom: 14px; }
+  .drop-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 6px; }
+  .drop-hint { font-size: 0.85rem; color: var(--muted); }
+  .drop-hint span { color: var(--accent2); }
+  .file-chosen { margin-top: 14px; font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--accent); }
+
+  textarea.paste-box {
+    width: 100%;
+    min-height: 220px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.93rem;
+    line-height: 1.7;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  textarea.paste-box:focus { border-color: var(--accent2); }
+  .char-count { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); text-align: right; margin-top: 6px; }
+
+  /* OPTIONS */
+  .options-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 22px 0; }
+  .opt-chip { font-family: 'DM Mono', monospace; font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 18px; background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; cursor: pointer; color: var(--muted); transition: all 0.2s; user-select: none; }
+  .opt-chip.selected { background: rgba(63,185,80,0.12); border-color: var(--accent); color: var(--accent); }
+  .opt-chip:hover:not(.selected) { border-color: var(--muted); color: var(--text); }
+  .options-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+
+  /* SUMMARISE BUTTON */
+  .btn-summarise {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 13px 32px;
+    background: var(--accent); color: #0d1117;
+    font-family: 'DM Mono', monospace; font-size: 0.82rem;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    border: none; border-radius: 6px; cursor: pointer;
+    font-weight: 600; transition: all 0.2s; margin-top: 6px;
+  }
+  .btn-summarise:hover { background: #56d364; transform: translateY(-1px); }
+  .btn-summarise:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .btn-summarise .spinner { width: 16px; height: 16px; border: 2px solid rgba(0,0,0,0.2); border-top-color: #0d1117; border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
+  .btn-summarise.loading .spinner { display: block; }
+  .btn-summarise.loading .btn-label { opacity: 0.7; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* OUTPUT */
+  .output-section { display: none; margin-top: 40px; }
+  .output-section.visible { display: block; }
+  .output-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .output-title { font-family: 'Playfair Display', serif; font-size: 1.35rem; }
+  .copy-btn { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); background: var(--bg2); border: 1px solid var(--border); padding: 7px 16px; border-radius: 5px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.06em; text-transform: uppercase; }
+  .copy-btn:hover { color: var(--accent2); border-color: var(--accent2); }
+
+  .summary-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin-bottom: 16px; }
+  .summary-section-title { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; }
+  .summary-text { color: var(--text); font-size: 0.95rem; line-height: 1.8; }
+  .summary-text p { margin-bottom: 10px; }
+  .summary-text ul { padding-left: 18px; }
+  .summary-text li { margin-bottom: 6px; }
+  .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .tag { font-family: 'DM Mono', monospace; font-size: 0.7rem; padding: 4px 12px; border-radius: 12px; background: rgba(88,166,255,0.1); border: 1px solid rgba(88,166,255,0.25); color: var(--accent2); }
+
+  .error-box { background: rgba(248,81,73,0.08); border: 1px solid rgba(248,81,73,0.3); border-radius: 8px; padding: 16px 20px; color: #f85149; font-size: 0.9rem; margin-top: 16px; display: none; }
+  .error-box.visible { display: block; }
+
+  footer { text-align: center; padding: 40px 48px; border-top: 1px solid var(--border); font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .page-wrap { padding: 90px 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Banda Sainath</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#publications">Publications</a></li>
+    <li class="nav-dropdown">
+      <a href="#" style="color:var(--accent);">Research Tools</a>
+      <ul class="dropdown-menu">
+        <li><a href="resources.html">📚 Resources</a></li>
+        <li><a href="methods.html">📐 Methods</a></li>
+        <li><a href="library.html">🗂 Library</a></li>
+        <li><a href="naas.html">🔢 NAAS Checker</a></li>
+        <li><a href="summariser.html" class="active">📄 Paper Summariser</a></li>
+        <li><a href="dataviz.html">📊 Data Visualiser</a></li>
+      </ul>
+    </li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="Banda_Sainath_CV.pdf" target="_blank" style="background:var(--gold);color:#0d1117;padding:6px 14px;border-radius:4px;font-weight:500;">📄 CV</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Research Tools<span>/</span>Paper Summariser</div>
+
+  <div class="page-badge">AI-Powered Tool</div>
+  <h1 class="page-title">Research Paper Summariser</h1>
+  <p class="page-subtitle">Upload a PDF or Word document, or paste text directly. Get a structured summary with objectives, methodology, key findings, and policy implications — tailored for agricultural economics research.</p>
+
+  <!-- INPUT TABS -->
+  <div class="tab-row">
+    <button class="tab-btn active" onclick="switchTab('upload', this)">📎 Upload File</button>
+    <button class="tab-btn" onclick="switchTab('paste', this)">📋 Paste Text</button>
+  </div>
+
+  <!-- UPLOAD PANEL -->
+  <div class="input-panel active" id="panel-upload">
+    <div class="drop-zone" id="dropZone">
+      <input type="file" id="fileInput" accept=".pdf,.doc,.docx" onchange="handleFileSelect(event)">
+      <div class="drop-icon">📄</div>
+      <div class="drop-title">Drop your paper here</div>
+      <div class="drop-hint">Supports <span>PDF</span> and <span>Word (.docx)</span> · Click or drag & drop</div>
+      <div class="file-chosen" id="fileChosen"></div>
+    </div>
+  </div>
+
+  <!-- PASTE PANEL -->
+  <div class="input-panel" id="panel-paste">
+    <textarea class="paste-box" id="pasteBox" placeholder="Paste your research paper text here…" oninput="updateCharCount()"></textarea>
+    <div class="char-count" id="charCount">0 characters</div>
+  </div>
+
+  <!-- SUMMARY STYLE -->
+  <div style="margin-top: 24px;">
+    <div class="options-label">Summary Style</div>
+    <div class="options-row" id="styleChips">
+      <div class="opt-chip selected" data-val="structured" onclick="selectChip(this, 'styleChips')">📋 Structured</div>
+      <div class="opt-chip" data-val="brief" onclick="selectChip(this, 'styleChips')">⚡ Brief</div>
+      <div class="opt-chip" data-val="policy" onclick="selectChip(this, 'styleChips')">🏛 Policy Focus</div>
+      <div class="opt-chip" data-val="student" onclick="selectChip(this, 'styleChips')">🎓 Student-Friendly</div>
+    </div>
+  </div>
+
+  <button class="btn-summarise" id="summariseBtn" onclick="runSummary()">
+    <div class="spinner"></div>
+    <span class="btn-label">✨ Summarise Paper</span>
+  </button>
+
+  <div class="error-box" id="errorBox"></div>
+
+  <!-- OUTPUT -->
+  <div class="output-section" id="outputSection">
+    <div class="output-header">
+      <div class="output-title">Summary</div>
+      <button class="copy-btn" onclick="copySummary()">⎘ Copy All</button>
+    </div>
+    <div id="summaryContent"></div>
+  </div>
+</div>
+
+<footer>
+  © 2025 Banda Sainath · <a href="index.html">← Back to Home</a>
+</footer>
+
+<script>
+  // ── PDF.js setup ──
+  if (typeof pdfjsLib !== 'undefined') {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  }
+
+  let extractedText = '';
+  let currentTab = 'upload';
+
+  function switchTab(tab, btn) {
+    currentTab = tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.input-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+  }
+
+  function updateCharCount() {
+    const len = document.getElementById('pasteBox').value.length;
+    document.getElementById('charCount').textContent = len.toLocaleString() + ' characters';
+  }
+
+  function selectChip(el, groupId) {
+    document.querySelectorAll(`#${groupId} .opt-chip`).forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function getSelectedStyle() {
+    const chip = document.querySelector('#styleChips .opt-chip.selected');
+    return chip ? chip.dataset.val : 'structured';
+  }
+
+  // ── Drag & drop ──
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) processFile(file);
+  });
+
+  function handleFileSelect(e) {
+    const file = e.target.files[0];
+    if (file) processFile(file);
+  }
+
+  async function processFile(file) {
+    const label = document.getElementById('fileChosen');
+    label.textContent = '⏳ Reading ' + file.name + '…';
+    extractedText = '';
+    try {
+      if (file.name.endsWith('.pdf')) {
+        extractedText = await extractPDF(file);
+      } else if (file.name.endsWith('.docx') || file.name.endsWith('.doc')) {
+        extractedText = await extractDOCX(file);
+      } else {
+        throw new Error('Unsupported file type. Please use PDF or DOCX.');
+      }
+      label.textContent = '✅ ' + file.name + ' (' + extractedText.length.toLocaleString() + ' characters extracted)';
+    } catch (err) {
+      label.textContent = '';
+      showError(err.message);
+    }
+  }
+
+  async function extractPDF(file) {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    let text = '';
+    for (let i = 1; i <= Math.min(pdf.numPages, 40); i++) {
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      text += content.items.map(s => s.str).join(' ') + '\n';
+    }
+    if (!text.trim()) throw new Error('Could not extract text from this PDF. It may be a scanned image.');
+    return text;
+  }
+
+  async function extractDOCX(file) {
+    const arrayBuffer = await file.arrayBuffer();
+    const result = await mammoth.extractRawText({ arrayBuffer });
+    if (!result.value.trim()) throw new Error('Could not extract text from this Word document.');
+    return result.value;
+  }
+
+  function showError(msg) {
+    const box = document.getElementById('errorBox');
+    box.textContent = '⚠️ ' + msg;
+    box.classList.add('visible');
+    setTimeout(() => box.classList.remove('visible'), 6000);
+  }
+
+  // ── Main summarise function ──
+  async function runSummary() {
+    let inputText = '';
+
+    if (currentTab === 'upload') {
+      if (!extractedText) { showError('Please upload a PDF or Word file first.'); return; }
+      inputText = extractedText;
+    } else {
+      inputText = document.getElementById('pasteBox').value.trim();
+      if (!inputText) { showError('Please paste some text first.'); return; }
+    }
+
+    // Trim to ~12000 chars for API context
+    const trimmed = inputText.slice(0, 12000);
+    const style = getSelectedStyle();
+
+    const styleInstructions = {
+      structured: 'Provide a detailed structured summary with clear sections.',
+      brief: 'Provide a concise 3-4 sentence executive summary, then 5 key bullet points.',
+      policy: 'Focus on policy implications, recommendations for policymakers, and real-world relevance.',
+      student: 'Explain in simple language suitable for postgraduate students new to research methodology.'
+    };
+
+    const prompt = `You are an expert agricultural economist. Summarise the following research paper text.
+
+Style: ${styleInstructions[style]}
+
+Return ONLY a JSON object (no markdown, no backticks) with this exact structure:
+{
+  "title": "detected or inferred title",
+  "authors": "detected authors or empty string",
+  "objective": "1-2 sentences on the main research objective",
+  "methodology": "2-3 sentences describing methods, data, study area",
+  "key_findings": ["finding 1", "finding 2", "finding 3", "finding 4", "finding 5"],
+  "policy_implications": "2-3 sentences on policy relevance and recommendations",
+  "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5"],
+  "one_liner": "One crisp sentence summary of the whole paper"
+}
+
+Paper text:
+${trimmed}`;
+
+    const btn = document.getElementById('summariseBtn');
+    btn.classList.add('loading');
+    btn.disabled = true;
+    document.getElementById('outputSection').classList.remove('visible');
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          messages: [{ role: 'user', content: prompt }]
+        })
+      });
+
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error?.message || 'API error');
+
+      const raw = data.content.find(b => b.type === 'text')?.text || '';
+      const clean = raw.replace(/```json|```/g, '').trim();
+      const parsed = JSON.parse(clean);
+      renderSummary(parsed);
+
+    } catch (err) {
+      showError('Summarisation failed: ' + err.message);
+    } finally {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
+  }
+
+  function renderSummary(d) {
+    const container = document.getElementById('summaryContent');
+    container.innerHTML = `
+      ${d.title ? `<div class="summary-card">
+        <div class="summary-section-title">📌 Paper</div>
+        <div class="summary-text">
+          <strong style="font-family:'Playfair Display',serif;font-size:1.1rem;">${d.title}</strong>
+          ${d.authors ? `<p style="color:var(--muted);font-size:0.88rem;margin-top:6px;">${d.authors}</p>` : ''}
+          <p style="margin-top:12px;color:var(--accent2);font-style:italic;">${d.one_liner}</p>
+        </div>
+      </div>` : ''}
+
+      <div class="summary-card">
+        <div class="summary-section-title">🎯 Objective</div>
+        <div class="summary-text"><p>${d.objective}</p></div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-section-title">🔬 Methodology</div>
+        <div class="summary-text"><p>${d.methodology}</p></div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-section-title">💡 Key Findings</div>
+        <div class="summary-text">
+          <ul>${(d.key_findings || []).map(f => `<li>${f}</li>`).join('')}</ul>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-section-title">🏛 Policy Implications</div>
+        <div class="summary-text"><p>${d.policy_implications}</p></div>
+      </div>
+
+      ${d.keywords?.length ? `<div class="summary-card" style="padding:20px 32px;">
+        <div class="summary-section-title">🏷 Keywords</div>
+        <div class="tag-row">${d.keywords.map(k => `<span class="tag">${k}</span>`).join('')}</div>
+      </div>` : ''}
+    `;
+
+    document.getElementById('outputSection').classList.add('visible');
+    document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function copySummary() {
+    const text = document.getElementById('summaryContent').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector('.copy-btn');
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => btn.textContent = '⎘ Copy All', 2000);
+    });
+  }
+</script>
+</body>
+</html>
