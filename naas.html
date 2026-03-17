@@ -6,9 +6,7 @@
 <meta name="google-site-verification" content="mxHYk3PITQRd54OTSWHV68Gr4SqV7jMlZDDD4PDqAgg" />
 <title>NAAS Score Checker 2026 | Banda Sainath</title>
 <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-589QFCEYJX">  function toggleTheme(){document.body.classList.toggle('light');const b=document.querySelector('.theme-btn');if(b)b.textContent=document.body.classList.contains('light')?'🌙 Dark':'☀️ Light';}
-  window.addEventListener('scroll',()=>{const bt=document.getElementById('backTop');if(bt)bt.classList.toggle('show',window.scrollY>300);});
-</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-589QFCEYJX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -37,7 +35,7 @@
   .nav-dropdown>a{display:flex;align-items:center;gap:4px;cursor:pointer;}
   .nav-dropdown>a::after{content:"▾";font-size:0.65rem;transition:transform 0.2s;}
   .nav-dropdown:hover>a::after{transform:rotate(180deg);}
-  .dropdown-menu{display:none;position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:6px;min-width:180px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,0.4);}
+  .dropdown-menu{display:none;position:absolute;top: 100%; padding-top: 8px;;left:50%;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:6px;min-width:180px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,0.4);}
   .nav-dropdown:hover .dropdown-menu{display:block;}
   .dropdown-menu li{list-style:none;}
   .dropdown-menu li a{display:block;padding:9px 14px;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--muted);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;border-radius:5px;transition:background 0.15s,color 0.15s;white-space:nowrap;}
@@ -531,6 +529,10 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+<script>
+  function toggleTheme(){document.body.classList.toggle('light');const b=document.querySelector('.theme-btn');if(b)b.textContent=document.body.classList.contains('light')?'🌙 Dark':'☀️ Light';}
+  window.addEventListener('scroll',()=>{const bt=document.getElementById('backTop');if(bt)bt.classList.toggle('show',window.scrollY>300);});
 </script>
 </body>
 </html>
