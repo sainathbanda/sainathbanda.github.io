@@ -6,178 +6,112 @@
 <meta name="google-site-verification" content="mxHYk3PITQRd54OTSWHV68Gr4SqV7jMlZDDD4PDqAgg" />
 <title>Data Visualiser | Banda Sainath</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-589QFCEYJX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-589QFCEYJX');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-589QFCEYJX');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-  :root {
-    --bg: #0d1117; --bg2: #161b22; --bg3: #1c2330;
-    --accent: #3fb950; --accent2: #58a6ff; --gold: #d4a843;
-    --text: #e6edf3; --muted: #8b949e; --border: #30363d;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.7; overflow-x: hidden; }
-
-  /* NAV */
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 18px 48px; background: rgba(13,17,23,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--gold); letter-spacing: 0.02em; text-decoration: none; }
-  .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
-  .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-  .nav-dropdown { position: relative; }
-  .nav-dropdown > a { display: flex; align-items: center; gap: 4px; cursor: pointer; }
-  
-  /* Bridge gap so cursor doesn't lose hover moving to dropdown */
-  .nav-dropdown > a::before {
-    content: '';
-    position: absolute;
-    bottom: -12px;
-    left: -10px;
-    right: -10px;
-    height: 20px;
-  }
-  .nav-dropdown > a::after { content: "▾"; font-size: 0.65rem; transition: transform 0.2s; }
-  .nav-dropdown:hover > a::after { transform: rotate(180deg); }
-  .dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 8px;; left: 50%; transform: translateX(-50%); background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 6px; min-width: 180px; z-index: 200; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
-  .nav-dropdown:hover .dropdown-menu { display: block; }
-  .dropdown-menu li { list-style: none; }
-  .dropdown-menu li a { display: block; padding: 9px 14px; font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 5px; transition: background 0.15s, color 0.15s; white-space: nowrap; }
-  .dropdown-menu li a:hover, .dropdown-menu li a.active { background: var(--bg3); color: var(--accent); }
-
-  /* PAGE */
-  .page-wrap { max-width: 1000px; margin: 0 auto; padding: 110px 48px 80px; }
-  .breadcrumb { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 32px; }
-  .breadcrumb a { color: var(--accent); text-decoration: none; }
-  .breadcrumb span { margin: 0 8px; }
-  .page-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid rgba(212,168,67,0.35); padding: 5px 14px; border-radius: 2px; margin-bottom: 18px; }
-  .page-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; margin-bottom: 10px; }
-  .page-subtitle { color: var(--muted); font-size: 0.97rem; max-width: 660px; margin-bottom: 40px; }
-
-  /* DATA INPUT */
-  .input-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 28px 32px; margin-bottom: 20px; }
-  .input-card-title { font-family: 'DM Mono', monospace; font-size: 0.74rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 14px; }
-
-  textarea.data-box {
-    width: 100%; min-height: 180px;
-    background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
-    padding: 16px 18px; color: var(--text); font-family: 'DM Mono', monospace;
-    font-size: 0.82rem; line-height: 1.7; resize: vertical; outline: none; transition: border-color 0.2s;
-  }
-  textarea.data-box:focus { border-color: var(--accent2); }
-
-  .data-hint { font-size: 0.8rem; color: var(--muted); margin-top: 8px; }
-  .data-hint code { font-family: 'DM Mono', monospace; background: var(--bg3); padding: 2px 6px; border-radius: 3px; font-size: 0.78rem; }
-
-  /* CHART TYPE PICKER */
-  .chart-types { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-  .chart-type-btn {
-    display: flex; flex-direction: column; align-items: center; gap: 5px;
-    padding: 14px 18px; background: var(--bg2); border: 1px solid var(--border);
-    border-radius: 10px; cursor: pointer; transition: all 0.2s; min-width: 80px;
-  }
-  .chart-type-btn:hover { border-color: var(--muted); }
-  .chart-type-btn.active { background: rgba(63,185,80,0.1); border-color: var(--accent); }
-  .chart-type-btn .ct-icon { font-size: 1.5rem; }
-  .chart-type-btn .ct-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; }
-  .chart-type-btn.active .ct-label { color: var(--accent); }
-
-  /* CONTROLS */
-  .controls-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 20px; }
-  .ctrl-group { display: flex; flex-direction: column; gap: 6px; }
-  .ctrl-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
-  input[type="text"].ctrl-input, select.ctrl-input {
-    background: var(--bg2); border: 1px solid var(--border); border-radius: 6px;
-    color: var(--text); padding: 8px 12px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; outline: none;
-    transition: border-color 0.2s; min-width: 160px;
-  }
-  input[type="text"].ctrl-input:focus, select.ctrl-input:focus { border-color: var(--accent2); }
-  select.ctrl-input option { background: var(--bg2); }
-
-  /* BUTTONS */
-  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
-  .btn-plot {
-    display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px;
-    background: var(--accent); color: #0d1117; font-family: 'DM Mono', monospace;
-    font-size: 0.8rem; letter-spacing: 0.07em; text-transform: uppercase; border: none;
-    border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.2s;
-  }
-  .btn-plot:hover { background: #56d364; transform: translateY(-1px); }
-  .btn-plot:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-  .btn-secondary {
-    display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px;
-    background: transparent; color: var(--muted); font-family: 'DM Mono', monospace;
-    font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase;
-    border: 1px solid var(--border); border-radius: 6px; cursor: pointer; transition: all 0.2s;
-  }
-  .btn-secondary:hover { border-color: var(--accent2); color: var(--accent2); }
-
-  /* CHART AREA */
-  .chart-area { display: none; background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 28px; margin-top: 8px; }
-  .chart-area.visible { display: block; }
-  .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-  .chart-title-display { font-family: 'Playfair Display', serif; font-size: 1.2rem; }
-  .download-btn {
-    font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted);
-    background: var(--bg3); border: 1px solid var(--border); padding: 7px 16px;
-    border-radius: 5px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.06em; text-transform: uppercase;
-  }
-  .download-btn:hover { color: var(--gold); border-color: var(--gold); }
-
-  .canvas-wrap { position: relative; }
-  canvas#mainChart { max-height: 420px; }
-
-  /* DATA PREVIEW TABLE */
-  .table-wrap { overflow-x: auto; margin-top: 24px; }
-  table.preview-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; font-family: 'DM Mono', monospace; }
-  .preview-table th { background: var(--bg3); color: var(--accent); padding: 8px 14px; text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid var(--border); }
-  .preview-table td { padding: 7px 14px; border-bottom: 1px solid rgba(48,54,61,0.5); color: var(--text); }
-  .preview-table tr:hover td { background: var(--bg3); }
-
-  .error-box { background: rgba(248,81,73,0.08); border: 1px solid rgba(248,81,73,0.3); border-radius: 8px; padding: 14px 18px; color: #f85149; font-size: 0.88rem; margin-top: 12px; display: none; }
-  .error-box.visible { display: block; }
-
-  /* EXAMPLES */
-  .examples-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
-  .ex-btn { font-family: 'DM Mono', monospace; font-size: 0.7rem; padding: 5px 12px; background: transparent; border: 1px solid var(--border); border-radius: 4px; color: var(--muted); cursor: pointer; transition: all 0.2s; }
-  .ex-btn:hover { border-color: var(--accent2); color: var(--accent2); }
-
-  footer { text-align: center; padding: 40px 48px; border-top: 1px solid var(--border); font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); }
-  footer a { color: var(--accent); text-decoration: none; }
-
-  @media (max-width: 768px) {
-    nav { padding: 16px 20px; }
-    .nav-links { display: none; }
-    .page-wrap { padding: 90px 20px 60px; }
-    .input-card { padding: 20px; }
-  }
-
-  body.light{--bg:#f6f8fa;--bg2:#ffffff;--bg3:#f0f2f4;--text:#1c2330;--muted:#57606a;--border:#d0d7de;}
-  body{transition:background 0.3s,color 0.3s;}
-  body.light nav{background:rgba(246,248,250,0.95);}
-  .theme-btn{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);cursor:pointer;transition:all 0.2s;}
-  .theme-btn:hover{border-color:var(--accent);color:var(--accent);}
-  .back-top{position:fixed;bottom:32px;right:32px;z-index:99;width:44px;height:44px;background:var(--accent);color:#0d1117;border:none;border-radius:50%;font-size:1.1rem;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(63,185,80,0.35);transition:all 0.2s;}
-  .back-top:hover{transform:translateY(-3px);}
-  .back-top.show{display:flex;}
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2330;--accent:#3fb950;--accent2:#58a6ff;--gold:#d4a843;--text:#e6edf3;--muted:#8b949e;--border:#30363d;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;transition:background 0.3s,color 0.3s;}
+body.light{--bg:#f6f8fa;--bg2:#ffffff;--bg3:#f0f2f4;--text:#1c2330;--muted:#57606a;--border:#d0d7de;}
+body.light nav{background:rgba(246,248,250,0.95);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;background:rgba(13,17,23,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold);letter-spacing:0.02em;text-decoration:none;}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--muted);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);}
+.nav-dropdown{position:relative;}.nav-dropdown>a{display:flex;align-items:center;gap:4px;cursor:pointer;}
+.nav-dropdown>a::before{content:'';position:absolute;bottom:-14px;left:-10px;right:-10px;height:20px;}
+.nav-dropdown>a::after{content:"▾";font-size:0.65rem;transition:transform 0.2s;}
+.nav-dropdown:hover>a::after{transform:rotate(180deg);}
+.dropdown-menu{display:none;position:absolute;top:100%;padding-top:8px;left:50%;transform:translateX(-50%);z-index:200;}
+.dropdown-menu-inner{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:6px;min-width:200px;box-shadow:0 8px 24px rgba(0,0,0,0.4);}
+.nav-dropdown:hover .dropdown-menu{display:block;}
+.dropdown-menu li{list-style:none;}
+.dropdown-menu li a{display:block;padding:9px 14px;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--muted);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;border-radius:5px;transition:background 0.15s,color 0.15s;white-space:nowrap;}
+.dropdown-menu li a:hover,.dropdown-menu li a.active{background:var(--bg3);color:var(--accent);}
+.theme-btn{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent);}
+.back-top{position:fixed;bottom:32px;right:32px;z-index:99;width:44px;height:44px;background:var(--accent);color:#0d1117;border:none;border-radius:50%;font-size:1.1rem;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(63,185,80,0.35);transition:all 0.2s;}
+.back-top:hover{transform:translateY(-3px);}.back-top.show{display:flex;}
+.page-wrap{max-width:1060px;margin:0 auto;padding:110px 48px 80px;}
+.breadcrumb{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);margin-bottom:28px;}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{margin:0 8px;}
+.page-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;border:1px solid rgba(212,168,67,0.35);padding:5px 14px;border-radius:2px;margin-bottom:18px;}
+.page-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);line-height:1.2;margin-bottom:10px;}
+.page-subtitle{color:var(--muted);font-size:0.97rem;max-width:700px;margin-bottom:36px;}
+.section-label{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;}
+.input-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:22px;}
+textarea.data-box{width:100%;min-height:150px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px 16px;color:var(--text);font-family:'DM Mono',monospace;font-size:0.82rem;line-height:1.7;resize:vertical;outline:none;transition:border-color 0.2s;}
+textarea.data-box:focus{border-color:var(--accent2);}
+.data-hint{font-size:0.8rem;color:var(--muted);margin-top:8px;}
+.data-hint code{font-family:'DM Mono',monospace;background:var(--bg3);padding:2px 6px;border-radius:3px;font-size:0.78rem;}
+.examples-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+.ex-btn{font-family:'DM Mono',monospace;font-size:0.7rem;padding:5px 12px;background:transparent;border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.ex-btn:hover{border-color:var(--accent2);color:var(--accent2);}
+.chart-group-tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
+.cg-tab{font-family:'DM Mono',monospace;font-size:0.7rem;padding:5px 14px;border:1px solid var(--border);border-radius:20px;background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s;letter-spacing:0.06em;text-transform:uppercase;}
+.cg-tab.active{border-color:var(--accent);color:var(--accent);background:rgba(63,185,80,0.08);}
+.chart-type-group{display:none;}.chart-type-group.visible{display:flex;gap:10px;flex-wrap:wrap;}
+.chart-types{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;}
+.chart-type-btn{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.2s;min-width:76px;}
+.chart-type-btn:hover{border-color:var(--muted);}
+.chart-type-btn.active{background:rgba(63,185,80,0.1);border-color:var(--accent);}
+.chart-type-btn .ct-icon{font-size:1.3rem;}
+.chart-type-btn .ct-label{font-family:'DM Mono',monospace;font-size:0.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;text-align:center;}
+.chart-type-btn.active .ct-label{color:var(--accent);}
+.controls-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-bottom:16px;}
+.ctrl-group{display:flex;flex-direction:column;gap:5px;}
+.ctrl-label{font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;}
+input[type="text"].ctrl-input,input[type="number"].ctrl-input,select.ctrl-input,input[type="color"].ctrl-input{background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:8px 12px;font-family:'DM Sans',sans-serif;font-size:0.86rem;outline:none;transition:border-color 0.2s;width:100%;}
+input[type="text"].ctrl-input:focus,select.ctrl-input:focus,input[type="number"].ctrl-input:focus{border-color:var(--accent2);}
+select.ctrl-input option{background:var(--bg2);}
+input[type="color"].ctrl-input{padding:4px 6px;height:38px;cursor:pointer;}
+.toggle-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;align-items:center;}
+.toggle-item{display:flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:0.71rem;color:var(--muted);cursor:pointer;user-select:none;}
+.toggle-item input[type="checkbox"]{accent-color:var(--accent);width:14px;height:14px;}
+.section-divider{height:1px;background:var(--border);margin:16px 0;}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;}
+.btn-plot{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--accent);color:#0d1117;font-family:'DM Mono',monospace;font-size:0.8rem;letter-spacing:0.07em;text-transform:uppercase;border:none;border-radius:6px;cursor:pointer;font-weight:600;transition:all 0.2s;}
+.btn-plot:hover{background:#56d364;transform:translateY(-1px);}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;background:transparent;color:var(--muted);font-family:'DM Mono',monospace;font-size:0.78rem;letter-spacing:0.07em;text-transform:uppercase;border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all 0.2s;}
+.btn-secondary:hover{border-color:var(--accent2);color:var(--accent2);}
+.chart-area{display:none;background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:28px;margin-top:8px;}
+.chart-area.visible{display:block;}
+.chart-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;gap:16px;flex-wrap:wrap;}
+.chart-title-display{font-family:'Playfair Display',serif;font-size:1.2rem;}
+.download-group{display:flex;gap:8px;flex-wrap:wrap;}
+.download-btn{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);background:var(--bg3);border:1px solid var(--border);padding:7px 14px;border-radius:5px;cursor:pointer;transition:all 0.2s;letter-spacing:0.06em;text-transform:uppercase;}
+.download-btn:hover{color:var(--gold);border-color:var(--gold);}
+.canvas-wrap{position:relative;}
+canvas#mainChart{width:100%!important;}
+#specialChartWrap{display:none;width:100%;}
+#specialChart{width:100%;border-radius:8px;}
+.table-wrap{overflow-x:auto;margin-top:24px;}
+table.preview-table{width:100%;border-collapse:collapse;font-size:0.85rem;font-family:'DM Mono',monospace;}
+.preview-table th{background:var(--bg3);color:var(--accent);padding:8px 14px;text-align:left;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;border-bottom:1px solid var(--border);}
+.preview-table td{padding:7px 14px;border-bottom:1px solid rgba(48,54,61,0.5);color:var(--text);}
+.preview-table tr:hover td{background:var(--bg3);}
+.error-box{background:rgba(248,81,73,0.08);border:1px solid rgba(248,81,73,0.3);border-radius:8px;padding:14px 18px;color:#f85149;font-size:0.88rem;margin-top:12px;display:none;}
+.error-box.visible{display:block;}
+.infographic-note{font-size:0.8rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:10px;padding:10px 14px;background:var(--bg3);border-radius:6px;border-left:3px solid var(--accent2);}
+footer{text-align:center;padding:40px 48px;border-top:1px solid var(--border);font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);}
+footer a{color:var(--accent);text-decoration:none;}
+@media(max-width:768px){nav{padding:16px 20px;}.nav-links{display:none;}.page-wrap{padding:90px 20px 60px;}.input-card{padding:20px;}.controls-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
-
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <nav>
   <a href="index.html" class="nav-logo">Banda Sainath</a>
   <ul class="nav-links">
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#publications">Publications</a></li>
     <li class="nav-dropdown">
-      <a href="#" style="color:var(--accent);">Research Tools</a>
-      <ul class="dropdown-menu">
+      <a href="#" style="color:var(--accent);">Research Tools ▾</a>
+      <div class="dropdown-menu"><div class="dropdown-menu-inner"><ul>
         <li><a href="resources.html">📚 Resources</a></li>
         <li><a href="methods.html">📐 Methods</a></li>
         <li><a href="library.html">🗂 Library</a></li>
@@ -187,74 +121,132 @@
         <li><a href="ideagen.html">💡 Idea Generator</a></li>
         <li><a href="samplesize.html">🧮 Sample Size Calc</a></li>
         <li><a href="indiamap.html">🗺 India Map</a></li>
-      </ul>
+      </ul></div></div>
     </li>
     <li><a href="blog.html">Blog</a></li>
     <li><a href="index.html#contact">Contact</a></li>
+    <li><button class="theme-btn" onclick="toggleTheme()">☀️ Light</button></li>
     <li><a href="Banda_Sainath_CV.pdf" target="_blank" style="background:var(--gold);color:#0d1117;padding:6px 14px;border-radius:4px;font-weight:500;">📄 CV</a></li>
   </ul>
 </nav>
 
 <div class="page-wrap">
   <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Research Tools<span>/</span>Data Visualiser</div>
-
   <div class="page-badge">Interactive Tool</div>
   <h1 class="page-title">Data Visualiser</h1>
-  <p class="page-subtitle">Paste your data in CSV or tab-separated format and instantly turn it into publication-ready charts — bar, line, scatter, pie, doughnut, radar and more.</p>
+  <p class="page-subtitle">Paste CSV data → choose from 22 chart types including infographics → customise every detail → download as editable <strong style="color:var(--accent2)">SVG</strong> (Inkscape / Illustrator / PowerPoint) or PNG.</p>
 
   <!-- DATA INPUT -->
   <div class="input-card">
-    <div class="input-card-title">📋 Paste Your Data</div>
+    <div class="section-label">📋 Paste Your Data</div>
     <textarea class="data-box" id="dataInput" placeholder="Paste CSV or tab-separated data here…
 
 Example:
 Year, Wheat Yield, Rice Yield
 2018, 3.2, 4.1
-2019, 3.5, 4.3
-2020, 3.1, 4.0
-2021, 3.8, 4.6
-2022, 4.0, 4.8"></textarea>
-    <div class="data-hint">First row = headers. Separate with <code>commas</code>, <code>tabs</code>, or <code>semicolons</code>. First column = labels (X-axis).</div>
+2019, 3.5, 4.3"></textarea>
+    <div class="data-hint">First row = headers · Separate with <code>commas</code>, <code>tabs</code>, or <code>semicolons</code> · First column = labels</div>
     <div class="examples-row">
-      <span style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);padding:5px 0;">Try examples:</span>
+      <span style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);padding:5px 0;">Load example:</span>
       <button class="ex-btn" onclick="loadExample('yield')">🌾 Crop Yields</button>
       <button class="ex-btn" onclick="loadExample('price')">💰 Price Trends</button>
       <button class="ex-btn" onclick="loadExample('share')">🥧 Market Share</button>
       <button class="ex-btn" onclick="loadExample('radar')">🕸 State Comparison</button>
+      <button class="ex-btn" onclick="loadExample('bubble')">🫧 Bubble Data</button>
+      <button class="ex-btn" onclick="loadExample('lollipop')">🍭 Rankings</button>
+      <button class="ex-btn" onclick="loadExample('gantt')">📅 Gantt</button>
+      <button class="ex-btn" onclick="loadExample('funnel')">🔻 Funnel</button>
+      <button class="ex-btn" onclick="loadExample('heatmap')">🔥 Heatmap</button>
+      <button class="ex-btn" onclick="loadExample('waterfall')">💧 Waterfall</button>
     </div>
   </div>
 
   <!-- CHART TYPE -->
-  <div class="input-card-title" style="margin-bottom:12px;">📊 Chart Type</div>
-  <div class="chart-types" id="chartTypes">
-    <div class="chart-type-btn active" data-type="bar" onclick="selectChartType(this)"><span class="ct-icon">📊</span><span class="ct-label">Bar</span></div>
-    <div class="chart-type-btn" data-type="line" onclick="selectChartType(this)"><span class="ct-icon">📈</span><span class="ct-label">Line</span></div>
-    <div class="chart-type-btn" data-type="scatter" onclick="selectChartType(this)"><span class="ct-icon">🔵</span><span class="ct-label">Scatter</span></div>
-    <div class="chart-type-btn" data-type="pie" onclick="selectChartType(this)"><span class="ct-icon">🥧</span><span class="ct-label">Pie</span></div>
-    <div class="chart-type-btn" data-type="doughnut" onclick="selectChartType(this)"><span class="ct-icon">🍩</span><span class="ct-label">Doughnut</span></div>
-    <div class="chart-type-btn" data-type="radar" onclick="selectChartType(this)"><span class="ct-icon">🕸</span><span class="ct-label">Radar</span></div>
-    <div class="chart-type-btn" data-type="polarArea" onclick="selectChartType(this)"><span class="ct-icon">🎡</span><span class="ct-label">Polar</span></div>
-    <div class="chart-type-btn" data-type="bar-horizontal" onclick="selectChartType(this)"><span class="ct-icon">📉</span><span class="ct-label">Horiz. Bar</span></div>
+  <div class="section-label" style="margin-bottom:10px;">📊 Chart Type</div>
+  <div class="chart-group-tabs">
+    <button class="cg-tab active" onclick="switchGroup(this,'standard')">Standard</button>
+    <button class="cg-tab" onclick="switchGroup(this,'advanced')">Advanced</button>
+    <button class="cg-tab" onclick="switchGroup(this,'infographic')">Infographic</button>
+    <button class="cg-tab" onclick="switchGroup(this,'special')">Special</button>
+  </div>
+  <div class="chart-types" style="margin-bottom:22px;">
+    <div class="chart-type-group visible" id="grp-standard">
+      <div class="chart-type-btn active" data-type="bar" onclick="selectChartType(this)"><span class="ct-icon">📊</span><span class="ct-label">Bar</span></div>
+      <div class="chart-type-btn" data-type="bar-horizontal" onclick="selectChartType(this)"><span class="ct-icon">📉</span><span class="ct-label">Horiz Bar</span></div>
+      <div class="chart-type-btn" data-type="bar-stacked" onclick="selectChartType(this)"><span class="ct-icon">🏗</span><span class="ct-label">Stacked</span></div>
+      <div class="chart-type-btn" data-type="bar-stacked-100" onclick="selectChartType(this)"><span class="ct-icon">📐</span><span class="ct-label">100% Stack</span></div>
+      <div class="chart-type-btn" data-type="line" onclick="selectChartType(this)"><span class="ct-icon">📈</span><span class="ct-label">Line</span></div>
+      <div class="chart-type-btn" data-type="line-area" onclick="selectChartType(this)"><span class="ct-icon">🏔</span><span class="ct-label">Area</span></div>
+      <div class="chart-type-btn" data-type="pie" onclick="selectChartType(this)"><span class="ct-icon">🥧</span><span class="ct-label">Pie</span></div>
+      <div class="chart-type-btn" data-type="doughnut" onclick="selectChartType(this)"><span class="ct-icon">🍩</span><span class="ct-label">Doughnut</span></div>
+    </div>
+    <div class="chart-type-group" id="grp-advanced">
+      <div class="chart-type-btn" data-type="radar" onclick="selectChartType(this)"><span class="ct-icon">🕸</span><span class="ct-label">Radar</span></div>
+      <div class="chart-type-btn" data-type="polarArea" onclick="selectChartType(this)"><span class="ct-icon">🎡</span><span class="ct-label">Polar</span></div>
+      <div class="chart-type-btn" data-type="scatter" onclick="selectChartType(this)"><span class="ct-icon">🔵</span><span class="ct-label">Scatter</span></div>
+      <div class="chart-type-btn" data-type="bubble" onclick="selectChartType(this)"><span class="ct-icon">🫧</span><span class="ct-label">Bubble</span></div>
+      <div class="chart-type-btn" data-type="lollipop" onclick="selectChartType(this)"><span class="ct-icon">🍭</span><span class="ct-label">Lollipop</span></div>
+      <div class="chart-type-btn" data-type="histogram" onclick="selectChartType(this)"><span class="ct-icon">📶</span><span class="ct-label">Histogram</span></div>
+      <div class="chart-type-btn" data-type="slope" onclick="selectChartType(this)"><span class="ct-icon">↗</span><span class="ct-label">Slope</span></div>
+      <div class="chart-type-btn" data-type="diverging" onclick="selectChartType(this)"><span class="ct-icon">⇔</span><span class="ct-label">Diverging</span></div>
+    </div>
+    <div class="chart-type-group" id="grp-infographic">
+      <div class="chart-type-btn" data-type="waffle" onclick="selectChartType(this)"><span class="ct-icon">🧇</span><span class="ct-label">Waffle</span></div>
+      <div class="chart-type-btn" data-type="treemap" onclick="selectChartType(this)"><span class="ct-icon">🗂</span><span class="ct-label">Treemap</span></div>
+      <div class="chart-type-btn" data-type="pictogram" onclick="selectChartType(this)"><span class="ct-icon">👤</span><span class="ct-label">Pictogram</span></div>
+      <div class="chart-type-btn" data-type="dot-strip" onclick="selectChartType(this)"><span class="ct-icon">⋮</span><span class="ct-label">Dot Strip</span></div>
+      <div class="chart-type-btn" data-type="radial-bar" onclick="selectChartType(this)"><span class="ct-icon">🎯</span><span class="ct-label">Radial Bar</span></div>
+      <div class="chart-type-btn" data-type="bullet" onclick="selectChartType(this)"><span class="ct-icon">🎯</span><span class="ct-label">Bullet</span></div>
+    </div>
+    <div class="chart-type-group" id="grp-special">
+      <div class="chart-type-btn" data-type="gantt" onclick="selectChartType(this)"><span class="ct-icon">📅</span><span class="ct-label">Gantt</span></div>
+      <div class="chart-type-btn" data-type="funnel" onclick="selectChartType(this)"><span class="ct-icon">🔻</span><span class="ct-label">Funnel</span></div>
+      <div class="chart-type-btn" data-type="heatmap" onclick="selectChartType(this)"><span class="ct-icon">🔥</span><span class="ct-label">Heatmap</span></div>
+      <div class="chart-type-btn" data-type="waterfall" onclick="selectChartType(this)"><span class="ct-icon">💧</span><span class="ct-label">Waterfall</span></div>
+      <div class="chart-type-btn" data-type="timeline" onclick="selectChartType(this)"><span class="ct-icon">⏱</span><span class="ct-label">Timeline</span></div>
+    </div>
   </div>
 
-  <!-- CONTROLS -->
-  <div class="controls-row">
+  <!-- CUSTOMISE -->
+  <div class="section-label" style="margin-bottom:12px;">🎨 Customise</div>
+  <div class="controls-grid">
     <div class="ctrl-group">
       <div class="ctrl-label">Chart Title</div>
-      <input type="text" class="ctrl-input" id="chartTitleInput" placeholder="e.g. Crop Yield Trends 2018–2022">
+      <input type="text" class="ctrl-input" id="chartTitleInput" placeholder="e.g. Crop Yield Trends">
+    </div>
+    <div class="ctrl-group">
+      <div class="ctrl-label">X-Axis Label</div>
+      <input type="text" class="ctrl-input" id="xAxisLabel" placeholder="e.g. Year">
+    </div>
+    <div class="ctrl-group">
+      <div class="ctrl-label">Y-Axis Label</div>
+      <input type="text" class="ctrl-input" id="yAxisLabel" placeholder="e.g. Yield (t/ha)">
+    </div>
+    <div class="ctrl-group">
+      <div class="ctrl-label">Annotation Text</div>
+      <input type="text" class="ctrl-input" id="annotationText" placeholder="e.g. Policy change in 2020">
     </div>
     <div class="ctrl-group">
       <div class="ctrl-label">Color Palette</div>
-      <select class="ctrl-input" id="paletteSelect">
+      <select class="ctrl-input" id="paletteSelect" onchange="onPaletteChange()">
         <option value="green">🌿 Research Green</option>
         <option value="blue">🔵 Ocean Blue</option>
         <option value="gold">🌕 Harvest Gold</option>
         <option value="multi">🌈 Multi-Color</option>
+        <option value="red">🔴 Crimson Red</option>
+        <option value="purple">🟣 Academic Purple</option>
+        <option value="teal">🩵 Teal / Cyan</option>
+        <option value="earth">🌍 Earth Tones</option>
         <option value="mono">⬜ Monochrome</option>
+        <option value="custom">🖌 Custom Color</option>
       </select>
     </div>
+    <div class="ctrl-group" id="customColorGroup" style="display:none;">
+      <div class="ctrl-label">Custom Color</div>
+      <input type="color" class="ctrl-input" id="customColor" value="#3fb950">
+    </div>
     <div class="ctrl-group">
-      <div class="ctrl-label">Legend</div>
+      <div class="ctrl-label">Legend Position</div>
       <select class="ctrl-input" id="legendPos">
         <option value="top">Top</option>
         <option value="bottom">Bottom</option>
@@ -263,278 +255,728 @@ Year, Wheat Yield, Rice Yield
         <option value="false">Hidden</option>
       </select>
     </div>
+    <div class="ctrl-group">
+      <div class="ctrl-label">Font Size</div>
+      <select class="ctrl-input" id="fontSize">
+        <option value="10">Small (10px)</option>
+        <option value="12" selected>Medium (12px)</option>
+        <option value="14">Large (14px)</option>
+        <option value="16">X-Large (16px)</option>
+      </select>
+    </div>
+    <div class="ctrl-group">
+      <div class="ctrl-label">Chart Height</div>
+      <select class="ctrl-input" id="chartHeight">
+        <option value="300">Compact (300px)</option>
+        <option value="420" selected>Standard (420px)</option>
+        <option value="560">Tall (560px)</option>
+        <option value="700">Full (700px)</option>
+      </select>
+    </div>
+    <div class="ctrl-group">
+      <div class="ctrl-label">Aspect Ratio</div>
+      <select class="ctrl-input" id="aspectRatio">
+        <option value="auto" selected>Auto</option>
+        <option value="1.6">Landscape 16:10</option>
+        <option value="1.33">Landscape 4:3</option>
+        <option value="1">Square 1:1</option>
+        <option value="0.75">Portrait 3:4</option>
+      </select>
+    </div>
+    <div class="ctrl-group">
+      <div class="ctrl-label">Bar Border Radius</div>
+      <input type="number" class="ctrl-input" id="barRadius" value="4" min="0" max="30">
+    </div>
+    <div class="ctrl-group">
+      <div class="ctrl-label">Border Width (px)</div>
+      <input type="number" class="ctrl-input" id="borderWidth" value="1" min="0" max="6">
+    </div>
+    <div class="ctrl-group">
+      <div class="ctrl-label">Fill Opacity (%)</div>
+      <input type="number" class="ctrl-input" id="fillOpacity" value="60" min="10" max="100">
+    </div>
+    <div class="ctrl-group">
+      <div class="ctrl-label">Line Smoothing</div>
+      <select class="ctrl-input" id="lineTension">
+        <option value="0">Straight</option>
+        <option value="0.3" selected>Smooth</option>
+        <option value="0.5">Very Smooth</option>
+      </select>
+    </div>
+    <div class="ctrl-group">
+      <div class="ctrl-label">Point Style</div>
+      <select class="ctrl-input" id="pointStyle">
+        <option value="circle">Circle</option>
+        <option value="rect">Square</option>
+        <option value="triangle">Triangle</option>
+        <option value="star">Star</option>
+        <option value="cross">Cross</option>
+        <option value="false">None</option>
+      </select>
+    </div>
+    <div class="ctrl-group">
+      <div class="ctrl-label">Point Size (px)</div>
+      <input type="number" class="ctrl-input" id="pointSize" value="5" min="2" max="20">
+    </div>
+    <div class="ctrl-group">
+      <div class="ctrl-label">Grid Style</div>
+      <select class="ctrl-input" id="gridStyle">
+        <option value="dashed">Dashed</option>
+        <option value="solid">Solid</option>
+        <option value="dotted">Dotted</option>
+        <option value="none">None</option>
+      </select>
+    </div>
+    <div class="ctrl-group">
+      <div class="ctrl-label">Background</div>
+      <select class="ctrl-input" id="bgColorMode">
+        <option value="dark">Dark (#0d1117)</option>
+        <option value="panel">Panel (#161b22)</option>
+        <option value="white">White</option>
+        <option value="transparent">Transparent</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="toggle-row">
+    <label class="toggle-item"><input type="checkbox" id="showGridX" checked> X Grid</label>
+    <label class="toggle-item"><input type="checkbox" id="showGridY" checked> Y Grid</label>
+    <label class="toggle-item"><input type="checkbox" id="showDataLabels"> Data Labels</label>
+    <label class="toggle-item"><input type="checkbox" id="fillArea"> Fill Area</label>
+    <label class="toggle-item"><input type="checkbox" id="showAnnotation"> Show Annotation</label>
+    <label class="toggle-item"><input type="checkbox" id="animateOn" checked> Animate</label>
+    <label class="toggle-item"><input type="checkbox" id="showTrendline"> Trendline</label>
+    <label class="toggle-item"><input type="checkbox" id="showAvgLine"> Avg Line</label>
   </div>
 
   <div class="btn-row">
     <button class="btn-plot" onclick="plotData()">📊 Plot Chart</button>
     <button class="btn-secondary" onclick="clearAll()">✕ Clear</button>
   </div>
-
   <div class="error-box" id="errorBox"></div>
 
   <!-- CHART OUTPUT -->
   <div class="chart-area" id="chartArea">
     <div class="chart-header">
       <div class="chart-title-display" id="chartTitleDisplay"></div>
-      <button class="download-btn" onclick="downloadChart()">⬇ Download PNG</button>
+      <div class="download-group">
+        <button class="download-btn" onclick="downloadSVG()" title="Editable in Inkscape, Illustrator, PowerPoint">⬇ SVG (Editable)</button>
+        <button class="download-btn" onclick="downloadPNG()">⬇ PNG</button>
+      </div>
     </div>
-    <div class="canvas-wrap">
-      <canvas id="mainChart"></canvas>
-    </div>
+    <div class="canvas-wrap" id="canvasWrap"><canvas id="mainChart"></canvas></div>
+    <div id="specialChartWrap"><canvas id="specialChart"></canvas></div>
+    <div class="infographic-note" id="infoNote" style="display:none;"></div>
     <div class="table-wrap" id="tableWrap"></div>
   </div>
 </div>
 
-<footer>
-  © 2025 Banda Sainath · <a href="index.html">← Back to Home</a>
-</footer>
+<footer>© 2025 Banda Sainath · <a href="index.html">← Back to Home</a></footer>
 
 <script>
-  let chartInstance = null;
-  let selectedChartType = 'bar';
+function toggleTheme(){document.body.classList.toggle('light');var b=document.querySelector('.theme-btn');if(b)b.textContent=document.body.classList.contains('light')?'🌙 Dark':'☀️ Light';}
+window.addEventListener('scroll',function(){var bt=document.getElementById('backTop');if(bt)bt.classList.toggle('show',window.scrollY>300);});
 
-  const PALETTES = {
-    green:  ['#3fb950','#56d364','#2ea043','#26a641','#39d353','#a5f3a0','#196c2e','#0e4429'],
-    blue:   ['#58a6ff','#79c0ff','#388bfd','#1f6feb','#cae8ff','#a5d6ff','#0d419d','#0550ae'],
-    gold:   ['#d4a843','#e3b94a','#c49030','#f0c04a','#ffd700','#b8860b','#daa520','#8b6914'],
-    multi:  ['#3fb950','#58a6ff','#d4a843','#f85149','#bc8cff','#39c5cf','#ff9966','#a5f3a0'],
-    mono:   ['#e6edf3','#b1bac4','#8b949e','#6e7681','#484f58','#30363d','#21262d','#161b22'],
-  };
+function switchGroup(tab,grp){
+  document.querySelectorAll('.cg-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  document.querySelectorAll('.chart-type-group').forEach(g=>g.classList.remove('visible'));
+  document.getElementById('grp-'+grp).classList.add('visible');
+}
 
-  const EXAMPLES = {
-    yield: `Year,Wheat Yield (t/ha),Rice Yield (t/ha),Maize Yield (t/ha)
-2018,3.2,4.1,2.8
-2019,3.5,4.3,3.0
-2020,3.1,4.0,2.6
-2021,3.8,4.6,3.3
-2022,4.0,4.8,3.6`,
-    price: `Month,Wheat Price (₹/qt),Rice Price (₹/qt)
-Jan 2023,2100,3200
-Apr 2023,2250,3350
-Jul 2023,2180,3400
-Oct 2023,2300,3500
-Jan 2024,2400,3600
-Apr 2024,2350,3650`,
-    share: `State,Market Share (%)
-Punjab,28
-Haryana,18
-UP,22
-MP,14
-Rajasthan,10
-Others,8`,
-    radar: `State,Irrigation (%),Mechanisation,Credit Access,Market Access,Storage
-Punjab,98,85,78,90,72
-Haryana,87,80,74,85,68
-UP,72,60,58,70,50
-Bihar,58,42,44,55,38
-MP,65,55,50,62,45`,
-  };
+let chartInstance=null, selectedChartType='bar', lastParsed=null;
 
-  function loadExample(key) {
-    document.getElementById('dataInput').value = EXAMPLES[key];
-    const titles = { yield:'Crop Yield Trends (t/ha)', price:'Cereal Price Trends (₹/quintal)', share:'State-wise Market Share (%)', radar:'State Agricultural Development Index' };
-    document.getElementById('chartTitleInput').value = titles[key];
-    if (key === 'share') selectChartTypeByVal('doughnut');
-    else if (key === 'radar') selectChartTypeByVal('radar');
-    else selectChartTypeByVal('bar');
-  }
+const PALETTES={
+  green:['#3fb950','#56d364','#2ea043','#26a641','#39d353','#a5f3a0','#196c2e','#0e4429'],
+  blue:['#58a6ff','#79c0ff','#388bfd','#1f6feb','#cae8ff','#a5d6ff','#0d419d','#0550ae'],
+  gold:['#d4a843','#e3b94a','#c49030','#f0c04a','#ffd700','#b8860b','#daa520','#8b6914'],
+  multi:['#3fb950','#58a6ff','#d4a843','#f85149','#bc8cff','#39c5cf','#ff9966','#a5f3a0'],
+  red:['#f85149','#ff7b72','#da3633','#b91c1c','#fca5a5','#ef4444','#991b1b','#7f1d1d'],
+  purple:['#bc8cff','#d2a8ff','#a371f7','#8957e5','#6e40c9','#553098','#3b1f87','#271178'],
+  teal:['#39c5cf','#56d4de','#22b3bd','#0e8a94','#a5f3fc','#67e8f9','#06b6d4','#0891b2'],
+  earth:['#c49030','#8b6914','#a0522d','#8b4513','#d2691e','#cd853f','#deb887','#f4a460'],
+  mono:['#e6edf3','#b1bac4','#8b949e','#6e7681','#484f58','#30363d','#21262d','#161b22'],
+};
 
-  function selectChartType(el) {
-    document.querySelectorAll('.chart-type-btn').forEach(b => b.classList.remove('active'));
-    el.classList.add('active');
-    selectedChartType = el.dataset.type;
-  }
+const EXAMPLES={
+  yield:`Year,Wheat Yield (t/ha),Rice Yield (t/ha),Maize Yield (t/ha)\n2018,3.2,4.1,2.8\n2019,3.5,4.3,3.0\n2020,3.1,4.0,2.6\n2021,3.8,4.6,3.3\n2022,4.0,4.8,3.6`,
+  price:`Month,Wheat Price (Rs/qt),Rice Price (Rs/qt)\nJan 2023,2100,3200\nApr 2023,2250,3350\nJul 2023,2180,3400\nOct 2023,2300,3500\nJan 2024,2400,3600`,
+  share:`State,Market Share (%)\nPunjab,28\nHaryana,18\nUP,22\nMP,14\nRajasthan,10\nOthers,8`,
+  radar:`State,Irrigation (%),Mechanisation,Credit Access,Market Access,Storage\nPunjab,98,85,78,90,72\nHaryana,87,80,74,85,68\nUP,72,60,58,70,50\nBihar,58,42,44,55,38\nMP,65,55,50,62,45`,
+  bubble:`Label,X (Irrigation %),Y (Yield),Size (Area)\nPunjab,85,4.2,120\nHaryana,78,3.8,95\nUP,62,3.1,180\nBihar,44,2.5,140\nMP,55,3.4,130`,
+  lollipop:`State,Score\nPunjab,92\nHaryana,87\nTamil Nadu,83\nGujarat,79\nMaharashtra,76\nAndhra Pradesh,71\nKarnataka,68\nUP,62\nBihar,54\nOdisha,49`,
+  gantt:`Task,Start,End\nLiterature Review,1,3\nField Survey,2,5\nData Collection,4,7\nData Analysis,6,9\nDraft Writing,8,11\nRevision,10,12`,
+  funnel:`Stage,Count\nAwareness,10000\nInterest,7500\nConsideration,4200\nIntent,2100\nPurchase,850\nLoyalty,320`,
+  heatmap:`Month,Punjab,Haryana,UP,Bihar,MP\nJan,2.1,1.8,1.5,1.2,1.0\nFeb,2.3,2.0,1.7,1.4,1.2\nMar,3.5,3.1,2.8,2.3,2.0\nApr,4.2,3.8,3.4,2.9,2.6\nMay,3.8,3.5,3.1,2.7,2.3\nJun,1.2,1.0,0.9,0.8,0.7`,
+  waterfall:`Category,Value\nStarting Revenue,500\nCrop Sales,+280\nLivestock,+120\nInput Costs,-180\nLabour,-90\nIrrigation,-45\nNet Income,585`,
+};
 
-  function selectChartTypeByVal(val) {
-    document.querySelectorAll('.chart-type-btn').forEach(b => {
-      b.classList.remove('active');
-      if (b.dataset.type === val) b.classList.add('active');
+function loadExample(key){
+  document.getElementById('dataInput').value=EXAMPLES[key];
+  const titles={yield:'Crop Yield Trends (t/ha)',price:'Cereal Price Trends (Rs/quintal)',share:'State-wise Market Share (%)',radar:'Agricultural Development Index',bubble:'State Agricultural Indicators',lollipop:'State Development Score Ranking',gantt:'Research Project Timeline',funnel:'Agricultural Value Chain Funnel',heatmap:'Monthly Crop Production Index',waterfall:'Farm Income Waterfall (₹000)'};
+  document.getElementById('chartTitleInput').value=titles[key]||'';
+  const types={yield:'bar',price:'line',share:'doughnut',radar:'radar',bubble:'bubble',lollipop:'lollipop',gantt:'gantt',funnel:'funnel',heatmap:'heatmap',waterfall:'waterfall'};
+  selectChartTypeByVal(types[key]||'bar');
+}
+
+function onPaletteChange(){document.getElementById('customColorGroup').style.display=document.getElementById('paletteSelect').value==='custom'?'flex':'none';}
+
+function selectChartType(el){
+  document.querySelectorAll('.chart-type-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  selectedChartType=el.dataset.type;
+}
+
+function selectChartTypeByVal(val){
+  document.querySelectorAll('.chart-type-btn').forEach(b=>{b.classList.remove('active');if(b.dataset.type===val)b.classList.add('active');});
+  selectedChartType=val;
+  const grpMap={bar:'standard','bar-horizontal':'standard','bar-stacked':'standard','bar-stacked-100':'standard',line:'standard','line-area':'standard',pie:'standard',doughnut:'standard',radar:'advanced',polarArea:'advanced',scatter:'advanced',bubble:'advanced',lollipop:'advanced',histogram:'advanced',slope:'advanced',diverging:'advanced',waffle:'infographic',treemap:'infographic',pictogram:'infographic','dot-strip':'infographic','radial-bar':'infographic',bullet:'infographic',gantt:'special',funnel:'special',heatmap:'special',waterfall:'special',timeline:'special'};
+  const grp=grpMap[val]||'standard';
+  const gs=['standard','advanced','infographic','special'];
+  document.querySelectorAll('.cg-tab').forEach((t,i)=>t.classList.toggle('active',gs[i]===grp));
+  document.querySelectorAll('.chart-type-group').forEach(g=>g.classList.remove('visible'));
+  document.getElementById('grp-'+grp).classList.add('visible');
+}
+
+function showError(msg){const box=document.getElementById('errorBox');box.textContent='Warning: '+msg;box.classList.add('visible');setTimeout(()=>box.classList.remove('visible'),6000);}
+
+function parseData(raw){
+  const lines=raw.trim().split('\n').filter(l=>l.trim());
+  if(lines.length<2)throw new Error('Need at least a header row and one data row.');
+  const sep=raw.includes('\t')?'\t':raw.includes(';')?';':',';
+  const headers=lines[0].split(sep).map(h=>h.trim().replace(/^"|"$/g,''));
+  const rows=lines.slice(1).map(l=>l.split(sep).map(c=>c.trim().replace(/^"|"$/g,'')));
+  const labels=rows.map(r=>r[0]);
+  const datasets=[];
+  for(let c=1;c<headers.length;c++){datasets.push({label:headers[c],data:rows.map(r=>parseFloat(r[c])||0)});}
+  return{labels,datasets,headers,rows};
+}
+
+function getColors(paletteName,count,alpha){
+  if(alpha===undefined)alpha=1;
+  let base;
+  if(paletteName==='custom'){
+    const hex=document.getElementById('customColor').value;
+    const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+    base=Array.from({length:8},(_,i)=>{const f=1-i*0.1;return '#'+[r,g,b].map(v=>Math.max(0,Math.round(v*f)).toString(16).padStart(2,'0')).join('');});
+  }else{base=PALETTES[paletteName]||PALETTES.multi;}
+  return Array.from({length:count},(_,i)=>{const hex=base[i%base.length];const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return `rgba(${r},${g},${b},${alpha})`;});
+}
+
+function getBGColor(){return{dark:'#0d1117',panel:'#161b22',white:'#ffffff',transparent:'transparent'}[document.getElementById('bgColorMode').value]||'#0d1117';}
+
+function getGridDash(style){return{dashed:[4,4],solid:[],dotted:[2,2],none:[]}[style]||[4,4];}
+
+const dataLabelPlugin={id:'dataLabels',afterDatasetsDraw(chart){
+  if(!document.getElementById('showDataLabels').checked)return;
+  const ctx=chart.ctx;
+  chart.data.datasets.forEach((ds,i)=>{
+    const meta=chart.getDatasetMeta(i);
+    if(meta.hidden)return;
+    meta.data.forEach((el,idx)=>{
+      const v=ds.data[idx];if(v==null)return;
+      ctx.fillStyle='#e6edf3';ctx.font=`${document.getElementById('fontSize').value}px DM Sans`;ctx.textAlign='center';ctx.textBaseline='bottom';
+      const p=el.tooltipPosition();ctx.fillText(typeof v==='object'?v.y:v,p.x,p.y-4);
     });
-    selectedChartType = val;
-  }
+  });
+}};
+Chart.register(dataLabelPlugin);
 
-  function showError(msg) {
-    const box = document.getElementById('errorBox');
-    box.textContent = '⚠️ ' + msg;
-    box.classList.add('visible');
-    setTimeout(() => box.classList.remove('visible'), 5000);
-  }
+const SPECIAL_TYPES=['waffle','treemap','pictogram','lollipop','histogram','diverging','dot-strip','slope','radial-bar','bullet','gantt','funnel','heatmap','waterfall','timeline'];
 
-  function parseData(raw) {
-    const lines = raw.trim().split('\n').filter(l => l.trim());
-    if (lines.length < 2) throw new Error('Need at least a header row and one data row.');
+function plotData(){
+  const raw=document.getElementById('dataInput').value.trim();
+  if(!raw){showError('Please paste some data first.');return;}
+  let parsed;try{parsed=parseData(raw);}catch(e){showError(e.message);return;}
+  lastParsed=parsed;
+  const palette=document.getElementById('paletteSelect').value;
+  const legendPos=document.getElementById('legendPos').value;
+  const chartTitle=document.getElementById('chartTitleInput').value.trim()||'Chart';
+  const fSize=parseInt(document.getElementById('fontSize').value);
+  const height=parseInt(document.getElementById('chartHeight').value);
+  const barRadius=parseInt(document.getElementById('barRadius').value)||0;
+  const lineTension=parseFloat(document.getElementById('lineTension').value);
+  const fillArea=document.getElementById('fillArea').checked;
+  const showGridX=document.getElementById('showGridX').checked;
+  const showGridY=document.getElementById('showGridY').checked;
+  const animate=document.getElementById('animateOn').checked;
+  const xLabel=document.getElementById('xAxisLabel').value.trim();
+  const yLabel=document.getElementById('yAxisLabel').value.trim();
+  const pStyle=document.getElementById('pointStyle').value;
+  const pSize=parseInt(document.getElementById('pointSize').value)||5;
+  const bw=parseInt(document.getElementById('borderWidth').value)||1;
+  const fillOp=parseInt(document.getElementById('fillOpacity').value)/100||0.6;
+  const gridDash=getGridDash(document.getElementById('gridStyle').value);
+  const ar=document.getElementById('aspectRatio').value;
+  const infoNote=document.getElementById('infoNote');
+  const mainWrap=document.getElementById('canvasWrap');
+  const specWrap=document.getElementById('specialChartWrap');
+  infoNote.style.display='none';
 
-    const sep = raw.includes('\t') ? '\t' : raw.includes(';') ? ';' : ',';
-    const headers = lines[0].split(sep).map(h => h.trim().replace(/^"|"$/g, ''));
-    const rows = lines.slice(1).map(l => l.split(sep).map(c => c.trim().replace(/^"|"$/g, '')));
-
-    const labels = rows.map(r => r[0]);
-    const datasets = [];
-    for (let c = 1; c < headers.length; c++) {
-      datasets.push({
-        label: headers[c],
-        data: rows.map(r => parseFloat(r[c]) || 0)
-      });
-    }
-    return { labels, datasets, headers, rows };
-  }
-
-  function getColors(palette, count, alpha = 1) {
-    const base = PALETTES[palette] || PALETTES.multi;
-    return Array.from({ length: count }, (_, i) => {
-      const hex = base[i % base.length];
-      const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
-      return `rgba(${r},${g},${b},${alpha})`;
-    });
-  }
-
-  function plotData() {
-    const raw = document.getElementById('dataInput').value.trim();
-    if (!raw) { showError('Please paste some data first.'); return; }
-
-    let parsed;
-    try { parsed = parseData(raw); } catch(e) { showError(e.message); return; }
-
-    const palette = document.getElementById('paletteSelect').value;
-    const legendPos = document.getElementById('legendPos').value;
-    const chartTitle = document.getElementById('chartTitleInput').value.trim() || 'Chart';
-    const isHoriz = selectedChartType === 'bar-horizontal';
-    const chartType = isHoriz ? 'bar' : selectedChartType;
-    const isPie = ['pie','doughnut','polarArea'].includes(chartType);
-    const isRadar = chartType === 'radar';
-
-    // Destroy previous
-    if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
-
-    const colors = getColors(palette, isPie ? parsed.labels.length : parsed.datasets.length);
-    const colorsAlpha = getColors(palette, isPie ? parsed.labels.length : parsed.datasets.length, 0.75);
-
-    let chartDatasets;
-    if (isPie || isRadar) {
-      if (isPie) {
-        chartDatasets = [{
-          label: parsed.datasets[0]?.label || 'Value',
-          data: parsed.datasets[0]?.data || [],
-          backgroundColor: colors,
-          borderColor: colors.map(c => c.replace(/[\d.]+\)$/, '1)')),
-          borderWidth: 2,
-        }];
-      } else {
-        chartDatasets = parsed.datasets.map((ds, i) => ({
-          label: ds.label,
-          data: ds.data,
-          backgroundColor: getColors(palette, parsed.datasets.length, 0.25)[i],
-          borderColor: getColors(palette, parsed.datasets.length)[i],
-          borderWidth: 2,
-          pointBackgroundColor: getColors(palette, parsed.datasets.length)[i],
-        }));
-      }
-    } else {
-      chartDatasets = parsed.datasets.map((ds, i) => ({
-        label: ds.label,
-        data: ds.data,
-        backgroundColor: chartType === 'line' ? colorsAlpha[i] : colors[i],
-        borderColor: colors[i],
-        borderWidth: chartType === 'line' ? 2.5 : 1,
-        fill: chartType === 'line' ? false : undefined,
-        tension: chartType === 'line' ? 0.35 : undefined,
-        pointRadius: chartType === 'line' ? 5 : undefined,
-        pointHoverRadius: chartType === 'line' ? 7 : undefined,
-      }));
-    }
-
-    const ctx = document.getElementById('mainChart').getContext('2d');
-    const gridColor = 'rgba(48,54,61,0.6)';
-    const textColor = '#8b949e';
-
-    chartInstance = new Chart(ctx, {
-      type: chartType,
-      data: {
-        labels: isPie || isRadar ? (isPie ? parsed.labels : parsed.datasets[0] ? parsed.labels.slice() : []) : parsed.labels,
-        datasets: chartDatasets,
-      },
-      options: {
-        indexAxis: isHoriz ? 'y' : 'x',
-        responsive: true,
-        maintainAspectRatio: true,
-        plugins: {
-          legend: {
-            display: legendPos !== 'false',
-            position: legendPos !== 'false' ? legendPos : 'top',
-            labels: { color: textColor, font: { family: 'DM Sans', size: 12 }, padding: 16, usePointStyle: true }
-          },
-          tooltip: {
-            backgroundColor: '#1c2330',
-            borderColor: '#30363d',
-            borderWidth: 1,
-            titleColor: '#e6edf3',
-            bodyColor: '#8b949e',
-            padding: 12,
-            titleFont: { family: 'DM Mono', size: 12 },
-            bodyFont: { family: 'DM Sans', size: 13 },
-          }
-        },
-        scales: (isPie || isRadar) ? (isRadar ? {
-          r: {
-            grid: { color: gridColor },
-            ticks: { color: textColor, font: { family: 'DM Mono', size: 10 }, backdropColor: 'transparent' },
-            pointLabels: { color: textColor, font: { family: 'DM Sans', size: 12 } },
-          }
-        } : {}) : {
-          x: {
-            grid: { color: isHoriz ? 'rgba(48,54,61,0.4)' : 'transparent', drawBorder: false },
-            ticks: { color: textColor, font: { family: 'DM Mono', size: 11 } },
-          },
-          y: {
-            grid: { color: isHoriz ? 'transparent' : 'rgba(48,54,61,0.4)', drawBorder: false },
-            ticks: { color: textColor, font: { family: 'DM Mono', size: 11 } },
-          }
-        },
-        animation: { duration: 700, easing: 'easeOutQuart' }
-      }
-    });
-
-    // Title
-    document.getElementById('chartTitleDisplay').textContent = chartTitle;
-
-    // Data preview table
-    const table = document.getElementById('tableWrap');
-    table.innerHTML = `<table class="preview-table">
-      <thead><tr>${parsed.headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
-      <tbody>${parsed.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
-    </table>`;
-
+  if(SPECIAL_TYPES.includes(selectedChartType)){
+    if(chartInstance){chartInstance.destroy();chartInstance=null;}
+    mainWrap.style.display='none';specWrap.style.display='block';
+    drawSpecialChart(selectedChartType,parsed,palette,height,fSize);
+    document.getElementById('chartTitleDisplay').textContent=chartTitle;
+    buildTable(parsed);
     document.getElementById('chartArea').classList.add('visible');
-    document.getElementById('chartArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('chartArea').scrollIntoView({behavior:'smooth',block:'start'});
+    return;
   }
 
-  function downloadChart() {
-    const canvas = document.getElementById('mainChart');
-    // White background for download
-    const offCanvas = document.createElement('canvas');
-    offCanvas.width = canvas.width;
-    offCanvas.height = canvas.height;
-    const ctx = offCanvas.getContext('2d');
-    ctx.fillStyle = '#0d1117';
-    ctx.fillRect(0, 0, offCanvas.width, offCanvas.height);
-    ctx.drawImage(canvas, 0, 0);
-    const link = document.createElement('a');
-    link.download = (document.getElementById('chartTitleInput').value || 'chart') + '.png';
-    link.href = offCanvas.toDataURL('image/png');
-    link.click();
+  mainWrap.style.display='block';specWrap.style.display='none';
+  if(chartInstance){chartInstance.destroy();chartInstance=null;}
+
+  const canvas=document.getElementById('mainChart');
+  canvas.style.maxHeight=height+'px';
+  const isHoriz=selectedChartType==='bar-horizontal';
+  const isStacked=['bar-stacked','bar-stacked-100'].includes(selectedChartType);
+  const is100=selectedChartType==='bar-stacked-100';
+  const isArea=selectedChartType==='line-area';
+  const chartType=(isHoriz||isStacked)?'bar':isArea?'line':selectedChartType;
+  const isPie=['pie','doughnut','polarArea'].includes(chartType);
+  const isRadar=chartType==='radar';
+  const isBubble=selectedChartType==='bubble';
+  const isScatter=selectedChartType==='scatter';
+  const colors=getColors(palette,isPie?parsed.labels.length:parsed.datasets.length);
+  const colorsAlpha=getColors(palette,isPie?parsed.labels.length:parsed.datasets.length,fillOp);
+  let chartDatasets;
+  if(isBubble){
+    chartDatasets=[{label:'Bubble',data:parsed.rows.map(r=>({x:parseFloat(r[1])||0,y:parseFloat(r[2])||0,r:Math.sqrt(parseFloat(r[3])||10)*0.6})),backgroundColor:getColors(palette,parsed.rows.length,0.65),borderColor:getColors(palette,parsed.rows.length),borderWidth:bw}];
+  }else if(isScatter){
+    chartDatasets=parsed.datasets.map((ds,i)=>({label:ds.label,data:parsed.labels.map((l,j)=>({x:parseFloat(l)||j,y:ds.data[j]})),backgroundColor:colorsAlpha[i],borderColor:colors[i],borderWidth:bw,pointRadius:pSize,pointHoverRadius:pSize+3}));
+  }else if(isPie){
+    chartDatasets=[{label:parsed.datasets[0]?.label||'Value',data:parsed.datasets[0]?.data||[],backgroundColor:colors,borderColor:colors.map(c=>c.replace(/[\d.]+\)$/,'1)')),borderWidth:bw}];
+  }else if(isRadar){
+    chartDatasets=parsed.datasets.map((ds,i)=>({label:ds.label,data:ds.data,backgroundColor:getColors(palette,parsed.datasets.length,0.2)[i],borderColor:getColors(palette,parsed.datasets.length)[i],borderWidth:bw,pointBackgroundColor:getColors(palette,parsed.datasets.length)[i],pointRadius:pSize}));
+  }else{
+    chartDatasets=parsed.datasets.map((ds,i)=>({label:ds.label,data:ds.data,backgroundColor:(chartType==='line'&&!isArea)?colorsAlpha[i]:colors[i],borderColor:colors[i],borderWidth:chartType==='line'?bw+1.5:bw,fill:isArea||fillArea,tension:chartType==='line'?lineTension:undefined,pointRadius:chartType==='line'?pSize:undefined,pointHoverRadius:chartType==='line'?pSize+3:undefined,pointStyle:pStyle==='false'?false:pStyle,borderRadius:chartType==='bar'?barRadius:undefined,borderSkipped:false}));
   }
 
-  function clearAll() {
-    document.getElementById('dataInput').value = '';
-    document.getElementById('chartTitleInput').value = '';
-    if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
-    document.getElementById('chartArea').classList.remove('visible');
-    document.getElementById('tableWrap').innerHTML = '';
+  // Trendline dataset
+  if(document.getElementById('showTrendline').checked && parsed.datasets.length>0 && !isPie && !isRadar){
+    const vals=parsed.datasets[0].data;
+    const n=vals.length;const sumX=vals.reduce((_,__,i)=>_+i,0),sumY=vals.reduce((a,b)=>a+b,0);
+    const sumXY=vals.reduce((a,v,i)=>a+i*v,0),sumX2=vals.reduce((a,_,i)=>a+i*i,0);
+    const m=(n*sumXY-sumX*sumY)/(n*sumX2-sumX*sumX);
+    const b2=(sumY-m*sumX)/n;
+    const trendData=vals.map((_,i)=>m*i+b2);
+    chartDatasets.push({label:'Trendline',data:trendData,type:'line',borderColor:'rgba(248,81,73,0.7)',borderWidth:2,borderDash:[6,4],pointRadius:0,fill:false,tension:0});
   }
-</script>
-<script>
-  function toggleTheme(){document.body.classList.toggle('light');const b=document.querySelector('.theme-btn');if(b)b.textContent=document.body.classList.contains('light')?'🌙 Dark':'☀️ Light';}
-  window.addEventListener('scroll',()=>{const bt=document.getElementById('backTop');if(bt)bt.classList.toggle('show',window.scrollY>300);});
+  // Average line
+  if(document.getElementById('showAvgLine').checked && parsed.datasets.length>0 && !isPie && !isRadar){
+    const vals=parsed.datasets[0].data;
+    const avg=vals.reduce((a,b)=>a+b,0)/vals.length;
+    chartDatasets.push({label:`Avg: ${avg.toFixed(1)}`,data:Array(parsed.labels.length).fill(avg),type:'line',borderColor:'rgba(212,168,67,0.8)',borderWidth:1.5,borderDash:[4,4],pointRadius:0,fill:false,tension:0});
+  }
+
+  const gridColor=`rgba(48,54,61,${document.getElementById('gridStyle').value==='none'?0:0.5})`;
+  const textColor='#8b949e';
+  const ctx=canvas.getContext('2d');
+  const maintainAR=ar==='auto';
+  chartInstance=new Chart(ctx,{
+    type:chartType,
+    data:{labels:parsed.labels,datasets:chartDatasets},
+    options:{
+      indexAxis:isHoriz?'y':'x',responsive:true,maintainAspectRatio:maintainAR,
+      aspectRatio:ar==='auto'?undefined:parseFloat(ar),
+      animation:animate?{duration:700,easing:'easeOutQuart'}:false,
+      plugins:{
+        legend:{display:legendPos!=='false',position:legendPos!=='false'?legendPos:'top',labels:{color:textColor,font:{family:'DM Sans',size:fSize},padding:16,usePointStyle:true}},
+        tooltip:{backgroundColor:'#1c2330',borderColor:'#30363d',borderWidth:1,titleColor:'#e6edf3',bodyColor:'#8b949e',padding:12,titleFont:{family:'DM Mono',size:fSize},bodyFont:{family:'DM Sans',size:fSize+1}}
+      },
+      scales:(isPie||isRadar)?(isRadar?{r:{grid:{color:gridColor,dash:gridDash},ticks:{color:textColor,font:{family:'DM Mono',size:fSize-2},backdropColor:'transparent'},pointLabels:{color:textColor,font:{family:'DM Sans',size:fSize}}}}:{}):{
+        x:{stacked:isStacked,grid:{color:showGridX?gridColor:'transparent',dash:gridDash,drawBorder:false},ticks:{color:textColor,font:{family:'DM Mono',size:fSize}},title:xLabel?{display:true,text:xLabel,color:textColor,font:{family:'DM Sans',size:fSize}}:undefined},
+        y:{stacked:isStacked,max:is100?100:undefined,grid:{color:showGridY?gridColor:'transparent',dash:gridDash,drawBorder:false},ticks:{color:textColor,font:{family:'DM Mono',size:fSize},callback:is100?(v)=>v+'%':undefined},title:yLabel?{display:true,text:yLabel,color:textColor,font:{family:'DM Sans',size:fSize}}:undefined}
+      }
+    }
+  });
+
+  // Annotation overlay
+  if(document.getElementById('showAnnotation').checked){
+    const annText=document.getElementById('annotationText').value.trim();
+    if(annText){
+      const canv=document.getElementById('mainChart');
+      const oc=canv.getContext('2d');
+      const W=canv.offsetWidth,H=canv.offsetHeight;
+      setTimeout(()=>{oc.save();oc.strokeStyle='rgba(248,81,73,0.5)';oc.lineWidth=1.5;oc.setLineDash([6,4]);oc.beginPath();oc.moveTo(W*0.65,40);oc.lineTo(W*0.65,H-50);oc.stroke();oc.setLineDash([]);oc.fillStyle='rgba(248,81,73,0.85)';oc.font=`11px DM Sans`;oc.textAlign='left';oc.fillText(annText,W*0.66,60);oc.restore();},800);
+    }
+  }
+
+  document.getElementById('chartTitleDisplay').textContent=chartTitle;
+  buildTable(parsed);
+  document.getElementById('chartArea').classList.add('visible');
+  document.getElementById('chartArea').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function drawSpecialChart(type,parsed,palette,height,fSize){
+  const canvas=document.getElementById('specialChart');
+  const dpr=window.devicePixelRatio||1;
+  const w=canvas.parentElement.offsetWidth||800;
+  canvas.width=w*dpr;canvas.height=height*dpr;
+  canvas.style.width=w+'px';canvas.style.height=height+'px';
+  const ctx=canvas.getContext('2d');
+  ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,height);
+  const bg=getBGColor();
+  if(bg!=='transparent'){ctx.fillStyle=bg;ctx.fillRect(0,0,w,height);}
+  const textColor='#8b949e';
+  const palName=document.getElementById('paletteSelect').value;
+  let baseColors;
+  if(palName==='custom'){
+    const hex=document.getElementById('customColor').value;
+    const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+    baseColors=Array.from({length:8},(_,i)=>{const f=1-i*0.09;return{hex,r:Math.round(r*f),g:Math.round(g*f),b:Math.round(b*f),rgba:(a)=>`rgba(${Math.round(r*f)},${Math.round(g*f)},${Math.round(b*f)},${a===undefined?1:a})`};});
+  }else{
+    const pal=PALETTES[palName]||PALETTES.multi;
+    baseColors=pal.map(hex=>({hex,r:parseInt(hex.slice(1,3),16),g:parseInt(hex.slice(3,5),16),b:parseInt(hex.slice(5,7),16),rgba:(a)=>`rgba(${parseInt(hex.slice(1,3),16)},${parseInt(hex.slice(3,5),16)},${parseInt(hex.slice(5,7),16)},${a===undefined?1:a})`}));
+  }
+  const labels=parsed.labels,values=parsed.datasets[0]?.data||[];
+  const infoNote=document.getElementById('infoNote');
+  const brd=parseInt(document.getElementById('borderWidth').value)||1;
+
+  if(type==='lollipop'){
+    const pad={left:150,right:60,top:20,bottom:40};
+    const chartW=w-pad.left-pad.right,chartH=height-pad.top-pad.bottom;
+    const max=Math.max(...values)*1.12;const step=chartH/labels.length;
+    labels.forEach((label,i)=>{
+      const val=values[i],barLen=(val/max)*chartW,y=pad.top+i*step+step/2;
+      const col=baseColors[i%baseColors.length];
+      ctx.strokeStyle=col.rgba(0.25);ctx.lineWidth=1.5;ctx.setLineDash([4,4]);
+      ctx.beginPath();ctx.moveTo(pad.left,y);ctx.lineTo(pad.left+barLen,y);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle=col.rgba();ctx.beginPath();ctx.arc(pad.left+barLen,y,Math.min(step/2-4,12),0,Math.PI*2);ctx.fill();
+      ctx.fillStyle=textColor;ctx.font=`${fSize}px DM Sans`;ctx.textAlign='right';ctx.textBaseline='middle';
+      ctx.fillText(label,pad.left-8,y);
+      ctx.fillStyle=col.rgba();ctx.textAlign='left';ctx.fillText(val,pad.left+barLen+16,y);
+    });
+  }else if(type==='slope'){
+    if(parsed.datasets.length<2){infoNote.textContent='Slope chart needs at least 2 series (time points). Load the Crop Yields example.';infoNote.style.display='block';return;}
+    const pad={left:90,right:90,top:40,bottom:40};
+    const numPoints=parsed.datasets.length;const chartW=w-pad.left-pad.right;
+    const allVals=parsed.datasets.flatMap(d=>d.data);const minV=Math.min(...allVals),maxV=Math.max(...allVals),rng=maxV-minV||1;
+    const getY=(v)=>pad.top+((maxV-v)/rng)*(height-pad.top-pad.bottom);
+    const getX=(i)=>pad.left+i*(chartW/(numPoints-1));
+    // Draw series lines
+    parsed.labels.forEach((label,li)=>{
+      const col=baseColors[li%baseColors.length];
+      const pts=parsed.datasets.map(ds=>ds.data[li]);
+      ctx.strokeStyle=col.rgba();ctx.lineWidth=2;ctx.beginPath();
+      pts.forEach((v,pi)=>{const x=getX(pi);const y=getY(v);pi===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+      ctx.stroke();
+      pts.forEach((v,pi)=>{ctx.beginPath();ctx.arc(getX(pi),getY(v),5,0,Math.PI*2);ctx.fillStyle=col.rgba();ctx.fill();});
+      // Labels at start and end
+      ctx.fillStyle=textColor;ctx.font=`${fSize}px DM Sans`;
+      ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(`${label} (${pts[0]})`,getX(0)-9,getY(pts[0]));
+      ctx.textAlign='left';ctx.fillText(`${label} (${pts[pts.length-1]})`,getX(numPoints-1)+9,getY(pts[pts.length-1]));
+    });
+    // X axis labels
+    parsed.datasets.forEach((ds,i)=>{
+      ctx.fillStyle=textColor;ctx.font=`bold ${fSize}px DM Mono`;ctx.textAlign='center';ctx.textBaseline='top';
+      ctx.fillText(ds.label,getX(i),pad.top-22);
+    });
+    infoNote.textContent='Slope chart: shows change between two or more time points. Each line = one entity.';infoNote.style.display='block';
+  }else if(type==='radial-bar'){
+    const total=values.length;const maxV=Math.max(...values)||1;
+    const cx=w/2,cy=height/2;const maxR=Math.min(cx,cy)-40;const minR=maxR*0.2;
+    const ringW=(maxR-minR)/(total+1);
+    labels.forEach((label,i)=>{
+      const r=minR+(i+0.5)*ringW;const pct=values[i]/maxV;const endAngle=-Math.PI/2+pct*2*Math.PI;
+      const col=baseColors[i%baseColors.length];
+      // Background ring
+      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=col.rgba(0.12);ctx.lineWidth=ringW-4;ctx.stroke();
+      // Value arc
+      ctx.beginPath();ctx.arc(cx,cy,r,-Math.PI/2,endAngle);ctx.strokeStyle=col.rgba();ctx.lineWidth=ringW-4;ctx.stroke();
+      // Label
+      ctx.fillStyle=textColor;ctx.font=`${fSize-1}px DM Sans`;ctx.textAlign='left';ctx.textBaseline='middle';
+      ctx.fillText(`${label}  ${values[i]}`,cx+r+ringW/2+4,cy+(i-(total-1)/2)*(fSize+6));
+    });
+    infoNote.textContent='Radial bar chart: each ring = one category. Arc length = proportion of max value.';infoNote.style.display='block';
+  }else if(type==='bullet'){
+    const pad={left:160,right:80,top:20,bottom:20};
+    const chartW=w-pad.left-pad.right,chartH=height-pad.top-pad.bottom;
+    const maxV=Math.max(...values)*1.2||1;const step=chartH/labels.length;const barH=Math.min(step-12,28);
+    labels.forEach((label,i)=>{
+      const val=values[i],target=val*1.15;const y=pad.top+i*step+step/2-barH/2;
+      const col=baseColors[0];
+      // Background range
+      ctx.fillStyle=col.rgba(0.12);ctx.fillRect(pad.left,y,chartW,barH);
+      // Comparative band
+      ctx.fillStyle=col.rgba(0.25);ctx.fillRect(pad.left,y,(target/maxV)*chartW,barH);
+      // Actual bar
+      ctx.fillStyle=col.rgba();ctx.fillRect(pad.left,y+barH*0.2,(val/maxV)*chartW,barH*0.6);
+      // Target marker
+      ctx.strokeStyle='#e6edf3';ctx.lineWidth=2;const tx=pad.left+(target/maxV)*chartW;
+      ctx.beginPath();ctx.moveTo(tx,y-4);ctx.lineTo(tx,y+barH+4);ctx.stroke();
+      // Labels
+      ctx.fillStyle=textColor;ctx.font=`${fSize}px DM Sans`;ctx.textAlign='right';ctx.textBaseline='middle';
+      ctx.fillText(label,pad.left-8,y+barH/2);
+      ctx.fillStyle=col.rgba();ctx.textAlign='left';ctx.fillText(val,pad.left+(val/maxV)*chartW+8,y+barH/2);
+    });
+    infoNote.textContent='Bullet chart: dark bar = actual, light = target, very light = range. Good for KPI dashboards.';infoNote.style.display='block';
+  }else if(type==='gantt'){
+    // rows: Task, Start, End
+    const tasks=parsed.labels;const starts=parsed.datasets[0]?.data||[];const ends=parsed.datasets[1]?.data||starts.map(s=>s+2);
+    const pad={left:180,right:40,top:40,bottom:30};
+    const minT=Math.min(...starts),maxT=Math.max(...ends);const tRange=maxT-minT||1;
+    const chartW=w-pad.left-pad.right,chartH=height-pad.top-pad.bottom;
+    const step=chartH/tasks.length;const barH=Math.min(step-8,24);
+    // Grid vertical lines
+    for(let t=minT;t<=maxT;t++){
+      const gx=pad.left+(t-minT)/tRange*chartW;
+      ctx.strokeStyle='rgba(48,54,61,0.4)';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+      ctx.beginPath();ctx.moveTo(gx,pad.top-10);ctx.lineTo(gx,pad.top+chartH);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle=textColor;ctx.font=`${fSize-1}px DM Mono`;ctx.textAlign='center';ctx.textBaseline='bottom';
+      ctx.fillText(t,gx,pad.top-12);
+    }
+    tasks.forEach((task,i)=>{
+      const s=starts[i],e=ends[i];const y=pad.top+i*step+(step-barH)/2;
+      const x1=pad.left+(s-minT)/tRange*chartW,barW=(e-s)/tRange*chartW;
+      const col=baseColors[i%baseColors.length];
+      ctx.fillStyle=col.rgba(0.85);ctx.beginPath();ctx.roundRect(x1,y,barW,barH,4);ctx.fill();
+      ctx.strokeStyle=col.rgba();ctx.lineWidth=brd;ctx.beginPath();ctx.roundRect(x1,y,barW,barH,4);ctx.stroke();
+      ctx.fillStyle='#e6edf3';ctx.font=`${fSize-1}px DM Sans`;ctx.textAlign='center';ctx.textBaseline='middle';
+      if(barW>50)ctx.fillText(task,x1+barW/2,y+barH/2);
+      ctx.fillStyle=textColor;ctx.textAlign='right';ctx.fillText(task,pad.left-8,y+barH/2);
+    });
+    infoNote.textContent='Gantt chart: data format: Task, Start (number), End (number). Ideal for project planning and research timelines.';infoNote.style.display='block';
+  }else if(type==='funnel'){
+    const total=values[0]||1;const cx=w/2;
+    const segH=(height-60)/labels.length;const maxW=w*0.65;
+    labels.forEach((label,i)=>{
+      const pct=values[i]/total;const rectW=maxW*pct;const y=30+i*segH;
+      const col=baseColors[i%baseColors.length];
+      ctx.fillStyle=col.rgba(0.88);
+      ctx.beginPath();ctx.roundRect(cx-rectW/2,y,rectW,segH-4,i===0?[6,6,0,0]:i===labels.length-1?[0,0,6,6]:[0]);ctx.fill();
+      ctx.fillStyle='#e6edf3';ctx.font=`bold ${fSize}px DM Sans`;ctx.textAlign='center';ctx.textBaseline='middle';
+      const val=values[i];const pctStr=Math.round(pct*100)+'%';
+      if(rectW>80)ctx.fillText(`${label}: ${val.toLocaleString()} (${pctStr})`,cx,y+segH/2);
+      else{ctx.fillStyle=textColor;ctx.fillText(`${label}  ${pctStr}`,cx,y+segH/2);}
+    });
+    infoNote.textContent='Funnel chart: visualises drop-off across sequential stages (value chain, sales pipeline).';infoNote.style.display='block';
+  }else if(type==='heatmap'){
+    // rows: category, col1, col2...
+    const rowLabels=parsed.labels;const colLabels=parsed.headers.slice(1);
+    const allVals=parsed.datasets.flatMap(d=>d.data);const minV=Math.min(...allVals),maxV=Math.max(...allVals),rng=maxV-minV||1;
+    const pad={left:80,right:20,top:60,bottom:20};
+    const cellW=(w-pad.left-pad.right)/colLabels.length;const cellH=(height-pad.top-pad.bottom)/rowLabels.length;
+    // Column headers
+    colLabels.forEach((cl,ci)=>{
+      ctx.fillStyle=textColor;ctx.font=`${fSize-1}px DM Mono`;ctx.textAlign='center';ctx.textBaseline='bottom';
+      ctx.fillText(cl,pad.left+(ci+0.5)*cellW,pad.top-10);
+    });
+    rowLabels.forEach((rl,ri)=>{
+      parsed.datasets.forEach((ds,ci)=>{
+        const v=ds.data[ri];const t=(v-minV)/rng;
+        const col=baseColors[Math.floor(t*(baseColors.length-1))];
+        const x=pad.left+ci*cellW,y=pad.top+ri*cellH;
+        ctx.fillStyle=col.rgba(0.7+t*0.3);ctx.fillRect(x+1,y+1,cellW-2,cellH-2);
+        ctx.fillStyle='rgba(13,17,23,0.4)';ctx.strokeStyle='rgba(0,0,0,0.2)';ctx.lineWidth=1;ctx.strokeRect(x+1,y+1,cellW-2,cellH-2);
+        // Value label
+        ctx.fillStyle=t>0.5?'#e6edf3':'rgba(230,237,243,0.7)';ctx.font=`${fSize-2}px DM Mono`;ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.fillText(v.toFixed(1),x+cellW/2,y+cellH/2);
+      });
+      // Row label
+      ctx.fillStyle=textColor;ctx.font=`${fSize-1}px DM Sans`;ctx.textAlign='right';ctx.textBaseline='middle';
+      ctx.fillText(rl,pad.left-8,pad.top+ri*cellH+cellH/2);
+    });
+    infoNote.textContent='Heatmap: colour intensity = value. Good for showing patterns across time and categories.';infoNote.style.display='block';
+  }else if(type==='waterfall'){
+    // rows: Category, Value (+/- or absolute)
+    const pad={left:160,right:40,top:40,bottom:60};
+    const chartW=w-pad.left-pad.right,chartH=height-pad.top-pad.bottom;
+    let running=0;const bars=[];
+    parsed.rows.forEach((row,i)=>{
+      const v=row[1];const isStart=i===0;const isEnd=i===parsed.rows.length-1;
+      const numVal=parseFloat(v.replace('+',''))||0;
+      if(isStart||isEnd){bars.push({label:row[0],start:0,end:numVal,isTotal:true});}
+      else{bars.push({label:row[0],start:running,end:running+numVal,isPos:numVal>=0});}
+      if(!isStart&&!isEnd)running+=numVal;
+    });
+    const allPts=bars.flatMap(b=>[b.start,b.end]);const minV=Math.min(...allPts,0),maxV=Math.max(...allPts);const rng=maxV-minV||1;
+    const getY=(v)=>pad.top+chartH-((v-minV)/rng)*chartH;
+    const barW=chartW/bars.length*0.6;
+    bars.forEach((bar,i)=>{
+      const x=pad.left+i*(chartW/bars.length)+(chartW/bars.length)*0.2;
+      const y1=getY(Math.max(bar.start,bar.end)),y2=getY(Math.min(bar.start,bar.end));const bh=y2-y1;
+      const col=bar.isTotal?baseColors[0]:bar.isPos?baseColors[1]||baseColors[0]:baseColors[3]||baseColors[2];
+      ctx.fillStyle=col.rgba(0.85);ctx.beginPath();ctx.roundRect(x,y1,barW,bh,3);ctx.fill();
+      ctx.strokeStyle=col.rgba();ctx.lineWidth=brd;ctx.beginPath();ctx.roundRect(x,y1,barW,bh,3);ctx.stroke();
+      // Connector
+      if(i>0&&!bar.isTotal){
+        ctx.strokeStyle='rgba(139,148,158,0.4)';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+        ctx.beginPath();ctx.moveTo(x,getY(bar.start));ctx.lineTo(x-chartW/bars.length*0.2,getY(bar.start));ctx.stroke();ctx.setLineDash([]);
+      }
+      ctx.fillStyle=textColor;ctx.font=`${fSize-1}px DM Mono`;ctx.textAlign='center';ctx.textBaseline='top';
+      ctx.fillText(bar.label,x+barW/2,pad.top+chartH+8);
+      const dispV=bar.end-(bar.isTotal?0:bar.start);
+      ctx.fillStyle=col.rgba();ctx.textBaseline='bottom';ctx.fillText((dispV>=0?'+':'')+dispV.toFixed(0),x+barW/2,y1-3);
+    });
+    infoNote.textContent='Waterfall chart: shows cumulative effect of positive/negative values. Use +/- prefix for changes.';infoNote.style.display='block';
+  }else if(type==='timeline'){
+    // rows: Event, Year/Date
+    const evts=parsed.labels;const times=parsed.datasets[0]?.data||[];
+    const minT=Math.min(...times),maxT=Math.max(...times),tRange=maxT-minT||1;
+    const cy=height/2;const pad={left:60,right:60};const lineW=w-pad.left-pad.right;
+    ctx.strokeStyle='rgba(63,185,80,0.5)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(pad.left,cy);ctx.lineTo(w-pad.right,cy);ctx.stroke();
+    evts.forEach((evt,i)=>{
+      const x=pad.left+((times[i]-minT)/tRange)*lineW;
+      const above=i%2===0;const col=baseColors[i%baseColors.length];
+      ctx.fillStyle=col.rgba();ctx.beginPath();ctx.arc(x,cy,7,0,Math.PI*2);ctx.fill();
+      ctx.strokeStyle='#0d1117';ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,cy,7,0,Math.PI*2);ctx.stroke();
+      ctx.strokeStyle=col.rgba(0.5);ctx.lineWidth=1.5;ctx.setLineDash([3,3]);
+      ctx.beginPath();ctx.moveTo(x,cy+(above?-7:7));ctx.lineTo(x,above?cy-60:cy+60);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle=col.rgba();ctx.font=`${fSize}px DM Sans`;ctx.textAlign='center';ctx.textBaseline=above?'bottom':'top';
+      ctx.fillText(evt,x,above?cy-65:cy+65);
+      ctx.fillStyle=textColor;ctx.font=`${fSize-1}px DM Mono`;ctx.textBaseline=above?'bottom':'top';
+      ctx.fillText(times[i],x,above?cy-80:cy+80);
+    });
+    infoNote.textContent='Timeline chart: data format: Event Name, Year. Shows events along a horizontal time axis.';infoNote.style.display='block';
+  }else if(type==='waffle'){
+    const total=values.reduce((a,b)=>a+b,0);const cols=10,rows=10,cellSize=Math.min((w-80)/cols,(height-90)/rows)-3;
+    const gridW=cols*(cellSize+3),gridH=rows*(cellSize+3);const ox=(w-gridW)/2,oy=(height-gridH)/2-15;
+    const cellCounts=values.map(v=>Math.round((v/total)*100));
+    let cellIdx=0;
+    for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+      let cum=0,seg=0;
+      for(let s=0;s<cellCounts.length;s++){cum+=cellCounts[s];if(cellIdx<cum){seg=s;break;}}
+      const col=baseColors[seg%baseColors.length];ctx.fillStyle=col.rgba(0.85);
+      const rx=ox+c*(cellSize+3),ry=oy+r*(cellSize+3);
+      ctx.beginPath();ctx.roundRect(rx,ry,cellSize,cellSize,2);ctx.fill();cellIdx++;
+    }
+    let legX=20;const legY=oy+gridH+18;
+    labels.forEach((label,i)=>{
+      const col=baseColors[i%baseColors.length];const pct=Math.round((values[i]/total)*100);
+      ctx.fillStyle=col.rgba();ctx.fillRect(legX,legY,12,12);
+      ctx.fillStyle=textColor;ctx.font=`${fSize}px DM Sans`;ctx.textAlign='left';ctx.textBaseline='top';
+      const txt=`${label} (${pct}%)`;ctx.fillText(txt,legX+16,legY);legX+=ctx.measureText(txt).width+32;
+      if(legX>w-80)legX=20;
+    });
+    infoNote.textContent='Waffle chart: each cell = 1%.';infoNote.style.display='block';
+  }else if(type==='treemap'){
+    const total=values.reduce((a,b)=>a+b,0);const pad=10;
+    let rects=treemapLayout(labels.map((l,i)=>({label:l,value:values[i]})),pad,pad,w-pad*2,height-pad*2);
+    rects.forEach((rect,i)=>{
+      const col=baseColors[i%baseColors.length];ctx.fillStyle=col.rgba(0.85);ctx.beginPath();ctx.roundRect(rect.x,rect.y,rect.w,rect.h,4);ctx.fill();
+      ctx.strokeStyle='rgba(13,17,23,0.6)';ctx.lineWidth=brd;ctx.beginPath();ctx.roundRect(rect.x,rect.y,rect.w,rect.h,4);ctx.stroke();
+      if(rect.w>44&&rect.h>28){ctx.fillStyle='#e6edf3';ctx.font=`bold ${fSize}px DM Sans`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(rect.label.length>14?rect.label.slice(0,13)+'…':rect.label,rect.x+rect.w/2,rect.y+rect.h/2-8);ctx.font=`${fSize-1}px DM Mono`;ctx.fillStyle='rgba(255,255,255,0.7)';ctx.fillText(`${Math.round((rect.value/total)*100)}%`,rect.x+rect.w/2,rect.y+rect.h/2+9);}
+    });
+    infoNote.textContent='Treemap: area = proportion.';infoNote.style.display='block';
+  }else if(type==='pictogram'){
+    const max=Math.max(...values);const colW=w/(labels.length+1);const iconSize=Math.min(colW*0.38,28);const maxIcons=10;
+    labels.forEach((label,i)=>{
+      const count=Math.round((values[i]/max)*maxIcons);const cx=(i+1)*colW;const col=baseColors[i%baseColors.length];
+      for(let j=0;j<maxIcons;j++){const py=height-58-j*(iconSize+4);ctx.font=`${iconSize}px serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.globalAlpha=j<count?1:0.1;ctx.fillText('👤',cx,py);}
+      ctx.globalAlpha=1;ctx.fillStyle=col.rgba();ctx.font=`bold ${fSize+1}px DM Sans`;ctx.textAlign='center';ctx.textBaseline='top';ctx.fillText(values[i],cx,height-48);
+      ctx.fillStyle=textColor;ctx.font=`${fSize}px DM Sans`;ctx.fillText(label,cx,height-32);
+    });
+    infoNote.textContent='Pictogram: each icon = 1 unit of maximum value.';infoNote.style.display='block';
+  }else if(type==='histogram'){
+    const bins=8;const minV=Math.min(...values),maxV=Math.max(...values),binW=(maxV-minV)/bins;
+    const counts=Array(bins).fill(0);values.forEach(v=>{const b=Math.min(bins-1,Math.floor((v-minV)/binW));counts[b]++;});
+    const maxC=Math.max(...counts);const pad={left:50,right:20,top:20,bottom:50};
+    const chartW=w-pad.left-pad.right,chartH=height-pad.top-pad.bottom,bw2=chartW/bins;
+    const col=baseColors[0];
+    counts.forEach((c,i)=>{const bh=(c/maxC)*chartH;ctx.fillStyle=col.rgba(0.8);ctx.fillRect(pad.left+i*bw2+1,pad.top+chartH-bh,bw2-2,bh);ctx.fillStyle=textColor;ctx.font=`${fSize-2}px DM Mono`;ctx.textAlign='center';ctx.textBaseline='top';ctx.fillText((minV+i*binW).toFixed(1),pad.left+i*bw2+bw2/2,pad.top+chartH+6);if(c>0){ctx.fillStyle='#e6edf3';ctx.textBaseline='bottom';ctx.fillText(c,pad.left+i*bw2+bw2/2,pad.top+chartH-bh-2);}});
+    ctx.strokeStyle='rgba(48,54,61,0.6)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.left,pad.top);ctx.lineTo(pad.left,pad.top+chartH);ctx.lineTo(pad.left+chartW,pad.top+chartH);ctx.stroke();
+  }else if(type==='diverging'){
+    const mid=values.reduce((a,b)=>a+b,0)/values.length;const maxDev=Math.max(...values.map(v=>Math.abs(v-mid)))||1;
+    const pad={left:140,right:80,top:20,bottom:20};const chartW=w-pad.left-pad.right,chartH=height-pad.top-pad.bottom;
+    const barH=Math.min(30,chartH/labels.length-6),step=chartH/labels.length,midX=pad.left+chartW/2;
+    ctx.strokeStyle='rgba(48,54,61,0.5)';ctx.lineWidth=1;ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(midX,pad.top);ctx.lineTo(midX,pad.top+chartH);ctx.stroke();ctx.setLineDash([]);
+    labels.forEach((label,i)=>{const val=values[i],dev=val-mid,barLen=(Math.abs(dev)/maxDev)*(chartW/2-10),y=pad.top+i*step+step/2;const isPos=dev>=0,col=isPos?baseColors[0]:baseColors[1]||baseColors[2];ctx.fillStyle=col.rgba(0.8);if(isPos)ctx.fillRect(midX,y-barH/2,barLen,barH);else ctx.fillRect(midX-barLen,y-barH/2,barLen,barH);ctx.fillStyle=textColor;ctx.font=`${fSize}px DM Sans`;ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(label,pad.left-8,y);ctx.fillStyle=col.rgba();ctx.textAlign='left';const ns=val.toFixed(1);ctx.fillText(ns,isPos?midX+barLen+5:midX-barLen-ctx.measureText(ns).width-5,y);});
+    infoNote.textContent=`Diverging bar centred at mean (${mid.toFixed(1)}).`;infoNote.style.display='block';
+  }else if(type==='dot-strip'){
+    const allVals=parsed.datasets.flatMap(d=>d.data);const max=Math.max(...allVals)*1.1;const numSeries=parsed.datasets.length;const seriesH=Math.floor((height-60)/Math.max(numSeries,1));
+    parsed.datasets.forEach((ds,si)=>{const col=baseColors[si%baseColors.length];const baseY=30+si*seriesH+seriesH/2;ctx.strokeStyle='rgba(48,54,61,0.3)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(30,baseY);ctx.lineTo(w-20,baseY);ctx.stroke();const usableW=w-50;ds.data.forEach((v)=>{const x=30+(v/max)*usableW;const jitter=(Math.random()-0.5)*seriesH*0.45;ctx.beginPath();ctx.arc(x,baseY+jitter,5,0,Math.PI*2);ctx.fillStyle=col.rgba(0.7);ctx.fill();ctx.strokeStyle=col.rgba();ctx.lineWidth=1;ctx.stroke();});ctx.fillStyle=textColor;ctx.font=`${fSize}px DM Sans`;ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(ds.label,4,baseY);});
+    infoNote.textContent='Dot strip plot: each dot = one observation. Shows distribution better than bar chart.';infoNote.style.display='block';
+  }
+}
+
+function treemapLayout(items,x,y,w,h){
+  const rects=[];
+  function slice(items,x,y,w,h,horiz){if(!items.length)return;if(items.length===1){rects.push({...items[0],x,y,w,h});return;}const half=items.reduce((s,i)=>s+i.value,0)/2;let sum=0,si=0;for(let i=0;i<items.length;i++){sum+=items[i].value;if(sum>=half){si=i;break;}}const ratio=sum/items.reduce((s,i)=>s+i.value,0);if(horiz){slice(items.slice(0,si+1),x,y,w*ratio,h,!horiz);slice(items.slice(si+1),x+w*ratio,y,w*(1-ratio),h,!horiz);}else{slice(items.slice(0,si+1),x,y,w,h*ratio,!horiz);slice(items.slice(si+1),x,y+h*ratio,w,h*(1-ratio),!horiz);}}
+  slice(items.sort((a,b)=>b.value-a.value),x,y,w,h,w>h);return rects;
+}
+
+function buildTable(parsed){
+  document.getElementById('tableWrap').innerHTML=`<table class="preview-table"><thead><tr>${parsed.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${parsed.rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+}
+
+// ── DOWNLOADS ──────────────────────────────────────────────────────────────
+function downloadPNG(){
+  const title=document.getElementById('chartTitleInput').value||'chart';
+  if(SPECIAL_TYPES.includes(selectedChartType)){
+    const c=document.getElementById('specialChart');const link=document.createElement('a');link.download=title+'.png';link.href=c.toDataURL('image/png');link.click();return;
+  }
+  const canvas=document.getElementById('mainChart');const off=document.createElement('canvas');
+  off.width=canvas.width;off.height=canvas.height;const ctx=off.getContext('2d');
+  const bg=getBGColor();if(bg!=='transparent'){ctx.fillStyle=bg;ctx.fillRect(0,0,off.width,off.height);}
+  ctx.drawImage(canvas,0,0);const link=document.createElement('a');link.download=title+'.png';link.href=off.toDataURL('image/png');link.click();
+}
+
+function downloadSVG(){
+  if(!lastParsed){showError('Plot a chart first.');return;}
+  const title=document.getElementById('chartTitleInput').value||'Chart';
+  const palette=document.getElementById('paletteSelect').value;
+  const colors=PALETTES[palette]||PALETTES.multi;
+  const bg=getBGColor();const parsed=lastParsed;
+  const fSize=parseInt(document.getElementById('fontSize').value);
+  const xLabel=document.getElementById('xAxisLabel').value;
+  const yLabel=document.getElementById('yAxisLabel').value;
+
+  // For canvas-based special charts: rasterise to SVG image
+  if(SPECIAL_TYPES.includes(selectedChartType)){
+    const canvas=document.getElementById('specialChart');
+    const W=canvas.offsetWidth||800,H=canvas.offsetHeight||420;
+    const dataUrl=canvas.toDataURL('image/png');
+    const svg=`<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${W}" height="${H+40}" viewBox="0 0 ${W} ${H+40}">\n  <rect width="${W}" height="${H+40}" fill="${bg==='transparent'?'#0d1117':bg}"/>\n  <text x="${W/2}" y="24" text-anchor="middle" fill="#e6edf3" font-family="Georgia,serif" font-size="${fSize+4}" font-weight="bold">${title}</text>\n  <image href="${dataUrl}" x="0" y="30" width="${W}" height="${H}"/>\n  <!-- ${title} | Banda Sainath Data Visualiser -->\n</svg>`;
+    const blob=new Blob([svg],{type:'image/svg+xml'});const url=URL.createObjectURL(blob);
+    const link=document.createElement('a');link.download=title.replace(/\s+/g,'_')+'.svg';link.href=url;link.click();URL.revokeObjectURL(url);
+    return;
+  }
+
+  // Chart.js charts: build true vector SVG
+  const canvas=document.getElementById('mainChart');
+  const W=canvas.offsetWidth||800,H=canvas.offsetHeight||420;
+  const isPie=['pie','doughnut'].includes(selectedChartType);
+  const isLine=['line','line-area'].includes(selectedChartType);
+  const isHoriz=selectedChartType==='bar-horizontal';
+  const isStacked=['bar-stacked','bar-stacked-100'].includes(selectedChartType);
+  let svgContent='';
+
+  if(isPie){
+    const total=parsed.datasets[0].data.reduce((a,b)=>a+b,0);
+    const cx=W/2,cy=H/2-20,r=Math.min(W,H)/2-60;const innerR=selectedChartType==='doughnut'?r*0.6:0;
+    let angle=-Math.PI/2;
+    const slices=parsed.datasets[0].data.map((v,i)=>{
+      const sweep=(v/total)*Math.PI*2;const x1=cx+r*Math.cos(angle),y1=cy+r*Math.sin(angle);const x2=cx+r*Math.cos(angle+sweep),y2=cy+r*Math.sin(angle+sweep);const ix1=cx+innerR*Math.cos(angle),iy1=cy+innerR*Math.sin(angle);const ix2=cx+innerR*Math.cos(angle+sweep),iy2=cy+innerR*Math.sin(angle+sweep);const large=sweep>Math.PI?1:0;const path=innerR>0?`M${ix1},${iy1}L${x1},${y1}A${r},${r} 0 ${large},1 ${x2},${y2}L${ix2},${iy2}A${innerR},${innerR} 0 ${large},0 ${ix1},${iy1}Z`:`M${cx},${cy}L${x1},${y1}A${r},${r} 0 ${large},1 ${x2},${y2}Z`;
+      const lx=cx+(r*0.7)*Math.cos(angle+sweep/2),ly=cy+(r*0.7)*Math.sin(angle+sweep/2);const pct=Math.round((v/total)*100);angle+=sweep;
+      return `<path d="${path}" fill="${colors[i%colors.length]}" stroke="${bg==='transparent'?'none':bg}" stroke-width="2"/><text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" fill="#e6edf3" font-family="DM Sans,sans-serif" font-size="${fSize}">${pct}%</text>`;
+    });
+    let legX=20;const legY=H-38;const legItems=parsed.labels.map((l,i)=>{const item=`<rect x="${legX}" y="${legY}" width="12" height="12" fill="${colors[i%colors.length]}"/><text x="${legX+16}" y="${legY+11}" fill="#8b949e" font-family="DM Sans,sans-serif" font-size="${fSize-1}">${l}</text>`;legX+=l.length*7+40;return item;});
+    svgContent=slices.join('')+legItems.join('');
+  }else{
+    const pad={left:60,right:20,top:30,bottom:60};const chartW=W-pad.left-pad.right,chartH=H-pad.top-pad.bottom;
+    const numLabels=parsed.labels.length;const allVals=parsed.datasets.flatMap(d=>d.data);const maxVal=(Math.max(...allVals)||1)*1.1;
+    const gridLines=[0,0.25,0.5,0.75,1].map(f=>{const gy=pad.top+chartH*(1-f);return `<line x1="${pad.left}" y1="${gy}" x2="${pad.left+chartW}" y2="${gy}" stroke="rgba(48,54,61,0.5)" stroke-width="1" stroke-dasharray="4,4"/><text x="${pad.left-6}" y="${gy+4}" text-anchor="end" fill="#8b949e" font-family="DM Mono,monospace" font-size="${fSize-2}">${(maxVal*f).toFixed(1)}</text>`;});
+    const xLabels=parsed.labels.map((l,i)=>`<text x="${pad.left+(i+0.5)*(chartW/numLabels)}" y="${pad.top+chartH+16}" text-anchor="middle" fill="#8b949e" font-family="DM Mono,monospace" font-size="${fSize-2}">${l}</text>`);
+    let series='';
+    if(isLine){
+      series=parsed.datasets.map((ds,si)=>{const points=ds.data.map((v,i)=>`${pad.left+(i+0.5)*(chartW/numLabels)},${pad.top+chartH*(1-v/maxVal)}`);const fill=selectedChartType==='line-area'?`<polygon points="${pad.left+0.5*(chartW/numLabels)},${pad.top+chartH} ${points.join(' ')} ${pad.left+(numLabels-0.5)*(chartW/numLabels)},${pad.top+chartH}" fill="${colors[si%colors.length]}" fill-opacity="0.25"/>` :'';return `${fill}<polyline points="${points.join(' ')}" fill="none" stroke="${colors[si%colors.length]}" stroke-width="2.5" stroke-linejoin="round"/>${ds.data.map((v,i)=>`<circle cx="${pad.left+(i+0.5)*(chartW/numLabels)}" cy="${pad.top+chartH*(1-v/maxVal)}" r="5" fill="${colors[si%colors.length]}"/>`).join('')}`;}).join('');
+    }else{
+      const numSeries=parsed.datasets.length;
+      series=parsed.datasets.map((ds,si)=>ds.data.map((v,i)=>{const slotW=chartW/numLabels,bw2=isStacked?slotW*0.7:slotW*0.7/numSeries;const bx=isStacked?pad.left+i*slotW+slotW*0.15:pad.left+i*slotW+slotW*0.15+si*bw2;const bh=(v/maxVal)*chartH,by=pad.top+chartH-bh;return `<rect x="${bx}" y="${by}" width="${bw2}" height="${bh}" fill="${colors[si%colors.length]}" rx="3"/>`;}).join('')).join('');
+    }
+    const legendItems=parsed.datasets.map((ds,i)=>`<rect x="${pad.left+i*130}" y="${H-20}" width="12" height="12" fill="${colors[i%colors.length]}"/><text x="${pad.left+i*130+16}" y="${H-9}" fill="#8b949e" font-family="DM Sans,sans-serif" font-size="${fSize-1}">${ds.label}</text>`).join('');
+    const axes=`<line x1="${pad.left}" y1="${pad.top}" x2="${pad.left}" y2="${pad.top+chartH}" stroke="rgba(48,54,61,0.7)" stroke-width="1.5"/><line x1="${pad.left}" y1="${pad.top+chartH}" x2="${pad.left+chartW}" y2="${pad.top+chartH}" stroke="rgba(48,54,61,0.7)" stroke-width="1.5"/>`;
+    svgContent=gridLines.join('')+xLabels.join('')+axes+series+legendItems;
+  }
+  const axisLabels=(xLabel?`<text x="${W/2}" y="${H-4}" text-anchor="middle" fill="#8b949e" font-family="DM Sans,sans-serif" font-size="${fSize}">${xLabel}</text>`:'')+(yLabel?`<text x="14" y="${H/2}" text-anchor="middle" fill="#8b949e" font-family="DM Sans,sans-serif" font-size="${fSize}" transform="rotate(-90,14,${H/2})">${yLabel}</text>`:'');
+  const svg=`<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">\n  <!-- ${title} | Banda Sainath Data Visualiser | Editable SVG -->\n  <rect width="${W}" height="${H}" fill="${bg==='transparent'?'#0d1117':bg}"/>\n  <text x="${W/2}" y="22" text-anchor="middle" fill="#e6edf3" font-family="'Playfair Display',Georgia,serif" font-size="${fSize+4}" font-weight="bold">${title}</text>\n  ${svgContent}\n  ${axisLabels}\n</svg>`;
+  const blob=new Blob([svg],{type:'image/svg+xml'});const url=URL.createObjectURL(blob);
+  const link=document.createElement('a');link.download=title.replace(/\s+/g,'_')+'.svg';link.href=url;link.click();URL.revokeObjectURL(url);
+}
+
+function clearAll(){document.getElementById('dataInput').value='';document.getElementById('chartTitleInput').value='';if(chartInstance){chartInstance.destroy();chartInstance=null;}document.getElementById('chartArea').classList.remove('visible');document.getElementById('tableWrap').innerHTML='';document.getElementById('canvasWrap').style.display='block';document.getElementById('specialChartWrap').style.display='none';document.getElementById('infoNote').style.display='none';}
 </script>
 </body>
 </html>

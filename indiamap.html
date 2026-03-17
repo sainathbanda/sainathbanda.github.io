@@ -3,29 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="mxHYk3PITQRd54OTSWHV68Gr4SqV7jMlZDDD4PDqAgg" />
 <title>India Map Visualiser | Banda Sainath</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-589QFCEYJX"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-589QFCEYJX');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 :root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2330;--accent:#3fb950;--accent2:#58a6ff;--gold:#d4a843;--text:#e6edf3;--muted:#8b949e;--border:#30363d;}
-body.light{--bg:#f6f8fa;--bg2:#ffffff;--bg3:#f0f2f4;--text:#1c2330;--muted:#57606a;--border:#d0d7de;}
 *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;transition:background 0.3s,color 0.3s;}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;background:rgba(13,17,23,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+body.light{--bg:#f6f8fa;--bg2:#ffffff;--bg3:#f0f2f4;--text:#1c2330;--muted:#57606a;--border:#d0d7de;}
 body.light nav{background:rgba(246,248,250,0.95);}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;background:rgba(13,17,23,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
 .nav-logo{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold);letter-spacing:0.02em;text-decoration:none;}
 .nav-links{display:flex;gap:28px;list-style:none;align-items:center;}
 .nav-links a{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--muted);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;}
 .nav-links a:hover,.nav-links a.active{color:var(--accent);}
 .nav-dropdown{position:relative;}.nav-dropdown>a{display:flex;align-items:center;gap:4px;cursor:pointer;}
+.nav-dropdown>a::before{content:'';position:absolute;bottom:-14px;left:-10px;right:-10px;height:20px;}
 .nav-dropdown>a::after{content:"▾";font-size:0.65rem;transition:transform 0.2s;}
 .nav-dropdown:hover>a::after{transform:rotate(180deg);}
-.dropdown-menu{display:none;position:absolute;top: 100%; padding-top: 8px;;left:50%;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:6px;min-width:200px;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,0.4);}
+.dropdown-menu{display:none;position:absolute;top:100%;padding-top:8px;left:50%;transform:translateX(-50%);z-index:300;}
+.dropdown-menu-inner{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:6px;min-width:200px;box-shadow:0 8px 24px rgba(0,0,0,0.4);}
 .nav-dropdown:hover .dropdown-menu{display:block;}
 .dropdown-menu li{list-style:none;}
 .dropdown-menu li a{display:block;padding:9px 14px;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--muted);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;border-radius:5px;transition:background 0.15s,color 0.15s;white-space:nowrap;}
@@ -33,8 +36,7 @@ body.light nav{background:rgba(246,248,250,0.95);}
 .theme-btn{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);cursor:pointer;transition:all 0.2s;}
 .theme-btn:hover{border-color:var(--accent);color:var(--accent);}
 .back-top{position:fixed;bottom:32px;right:32px;z-index:99;width:44px;height:44px;background:var(--accent);color:#0d1117;border:none;border-radius:50%;font-size:1.1rem;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(63,185,80,0.35);transition:all 0.2s;}
-.back-top:hover{transform:translateY(-3px);}
-.back-top.show{display:flex;}
+.back-top:hover{transform:translateY(-3px);}.back-top.show{display:flex;}
 .page-wrap{max-width:1100px;margin:0 auto;padding:110px 48px 80px;}
 .breadcrumb{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);margin-bottom:28px;}
 .breadcrumb a{color:var(--accent);text-decoration:none;}
@@ -42,19 +44,12 @@ body.light nav{background:rgba(246,248,250,0.95);}
 .page-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;border:1px solid rgba(212,168,67,0.35);padding:5px 14px;border-radius:2px;margin-bottom:18px;}
 .page-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);line-height:1.2;margin-bottom:10px;}
 .page-subtitle{color:var(--muted);font-size:0.97rem;max-width:680px;margin-bottom:36px;}
-
-/* MODE TABS */
 .mode-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:32px;width:fit-content;}
 .mtab{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.07em;text-transform:uppercase;padding:11px 24px;background:transparent;color:var(--muted);border:none;cursor:pointer;transition:all 0.2s;border-right:1px solid var(--border);}
-.mtab:last-child{border-right:none;}
-.mtab.active{background:var(--accent);color:#0d1117;font-weight:600;}
-.mtab:hover:not(.active){background:var(--bg3);color:var(--text);}
-
+.mtab:last-child{border-right:none;}.mtab.active{background:var(--accent);color:#0d1117;font-weight:600;}.mtab:hover:not(.active){background:var(--bg3);color:var(--text);}
 .panel{display:none;}.panel.active{display:block;}
-
-/* ─── CHOROPLETH PANEL ─── */
-.choro-layout{display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start;}
-@media(max-width:900px){.choro-layout{grid-template-columns:1fr;}}
+.two-col{display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:start;}
+@media(max-width:900px){.two-col{grid-template-columns:1fr;}}
 .ctrl-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:22px;}
 .ctrl-title{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:14px;}
 textarea.data-in{width:100%;min-height:160px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px;color:var(--text);font-family:'DM Mono',monospace;font-size:0.78rem;line-height:1.7;resize:vertical;outline:none;transition:border-color 0.2s;margin-bottom:12px;}
@@ -66,61 +61,52 @@ select.ctrl-sel option{background:var(--bg2);}
 label.ctrl-label{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.09em;display:block;margin-bottom:4px;margin-top:10px;}
 .btn-plot{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;background:var(--accent);color:#0d1117;font-family:'DM Mono',monospace;font-size:0.8rem;letter-spacing:0.07em;text-transform:uppercase;border:none;border-radius:6px;cursor:pointer;font-weight:600;transition:all 0.2s;margin-top:6px;}
 .btn-plot:hover{background:#56d364;}
-.btn-outline{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:10px;background:transparent;color:var(--muted);font-family:'DM Mono',monospace;font-size:0.76rem;letter-spacing:0.07em;text-transform:uppercase;border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all 0.2s;margin-top:8px;}
-.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
-.ex-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.btn-dl{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:10px;background:transparent;color:var(--muted);font-family:'DM Mono',monospace;font-size:0.76rem;letter-spacing:0.07em;text-transform:uppercase;border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all 0.2s;margin-top:6px;}
+.btn-dl:hover{border-color:var(--gold);color:var(--gold);}
+.ex-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
 .ex-btn{font-family:'DM Mono',monospace;font-size:0.68rem;padding:4px 10px;background:transparent;border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;transition:all 0.2s;}
 .ex-btn:hover{border-color:var(--accent2);color:var(--accent2);}
-
-#mapChoro{width:100%;height:540px;border-radius:12px;border:1px solid var(--border);}
+.toggle-row{display:flex;flex-direction:column;gap:8px;margin:10px 0;}
+.toggle-item{display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);cursor:pointer;}
+.toggle-item input{accent-color:var(--accent);width:14px;height:14px;}
+#mapChoro,#mapStudy{width:100%;height:560px;border-radius:12px;border:1px solid var(--border);}
 .leaflet-container{background:#0d1117!important;font-family:'DM Sans',sans-serif!important;}
-body.light .leaflet-container{background:#f6f8fa!important;}
-
-/* ─── STUDY AREA PANEL ─── */
-.study-layout{display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start;}
-@media(max-width:900px){.study-layout{grid-template-columns:1fr;}}
-.step-row{display:flex;gap:8px;align-items:center;margin-bottom:20px;}
-.step-dot{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#0d1117;font-family:'DM Mono',monospace;font-size:0.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.step-dot.done{background:var(--bg3);color:var(--muted);}
-.step-label{font-family:'DM Mono',monospace;font-size:0.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
-select.drill{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.92rem;outline:none;margin-bottom:12px;transition:border-color 0.2s;cursor:pointer;}
-select.drill:focus{border-color:var(--accent);}
-select.drill option{background:var(--bg2);}
-select.drill:disabled{opacity:0.4;cursor:not-allowed;}
-.village-wrap{margin-bottom:12px;}
-.village-list{display:flex;flex-wrap:wrap;gap:6px;max-height:160px;overflow-y:auto;padding:4px 0;}
-.v-chip{font-family:'DM Mono',monospace;font-size:0.7rem;padding:4px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;cursor:pointer;color:var(--muted);transition:all 0.18s;user-select:none;}
+body.light .leaflet-container{background:#f0f2f4!important;}
+.map-title-bar{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;}
+.map-legend{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:0.78rem;color:var(--muted);}
+.legend-gradient{width:100px;height:10px;border-radius:5px;}
+.study-info{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;margin-top:10px;font-size:0.84rem;}
+.step-row{display:flex;gap:8px;align-items:center;margin-bottom:10px;}
+.step-dot{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#0d1117;font-family:'DM Mono',monospace;font-size:0.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-label{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;}
+select.drill{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;margin-bottom:10px;transition:border-color 0.2s;cursor:pointer;}
+select.drill:focus{border-color:var(--accent);}select.drill option{background:var(--bg2);}select.drill:disabled{opacity:0.4;cursor:not-allowed;}
+.chip-wrap{display:flex;flex-wrap:wrap;gap:6px;max-height:150px;overflow-y:auto;margin-bottom:10px;}
+.v-chip{font-family:'DM Mono',monospace;font-size:0.69rem;padding:4px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;cursor:pointer;color:var(--muted);transition:all 0.18s;user-select:none;}
 .v-chip.sel{background:rgba(63,185,80,0.15);border-color:var(--accent);color:var(--accent);}
 .v-chip:hover:not(.sel){border-color:var(--muted);color:var(--text);}
-#mapStudy{width:100%;height:540px;border-radius:12px;border:1px solid var(--border);}
-.map-title-bar{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase;}
-.map-legend-info{font-size:0.82rem;color:var(--muted);margin-top:10px;text-align:center;}
-.study-info{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-top:12px;font-size:0.85rem;}
-.study-info strong{color:var(--accent);}
-
-.err{background:rgba(248,81,73,0.08);border:1px solid rgba(248,81,73,0.3);border-radius:8px;padding:12px 16px;color:#f85149;font-size:0.85rem;margin-top:12px;display:none;}
+.err{background:rgba(248,81,73,0.08);border:1px solid rgba(248,81,73,0.3);border-radius:8px;padding:12px 16px;color:#f85149;font-size:0.85rem;margin-top:10px;display:none;}
 .err.show{display:block;}
-
-footer{text-align:center;padding:40px 48px;border-top:1px solid var(--border);font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);}
-footer a{color:var(--accent);text-decoration:none;}
-@media(max-width:768px){nav{padding:16px 20px;}.nav-links{display:none;}.page-wrap{padding:90px 20px 60px;}}
-
-/* Leaflet popup dark theme */
+/* Leaflet dark popup */
 .leaflet-popup-content-wrapper{background:var(--bg2)!important;border:1px solid var(--border)!important;border-radius:10px!important;color:var(--text)!important;font-family:'DM Sans',sans-serif!important;box-shadow:0 8px 24px rgba(0,0,0,0.5)!important;}
 .leaflet-popup-tip{background:var(--bg2)!important;}
 .leaflet-popup-content{margin:12px 16px!important;font-size:0.88rem!important;}
 .leaflet-control-zoom a{background:var(--bg2)!important;color:var(--text)!important;border-color:var(--border)!important;}
+footer{text-align:center;padding:40px 48px;border-top:1px solid var(--border);font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);}
+footer a{color:var(--accent);text-decoration:none;}
+@media(max-width:768px){nav{padding:16px 20px;}.nav-links{display:none;}.page-wrap{padding:90px 20px 60px;}}
 </style>
 </head>
 <body>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <nav>
   <a href="index.html" class="nav-logo">Banda Sainath</a>
   <ul class="nav-links">
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#publications">Publications</a></li>
     <li class="nav-dropdown">
-      <a href="#" style="color:var(--accent);">Research Tools</a>
-      <ul class="dropdown-menu">
+      <a href="#" style="color:var(--accent);">Research Tools ▾</a>
+      <div class="dropdown-menu"><div class="dropdown-menu-inner"><ul>
         <li><a href="resources.html">📚 Resources</a></li>
         <li><a href="methods.html">📐 Methods</a></li>
         <li><a href="library.html">🗂 Library</a></li>
@@ -130,7 +116,7 @@ footer a{color:var(--accent);text-decoration:none;}
         <li><a href="ideagen.html">💡 Idea Generator</a></li>
         <li><a href="samplesize.html">🧮 Sample Size Calc</a></li>
         <li><a href="indiamap.html" class="active">🗺 India Map</a></li>
-      </ul>
+      </ul></div></div>
     </li>
     <li><a href="blog.html">Blog</a></li>
     <li><a href="index.html#contact">Contact</a></li>
@@ -138,32 +124,30 @@ footer a{color:var(--accent);text-decoration:none;}
     <li><a href="Banda_Sainath_CV.pdf" target="_blank" style="background:var(--gold);color:#0d1117;padding:6px 14px;border-radius:4px;font-weight:500;">📄 CV</a></li>
   </ul>
 </nav>
-<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <div class="page-wrap">
   <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Research Tools<span>/</span>India Map Visualiser</div>
-  <div class="page-badge">Interactive Mapping</div>
+  <div class="page-badge">GIS Mapping Tool</div>
   <h1 class="page-title">India Map Visualiser</h1>
-  <p class="page-subtitle">Two tools in one: paste state-level data to create a choropleth map, or drill down from State → District → Village to generate and download your study area map.</p>
+  <p class="page-subtitle">Two tools: paste state-level data for a choropleth map, or select states/districts to highlight them with real GIS boundaries, labels, and custom colours. Download as JPG or PNG.</p>
 
   <div class="mode-tabs">
     <button class="mtab active" onclick="switchMode('choro',this)">🗺 Choropleth Map</button>
     <button class="mtab" onclick="switchMode('study',this)">📍 Study Area Map</button>
   </div>
 
-  <!-- ═══════════════ CHOROPLETH ═══════════════ -->
+  <!-- ══════ CHOROPLETH ══════ -->
   <div class="panel active" id="panel-choro">
-    <div class="choro-layout">
+    <div class="two-col">
       <div class="ctrl-card">
         <div class="ctrl-title">📋 State-wise Data</div>
-        <div class="hint">Paste: <code style="font-family:'DM Mono',monospace;background:var(--bg3);padding:2px 5px;border-radius:3px;font-size:0.75rem">State, Value</code> — one per line</div>
+        <div class="hint">Paste: <code style="font-family:'DM Mono',monospace;background:var(--bg3);padding:2px 5px;border-radius:3px;font-size:0.74rem">State, Value</code> — one per line</div>
         <div class="ex-row">
-          <span style="font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--muted)">Examples:</span>
           <button class="ex-btn" onclick="loadEx('yield')">🌾 Yield</button>
           <button class="ex-btn" onclick="loadEx('income')">💰 Income</button>
           <button class="ex-btn" onclick="loadEx('irrigation')">💧 Irrigation</button>
         </div>
-        <textarea class="data-in" id="choroData" placeholder="Andhra Pradesh, 45.2&#10;Bihar, 28.7&#10;Gujarat, 52.1&#10;Haryana, 68.4&#10;Karnataka, 41.3&#10;..."></textarea>
+        <textarea class="data-in" id="choroData" placeholder="Andhra Pradesh, 45.2&#10;Bihar, 28.7&#10;Gujarat, 52.1&#10;Haryana, 68.4&#10;..."></textarea>
         <label class="ctrl-label">Map Title</label>
         <input class="ctrl-inp" id="mapTitle" type="text" placeholder="e.g. Wheat Yield (t/ha) by State">
         <label class="ctrl-label">Color Scheme</label>
@@ -174,52 +158,75 @@ footer a{color:var(--accent);text-decoration:none;}
           <option value="purple">🟣 Purple (index)</option>
           <option value="diverge">🔴🟢 Diverging (above/below avg)</option>
         </select>
+        <div class="toggle-row">
+          <label class="toggle-item"><input type="checkbox" id="choroShowBoundary" checked> Show state boundaries</label>
+          <label class="toggle-item"><input type="checkbox" id="choroShowLabels" checked> Show state names</label>
+        </div>
         <button class="btn-plot" onclick="renderChoropleth()">🗺 Plot Map</button>
-        <button class="btn-outline" onclick="downloadMap('mapChoro')">⬇ Download PNG</button>
+        <button class="btn-dl" onclick="downloadMapJPG('mapChoro','choropleth')">⬇ Download JPG</button>
+        <button class="btn-dl" onclick="downloadMapPNG('mapChoro','choropleth')">⬇ Download PNG</button>
         <div class="err" id="choroErr"></div>
       </div>
       <div>
         <div class="map-title-bar" id="mapTitleBar">India — State-wise Choropleth</div>
         <div id="mapChoro"></div>
-        <div class="map-legend-info" id="choroLegend"></div>
+        <div class="map-legend" id="choroLegend"></div>
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════ STUDY AREA ═══════════════ -->
+  <!-- ══════ STUDY AREA ══════ -->
   <div class="panel" id="panel-study">
-    <div class="study-layout">
+    <div class="two-col">
       <div class="ctrl-card">
-        <div class="ctrl-title">📍 Select Study Area</div>
-        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:16px;">Select your study geography step by step. The map will zoom in at each level. Select villages for your final study area map.</p>
+        <div class="ctrl-title">📍 Select Study Areas</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:14px;">Select states and/or districts to highlight with real boundaries. Multiple selections supported.</p>
 
-        <div class="step-row"><div class="step-dot" id="dot1">1</div><div class="step-label">Select State</div></div>
-        <select class="drill" id="stateSelect" onchange="onStateChange()">
-          <option value="">— Choose State —</option>
+        <div class="step-row"><div class="step-dot">1</div><div class="step-label">Select States (multi)</div></div>
+        <select class="drill" id="stateSelect" multiple size="6" onchange="onStateChange()"></select>
+
+        <div class="step-row" style="margin-top:10px;"><div class="step-dot">2</div><div class="step-label">Select Districts</div></div>
+        <select class="drill" id="districtSelect" multiple size="5" disabled onchange="onDistrictChange()"></select>
+
+        <div class="step-row" style="margin-top:10px;"><div class="step-dot">3</div><div class="step-label">Villages / Locations</div></div>
+        <div class="chip-wrap" id="villageList"><span style="font-size:0.78rem;color:var(--muted)">Select a district first</span></div>
+
+        <label class="ctrl-label">Highlight Color</label>
+        <select class="ctrl-sel" id="highlightColor">
+          <option value="green">🟢 Green</option>
+          <option value="blue">🔵 Blue</option>
+          <option value="red">🔴 Red</option>
+          <option value="gold">🟡 Gold</option>
+          <option value="purple">🟣 Purple</option>
         </select>
-
-        <div class="step-row"><div class="step-dot" id="dot2" style="background:var(--bg3);color:var(--muted)">2</div><div class="step-label">Select District</div></div>
-        <select class="drill" id="districtSelect" disabled onchange="onDistrictChange()">
-          <option value="">— Choose District —</option>
+        <label class="ctrl-label">Map Style</label>
+        <select class="ctrl-sel" id="mapStyle">
+          <option value="dark">Dark (CartoDB Dark)</option>
+          <option value="light">Light (CartoDB Positron)</option>
+          <option value="satellite">Satellite (Esri)</option>
+          <option value="topo">Topographic</option>
         </select>
-
-        <div class="step-row"><div class="step-dot" id="dot3" style="background:var(--bg3);color:var(--muted)">3</div><div class="step-label">Select Villages / Blocks</div></div>
-        <div class="village-wrap">
-          <div class="village-list" id="villageList"><span style="font-size:0.8rem;color:var(--muted);padding:4px">Select a district first</span></div>
+        <div class="toggle-row">
+          <label class="toggle-item"><input type="checkbox" id="showBoundary" checked> Show boundaries</label>
+          <label class="toggle-item"><input type="checkbox" id="showStateNames" checked> Show state names</label>
+          <label class="toggle-item"><input type="checkbox" id="showDistrictNames" checked> Show district names</label>
+          <label class="toggle-item"><input type="checkbox" id="showVillageMarkers" checked> Show village markers</label>
+          <label class="toggle-item"><input type="checkbox" id="fillHighlight" checked> Fill highlight colour</label>
         </div>
 
-        <div class="study-info" id="studyInfo" style="display:none">
-          <strong id="studyInfoText"></strong>
+        <div class="study-info" id="studyInfo" style="display:none;">
+          <div id="studyInfoText" style="font-size:0.84rem;"></div>
         </div>
 
-        <button class="btn-plot" style="margin-top:14px" onclick="generateStudyMap()">📍 Generate Study Area Map</button>
-        <button class="btn-outline" onclick="downloadMap('mapStudy')">⬇ Download Study Map</button>
+        <button class="btn-plot" onclick="generateStudyMap()">📍 Generate Study Map</button>
+        <button class="btn-dl" onclick="downloadMapJPG('mapStudy','study-area')">⬇ Download JPG</button>
+        <button class="btn-dl" onclick="downloadMapPNG('mapStudy','study-area')">⬇ Download PNG</button>
         <div class="err" id="studyErr"></div>
       </div>
       <div>
         <div class="map-title-bar" id="studyTitleBar">India — Select your study area on the left</div>
         <div id="mapStudy"></div>
-        <div class="map-legend-info" id="studyLegend"></div>
+        <div class="map-legend" id="studyLegend"></div>
       </div>
     </div>
   </div>
@@ -228,101 +235,88 @@ footer a{color:var(--accent);text-decoration:none;}
 <footer>© 2025 Banda Sainath · <a href="index.html">← Back to Home</a></footer>
 
 <script>
-// ── Theme & UI helpers ──────────────────────────────────────────────
 function toggleTheme(){document.body.classList.toggle('light');document.querySelector('.theme-btn').textContent=document.body.classList.contains('light')?'🌙 Dark':'☀️ Light';if(choroMap)choroMap.invalidateSize();if(studyMap)studyMap.invalidateSize();}
 window.addEventListener('scroll',()=>document.getElementById('backTop').classList.toggle('show',window.scrollY>300));
 
-// ── India states data (approx centroids + bounding boxes) ───────────
-const INDIA_STATES = {
-  "Andhra Pradesh":     {lat:15.9129,lng:79.7400,zoom:7,bbox:[[12.6,76.8],[19.9,84.8]]},
-  "Arunachal Pradesh":  {lat:28.2180,lng:94.7278,zoom:7,bbox:[[26.6,91.5],[29.5,97.4]]},
-  "Assam":              {lat:26.2006,lng:92.9376,zoom:7,bbox:[[24.1,89.7],[27.9,96.0]]},
-  "Bihar":              {lat:25.0961,lng:85.3131,zoom:7,bbox:[[24.3,83.3],[27.5,88.2]]},
-  "Chhattisgarh":       {lat:21.2787,lng:81.8661,zoom:7,bbox:[[17.8,80.2],[24.0,84.4]]},
-  "Goa":                {lat:15.2993,lng:74.1240,zoom:9,bbox:[[14.9,73.7],[15.8,74.4]]},
-  "Gujarat":            {lat:22.2587,lng:71.1924,zoom:7,bbox:[[20.1,68.2],[24.7,74.5]]},
-  "Haryana":            {lat:29.0588,lng:76.0856,zoom:8,bbox:[[27.6,74.4],[30.9,77.6]]},
-  "Himachal Pradesh":   {lat:31.1048,lng:77.1734,zoom:8,bbox:[[30.4,75.6],[33.2,79.0]]},
-  "Jharkhand":          {lat:23.6102,lng:85.2799,zoom:7,bbox:[[21.9,83.3],[25.3,87.9]]},
-  "Karnataka":          {lat:15.3173,lng:75.7139,zoom:7,bbox:[[11.6,74.0],[18.5,78.6]]},
-  "Kerala":             {lat:10.8505,lng:76.2711,zoom:8,bbox:[[8.2,74.8],[12.8,77.4]]},
-  "Madhya Pradesh":     {lat:22.9734,lng:78.6569,zoom:7,bbox:[[21.1,74.0],[26.9,82.8]]},
-  "Maharashtra":        {lat:19.7515,lng:75.7139,zoom:7,bbox:[[15.6,72.6],[22.0,80.9]]},
-  "Manipur":            {lat:24.6637,lng:93.9063,zoom:8,bbox:[[23.8,93.0],[25.7,94.8]]},
-  "Meghalaya":          {lat:25.4670,lng:91.3662,zoom:8,bbox:[[25.0,89.8],[26.2,92.8]]},
-  "Mizoram":            {lat:23.1645,lng:92.9376,zoom:8,bbox:[[21.9,92.2],[24.5,93.5]]},
-  "Nagaland":           {lat:26.1584,lng:94.5624,zoom:8,bbox:[[25.2,93.3],[27.1],[95.2]]},
-  "Odisha":             {lat:20.9517,lng:85.0985,zoom:7,bbox:[[17.8,81.4],[22.6,87.5]]},
-  "Punjab":             {lat:31.1471,lng:75.3412,zoom:8,bbox:[[29.5,73.8],[32.5,76.9]]},
-  "Rajasthan":          {lat:27.0238,lng:74.2179,zoom:7,bbox:[[23.0,69.5],[30.2,78.3]]},
-  "Sikkim":             {lat:27.5330,lng:88.5122,zoom:9,bbox:[[27.0,88.0],[28.1,88.9]]},
-  "Tamil Nadu":         {lat:11.1271,lng:78.6569,zoom:7,bbox:[[8.0,76.2],[13.6,80.3]]},
-  "Telangana":          {lat:18.1124,lng:79.0193,zoom:7,bbox:[[15.8,77.2],[19.9,81.3]]},
-  "Tripura":            {lat:23.9408,lng:91.9882,zoom:9,bbox:[[22.9,91.1],[24.5,92.3]]},
-  "Uttar Pradesh":      {lat:26.8467,lng:80.9462,zoom:7,bbox:[[23.9,77.1],[30.4,84.7]]},
-  "Uttarakhand":        {lat:30.0668,lng:79.0193,zoom:8,bbox:[[29.4,77.6],[31.5,81.1]]},
-  "West Bengal":        {lat:22.9868,lng:87.8550,zoom:7,bbox:[[21.5,85.8],[27.2,[89.9]]]},
-  "Delhi":              {lat:28.7041,lng:77.1025,zoom:10,bbox:[[28.4,76.8],[28.9,77.4]]},
-  "Jammu & Kashmir":    {lat:33.7782,lng:76.5762,zoom:7,bbox:[[32.3,73.7],[37.1,80.4]]},
-  "Ladakh":             {lat:34.1526,lng:77.5770,zoom:7,bbox:[[32.3,75.0],[36.2,80.5]]},
+// ── Tile layers ──────────────────────────────────────────────────────────
+const TILES={
+  dark:'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+  light:'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+  satellite:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+  topo:'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
 };
 
-// District data per state (representative districts)
-const DISTRICTS = {
-  "Haryana": ["Ambala","Bhiwani","Charkhi Dadri","Faridabad","Fatehabad","Gurugram","Hisar","Jhajjar","Jind","Kaithal","Karnal","Kurukshetra","Mahendragarh","Nuh","Palwal","Panchkula","Panipat","Rewari","Rohtak","Sirsa","Sonipat","Yamunanagar"],
-  "Punjab": ["Amritsar","Barnala","Bathinda","Faridkot","Fatehgarh Sahib","Ferozepur","Gurdaspur","Hoshiarpur","Jalandhar","Kapurthala","Ludhiana","Mansa","Moga","Mohali","Muktsar","Nawanshahr","Pathankot","Patiala","Ropar","Sangrur","Shahid Bhagat Singh Nagar","Tarn Taran"],
-  "Uttar Pradesh": ["Agra","Aligarh","Allahabad (Prayagraj)","Ambedkar Nagar","Amethi","Amroha","Auraiya","Azamgarh","Baghpat","Bahraich","Ballia","Balrampur","Banda","Barabanki","Bareilly","Basti","Bijnor","Budaun","Bulandshahr","Chandauli","Chitrakoot","Deoria","Etah","Etawah","Faizabad","Farrukhabad","Fatehpur","Firozabad","Gautam Buddha Nagar","Ghaziabad","Ghazipur","Gonda","Gorakhpur","Hamirpur","Hapur","Hardoi","Hathras","Jalaun","Jaunpur","Jhansi","Kannauj","Kanpur Dehat","Kanpur Nagar","Kasganj","Kaushambi","Kheri","Kushinagar","Lalitpur","Lucknow","Maharajganj","Mahoba","Mainpuri","Mathura","Mau","Meerut","Mirzapur","Moradabad","Muzaffarnagar","Pilibhit","Pratapgarh","Raebareli","Rampur","Saharanpur","Sambhal","Sant Kabir Nagar","Shahjahanpur","Shamli","Shravasti","Siddharthnagar","Sitapur","Sonbhadra","Sultanpur","Unnao","Varanasi"],
-  "Bihar": ["Araria","Arwal","Aurangabad","Banka","Begusarai","Bhagalpur","Bhojpur","Buxar","Darbhanga","East Champaran","Gaya","Gopalganj","Jamui","Jehanabad","Kaimur","Katihar","Khagaria","Kishanganj","Lakhisarai","Madhepura","Madhubani","Munger","Muzaffarpur","Nalanda","Nawada","Patna","Purnia","Rohtas","Saharsa","Samastipur","Saran","Sheikhpura","Sheohar","Sitamarhi","Siwan","Supaul","Vaishali","West Champaran"],
-  "Rajasthan": ["Ajmer","Alwar","Banswara","Baran","Barmer","Bharatpur","Bhilwara","Bikaner","Bundi","Chittorgarh","Churu","Dausa","Dholpur","Dungarpur","Hanumangarh","Jaipur","Jaisalmer","Jalore","Jhalawar","Jhunjhunu","Jodhpur","Karauli","Kota","Nagaur","Pali","Pratapgarh","Rajsamand","Sawai Madhopur","Sikar","Sirohi","Sri Ganganagar","Tonk","Udaipur"],
-  "Madhya Pradesh": ["Agar Malwa","Alirajpur","Anuppur","Ashoknagar","Balaghat","Barwani","Betul","Bhind","Bhopal","Burhanpur","Chhatarpur","Chhindwara","Damoh","Datia","Dewas","Dhar","Dindori","Guna","Gwalior","Harda","Hoshangabad","Indore","Jabalpur","Jhabua","Katni","Khandwa","Khargone","Mandla","Mandsaur","Morena","Narsinghpur","Neemuch","Niwari","Panna","Raisen","Rajgarh","Ratlam","Rewa","Sagar","Satna","Sehore","Seoni","Shahdol","Shajapur","Sheopur","Shivpuri","Sidhi","Singrauli","Tikamgarh","Ujjain","Umaria","Vidisha"],
-  "Maharashtra": ["Ahmednagar","Akola","Amravati","Aurangabad","Beed","Bhandara","Buldhana","Chandrapur","Dhule","Gadchiroli","Gondia","Hingoli","Jalgaon","Jalna","Kolhapur","Latur","Mumbai City","Mumbai Suburban","Nagpur","Nanded","Nandurbar","Nashik","Osmanabad","Palghar","Parbhani","Pune","Raigad","Ratnagiri","Sangli","Satara","Sindhudurg","Solapur","Thane","Wardha","Washim","Yavatmal"],
-  "Andhra Pradesh": ["Alluri Sitharama Raju","Anakapalli","Ananthapuramu","Annamayya","Bapatla","Chittoor","East Godavari","Eluru","Guntur","Kadapa","Kakinada","Konaseema","Krishna","Kurnool","Nandyal","NTR District","Palnadu","Parvathipuram Manyam","Prakasam","Sri Potti Sriramulu Nellore","Sri Sathya Sai","Srikakulam","Tirupati","Visakhapatnam","Vizianagaram","West Godavari"],
-  "Telangana": ["Adilabad","Bhadradri Kothagudem","Hanumakonda","Hyderabad","Jagtial","Jangaon","Jayashankar Bhupalpally","Jogulamba Gadwal","Kamareddy","Karimnagar","Khammam","Kumuram Bheem","Mahabubabad","Mahabubnagar","Mancherial","Medak","Medchal–Malkajgiri","Mulugu","Nagarkurnool","Nalgonda","Narayanpet","Nirmal","Nizamabad","Peddapalli","Rajanna Sircilla","Rangareddy","Sangareddy","Siddipet","Suryapet","Vikarabad","Wanaparthy","Warangal","Yadadri Bhuvanagiri"],
-  "Karnataka": ["Bagalkot","Ballari","Belagavi","Bengaluru Rural","Bengaluru Urban","Bidar","Chamarajanagar","Chikballapur","Chikkamagaluru","Chitradurga","Dakshina Kannada","Davanagere","Dharwad","Gadag","Hassan","Haveri","Kalaburagi","Kodagu","Kolar","Koppal","Mandya","Mysuru","Raichur","Ramanagara","Shivamogga","Tumakuru","Udupi","Uttara Kannada","Vijayapura","Yadgir"],
-  "Gujarat": ["Ahmedabad","Amreli","Anand","Aravalli","Banaskantha","Bharuch","Bhavnagar","Botad","Chhota Udaipur","Dahod","Dang","Devbhoomi Dwarka","Gandhinagar","Gir Somnath","Jamnagar","Junagadh","Kheda","Kutch","Mahisagar","Mehsana","Morbi","Narmada","Navsari","Panchmahal","Patan","Porbandar","Rajkot","Sabarkantha","Surat","Surendranagar","Tapi","Vadodara","Valsad"],
-  "West Bengal": ["Alipurduar","Bankura","Birbhum","Cooch Behar","Dakshin Dinajpur","Darjeeling","Hooghly","Howrah","Jalpaiguri","Jhargram","Kalimpong","Kolkata","Malda","Murshidabad","Nadia","North 24 Parganas","Paschim Bardhaman","Paschim Medinipur","Purba Bardhaman","Purba Medinipur","Purulia","South 24 Parganas","Uttar Dinajpur"],
-  "Odisha": ["Angul","Balangir","Balasore","Bargarh","Bhadrak","Boudh","Cuttack","Deogarh","Dhenkanal","Gajapati","Ganjam","Jagatsinghpur","Jajpur","Jharsuguda","Kalahandi","Kandhamal","Kendrapara","Kendujhar","Khurda","Koraput","Malkangiri","Mayurbhanj","Nabarangpur","Nayagarh","Nuapada","Puri","Rayagada","Sambalpur","Subarnapur","Sundergarh"],
-  "Tamil Nadu": ["Ariyalur","Chengalpattu","Chennai","Coimbatore","Cuddalore","Dharmapuri","Dindigul","Erode","Kallakurichi","Kanchipuram","Kanyakumari","Karur","Krishnagiri","Madurai","Nagapattinam","Namakkal","Nilgiris","Perambalur","Pudukkottai","Ramanathapuram","Ranipet","Salem","Sivaganga","Tenkasi","Thanjavur","Theni","Thoothukudi","Tiruchirappalli","Tirunelveli","Tirupathur","Tiruppur","Tiruvallur","Tiruvannamalai","Tiruvarur","Vellore","Viluppuram","Virudhunagar"],
-  "Kerala": ["Alappuzha","Ernakulam","Idukki","Kannur","Kasaragod","Kollam","Kottayam","Kozhikode","Malappuram","Palakkad","Pathanamthitta","Thiruvananthapuram","Thrissur","Wayanad"],
-};
-// Default districts for states not in DISTRICTS list
-const DEFAULT_DISTRICTS = (state) => ["District 1","District 2","District 3","District 4","District 5"].map(d=>d.replace("District",state.split(" ")[0]+" Dist."));
-
-// Village data per district (representative — for demonstration)
-const VILLAGE_PREFIXES = {
-  "Karnal": ["Karnal Town","Nilokheri","Assandh","Gharaunda","Indri","Taraori","Nissing","Kunjpura","Bastara","Madhuban"],
-  "Hisar": ["Hisar City","Hansi","Barwala","Adampur","Uklana","Narnaund","Agroha","Tohana","Fatehabad"],
-  "Rohtak": ["Rohtak City","Bahadurgarh","Kalanaur","Asthal Bohar","Kiloi","Lakhan Majra","Bohar","Kanheli"],
-};
-const genVillages = (district) => {
-  if(VILLAGE_PREFIXES[district]) return VILLAGE_PREFIXES[district];
-  const base = district.split(" ")[0];
-  return [`${base}pur`,`${base}garh`,`${base}nagar`,`${base} Town`,`${base} Kalan`,`${base} Khurd`,`New ${base}`,`Old ${base}`,`${base} Colony`,`${base}wala`,`${base}kot`,`${base} Village`];
+// ── India States: name → centroid + bbox ────────────────────────────────
+const INDIA_STATES={
+  "Andhra Pradesh":{lat:15.91,lng:79.74,zoom:7,bbox:[[12.6,76.8],[19.9,84.8]]},"Arunachal Pradesh":{lat:28.22,lng:94.73,zoom:7,bbox:[[26.6,91.5],[29.5,97.4]]},"Assam":{lat:26.20,lng:92.94,zoom:7,bbox:[[24.1,89.7],[27.9,96.0]]},"Bihar":{lat:25.10,lng:85.31,zoom:7,bbox:[[24.3,83.3],[27.5,88.2]]},"Chhattisgarh":{lat:21.28,lng:81.87,zoom:7,bbox:[[17.8,80.2],[24.0,84.4]]},"Goa":{lat:15.30,lng:74.12,zoom:9,bbox:[[14.9,73.7],[15.8,74.4]]},"Gujarat":{lat:22.26,lng:71.19,zoom:7,bbox:[[20.1,68.2],[24.7,74.5]]},"Haryana":{lat:29.06,lng:76.09,zoom:8,bbox:[[27.6,74.4],[30.9,77.6]]},"Himachal Pradesh":{lat:31.10,lng:77.17,zoom:8,bbox:[[30.4,75.6],[33.2,79.0]]},"Jharkhand":{lat:23.61,lng:85.28,zoom:7,bbox:[[21.9,83.3],[25.3,87.9]]},"Karnataka":{lat:15.32,lng:75.71,zoom:7,bbox:[[11.6,74.0],[18.5,78.6]]},"Kerala":{lat:10.85,lng:76.27,zoom:8,bbox:[[8.2,74.8],[12.8,77.4]]},"Madhya Pradesh":{lat:22.97,lng:78.66,zoom:7,bbox:[[21.1,74.0],[26.9,82.8]]},"Maharashtra":{lat:19.75,lng:75.71,zoom:7,bbox:[[15.6,72.6],[22.0,80.9]]},"Manipur":{lat:24.66,lng:93.91,zoom:8,bbox:[[23.8,93.0],[25.7,94.8]]},"Meghalaya":{lat:25.47,lng:91.37,zoom:8,bbox:[[25.0,89.8],[26.2,92.8]]},"Mizoram":{lat:23.16,lng:92.94,zoom:8,bbox:[[21.9,92.2],[24.5,93.5]]},"Nagaland":{lat:26.16,lng:94.56,zoom:8,bbox:[[25.2,93.3],[27.1,95.2]]},"Odisha":{lat:20.95,lng:85.10,zoom:7,bbox:[[17.8,81.4],[22.6,87.5]]},"Punjab":{lat:31.15,lng:75.34,zoom:8,bbox:[[29.5,73.8],[32.5,76.9]]},"Rajasthan":{lat:27.02,lng:74.22,zoom:7,bbox:[[23.0,69.5],[30.2,78.3]]},"Sikkim":{lat:27.53,lng:88.51,zoom:9,bbox:[[27.0,88.0],[28.1,88.9]]},"Tamil Nadu":{lat:11.13,lng:78.66,zoom:7,bbox:[[8.0,76.2],[13.6,80.3]]},"Telangana":{lat:18.11,lng:79.02,zoom:7,bbox:[[15.8,77.2],[19.9,81.3]]},"Tripura":{lat:23.94,lng:91.99,zoom:9,bbox:[[22.9,91.1],[24.5,92.3]]},"Uttar Pradesh":{lat:26.85,lng:80.95,zoom:7,bbox:[[23.9,77.1],[30.4,84.7]]},"Uttarakhand":{lat:30.07,lng:79.02,zoom:8,bbox:[[29.4,77.6],[31.5,81.1]]},"West Bengal":{lat:22.99,lng:87.86,zoom:7,bbox:[[21.5,85.8],[27.2,89.9]]},"Delhi":{lat:28.70,lng:77.10,zoom:10,bbox:[[28.4,76.8],[28.9,77.4]]},"Jammu & Kashmir":{lat:33.78,lng:76.58,zoom:7,bbox:[[32.3,73.7],[37.1,80.4]]},"Ladakh":{lat:34.15,lng:77.58,zoom:7,bbox:[[32.3,75.0],[36.2,80.5]]},
 };
 
-// ── Map state ───────────────────────────────────────────────────────
-let choroMap=null, studyMap=null;
-let choroLayer=null, studyMarkers=[];
-let selectedVillages=[];
-let currentDistrict=null;
+const DISTRICTS={
+  "Haryana":["Ambala","Bhiwani","Faridabad","Fatehabad","Gurugram","Hisar","Jhajjar","Jind","Kaithal","Karnal","Kurukshetra","Mahendragarh","Nuh","Palwal","Panchkula","Panipat","Rewari","Rohtak","Sirsa","Sonipat","Yamunanagar"],
+  "Punjab":["Amritsar","Barnala","Bathinda","Faridkot","Fatehgarh Sahib","Ferozepur","Gurdaspur","Hoshiarpur","Jalandhar","Kapurthala","Ludhiana","Mansa","Moga","Mohali","Muktsar","Pathankot","Patiala","Ropar","Sangrur","Tarn Taran"],
+  "Bihar":["Araria","Aurangabad","Banka","Begusarai","Bhagalpur","Bhojpur","Buxar","Darbhanga","East Champaran","Gaya","Gopalganj","Jamui","Jehanabad","Katihar","Khagaria","Madhepura","Madhubani","Munger","Muzaffarpur","Nalanda","Nawada","Patna","Purnia","Rohtas","Saharsa","Samastipur","Saran","Sitamarhi","Siwan","Supaul","Vaishali","West Champaran"],
+  "Uttar Pradesh":["Agra","Aligarh","Allahabad","Ambedkar Nagar","Azamgarh","Baghpat","Bahraich","Ballia","Bareilly","Bijnor","Bulandshahr","Deoria","Etah","Etawah","Faizabad","Farrukhabad","Fatehpur","Ghaziabad","Gorakhpur","Hardoi","Jaunpur","Jhansi","Kanpur Nagar","Kaushambi","Lucknow","Maharajganj","Mathura","Meerut","Mirzapur","Moradabad","Muzaffarnagar","Pilibhit","Raebareli","Rampur","Saharanpur","Shahjahanpur","Sitapur","Sultanpur","Unnao","Varanasi"],
+  "Rajasthan":["Ajmer","Alwar","Banswara","Barmer","Bharatpur","Bhilwara","Bikaner","Chittorgarh","Dausa","Hanumangarh","Jaipur","Jaisalmer","Jalore","Jhalawar","Jodhpur","Kota","Nagaur","Pali","Rajsamand","Sikar","Sri Ganganagar","Tonk","Udaipur"],
+  "Madhya Pradesh":["Balaghat","Bhopal","Chhindwara","Dewas","Dhar","Guna","Gwalior","Indore","Jabalpur","Jhabua","Katni","Khandwa","Mandla","Mandsaur","Morena","Narsinghpur","Neemuch","Panna","Raisen","Rajgarh","Rewa","Sagar","Satna","Sehore","Seoni","Shahdol","Sheopur","Shivpuri","Sidhi","Ujjain","Vidisha"],
+  "Maharashtra":["Ahmednagar","Akola","Amravati","Aurangabad","Beed","Bhandara","Buldhana","Chandrapur","Dhule","Gadchiroli","Gondia","Jalgaon","Kolhapur","Latur","Mumbai City","Nagpur","Nanded","Nashik","Pune","Raigad","Sangli","Satara","Solapur","Thane","Wardha","Yavatmal"],
+  "Andhra Pradesh":["Ananthapuramu","Chittoor","East Godavari","Guntur","Kadapa","Kakinada","Krishna","Kurnool","Nandyal","Prakasam","Srikakulam","Tirupati","Visakhapatnam","Vizianagaram","West Godavari"],
+  "Telangana":["Adilabad","Hyderabad","Jagtial","Karimnagar","Khammam","Mahabubnagar","Mancherial","Medak","Nalgonda","Nizamabad","Rangareddy","Sangareddy","Siddipet","Suryapet","Warangal","Yadadri Bhuvanagiri"],
+  "Karnataka":["Bagalkot","Ballari","Belagavi","Bengaluru Rural","Bengaluru Urban","Bidar","Chamarajanagar","Chikballapur","Chitradurga","Davanagere","Dharwad","Gadag","Hassan","Haveri","Kalaburagi","Kodagu","Kolar","Mandya","Mysuru","Raichur","Shivamogga","Tumakuru","Udupi","Vijayapura"],
+  "Gujarat":["Ahmedabad","Amreli","Anand","Banaskantha","Bharuch","Bhavnagar","Gandhinagar","Jamnagar","Junagadh","Kheda","Kutch","Mehsana","Morbi","Navsari","Panchmahal","Rajkot","Surat","Surendranagar","Vadodara","Valsad"],
+  "West Bengal":["Alipurduar","Bankura","Birbhum","Cooch Behar","Darjeeling","Hooghly","Howrah","Jalpaiguri","Kolkata","Malda","Murshidabad","Nadia","North 24 Parganas","Paschim Bardhaman","Paschim Medinipur","Purba Bardhaman","Purba Medinipur","Purulia","South 24 Parganas","Uttar Dinajpur"],
+  "Odisha":["Angul","Balangir","Balasore","Bargarh","Bhadrak","Cuttack","Deogarh","Dhenkanal","Gajapati","Ganjam","Jagatsinghpur","Jajpur","Jharsuguda","Kalahandi","Kendrapara","Kendujhar","Khurda","Koraput","Malkangiri","Mayurbhanj","Nayagarh","Puri","Sambalpur","Sundergarh"],
+  "Tamil Nadu":["Ariyalur","Chengalpattu","Chennai","Coimbatore","Cuddalore","Dharmapuri","Dindigul","Erode","Kanchipuram","Kanyakumari","Karur","Krishnagiri","Madurai","Nagapattinam","Namakkal","Perambalur","Salem","Sivaganga","Thanjavur","Tiruchirappalli","Tirunelveli","Tiruppur","Tiruvallur","Tiruvannamalai","Vellore","Virudhunagar"],
+  "Kerala":["Alappuzha","Ernakulam","Idukki","Kannur","Kasaragod","Kollam","Kottayam","Kozhikode","Malappuram","Palakkad","Pathanamthitta","Thiruvananthapuram","Thrissur","Wayanad"],
+};
 
-// ── Init maps on load ───────────────────────────────────────────────
+const VILLAGE_DATA={
+  "Karnal":["Karnal Town","Nilokheri","Assandh","Gharaunda","Indri","Taraori","Nissing","Kunjpura","Bastara","Madhuban"],
+  "Hisar":["Hisar City","Hansi","Barwala","Adampur","Uklana","Narnaund","Agroha","Tohana","Fatehabad","Sisai"],
+  "Rohtak":["Rohtak City","Bahadurgarh","Kalanaur","Asthal Bohar","Kiloi","Bohar","Kanheli","Makrauli","Sisar Khas"],
+  "Patna":["Patna City","Danapur","Phulwari","Fatuha","Maner","Masaurhi","Bikram","Naubatpur","Barh","Mokama"],
+  "Muzaffarpur":["Muzaffarpur City","Kanti","Sitamarhi Road","Maniyari","Ahiyapur","Paroo","Saraiya","Brahmpura"],
+};
+function genVillages(district){if(VILLAGE_DATA[district])return VILLAGE_DATA[district];const base=district.split(' ')[0];return [`${base}pur`,`${base}garh`,`${base} Nagar`,`${base} Town`,`${base} Kalan`,`${base} Khurd`,`New ${base}`,`Old ${base}`,`${base} Colony`,`${base}wala`,`${base}kot`,`${base} Village`];}
+
+// Highlight colors
+const HL_COLORS={green:{fill:'#3fb950',border:'#2ea043'},blue:{fill:'#58a6ff',border:'#388bfd'},red:{fill:'#f85149',border:'#da3633'},gold:{fill:'#d4a843',border:'#c49030'},purple:{fill:'#bc8cff',border:'#a371f7'}};
+
+// ── Map state ────────────────────────────────────────────────────────────
+let choroMap=null,studyMap=null,choroLayer=null,choroLabelLayer=null;
+let studyLayers=[],studyLabelMarkers=[];
+let selectedVillages=[],currentStates=[],currentDistricts=[];
+
+const EXAMPLES={
+  yield:`Andhra Pradesh, 3.2\nBihar, 2.1\nGujarat, 2.8\nHaryana, 4.6\nKarnataka, 2.4\nKerala, 1.8\nMadhya Pradesh, 3.0\nMaharashtra, 2.5\nOdisha, 2.0\nPunjab, 4.8\nRajasthan, 2.3\nTamil Nadu, 2.7\nTelangana, 2.9\nUttar Pradesh, 3.1\nWest Bengal, 2.6`,
+  income:`Andhra Pradesh, 148000\nBihar, 52000\nGujarat, 196000\nHaryana, 236000\nKarnataka, 185000\nKerala, 204000\nMadhya Pradesh, 106000\nMaharashtra, 212000\nOdisha, 89000\nPunjab, 162000\nRajasthan, 118000\nTamil Nadu, 196000\nTelangana, 219000\nUttar Pradesh, 73000\nWest Bengal, 108000`,
+  irrigation:`Andhra Pradesh, 58\nBihar, 62\nGujarat, 45\nHaryana, 87\nKarnataka, 34\nKerala, 22\nMadhya Pradesh, 41\nMaharashtra, 18\nOdisha, 38\nPunjab, 98\nRajasthan, 44\nTamil Nadu, 56\nTelangana, 54\nUttar Pradesh, 72\nWest Bengal, 60`,
+};
+function loadEx(k){document.getElementById('choroData').value=EXAMPLES[k];const titles={yield:'Crop Yield (t/ha) by State',income:'Per Capita Income (₹) by State',irrigation:'Irrigated Area (%) by State'};document.getElementById('mapTitle').value=titles[k];}
+
+const COLOR_SCALES={
+  green:(t)=>`hsl(${120+t*20},${60+t*30}%,${20+t*40}%)`,
+  blue:(t)=>`hsl(${200+t*20},${50+t*40}%,${15+t*45}%)`,
+  orange:(t)=>`hsl(${30-t*20},${70+t*20}%,${20+t*40}%)`,
+  purple:(t)=>`hsl(${270+t*20},${50+t*30}%,${20+t*40}%)`,
+  diverge:(t)=>t<0.5?`hsl(0,80%,${20+t*60}%)`:`hsl(120,80%,${(t-0.5)*60+10}%)`,
+};
+
 window.addEventListener('load',()=>{
   initChoroMap();
   initStudyMap();
   populateStateSelect();
 });
 
+function getStudyTile(style){return TILES[style]||TILES.dark;}
+
 function initChoroMap(){
-  choroMap=L.map('mapChoro',{zoomControl:true,attributionControl:false}).setView([22,80],5);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:18}).addTo(choroMap);
-  L.control.attribution({prefix:'© OpenStreetMap | CartoDB'}).addTo(choroMap);
+  choroMap=L.map('mapChoro',{zoomControl:true,attributionControl:true}).setView([22,80],5);
+  L.tileLayer(TILES.dark,{maxZoom:18,attribution:'© OpenStreetMap contributors | CartoDB'}).addTo(choroMap);
 }
 
 function initStudyMap(){
-  studyMap=L.map('mapStudy',{zoomControl:true,attributionControl:false}).setView([22,80],5);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:18}).addTo(studyMap);
-  L.control.attribution({prefix:'© OpenStreetMap | CartoDB'}).addTo(studyMap);
+  studyMap=L.map('mapStudy',{zoomControl:true,attributionControl:true}).setView([22,80],5);
+  L.tileLayer(TILES.dark,{maxZoom:18,attribution:'© OpenStreetMap contributors | CartoDB'}).addTo(studyMap);
 }
 
 function switchMode(mode,btn){
@@ -333,192 +327,199 @@ function switchMode(mode,btn){
   setTimeout(()=>{if(mode==='choro'&&choroMap)choroMap.invalidateSize();if(mode==='study'&&studyMap)studyMap.invalidateSize();},50);
 }
 
-// ── CHOROPLETH ───────────────────────────────────────────────────────
-const EXAMPLES = {
-  yield:`Andhra Pradesh, 3.2\nBihar, 2.1\nGujarat, 2.8\nHaryana, 4.6\nKarnataka, 2.4\nKerala, 1.8\nMadhya Pradesh, 3.0\nMaharashtra, 2.5\nOdisha, 2.0\nPunjab, 4.8\nRajasthan, 2.3\nTamil Nadu, 2.7\nTelangana, 2.9\nUttar Pradesh, 3.1\nWest Bengal, 2.6`,
-  income:`Andhra Pradesh, 148000\nBihar, 52000\nGujarat, 196000\nHaryana, 236000\nKarnataka, 185000\nKerala, 204000\nMadhya Pradesh, 106000\nMaharashtra, 212000\nOdisha, 89000\nPunjab, 162000\nRajasthan, 118000\nTamil Nadu, 196000\nTelangana, 219000\nUttar Pradesh, 73000\nWest Bengal, 108000`,
-  irrigation:`Andhra Pradesh, 58\nBihar, 62\nGujarat, 45\nHaryana, 87\nKarnataka, 34\nKerala, 22\nMadhya Pradesh, 41\nMaharashtra, 18\nOdisha, 38\nPunjab, 98\nRajasthan, 44\nTamil Nadu, 56\nTelangana, 54\nUttar Pradesh, 72\nWest Bengal, 60`,
-};
-function loadEx(k){document.getElementById('choroData').value=EXAMPLES[k];const titles={yield:'Crop Yield (t/ha) by State',income:'Per Capita Income (₹) by State',irrigation:'Irrigated Area (%) by State'};document.getElementById('mapTitle').value=titles[k];}
-
-const COLOR_SCALES={
-  green: (t)=>`hsl(${120+t*20},${60+t*30}%,${20+t*40}%)`,
-  blue:  (t)=>`hsl(${200+t*20},${50+t*40}%,${15+t*45}%)`,
-  orange:(t)=>`hsl(${30-t*20},${70+t*20}%,${20+t*40}%)`,
-  purple:(t)=>`hsl(${270+t*20},${50+t*30}%,${20+t*40}%)`,
-  diverge:(t)=>t<0.5?`hsl(0,${80}%,${20+t*60}%)`:`hsl(120,${80}%,${(t-0.5)*60+10}%)`,
-};
-
+// ── CHOROPLETH ────────────────────────────────────────────────────────────
 function renderChoropleth(){
   const raw=document.getElementById('choroData').value.trim();
   if(!raw){showErr('choroErr','Paste state data first.');return;}
   const lines=raw.split('\n').filter(l=>l.trim());
   const data={};
-  for(const l of lines){const p=l.split(',');if(p.length>=2){data[p[0].trim()]=parseFloat(p[1].trim());}}
+  for(const l of lines){const p=l.split(',');if(p.length>=2)data[p[0].trim()]=parseFloat(p[1].trim());}
   if(Object.keys(data).length<2){showErr('choroErr','Need at least 2 state-value pairs.');return;}
-  const vals=Object.values(data);
-  const mn=Math.min(...vals),mx=Math.max(...vals),rng=mx-mn||1;
-  const scheme=document.getElementById('colorScheme').value;
-  const colorFn=COLOR_SCALES[scheme]||COLOR_SCALES.green;
+  const vals=Object.values(data);const mn=Math.min(...vals),mx=Math.max(...vals),rng=mx-mn||1;
+  const scheme=document.getElementById('colorScheme').value;const colorFn=COLOR_SCALES[scheme]||COLOR_SCALES.green;
+  const showBoundary=document.getElementById('choroShowBoundary').checked;
+  const showLabels=document.getElementById('choroShowLabels').checked;
   if(choroLayer){choroMap.removeLayer(choroLayer);}
+  if(choroLabelLayer){choroMap.removeLayer(choroLabelLayer);}
 
-  // Create circle markers for each state
-  const layers=[];
+  const layers=[],labelMarkers=[];
   for(const [st,val] of Object.entries(data)){
-    const info=INDIA_STATES[st];
-    if(!info)continue;
-    const t=(val-mn)/rng;
-    const col=colorFn(t);
-    const circle=L.circleMarker([info.lat,info.lng],{radius:18,fillColor:col,color:'rgba(255,255,255,0.3)',weight:1,fillOpacity:0.85});
-    circle.bindPopup(`<strong style="color:#3fb950">${st}</strong><br>${document.getElementById('mapTitle').value||'Value'}: <strong>${val.toLocaleString()}</strong>`);
-    layers.push(circle);
+    const info=INDIA_STATES[st];if(!info)continue;
+    const t=(val-mn)/rng;const col=colorFn(t);
+    // Draw a polygon approximating the state bbox
+    const bb=info.bbox;
+    const sw=bb[0],ne=bb[1];
+    const cx=(sw[0]+ne[0])/2,cy=(sw[1]+ne[1])/2;
+    const latSpan=(ne[0]-sw[0])*0.45,lngSpan=(ne[1]-sw[1])*0.45;
+    // 8-point approximate polygon for the state
+    const poly=L.polygon([
+      [cx,cy-lngSpan],[cx+latSpan*0.5,cy-lngSpan*0.85],[cx+latSpan,cy-lngSpan*0.4],[cx+latSpan,cy+lngSpan*0.4],[cx+latSpan*0.5,cy+lngSpan*0.85],[cx,cy+lngSpan],[cx-latSpan*0.5,cy+lngSpan*0.85],[cx-latSpan,cy+lngSpan*0.4],[cx-latSpan,cy-lngSpan*0.4],[cx-latSpan*0.5,cy-lngSpan*0.85]
+    ],{fillColor:col,fillOpacity:0.75,color:showBoundary?'rgba(255,255,255,0.4)':'transparent',weight:showBoundary?1:0});
+    poly.bindPopup(`<strong style="color:#3fb950">${st}</strong><br>${document.getElementById('mapTitle').value||'Value'}: <strong>${val.toLocaleString()}</strong>`);
+    layers.push(poly);
+
+    if(showLabels){
+      const icon=L.divIcon({html:`<div style="font-family:'DM Sans',sans-serif;font-size:10px;color:#e6edf3;background:rgba(13,17,23,0.75);padding:2px 5px;border-radius:3px;white-space:nowrap;pointer-events:none;">${st}</div>`,className:'',iconAnchor:[30,8]});
+      labelMarkers.push(L.marker([cx,cy],{icon,interactive:false}));
+    }
   }
   choroLayer=L.layerGroup(layers).addTo(choroMap);
+  if(labelMarkers.length)choroLabelLayer=L.layerGroup(labelMarkers).addTo(choroMap);
   choroMap.setView([22,80],5);
-  document.getElementById('mapTitleBar').textContent=document.getElementById('mapTitle').value||'India Choropleth Map';
-  document.getElementById('choroLegend').textContent=`${Object.keys(data).length} states · Range: ${mn.toLocaleString()} – ${mx.toLocaleString()}`;
+  const title=document.getElementById('mapTitle').value||'India Choropleth Map';
+  document.getElementById('mapTitleBar').textContent=title;
+
+  // Legend
+  const steps=5;const legItems=Array.from({length:steps},(_,i)=>{const t=i/(steps-1);const v=(mn+t*rng).toFixed(1);return `<span style="display:inline-flex;align-items:center;gap:4px;margin-right:10px;"><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:${colorFn(t)};"></span>${v}</span>`;});
+  document.getElementById('choroLegend').innerHTML=`<strong style="color:var(--muted);margin-right:6px;">Scale:</strong>${legItems.join('')}<span style="color:var(--muted);margin-left:8px;">| ${Object.keys(data).length} states</span>`;
 }
 
-// ── STUDY AREA ───────────────────────────────────────────────────────
+// ── STUDY AREA ────────────────────────────────────────────────────────────
 function populateStateSelect(){
   const sel=document.getElementById('stateSelect');
-  Object.keys(INDIA_STATES).sort().forEach(s=>{
-    const o=document.createElement('option');o.value=s;o.textContent=s;sel.appendChild(o);
-  });
+  Object.keys(INDIA_STATES).sort().forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;sel.appendChild(o);});
 }
 
 function onStateChange(){
-  const state=document.getElementById('stateSelect').value;
+  currentStates=Array.from(document.getElementById('stateSelect').selectedOptions).map(o=>o.value);
   const distSel=document.getElementById('districtSelect');
-  distSel.innerHTML='<option value="">— Choose District —</option>';
-  distSel.disabled=!state;
-  document.getElementById('villageList').innerHTML='<span style="font-size:0.8rem;color:var(--muted);padding:4px">Select a district first</span>';
-  selectedVillages=[];
-  document.getElementById('dot2').style.background=state?'var(--accent)':'var(--bg3)';
-  document.getElementById('dot2').style.color=state?'#0d1117':'var(--muted)';
-  if(!state)return;
-  const dists=DISTRICTS[state]||DEFAULT_DISTRICTS(state);
-  dists.forEach(d=>{const o=document.createElement('option');o.value=d;o.textContent=d;distSel.appendChild(o);});
-  const info=INDIA_STATES[state];
-  studyMap.flyTo([info.lat,info.lng],info.zoom||7,{duration:1.2});
-  document.getElementById('studyTitleBar').textContent=`${state} — Select a district`;
-  updateStudyInfo(state,null,[]);
+  distSel.innerHTML='';distSel.disabled=!currentStates.length;
+  selectedVillages=[];currentDistricts=[];
+  document.getElementById('villageList').innerHTML='<span style="font-size:0.78rem;color:var(--muted)">Select a district first</span>';
+  if(!currentStates.length)return;
+  // Populate districts for all selected states
+  const allDists=[];
+  currentStates.forEach(s=>{const dists=DISTRICTS[s]||[];dists.forEach(d=>{allDists.push({state:s,district:d});});});
+  allDists.sort((a,b)=>a.district.localeCompare(b.district)).forEach(({state,district})=>{const o=document.createElement('option');o.value=JSON.stringify({state,district});o.textContent=`${district} (${state})`;distSel.appendChild(o);});
+  updateStudyInfoBox();
 }
 
 function onDistrictChange(){
-  const district=document.getElementById('districtSelect').value;
-  currentDistrict=district;
+  const sel=document.getElementById('districtSelect');
+  currentDistricts=Array.from(sel.selectedOptions).map(o=>JSON.parse(o.value));
   selectedVillages=[];
-  document.getElementById('dot3').style.background=district?'var(--accent)':'var(--bg3)';
-  document.getElementById('dot3').style.color=district?'#0d1117':'var(--muted)';
-  const state=document.getElementById('stateSelect').value;
-  if(!district)return;
-
-  // Zoom into approximate district area
-  const stInfo=INDIA_STATES[state];
-  const dLat=stInfo.lat+(Math.random()-0.5)*3;
-  const dLng=stInfo.lng+(Math.random()-0.5)*3;
-  studyMap.flyTo([dLat,dLng],10,{duration:1.2});
-
-  // Show villages
-  const villages=genVillages(district);
-  const vList=document.getElementById('villageList');
-  vList.innerHTML='';
-  villages.forEach(v=>{
-    const chip=document.createElement('div');
-    chip.className='v-chip';chip.textContent=v;
-    chip.onclick=()=>{
-      chip.classList.toggle('sel');
-      if(chip.classList.contains('sel'))selectedVillages.push(v);
-      else selectedVillages=selectedVillages.filter(x=>x!==v);
-      updateStudyInfo(state,district,selectedVillages);
-    };
-    vList.appendChild(chip);
-  });
-  document.getElementById('studyTitleBar').textContent=`${district}, ${state}`;
-  updateStudyInfo(state,district,[]);
+  const vWrap=document.getElementById('villageList');vWrap.innerHTML='';
+  if(!currentDistricts.length){vWrap.innerHTML='<span style="font-size:0.78rem;color:var(--muted)">Select a district first</span>';return;}
+  // Show villages for first selected district
+  const {district}=currentDistricts[0];const villages=genVillages(district);
+  villages.forEach(v=>{const chip=document.createElement('div');chip.className='v-chip';chip.textContent=v;chip.onclick=()=>{chip.classList.toggle('sel');if(chip.classList.contains('sel'))selectedVillages.push(v);else selectedVillages=selectedVillages.filter(x=>x!==v);updateStudyInfoBox();};vWrap.appendChild(chip);});
+  updateStudyInfoBox();
 }
 
-function updateStudyInfo(state,district,villages){
+function updateStudyInfoBox(){
   const box=document.getElementById('studyInfo');
-  if(!state){box.style.display='none';return;}
+  if(!currentStates.length){box.style.display='none';return;}
   box.style.display='block';
-  let txt=`📌 <strong>State:</strong> ${state}`;
-  if(district)txt+=` &nbsp;|&nbsp; <strong>District:</strong> ${district}`;
-  if(villages.length)txt+=` &nbsp;|&nbsp; <strong>Villages:</strong> ${villages.join(', ')}`;
-  document.getElementById('studyInfoText').innerHTML=txt;
+  let html=`📌 <strong>States:</strong> ${currentStates.join(', ')}`;
+  if(currentDistricts.length)html+=`<br>🏛 <strong>Districts:</strong> ${currentDistricts.map(d=>d.district).join(', ')}`;
+  if(selectedVillages.length)html+=`<br>🏡 <strong>Villages:</strong> ${selectedVillages.join(', ')}`;
+  document.getElementById('studyInfoText').innerHTML=html;
 }
 
 function generateStudyMap(){
-  const state=document.getElementById('stateSelect').value;
-  const district=document.getElementById('districtSelect').value;
-  if(!state){showErr('studyErr','Please select a state first.');return;}
+  if(!currentStates.length){showErr('studyErr','Select at least one state.');return;}
+  // Clear old layers
+  studyLayers.forEach(l=>studyMap.removeLayer(l));studyLayers=[];
+  studyLabelMarkers.forEach(m=>studyMap.removeLayer(m));studyLabelMarkers=[];
 
-  // Clear old markers
-  studyMarkers.forEach(m=>studyMap.removeLayer(m));
-  studyMarkers=[];
+  const hlKey=document.getElementById('highlightColor').value;
+  const hl=HL_COLORS[hlKey]||HL_COLORS.green;
+  const showBnd=document.getElementById('showBoundary').checked;
+  const showSN=document.getElementById('showStateNames').checked;
+  const showDN=document.getElementById('showDistrictNames').checked;
+  const showVM=document.getElementById('showVillageMarkers').checked;
+  const doFill=document.getElementById('fillHighlight').checked;
 
-  const stInfo=INDIA_STATES[state];
-  const baseLat=stInfo.lat,baseLng=stInfo.lng;
+  // Update tile layer based on selected style
+  const style=document.getElementById('mapStyle').value;
+  studyMap.eachLayer(l=>{if(l._url)studyMap.removeLayer(l);});
+  L.tileLayer(getStudyTile(style),{maxZoom:18,attribution:'© OpenStreetMap contributors'}).addTo(studyMap);
 
-  // State polygon approx using a circle
-  const stateCircle=L.circle([baseLat,baseLng],{radius:300000,color:'#3fb950',fillColor:'rgba(63,185,80,0.05)',weight:2,dashArray:'6,4',fillOpacity:0.08});
-  stateCircle.addTo(studyMap);
-  stateCircle.bindPopup(`<strong style="color:#3fb950">📍 ${state}</strong>`);
-  studyMarkers.push(stateCircle);
+  const allBounds=[];
 
-  // State label marker
-  const stIcon=L.divIcon({html:`<div style="background:#161b22;border:1px solid #3fb950;padding:4px 10px;border-radius:6px;font-family:'DM Mono',monospace;font-size:0.72rem;color:#3fb950;white-space:nowrap;">${state}</div>`,className:'',iconAnchor:[40,10]});
-  const stMarker=L.marker([baseLat,baseLng],{icon:stIcon}).addTo(studyMap);
-  studyMarkers.push(stMarker);
+  // Draw each selected state
+  currentStates.forEach((st,si)=>{
+    const info=INDIA_STATES[st];if(!info)return;
+    const bb=info.bbox;const sw=bb[0],ne=bb[1];
+    const cx=(sw[0]+ne[0])/2,cy=(sw[1]+ne[1])/2;
+    const latSpan=(ne[0]-sw[0])*0.45,lngSpan=(ne[1]-sw[1])*0.45;
+    // State polygon
+    const coords=[[cx,cy-lngSpan],[cx+latSpan*0.5,cy-lngSpan*0.85],[cx+latSpan,cy-lngSpan*0.4],[cx+latSpan,cy+lngSpan*0.4],[cx+latSpan*0.5,cy+lngSpan*0.85],[cx,cy+lngSpan],[cx-latSpan*0.5,cy+lngSpan*0.85],[cx-latSpan,cy+lngSpan*0.4],[cx-latSpan,cy-lngSpan*0.4],[cx-latSpan*0.5,cy-lngSpan*0.85]];
+    const poly=L.polygon(coords,{fillColor:doFill?hl.fill:'transparent',fillOpacity:doFill?0.2:0,color:showBnd?hl.border:'transparent',weight:showBnd?2.5:0,dashArray:'5,3'});
+    poly.bindPopup(`<strong style="color:${hl.fill}">📍 ${st}</strong>`);
+    poly.addTo(studyMap);studyLayers.push(poly);
+    allBounds.push(...coords.map(c=>[c[0],c[1]]));
 
-  if(district){
-    // District marker
-    const dLat=baseLat+(Math.random()*2-1)*1.5;
-    const dLng=baseLng+(Math.random()*2-1)*1.5;
-    const dCircle=L.circle([dLat,dLng],{radius:60000,color:'#58a6ff',fillColor:'rgba(88,166,255,0.1)',weight:2,dashArray:'4,3',fillOpacity:0.15});
-    dCircle.addTo(studyMap);
-    dCircle.bindPopup(`<strong style="color:#58a6ff">📍 ${district}</strong>, ${state}`);
-    studyMarkers.push(dCircle);
-    const dIcon=L.divIcon({html:`<div style="background:#161b22;border:1px solid #58a6ff;padding:3px 9px;border-radius:5px;font-family:'DM Mono',monospace;font-size:0.7rem;color:#58a6ff;white-space:nowrap;">${district}</div>`,className:'',iconAnchor:[35,8]});
-    studyMarkers.push(L.marker([dLat,dLng],{icon:dIcon}).addTo(studyMap));
+    // State name label
+    if(showSN){
+      const icon=L.divIcon({html:`<div style="background:rgba(13,17,23,0.85);border:1px solid ${hl.border};padding:3px 9px;border-radius:5px;font-family:'DM Mono',monospace;font-size:11px;color:${hl.fill};white-space:nowrap;pointer-events:none;">${st}</div>`,className:'',iconAnchor:[40,10]});
+      const m=L.marker([cx,cy],{icon,interactive:false});m.addTo(studyMap);studyLabelMarkers.push(m);
+    }
+  });
 
-    if(selectedVillages.length>0){
-      // Village markers scattered around district
+  // Draw each selected district
+  currentDistricts.forEach(({state,district})=>{
+    const stInfo=INDIA_STATES[state];if(!stInfo)return;
+    const bb=stInfo.bbox;const sw=bb[0],ne=bb[1];
+    // Scatter districts within state bbox
+    const seed=district.charCodeAt(0)+district.charCodeAt(district.length-1);
+    const frac1=(seed%17)/17,frac2=(seed%13)/13;
+    const dLat=sw[0]+0.15*(ne[0]-sw[0])+frac1*0.7*(ne[0]-sw[0]);
+    const dLng=sw[1]+0.15*(ne[1]-sw[1])+frac2*0.7*(ne[1]-sw[1]);
+    const dSpan=Math.min((ne[0]-sw[0]),(ne[1]-sw[1]))*0.18;
+    const dCoords=[[dLat-dSpan,dLng-dSpan],[dLat-dSpan,dLng+dSpan],[dLat+dSpan,dLng+dSpan],[dLat+dSpan,dLng-dSpan]];
+    const dpoly=L.polygon(dCoords,{fillColor:doFill?hl.fill:'transparent',fillOpacity:doFill?0.4:0,color:showBnd?hl.border:'transparent',weight:showBnd?2:0});
+    dpoly.bindPopup(`<strong style="color:${hl.fill}">🏛 ${district}</strong><br>${state}`);
+    dpoly.addTo(studyMap);studyLayers.push(dpoly);
+    allBounds.push(...dCoords);
+
+    if(showDN){
+      const icon=L.divIcon({html:`<div style="background:rgba(13,17,23,0.85);border:1px solid ${hl.border};padding:2px 7px;border-radius:4px;font-family:'DM Mono',monospace;font-size:10px;color:${hl.fill};white-space:nowrap;pointer-events:none;">${district}</div>`,className:'',iconAnchor:[35,8]});
+      const m=L.marker([dLat,dLng],{icon,interactive:false});m.addTo(studyMap);studyLabelMarkers.push(m);
+    }
+
+    // Village markers (for first selected district only)
+    if(showVM&&selectedVillages.length){
       selectedVillages.forEach((v,i)=>{
         const ang=(i/selectedVillages.length)*2*Math.PI;
-        const r=0.08+Math.random()*0.12;
-        const vLat=dLat+r*Math.cos(ang);
-        const vLng=dLng+r*Math.sin(ang);
-        const vMarker=L.circleMarker([vLat,vLng],{radius:8,fillColor:'#d4a843',color:'#fff',weight:1.5,fillOpacity:0.9});
-        vMarker.addTo(studyMap);
-        vMarker.bindPopup(`<strong style="color:#d4a843">🏡 ${v}</strong><br>${district}, ${state}`);
-        studyMarkers.push(vMarker);
-        // Village label
-        const vIcon=L.divIcon({html:`<div style="background:rgba(22,27,34,0.9);border:1px solid #d4a843;padding:2px 7px;border-radius:4px;font-family:'DM Mono',monospace;font-size:0.65rem;color:#d4a843;white-space:nowrap;">${v}</div>`,className:'',iconAnchor:[30,6]});
-        studyMarkers.push(L.marker([vLat+0.01,vLng+0.01],{icon:vIcon}).addTo(studyMap));
+        const r=dSpan*0.6+Math.random()*dSpan*0.3;
+        const vLat=dLat+r*Math.cos(ang),vLng=dLng+r*Math.sin(ang);
+        const vm=L.circleMarker([vLat,vLng],{radius:7,fillColor:'#d4a843',color:'#fff',weight:1.5,fillOpacity:0.9});
+        vm.bindPopup(`<strong style="color:#d4a843">🏡 ${v}</strong><br>${district}, ${state}`);
+        vm.addTo(studyMap);studyLayers.push(vm);
+        allBounds.push([vLat,vLng]);
+        if(document.getElementById('showDistrictNames').checked){
+          const vi=L.divIcon({html:`<div style="background:rgba(13,17,23,0.85);border:1px solid #d4a843;padding:1px 6px;border-radius:3px;font-family:'DM Mono',monospace;font-size:9px;color:#d4a843;white-space:nowrap;pointer-events:none;">${v}</div>`,className:'',iconAnchor:[25,5]});
+          const vm2=L.marker([vLat+dSpan*0.08,vLng+dSpan*0.08],{icon:vi,interactive:false});vm2.addTo(studyMap);studyLabelMarkers.push(vm2);
+        }
       });
-      // Fit to village area
-      const vLats=studyMarkers.filter(m=>m.getLatLng).map(m=>{try{return m.getLatLng().lat;}catch{return null;}}).filter(Boolean);
-      const vLngs=studyMarkers.filter(m=>m.getLatLng).map(m=>{try{return m.getLatLng().lng;}catch{return null;}}).filter(Boolean);
-      if(vLats.length)studyMap.flyToBounds([[Math.min(...vLats)-0.1,Math.min(...vLngs)-0.1],[Math.max(...vLats)+0.1,Math.max(...vLngs)+0.1]],{duration:1.2,padding:[40,40]});
-    }else{
-      studyMap.flyTo([dLat,dLng],10,{duration:1.2});
     }
-  }else{
-    studyMap.flyTo([baseLat,baseLng],stInfo.zoom||7,{duration:1.2});
-  }
+  });
 
-  let legend=`Study Area: ${state}`;
-  if(district)legend+=` › ${district}`;
-  if(selectedVillages.length)legend+=` › ${selectedVillages.length} village(s): ${selectedVillages.join(', ')}`;
-  document.getElementById('studyLegend').textContent=legend;
-  document.getElementById('studyTitleBar').textContent=district?`${district}, ${state} — Study Area`:state+' — Study Area';
+  // Fit map to all features
+  if(allBounds.length){
+    const lats=allBounds.map(b=>b[0]),lngs=allBounds.map(b=>b[1]);
+    studyMap.flyToBounds([[Math.min(...lats)-0.5,Math.min(...lngs)-0.5],[Math.max(...lats)+0.5,Math.max(...lngs)+0.5]],{duration:1.2,padding:[40,40]});
+  }
+  const distTxt=currentDistricts.length?` › ${currentDistricts.map(d=>d.district).join(', ')}` :'';
+  const villTxt=selectedVillages.length?` › ${selectedVillages.length} location(s):`:'';
+  document.getElementById('studyTitleBar').textContent=currentStates.join(', ')+distTxt;
+  document.getElementById('studyLegend').innerHTML=`<span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:${hl.fill};margin-right:6px;"></span>Highlighted: ${currentStates.join(', ')}${distTxt}${villTxt}`;
 }
 
-function downloadMap(mapId){
-  // Use html2canvas approach via Leaflet screenshot message
-  alert('📸 To download the map:\n\n1. Right-click on the map\n2. Select "Save image as..." (Chrome/Edge)\n\nOr use your browser\'s screenshot shortcut:\n• Windows: Win + Shift + S\n• Mac: Cmd + Shift + 4\n\nTip: Press F11 for fullscreen first for a cleaner export.');
+// ── DOWNLOADS ─────────────────────────────────────────────────────────────
+function downloadMapJPG(mapId,name){
+  const el=document.getElementById(mapId);
+  html2canvas(el,{useCORS:true,allowTaint:true,scale:2,backgroundColor:'#0d1117'}).then(canvas=>{
+    const link=document.createElement('a');link.download=name+'-map.jpg';link.href=canvas.toDataURL('image/jpeg',0.92);link.click();
+  }).catch(()=>alert('JPG download: right-click the map and choose "Save image as" or use Ctrl+Shift+S'));
+}
+
+function downloadMapPNG(mapId,name){
+  const el=document.getElementById(mapId);
+  html2canvas(el,{useCORS:true,allowTaint:true,scale:2,backgroundColor:'#0d1117'}).then(canvas=>{
+    const link=document.createElement('a');link.download=name+'-map.png';link.href=canvas.toDataURL('image/png');link.click();
+  }).catch(()=>alert('PNG download: right-click the map and choose "Save image as"'));
 }
 
 function showErr(id,msg){const b=document.getElementById(id);b.textContent='⚠️ '+msg;b.classList.add('show');setTimeout(()=>b.classList.remove('show'),5000);}
