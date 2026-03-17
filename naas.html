@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="mxHYk3PITQRd54OTSWHV68Gr4SqV7jMlZDDD4PDqAgg" />
+<title>NAAS Score Checker 2026 | Banda Sainath</title>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-589QFCEYJX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-589QFCEYJX');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117; --bg2: #161b22; --bg3: #1c2330;
+    --accent: #3fb950; --accent2: #58a6ff; --gold: #d4a843;
+    --rose: #f78166; --purple: #bc8cff;
+    --text: #e6edf3; --muted: #8b949e; --border: #30363d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.7; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 18px 48px; background: rgba(13,17,23,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.77rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+  .page-hero { padding: 130px 48px 40px; max-width: 900px; margin: 0 auto; }
+  .breadcrumb { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 20px; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb span { margin: 0 8px; }
+  .page-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 10px; }
+  .page-title em { font-style: italic; color: var(--gold); }
+  .page-desc { color: var(--muted); font-size: 0.95rem; max-width: 600px; margin-bottom: 8px; }
+  .disclaimer { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--rose); background: rgba(247,129,102,0.08); border: 1px solid rgba(247,129,102,0.2); border-radius: 6px; padding: 8px 14px; display: inline-block; margin-bottom: 32px; }
+
+  /* SEARCH BOX */
+  .search-section { max-width: 900px; margin: 0 auto; padding: 0 48px 40px; }
+  .search-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 24px; }
+  .search-box label { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 10px; }
+  .search-input-wrap { position: relative; }
+  .search-input-wrap input {
+    width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px 50px 14px 18px; font-family: 'DM Sans', sans-serif; font-size: 1rem;
+    color: var(--text); outline: none; transition: border-color 0.2s;
+  }
+  .search-input-wrap input:focus { border-color: var(--accent); }
+  .search-input-wrap input::placeholder { color: var(--muted); }
+  .search-icon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; pointer-events: none; }
+  .filter-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+  .filter-btn { font-family: 'DM Mono', monospace; font-size: 0.7rem; padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border); color: var(--muted); background: transparent; cursor: pointer; letter-spacing: 0.05em; transition: all 0.2s; }
+  .filter-btn.active, .filter-btn:hover { color: var(--text); border-color: var(--accent2); background: rgba(88,166,255,0.08); }
+
+  /* RESULT CARD */
+  .result-card { background: var(--bg2); border: 2px solid var(--accent); border-radius: 12px; padding: 28px; margin-bottom: 24px; display: none; animation: fadeIn 0.3s ease; }
+  .result-card.visible { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+  .result-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+  .result-journal-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--text); flex: 1; }
+  .naas-badge { font-family: 'DM Mono', monospace; font-size: 2rem; font-weight: 500; padding: 8px 20px; border-radius: 8px; flex-shrink: 0; }
+  .naas-high { background: rgba(63,185,80,0.15); color: var(--accent); border: 1px solid rgba(63,185,80,0.3); }
+  .naas-mid { background: rgba(88,166,255,0.15); color: var(--accent2); border: 1px solid rgba(88,166,255,0.3); }
+  .naas-low { background: rgba(212,168,67,0.15); color: var(--gold); border: 1px solid rgba(212,168,67,0.3); }
+  .result-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+  .meta-item { background: var(--bg3); border-radius: 8px; padding: 12px 14px; }
+  .meta-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+  .meta-value { font-size: 0.95rem; color: var(--text); font-weight: 500; }
+  .icar-note { margin-top: 16px; background: rgba(63,185,80,0.06); border: 1px solid rgba(63,185,80,0.2); border-radius: 8px; padding: 12px 16px; font-size: 0.85rem; color: var(--muted); }
+  .icar-note strong { color: var(--accent); }
+
+  /* RESULTS LIST */
+  .results-list { display: none; margin-bottom: 24px; }
+  .results-list.visible { display: block; }
+  .results-count { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 12px; }
+  .journal-table { width: 100%; border-collapse: collapse; }
+  .journal-table th { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; cursor: pointer; }
+  .journal-table th:hover { color: var(--accent2); }
+  .journal-table td { padding: 10px 12px; border-bottom: 1px solid rgba(48,54,61,0.5); font-size: 0.88rem; }
+  .journal-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .score-pill { font-family: 'DM Mono', monospace; font-size: 0.78rem; padding: 2px 10px; border-radius: 20px; font-weight: 500; }
+  .score-high { background: rgba(63,185,80,0.12); color: var(--accent); }
+  .score-mid  { background: rgba(88,166,255,0.12); color: var(--accent2); }
+  .score-low  { background: rgba(212,168,67,0.12); color: var(--gold); }
+  .pub-tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; padding: 1px 7px; border-radius: 3px; }
+  .pub-elsevier  { background: rgba(247,129,102,0.1); color: var(--rose); }
+  .pub-springer  { background: rgba(188,140,255,0.1); color: var(--purple); }
+  .pub-wiley     { background: rgba(88,166,255,0.1); color: var(--accent2); }
+  .pub-taylor    { background: rgba(212,168,67,0.1); color: var(--gold); }
+  .pub-naas      { background: rgba(63,185,80,0.1); color: var(--accent); }
+  .pub-other     { background: rgba(139,148,158,0.1); color: var(--muted); }
+
+  /* QUICK STATS */
+  .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 32px; }
+  .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 16px; text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--accent); }
+  .stat-lbl { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* NO RESULT */
+  .no-result { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 28px; text-align: center; display: none; }
+  .no-result.visible { display: block; }
+  .no-result p { color: var(--muted); margin-bottom: 8px; }
+
+  footer { border-top: 1px solid var(--border); padding: 28px 48px; text-align: center; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+  .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.5s, transform 0.5s; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .page-hero, .search-section { padding-left: 20px; padding-right: 20px; }
+    .nav-links { gap: 14px; }
+    .nav-links a { font-size: 0.68rem; }
+    footer { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Banda Sainath</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#publications">Publications</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="naas.html" class="active">NAAS Checker</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="Banda_Sainath_CV.pdf" target="_blank" style="background:var(--gold);color:#0d1117;padding:6px 14px;border-radius:4px;font-weight:500;">📄 CV</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>NAAS Score Checker</div>
+  <h1 class="page-title">NAAS Score <em>Checker</em></h1>
+  <p class="page-desc">Instantly check NAAS ratings for 200+ journals — covering Agricultural Sciences, Elsevier, Springer, Wiley, Taylor & Francis and more.</p>
+  <div class="disclaimer">⚠️ Scores based on NAAS 2025–26 ratings. Always verify at naas.org.in before submission. For IF journals: NAAS = 6.0 + IF (capped at 20).</div>
+</div>
+
+<div class="search-section">
+
+  <!-- STATS -->
+  <div class="stats-row fade-in">
+    <div class="stat-card"><div class="stat-num" id="total-count">200+</div><div class="stat-lbl">Journals Listed</div></div>
+    <div class="stat-card"><div class="stat-num">20.0</div><div class="stat-lbl">Maximum Score</div></div>
+    <div class="stat-card"><div class="stat-num">6.0</div><div class="stat-lbl">IF Baseline</div></div>
+    <div class="stat-card"><div class="stat-num">30</div><div class="stat-lbl">Min. for ICAR ARS</div></div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-box fade-in">
+    <label>Search Journal Name</label>
+    <div class="search-input-wrap">
+      <input type="text" id="journalSearch" placeholder="e.g. Economic Affairs, Nature, Ecological Economics..." oninput="searchJournal()" autocomplete="off">
+      <span class="search-icon">🔍</span>
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="setFilter('all',this)">All Publishers</button>
+      <button class="filter-btn" onclick="setFilter('naas',this)">NAAS Rated</button>
+      <button class="filter-btn" onclick="setFilter('elsevier',this)">Elsevier</button>
+      <button class="filter-btn" onclick="setFilter('springer',this)">Springer</button>
+      <button class="filter-btn" onclick="setFilter('wiley',this)">Wiley</button>
+      <button class="filter-btn" onclick="setFilter('taylor',this)">Taylor & Francis</button>
+    </div>
+  </div>
+
+  <!-- SINGLE RESULT -->
+  <div class="result-card" id="resultCard">
+    <div class="result-header">
+      <div class="result-journal-name" id="res-name"></div>
+      <div class="naas-badge" id="res-badge"></div>
+    </div>
+    <div class="result-meta">
+      <div class="meta-item"><div class="meta-label">NAAS Score</div><div class="meta-value" id="res-naas"></div></div>
+      <div class="meta-item"><div class="meta-label">Impact Factor</div><div class="meta-value" id="res-if"></div></div>
+      <div class="meta-item"><div class="meta-label">Publisher</div><div class="meta-value" id="res-pub"></div></div>
+      <div class="meta-item"><div class="meta-label">Discipline</div><div class="meta-value" id="res-disc"></div></div>
+      <div class="meta-item"><div class="meta-label">Frequency</div><div class="meta-value" id="res-freq"></div></div>
+      <div class="meta-item"><div class="meta-label">Access</div><div class="meta-value" id="res-access"></div></div>
+    </div>
+    <div class="icar-note" id="res-note"></div>
+  </div>
+
+  <!-- MULTIPLE RESULTS -->
+  <div class="results-list" id="resultsList">
+    <div class="results-count" id="resultsCount"></div>
+    <table class="journal-table">
+      <thead>
+        <tr>
+          <th onclick="sortTable('name')">Journal Name ↕</th>
+          <th onclick="sortTable('naas')">NAAS Score ↕</th>
+          <th onclick="sortTable('if')">Impact Factor ↕</th>
+          <th>Publisher</th>
+          <th>Discipline</th>
+        </tr>
+      </thead>
+      <tbody id="resultsBody"></tbody>
+    </table>
+  </div>
+
+  <!-- NO RESULT -->
+  <div class="no-result" id="noResult">
+    <p>No journal found matching your search.</p>
+    <p style="font-size:0.82rem;">Try a shorter keyword or check spelling. For the complete list, visit <a href="https://www.naas.org.in" target="_blank" style="color:var(--accent2);">naas.org.in</a></p>
+  </div>
+
+</div>
+
+<footer>
+  © 2025 Banda Sainath · <a href="index.html" style="color:var(--accent); text-decoration:none;">← Home</a> &nbsp;·&nbsp;
+  Data source: NAAS Journal Ratings 2025–26 · <a href="https://www.naas.org.in" target="_blank" style="color:var(--accent2);">naas.org.in</a>
+</footer>
+
+<script>
+// ── JOURNAL DATABASE ─────────────────────────────────────────────────
+const journals = [
+  // ── AGRICULTURAL ECONOMICS & SOCIAL SCIENCES ──
+  { name: "Agricultural Economics Research Review", abbr: "AERR", naas: 5.15, if: null, publisher: "naas", discipline: "Agricultural Economics", freq: "Bi-annual", access: "Open Access" },
+  { name: "Indian Journal of Agricultural Economics", abbr: "IJAE", naas: 5.46, if: null, publisher: "naas", discipline: "Agricultural Economics", freq: "Quarterly", access: "Subscription" },
+  { name: "Economic Affairs", abbr: "EA", naas: 5.50, if: null, publisher: "naas", discipline: "Agricultural Economics", freq: "Quarterly", access: "Open Access" },
+  { name: "Agricultural Economics", abbr: "AgEcon", naas: 11.20, if: 5.2, publisher: "wiley", discipline: "Agricultural Economics", freq: "Bi-monthly", access: "Subscription" },
+  { name: "Journal of Agricultural Economics", abbr: "JAE", naas: 10.30, if: 4.3, publisher: "wiley", discipline: "Agricultural Economics", freq: "Tri-annual", access: "Subscription" },
+  { name: "Food Policy", abbr: "FP", naas: 12.40, if: 6.4, publisher: "elsevier", discipline: "Food & Agricultural Policy", freq: "Bi-monthly", access: "Subscription" },
+  { name: "Journal of Rural Studies", abbr: "JRS", naas: 11.00, if: 5.0, publisher: "elsevier", discipline: "Rural Economics", freq: "8x/year", access: "Subscription" },
+  { name: "World Development", abbr: "WD", naas: 13.40, if: 7.4, publisher: "elsevier", discipline: "Development Economics", freq: "Monthly", access: "Subscription" },
+  { name: "Land Use Policy", abbr: "LUP", naas: 11.10, if: 5.1, publisher: "elsevier", discipline: "Land Economics", freq: "Monthly", access: "Subscription" },
+  { name: "Journal of Development Economics", abbr: "JDE", naas: 12.30, if: 6.3, publisher: "elsevier", discipline: "Development Economics", freq: "Bi-monthly", access: "Subscription" },
+  { name: "Applied Economics", abbr: "AE", naas: 8.90, if: 2.9, publisher: "taylor", discipline: "Economics", freq: "36x/year", access: "Subscription" },
+  { name: "Journal of Agribusiness in Developing and Emerging Economies", abbr: "JADEE", naas: 8.30, if: 2.3, publisher: "emerald", discipline: "Agribusiness", freq: "Quarterly", access: "Subscription" },
+  { name: "Agribusiness", abbr: "Agribusiness", naas: 9.00, if: 3.0, publisher: "wiley", discipline: "Agribusiness", freq: "Quarterly", access: "Subscription" },
+  { name: "Asian Journal of Agricultural Extension Economics and Sociology", abbr: "AJAEES", naas: 4.73, if: null, publisher: "naas", discipline: "Agricultural Extension", freq: "Monthly", access: "Open Access" },
+  { name: "Journal of AgriSearch", abbr: "JAgriS", naas: 4.95, if: null, publisher: "naas", discipline: "Agricultural Sciences", freq: "Quarterly", access: "Open Access" },
+  { name: "SN Business and Economics", abbr: "SNBE", naas: 7.50, if: 1.5, publisher: "springer", discipline: "Business & Economics", freq: "Monthly", access: "Hybrid" },
+
+  // ── ENVIRONMENTAL & RESOURCE ECONOMICS ──
+  { name: "Ecological Economics", abbr: "EcolEcon", naas: 12.50, if: 6.5, publisher: "elsevier", discipline: "Environmental Economics", freq: "Monthly", access: "Subscription" },
+  { name: "Journal of Environmental Economics and Management", abbr: "JEEM", naas: 12.60, if: 6.6, publisher: "elsevier", discipline: "Environmental Economics", freq: "Bi-monthly", access: "Subscription" },
+  { name: "Environmental and Resource Economics", abbr: "ERE", naas: 10.80, if: 4.8, publisher: "springer", discipline: "Environmental Economics", freq: "Monthly", access: "Subscription" },
+  { name: "Journal of Environmental Management", abbr: "JEM", naas: 14.00, if: 8.0, publisher: "elsevier", discipline: "Environmental Management", freq: "Monthly", access: "Subscription" },
+  { name: "Journal of Cleaner Production", abbr: "JCP", naas: 17.00, if: 11.1, publisher: "elsevier", discipline: "Sustainability", freq: "Bi-weekly", access: "Subscription" },
+  { name: "Resources Conservation and Recycling", abbr: "RCR", naas: 15.00, if: 9.0, publisher: "elsevier", discipline: "Environmental Science", freq: "Monthly", access: "Subscription" },
+  { name: "Environmental Science and Policy", abbr: "ESP", naas: 10.90, if: 4.9, publisher: "elsevier", discipline: "Environmental Policy", freq: "Monthly", access: "Subscription" },
+  { name: "Ecosystem Services", abbr: "EcoSer", naas: 11.80, if: 5.8, publisher: "elsevier", discipline: "Ecosystem Services", freq: "Bi-monthly", access: "Subscription" },
+  { name: "Ambio", abbr: "Ambio", naas: 9.60, if: 3.6, publisher: "springer", discipline: "Environmental Science", freq: "Monthly", access: "Subscription" },
+  { name: "Sustainability", abbr: "Sustain", naas: 8.70, if: 3.3, publisher: "mdpi", discipline: "Sustainability", freq: "Monthly", access: "Open Access" },
+  { name: "One Ecosystem", abbr: "OE", naas: 7.00, if: 1.0, publisher: "other", discipline: "Ecology", freq: "Continuous", access: "Open Access" },
+
+  // ── CARBON & CLIMATE ──
+  { name: "Climate Policy", abbr: "CP", naas: 10.20, if: 4.2, publisher: "taylor", discipline: "Climate Policy", freq: "8x/year", access: "Subscription" },
+  { name: "Climatic Change", abbr: "CC", naas: 10.70, if: 4.7, publisher: "springer", discipline: "Climate Science", freq: "Monthly", access: "Subscription" },
+  { name: "Global Environmental Change", abbr: "GEC", naas: 14.60, if: 8.6, publisher: "elsevier", discipline: "Climate & Environment", freq: "Bi-monthly", access: "Subscription" },
+  { name: "Carbon Balance and Management", abbr: "CBM", naas: 8.60, if: 2.6, publisher: "springer", discipline: "Carbon Science", freq: "Annual", access: "Open Access" },
+  { name: "Mitigation and Adaptation Strategies for Global Change", abbr: "MASGC", naas: 8.90, if: 2.9, publisher: "springer", discipline: "Climate Mitigation", freq: "Monthly", access: "Subscription" },
+  { name: "Environmental Research Letters", abbr: "ERL", naas: 12.60, if: 6.6, publisher: "other", discipline: "Environmental Science", freq: "Monthly", access: "Open Access" },
+  { name: "Nature Climate Change", abbr: "NCC", naas: 20.00, if: 30.7, publisher: "springer", discipline: "Climate Science", freq: "Monthly", access: "Subscription" },
+  { name: "Nature Sustainability", abbr: "NS", naas: 20.00, if: 28.6, publisher: "springer", discipline: "Sustainability", freq: "Monthly", access: "Subscription" },
+
+  // ── AGRICULTURE & FOOD SYSTEMS ──
+  { name: "Agricultural Systems", abbr: "AgSys", naas: 12.30, if: 6.3, publisher: "elsevier", discipline: "Agricultural Systems", freq: "Monthly", access: "Subscription" },
+  { name: "Food and Energy Security", abbr: "FES", naas: 9.50, if: 3.5, publisher: "wiley", discipline: "Food Security", freq: "Quarterly", access: "Open Access" },
+  { name: "Global Food Security", abbr: "GFS", naas: 12.80, if: 6.8, publisher: "elsevier", discipline: "Food Security", freq: "Quarterly", access: "Subscription" },
+  { name: "Frontiers in Sustainable Food Systems", abbr: "FSFS", naas: 9.10, if: 3.1, publisher: "other", discipline: "Sustainable Agriculture", freq: "Continuous", access: "Open Access" },
+  { name: "Agriculture Ecosystems and Environment", abbr: "AEE", naas: 12.40, if: 6.4, publisher: "elsevier", discipline: "Agro-ecology", freq: "Semi-monthly", access: "Subscription" },
+  { name: "Field Crops Research", abbr: "FCR", naas: 11.20, if: 5.2, publisher: "elsevier", discipline: "Crop Science", freq: "Semi-monthly", access: "Subscription" },
+  { name: "Agronomy for Sustainable Development", abbr: "ASD", naas: 13.20, if: 7.2, publisher: "springer", discipline: "Agronomy", freq: "Bi-monthly", access: "Subscription" },
+  { name: "Food Security", abbr: "FS", naas: 10.10, if: 4.1, publisher: "springer", discipline: "Food Security", freq: "Bi-monthly", access: "Subscription" },
+  { name: "Current Science", abbr: "CS", naas: 7.00, if: 1.0, publisher: "naas", discipline: "Multidisciplinary", freq: "Bi-monthly", access: "Open Access" },
+  { name: "Indian Journal of Dairy Science", abbr: "IJDS", naas: 6.20, if: null, publisher: "naas", discipline: "Dairy Science", freq: "Bi-monthly", access: "Open Access" },
+  { name: "Journal of Pharmacognosy and Phytochemistry", abbr: "JPP", naas: 5.40, if: null, publisher: "naas", discipline: "Pharmacognosy", freq: "Bi-monthly", access: "Open Access" },
+  { name: "AgroBios", abbr: "AB", naas: 4.50, if: null, publisher: "naas", discipline: "Agriculture", freq: "Quarterly", access: "Subscription" },
+
+  // ── LIVESTOCK & DAIRY ──
+  { name: "Livestock Science", abbr: "LS", naas: 9.30, if: 3.3, publisher: "elsevier", discipline: "Livestock", freq: "Monthly", access: "Subscription" },
+  { name: "Journal of Dairy Science", abbr: "JDS", naas: 11.60, if: 5.6, publisher: "elsevier", discipline: "Dairy Science", freq: "Monthly", access: "Open Access" },
+  { name: "Animal Feed Science and Technology", abbr: "AFST", naas: 10.50, if: 4.5, publisher: "elsevier", discipline: "Animal Nutrition", freq: "Monthly", access: "Subscription" },
+  { name: "Small Ruminant Research", abbr: "SRR", naas: 8.80, if: 2.8, publisher: "elsevier", discipline: "Animal Science", freq: "Monthly", access: "Subscription" },
+  { name: "Tropical Animal Health and Production", abbr: "TAHP", naas: 7.90, if: 1.9, publisher: "springer", discipline: "Animal Health", freq: "Monthly", access: "Subscription" },
+  { name: "AATCCReview", abbr: "AATCC", naas: 6.00, if: null, publisher: "naas", discipline: "Textile & Agriculture", freq: "Monthly", access: "Open Access" },
+
+  // ── WATER & NATURAL RESOURCES ──
+  { name: "Water Resources Research", abbr: "WRR", naas: 13.10, if: 7.1, publisher: "wiley", discipline: "Water Resources", freq: "Monthly", access: "Subscription" },
+  { name: "Agricultural Water Management", abbr: "AWM", naas: 11.60, if: 5.6, publisher: "elsevier", discipline: "Water Management", freq: "Semi-monthly", access: "Subscription" },
+  { name: "Irrigation Science", abbr: "IS", naas: 9.40, if: 3.4, publisher: "springer", discipline: "Irrigation", freq: "Bi-monthly", access: "Subscription" },
+  { name: "Journal of Hydrology", abbr: "JH", naas: 12.80, if: 6.8, publisher: "elsevier", discipline: "Hydrology", freq: "Monthly", access: "Subscription" },
+  { name: "Water", abbr: "Water", naas: 8.90, if: 3.4, publisher: "mdpi", discipline: "Water Science", freq: "Monthly", access: "Open Access" },
+  { name: "Australian Journal of Agricultural and Resource Economics", abbr: "AJARE", naas: 9.40, if: 3.4, publisher: "wiley", discipline: "Agricultural Economics", freq: "Quarterly", access: "Subscription" },
+
+  // ── RURAL DEVELOPMENT & EXTENSION ──
+  { name: "Journal of Extension", abbr: "JExt", naas: 5.20, if: null, publisher: "other", discipline: "Extension Education", freq: "Bi-monthly", access: "Open Access" },
+  { name: "Development and Change", abbr: "DC", naas: 10.60, if: 4.6, publisher: "wiley", discipline: "Development Studies", freq: "Bi-monthly", access: "Subscription" },
+  { name: "The Journal of Development Studies", abbr: "JDS2", naas: 10.10, if: 4.1, publisher: "taylor", discipline: "Development Studies", freq: "Monthly", access: "Subscription" },
+  { name: "Agriculture and Human Values", abbr: "AHV", naas: 10.50, if: 4.5, publisher: "springer", discipline: "Agricultural Sociology", freq: "Quarterly", access: "Subscription" },
+  { name: "Journal of Peasant Studies", abbr: "JPS", naas: 11.30, if: 5.3, publisher: "taylor", discipline: "Rural Studies", freq: "Bi-monthly", access: "Subscription" },
+
+  // ── TECHNOLOGY & INNOVATION ──
+  { name: "Computers and Electronics in Agriculture", abbr: "CEA", naas: 12.80, if: 6.8, publisher: "elsevier", discipline: "Agricultural Technology", freq: "Monthly", access: "Subscription" },
+  { name: "Biosystems Engineering", abbr: "BE", naas: 11.00, if: 5.0, publisher: "elsevier", discipline: "Agricultural Engineering", freq: "Monthly", access: "Subscription" },
+  { name: "Precision Agriculture", abbr: "PA", naas: 11.30, if: 5.3, publisher: "springer", discipline: "Precision Agriculture", freq: "Bi-monthly", access: "Subscription" },
+  { name: "Frontiers in Education", abbr: "FE", naas: 7.90, if: 1.9, publisher: "other", discipline: "Education", freq: "Continuous", access: "Open Access" },
+
+  // ── TOP MULTIDISCIPLINARY ──
+  { name: "Nature", abbr: "Nature", naas: 20.00, if: 64.8, publisher: "springer", discipline: "Multidisciplinary", freq: "Weekly", access: "Subscription" },
+  { name: "Science", abbr: "Science", naas: 20.00, if: 56.9, publisher: "other", discipline: "Multidisciplinary", freq: "Weekly", access: "Subscription" },
+  { name: "PNAS", abbr: "PNAS", naas: 20.00, if: 12.8, publisher: "other", discipline: "Multidisciplinary", freq: "Weekly", access: "Hybrid" },
+  { name: "Nature Food", abbr: "NF", naas: 20.00, if: 23.0, publisher: "springer", discipline: "Food Science", freq: "Monthly", access: "Subscription" },
+  { name: "One Earth", abbr: "OE2", naas: 20.00, if: 16.3, publisher: "elsevier", discipline: "Environment", freq: "Monthly", access: "Subscription" },
+  { name: "iScience", abbr: "iSci", naas: 10.50, if: 4.5, publisher: "elsevier", discipline: "Multidisciplinary", freq: "Monthly", access: "Open Access" },
+  { name: "Heliyon", abbr: "Hel", naas: 8.50, if: 3.4, publisher: "elsevier", discipline: "Multidisciplinary", freq: "Continuous", access: "Open Access" },
+  { name: "Scientific Reports", abbr: "SR", naas: 10.70, if: 4.6, publisher: "springer", discipline: "Multidisciplinary", freq: "Continuous", access: "Open Access" },
+  { name: "PLOS ONE", abbr: "PLOS", naas: 9.30, if: 3.7, publisher: "other", discipline: "Multidisciplinary", freq: "Continuous", access: "Open Access" },
+
+  // ── SOCIAL SCIENCES & POLICY ──
+  { name: "World Development Perspectives", abbr: "WDP", naas: 8.50, if: 2.5, publisher: "elsevier", discipline: "Development Policy", freq: "Quarterly", access: "Subscription" },
+  { name: "Global Environmental Politics", abbr: "GEP", naas: 10.20, if: 4.2, publisher: "other", discipline: "Environmental Politics", freq: "Quarterly", access: "Subscription" },
+  { name: "Economic and Political Weekly", abbr: "EPW", naas: 6.50, if: null, publisher: "naas", discipline: "Political Economy", freq: "Weekly", access: "Subscription" },
+  { name: "Indian Economic Review", abbr: "IER", naas: 6.00, if: null, publisher: "springer", discipline: "Economics", freq: "Bi-annual", access: "Subscription" },
+  { name: "Vikalpa", abbr: "Vik", naas: 5.80, if: null, publisher: "naas", discipline: "Management", freq: "Quarterly", access: "Open Access" },
+
+  // ── SPRINGER AGRICULTURE ──
+  { name: "Agroforestry Systems", abbr: "AS", naas: 9.40, if: 3.4, publisher: "springer", discipline: "Agroforestry", freq: "Monthly", access: "Subscription" },
+  { name: "Nutrient Cycling in Agroecosystems", abbr: "NCA", naas: 9.20, if: 3.2, publisher: "springer", discipline: "Soil Science", freq: "Tri-annual", access: "Subscription" },
+  { name: "Food and Bioprocess Technology", abbr: "FBT", naas: 10.90, if: 4.9, publisher: "springer", discipline: "Food Technology", freq: "Monthly", access: "Subscription" },
+  { name: "Plant and Soil", abbr: "PS", naas: 10.80, if: 4.8, publisher: "springer", discipline: "Soil Science", freq: "Monthly", access: "Subscription" },
+  { name: "European Journal of Agronomy", abbr: "EJA", naas: 10.60, if: 4.6, publisher: "elsevier", discipline: "Agronomy", freq: "8x/year", access: "Subscription" },
+  { name: "Paddy and Water Environment", abbr: "PWE", naas: 8.50, if: 2.5, publisher: "springer", discipline: "Rice Agronomy", freq: "Quarterly", access: "Subscription" },
+  { name: "Journal of Soils and Sediments", abbr: "JSS", naas: 9.40, if: 3.4, publisher: "springer", discipline: "Soil Science", freq: "Monthly", access: "Subscription" },
+
+  // ── WILEY AGRICULTURE ──
+  { name: "Journal of the Science of Food and Agriculture", abbr: "JSFA", naas: 9.50, if: 3.5, publisher: "wiley", discipline: "Food Science", freq: "15x/year", access: "Subscription" },
+  { name: "Crop Science", abbr: "CropSci", naas: 9.50, if: 3.5, publisher: "wiley", discipline: "Crop Science", freq: "Bi-monthly", access: "Subscription" },
+  { name: "Grass and Forage Science", abbr: "GFS2", naas: 8.00, if: 2.0, publisher: "wiley", discipline: "Grassland", freq: "Quarterly", access: "Subscription" },
+  { name: "Natural Resource Modeling", abbr: "NRM", naas: 8.60, if: 2.6, publisher: "wiley", discipline: "Natural Resources", freq: "Quarterly", access: "Subscription" },
+  { name: "Canadian Journal of Agricultural Economics", abbr: "CJAE", naas: 8.90, if: 2.9, publisher: "wiley", discipline: "Agricultural Economics", freq: "Quarterly", access: "Subscription" },
+  { name: "American Journal of Agricultural Economics", abbr: "AJAE", naas: 12.10, if: 6.1, publisher: "wiley", discipline: "Agricultural Economics", freq: "5x/year", access: "Subscription" },
+  { name: "Review of Agricultural Food and Environmental Studies", abbr: "RAFES", naas: 8.20, if: 2.2, publisher: "springer", discipline: "Agricultural Economics", freq: "Quarterly", access: "Subscription" },
+
+  // ── TAYLOR & FRANCIS ──
+  { name: "International Journal of Sustainable Development and World Ecology", abbr: "IJSDWE", naas: 8.50, if: 2.5, publisher: "taylor", discipline: "Sustainable Development", freq: "Bi-monthly", access: "Subscription" },
+  { name: "Journal of Sustainable Agriculture", abbr: "JSA", naas: 8.00, if: 2.0, publisher: "taylor", discipline: "Sustainable Agriculture", freq: "Monthly", access: "Subscription" },
+  { name: "Agroecology and Sustainable Food Systems", abbr: "ASFS", naas: 9.40, if: 3.4, publisher: "taylor", discipline: "Agroecology", freq: "Monthly", access: "Subscription" },
+  { name: "International Journal of Water Resources Development", abbr: "IJWRD", naas: 9.00, if: 3.0, publisher: "taylor", discipline: "Water Resources", freq: "Bi-monthly", access: "Subscription" },
+
+  // ── INDIA-SPECIFIC NAAS JOURNALS ──
+  { name: "Journal of the Indian Society of Agricultural Statistics", abbr: "JISAS", naas: 5.36, if: null, publisher: "naas", discipline: "Agricultural Statistics", freq: "Tri-annual", access: "Subscription" },
+  { name: "Indian Journal of Extension Education", abbr: "IJEE", naas: 4.90, if: null, publisher: "naas", discipline: "Extension Education", freq: "Quarterly", access: "Open Access" },
+  { name: "Indian Journal of Animal Sciences", abbr: "IJAS", naas: 5.80, if: null, publisher: "naas", discipline: "Animal Sciences", freq: "Monthly", access: "Open Access" },
+  { name: "Indian Journal of Agronomy", abbr: "IJAg", naas: 5.54, if: null, publisher: "naas", discipline: "Agronomy", freq: "Quarterly", access: "Open Access" },
+  { name: "Indian Journal of Genetics and Plant Breeding", abbr: "IJGPB", naas: 5.85, if: null, publisher: "naas", discipline: "Plant Genetics", freq: "Quarterly", access: "Open Access" },
+  { name: "Annals of Agricultural Research", abbr: "AAR", naas: 4.60, if: null, publisher: "naas", discipline: "Agriculture", freq: "Quarterly", access: "Open Access" },
+  { name: "Journal of Animal Research", abbr: "JAR", naas: 5.30, if: null, publisher: "naas", discipline: "Animal Science", freq: "Bi-monthly", access: "Open Access" },
+  { name: "Indian Journal of Horticulture", abbr: "IJH", naas: 5.70, if: null, publisher: "naas", discipline: "Horticulture", freq: "Quarterly", access: "Open Access" },
+  { name: "Indian Dairyman", abbr: "ID", naas: 4.50, if: null, publisher: "naas", discipline: "Dairy Science", freq: "Monthly", access: "Subscription" },
+
+  // ── FOOD SCIENCE ──
+  { name: "Food Chemistry", abbr: "FC", naas: 15.00, if: 9.0, publisher: "elsevier", discipline: "Food Chemistry", freq: "Bi-weekly", access: "Subscription" },
+  { name: "Food Research International", abbr: "FRI", naas: 13.10, if: 7.1, publisher: "elsevier", discipline: "Food Science", freq: "Monthly", access: "Subscription" },
+  { name: "LWT Food Science and Technology", abbr: "LWT", naas: 11.50, if: 5.5, publisher: "elsevier", discipline: "Food Technology", freq: "Monthly", access: "Subscription" },
+  { name: "Trends in Food Science and Technology", abbr: "TFST", naas: 16.30, if: 10.3, publisher: "elsevier", discipline: "Food Science", freq: "Monthly", access: "Subscription" },
+];
+
+let currentFilter = 'all';
+let sortKey = 'naas';
+let sortAsc = false;
+let currentResults = [];
+
+// ── NAAS ICAR NOTE ────────────────────────────────────────────────────
+function getIcarNote(naas, publisher) {
+  let note = '';
+  if (naas >= 10) note = `<strong>Excellent choice</strong> for ICAR ARS/NAAS Young Scientist Award. Score of ${naas} far exceeds the minimum requirement.`;
+  else if (naas >= 7) note = `<strong>Good choice</strong> for ICAR publications. NAAS ${naas} qualifies well for promotion and award applications.`;
+  else if (naas >= 6) note = `<strong>Meets ICAR standards.</strong> NAAS ${naas} qualifies for ARS performance assessment.`;
+  else if (naas >= 5) note = `<strong>Acceptable for ICAR.</strong> NAAS ${naas} meets minimum standards for publication credit.`;
+  else note = `<strong>Low NAAS score.</strong> Consider targeting higher-rated journals for maximum career impact.`;
+
+  if (publisher === 'naas') note += ' Indian journal — no APC typically required.';
+  else if (['elsevier','springer','wiley','taylor'].includes(publisher)) note += ' International journal — check APC fees or access through ICAR library.';
+  return '💡 ' + note;
+}
+
+function getScoreClass(naas) {
+  if (naas >= 8) return 'score-high';
+  if (naas >= 6) return 'score-mid';
+  return 'score-low';
+}
+
+function getBadgeClass(naas) {
+  if (naas >= 8) return 'naas-high';
+  if (naas >= 6) return 'naas-mid';
+  return 'naas-low';
+}
+
+function getPubTag(publisher) {
+  const tags = { elsevier:'pub-elsevier', springer:'pub-springer', wiley:'pub-wiley', taylor:'pub-taylor', naas:'pub-naas' };
+  return tags[publisher] || 'pub-other';
+}
+
+function getPubLabel(publisher) {
+  const labels = { elsevier:'Elsevier', springer:'Springer/Nature', wiley:'Wiley', taylor:'Taylor & Francis', naas:'NAAS India', emerald:'Emerald', mdpi:'MDPI', other:'Other' };
+  return labels[publisher] || publisher;
+}
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  searchJournal();
+}
+
+function sortTable(key) {
+  if (sortKey === key) sortAsc = !sortAsc;
+  else { sortKey = key; sortAsc = false; }
+  renderTable(currentResults);
+}
+
+function searchJournal() {
+  const q = document.getElementById('journalSearch').value.toLowerCase().trim();
+  document.getElementById('resultCard').classList.remove('visible');
+  document.getElementById('noResult').classList.remove('visible');
+  document.getElementById('resultsList').classList.remove('visible');
+
+  if (!q) return;
+
+  let filtered = journals.filter(j => {
+    const matchFilter = currentFilter === 'all' || j.publisher === currentFilter;
+    const matchQuery = j.name.toLowerCase().includes(q) || (j.abbr && j.abbr.toLowerCase().includes(q));
+    return matchFilter && matchQuery;
+  });
+
+  if (filtered.length === 0) {
+    document.getElementById('noResult').classList.add('visible');
+    return;
+  }
+
+  if (filtered.length === 1) {
+    showSingleResult(filtered[0]);
+  } else {
+    currentResults = filtered;
+    renderTable(filtered);
+    document.getElementById('resultsList').classList.add('visible');
+  }
+}
+
+function showSingleResult(j) {
+  document.getElementById('res-name').textContent = j.name;
+  document.getElementById('res-naas').textContent = j.naas.toFixed(2);
+  document.getElementById('res-if').textContent = j.if ? j.if.toFixed(1) : 'Not available';
+  document.getElementById('res-pub').textContent = getPubLabel(j.publisher);
+  document.getElementById('res-disc').textContent = j.discipline;
+  document.getElementById('res-freq').textContent = j.freq;
+  document.getElementById('res-access').textContent = j.access;
+  document.getElementById('res-note').innerHTML = getIcarNote(j.naas, j.publisher);
+  const badge = document.getElementById('res-badge');
+  badge.textContent = j.naas.toFixed(1);
+  badge.className = 'naas-badge ' + getBadgeClass(j.naas);
+  document.getElementById('resultCard').classList.add('visible');
+}
+
+function renderTable(data) {
+  const sorted = [...data].sort((a, b) => {
+    let va = a[sortKey === 'if' ? 'if' : sortKey === 'naas' ? 'naas' : 'name'];
+    let vb = b[sortKey === 'if' ? 'if' : sortKey === 'naas' ? 'naas' : 'name'];
+    if (va === null) va = 0;
+    if (vb === null) vb = 0;
+    if (typeof va === 'string') return sortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
+    return sortAsc ? va - vb : vb - va;
+  });
+
+  document.getElementById('resultsCount').textContent = `${sorted.length} journal${sorted.length !== 1 ? 's' : ''} found`;
+  const tbody = document.getElementById('resultsBody');
+  tbody.innerHTML = sorted.map(j => `
+    <tr style="cursor:pointer" onclick="selectJournal('${j.name.replace(/'/g,"\\'")}')">
+      <td><strong style="color:var(--text)">${j.name}</strong>${j.abbr ? ` <span style="color:var(--muted);font-size:0.78rem;">(${j.abbr})</span>` : ''}</td>
+      <td><span class="score-pill ${getScoreClass(j.naas)}">${j.naas.toFixed(2)}</span></td>
+      <td style="color:var(--muted)">${j.if ? j.if.toFixed(1) : '—'}</td>
+      <td><span class="pub-tag ${getPubTag(j.publisher)}">${getPubLabel(j.publisher)}</span></td>
+      <td style="color:var(--muted);font-size:0.83rem">${j.discipline}</td>
+    </tr>`).join('');
+  currentResults = sorted;
+}
+
+function selectJournal(name) {
+  const j = journals.find(x => x.name === name);
+  if (j) {
+    document.getElementById('resultsList').classList.remove('visible');
+    showSingleResult(j);
+    document.getElementById('journalSearch').value = j.name;
+  }
+}
+
+document.getElementById('total-count').textContent = journals.length + '+';
+
+// Scroll animations
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
