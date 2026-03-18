@@ -479,3 +479,18 @@
   }
 
   // Theme t
+  // Theme toggle
+  function toggleTheme() {
+    document.body.classList.toggle('light');
+    var b = document.querySelector('.theme-btn');
+    if (b) b.textContent = document.body.classList.contains('light') ? '🌙 Dark' : '☀️ Light';
+  }
+
+  // Back to top
+  window.addEventListener('scroll', function() {
+    var bt = document.getElementById('backTop');
+    if (bt) bt.classList.toggle('show', window.scrollY > 300);
+  });
+</script>
+</body>
+</html>
