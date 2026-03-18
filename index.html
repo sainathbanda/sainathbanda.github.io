@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="mxHYk3PITQRd54OTSWHV68Gr4SqV7jMlZDDD4PDqAgg" />
+<!-- Disable Cloudflare email obfuscation -->
+<meta name="cf-2fa-verify" content="disabled">
 <title>Banda Sainath | Agricultural Economist</title>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-589QFCEYJX"></script>
@@ -283,7 +285,7 @@
       <div class="hero-title">Agricultural Economist · ICAR-RCER, Patna</div>
       <p class="hero-bio">Agricultural economist specializing in environmental economics, ecosystem services, carbon farming &amp; carbon credits, and livestock economics. Currently working on Carbon Credits in Smallholder Agriculture at ICAR Research Complex for Eastern Region, Patna, Bihar.</p>
       <div class="hero-links">
-        <a href="/cdn-cgi/l/email-protection#3546545c5b54415d57545b515401755258545c591b565a58" class="btn btn-primary">✉ Contact Me</a>
+        <a href="#contact" class="btn btn-primary">✉ Contact Me</a>
         <a href="https://scholar.google.com/citations?hl=en&user=gn7DyzAAAAAJ" target="_blank" class="btn btn-outline">Google Scholar</a>
         <a href="https://www.researchgate.net/profile/Banda-Sainath" target="_blank" class="btn btn-outline">ResearchGate</a>
         <a href="https://www.linkedin.com/in/banda-sainath-ars-agrileconomist-" target="_blank" class="btn btn-outline">LinkedIn</a>
@@ -438,8 +440,8 @@
     <h2 class="section-title" style="margin-bottom:12px;">Let's Connect</h2>
     <p style="color:var(--muted);max-width:480px;margin:0 auto 32px;font-size:0.95rem;">Interested in collaborations on carbon markets, environmental economics, or agricultural policy? I'd love to hear from you.</p>
     <div class="contact-links">
-      <a href="/cdn-cgi/l/email-protection#1d6e7c74737c69757f7c73797c295d7a707c7471337e7270" class="btn btn-primary">✉ <span class="__cf_email__" data-cfemail="5221333b3c33263a30333c36336612353f333b3e7c313d3f">[email&#160;protected]</span></a>
-      <a href="/cdn-cgi/l/email-protection#2754464e4946534f094546494346674e44465509404851094e49" class="btn btn-outline"><span class="__cf_email__" data-cfemail="cebdafa7a0afbaa6e0acafa0aaaf8ea7adafbce0a9a1b8e0a7a0">[email&#160;protected]</span></a>
+      <a id="emailBtn1" href="#" class="btn btn-primary" onclick="openMail1(event)">✉ <span id="em1"></span></a>
+      <a id="emailBtn2" href="#" class="btn btn-outline" onclick="openMail2(event)"><span id="em2"></span></a>
     </div>
     <div class="contact-links" style="margin-top:16px;">
       <a href="https://scholar.google.com/citations?hl=en&user=gn7DyzAAAAAJ" target="_blank" class="btn btn-outline">🎓 Google Scholar</a>
@@ -462,7 +464,7 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Scroll fade-in observer
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -486,6 +488,15 @@
     if (b) b.textContent = document.body.classList.contains('light') ? '🌙 Dark' : '☀️ Light';
   }
 
+
+  // Email links - split to avoid Cloudflare obfuscation
+  function openMail1(e){ e.preventDefault(); var u='sainath.agriresearcher'; var d='gmail.com'; window.location='mai'+'lto:'+u+'@'+d; }
+  function openMail2(e){ e.preventDefault(); var u='sainath.banda'; var d='icar.org.in'; window.location='mai'+'lto:'+u+'@'+d; }
+  // Fill email display text via JS so Cloudflare doesn't obfuscate
+  (function(){
+    var e1=document.getElementById('em1'); if(e1){ e1.textContent='sainath.agriresearcher'+'@'+'gmail.com'; }
+    var e2=document.getElementById('em2'); if(e2){ e2.textContent='sainath.banda'+'@'+'icar.org.in'; }
+  })();
   // Back to top
   window.addEventListener('scroll', function() {
     var bt = document.getElementById('backTop');
