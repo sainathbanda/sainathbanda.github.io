@@ -144,24 +144,75 @@ footer a{color:var(--accent);text-decoration:none;}
 <body>
 
 <!-- API KEY BANNER -->
-<div id="apiBanner" style="background:rgba(212,168,67,0.08);border-bottom:1px solid rgba(212,168,67,0.3);padding:12px 32px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:68px;z-index:90;">
-  <span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:#d4a843;letter-spacing:0.08em;white-space:nowrap;">🔑 ANTHROPIC API KEY</span>
-  <input id="apiKeyInput" type="password" placeholder="sk-ant-api03-…  (stored in browser session only, never sent elsewhere)"
-    style="flex:1;min-width:240px;max-width:520px;background:#0d1117;border:1px solid rgba(212,168,67,0.4);border-radius:6px;padding:7px 12px;color:#e6edf3;font-family:'DM Mono',monospace;font-size:0.78rem;outline:none;"
-    oninput="saveKey(this.value)">
-  <button onclick="toggleKeyVisibility()" style="background:transparent;border:1px solid rgba(212,168,67,0.3);border-radius:5px;color:#d4a843;font-family:'DM Mono',monospace;font-size:0.7rem;padding:6px 12px;cursor:pointer;white-space:nowrap;">👁 Show/Hide</button>
-  <a href="https://console.anthropic.com/keys" target="_blank" style="font-family:'DM Mono',monospace;font-size:0.68rem;color:#58a6ff;white-space:nowrap;text-decoration:none;">Get API key ↗</a>
-  <button onclick="dismissBanner()" style="background:transparent;border:none;color:#8b949e;font-size:1rem;cursor:pointer;padding:0 4px;line-height:1;" title="Dismiss">✕</button>
+<div id="apiBanner" style="background:rgba(22,27,34,0.97);border-bottom:1px solid var(--border);padding:14px 32px;position:sticky;top:68px;z-index:90;">
+  <div style="max-width:860px;margin:0 auto;">
+    <!-- Mode toggle -->
+    <div style="display:flex;gap:8px;margin-bottom:10px;">
+      <button onclick="setMode('key')" id="modeKeyBtn" style="font-family:'DM Mono',monospace;font-size:0.7rem;padding:5px 14px;border-radius:20px;border:1px solid #3fb950;background:rgba(63,185,80,0.1);color:#3fb950;cursor:pointer;transition:all 0.2s;">🔑 Use API Key</button>
+      <button onclick="setMode('claude')" id="modeClaudeBtn" style="font-family:'DM Mono',monospace;font-size:0.7rem;padding:5px 14px;border-radius:20px;border:1px solid #30363d;background:transparent;color:#8b949e;cursor:pointer;transition:all 0.2s;">💬 Use Claude.ai (no key needed)</button>
+      <button onclick="document.getElementById('apiBanner').style.display='none'" style="margin-left:auto;background:transparent;border:none;color:#8b949e;font-size:1rem;cursor:pointer;" title="Dismiss">✕</button>
+    </div>
+    <!-- API Key panel -->
+    <div id="keyPanel" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <input id="apiKeyInput" type="password" placeholder="Paste your Anthropic API key here  (sk-ant-…)  — saved locally in your browser"
+        style="flex:1;min-width:260px;max-width:480px;background:#0d1117;border:1px solid rgba(63,185,80,0.4);border-radius:6px;padding:8px 12px;color:#e6edf3;font-family:'DM Mono',monospace;font-size:0.76rem;outline:none;"
+        oninput="saveKey(this.value)">
+      <button onclick="toggleKeyVisibility()" style="background:transparent;border:1px solid #30363d;border-radius:5px;color:#8b949e;font-family:'DM Mono',monospace;font-size:0.68rem;padding:7px 12px;cursor:pointer;">👁 Show</button>
+      <div style="font-family:'DM Mono',monospace;font-size:0.68rem;color:#8b949e;line-height:1.5;">
+        Get free key: <strong style="color:#e6edf3;">console.anthropic.com</strong> → Login → Settings → API Keys → Create Key
+      </div>
+    </div>
+    <!-- Claude.ai panel -->
+    <div id="claudePanel" style="display:none;">
+      <p style="font-family:'DM Sans',sans-serif;font-size:0.85rem;color:#8b949e;margin-bottom:8px;">Click the button below after filling the form — it copies your prompt. Then paste it into <a href="https://claude.ai" target="_blank" style="color:#58a6ff;">claude.ai</a> and paste the response back here.</p>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <button onclick="copyPromptToClipboard()" style="font-family:'DM Mono',monospace;font-size:0.76rem;padding:8px 18px;background:#58a6ff;color:#0d1117;border:none;border-radius:6px;cursor:pointer;font-weight:600;">📋 Copy Prompt → Paste in Claude.ai</button>
+        <a href="https://claude.ai" target="_blank" style="font-family:'DM Mono',monospace;font-size:0.72rem;color:#58a6ff;text-decoration:none;">Open Claude.ai ↗</a>
+      </div>
+      <div id="pasteResponseWrap" style="margin-top:10px;display:none;">
+        <textarea id="pasteResponseBox" placeholder="Paste Claude's response here…" rows="4"
+          style="width:100%;background:#0d1117;border:1px solid #30363d;border-radius:6px;padding:10px;color:#e6edf3;font-family:'DM Mono',monospace;font-size:0.76rem;outline:none;resize:vertical;"></textarea>
+        <button onclick="processManualResponse()" style="margin-top:6px;font-family:'DM Mono',monospace;font-size:0.76rem;padding:8px 18px;background:#3fb950;color:#0d1117;border:none;border-radius:6px;cursor:pointer;font-weight:600;">✓ Process Response</button>
+      </div>
+    </div>
+  </div>
 </div>
 <script>
 (function(){
-  const saved = sessionStorage.getItem('anthropicKey');
-  if(saved){ document.getElementById('apiKeyInput').value=saved; }
+  const saved = localStorage.getItem('anthropicKey');
+  if(saved && saved.startsWith('sk-')){ document.getElementById('apiKeyInput').value=saved; }
+  // Restore mode
+  const m = localStorage.getItem('aiMode')||'key';
+  setMode(m);
 })();
-function saveKey(v){ sessionStorage.setItem('anthropicKey', v.trim()); }
-function getKey(){ return (document.getElementById('apiKeyInput').value || sessionStorage.getItem('anthropicKey') || '').trim(); }
+function saveKey(v){ localStorage.setItem('anthropicKey', v.trim()); }
+function getKey(){ return (document.getElementById('apiKeyInput').value || localStorage.getItem('anthropicKey') || '').trim(); }
+function getMode(){ return localStorage.getItem('aiMode')||'key'; }
 function toggleKeyVisibility(){ const i=document.getElementById('apiKeyInput'); i.type=i.type==='password'?'text':'password'; }
-function dismissBanner(){ document.getElementById('apiBanner').style.display='none'; }
+function setMode(m){
+  localStorage.setItem('aiMode', m);
+  document.getElementById('keyPanel').style.display = m==='key'?'flex':'none';
+  document.getElementById('claudePanel').style.display = m==='claude'?'block':'none';
+  document.getElementById('modeKeyBtn').style.background = m==='key'?'rgba(63,185,80,0.1)':'transparent';
+  document.getElementById('modeKeyBtn').style.borderColor = m==='key'?'#3fb950':'#30363d';
+  document.getElementById('modeKeyBtn').style.color = m==='key'?'#3fb950':'#8b949e';
+  document.getElementById('modeClaudeBtn').style.background = m==='claude'?'rgba(88,166,255,0.1)':'transparent';
+  document.getElementById('modeClaudeBtn').style.borderColor = m==='claude'?'#58a6ff':'#30363d';
+  document.getElementById('modeClaudeBtn').style.color = m==='claude'?'#58a6ff':'#8b949e';
+}
+let _lastPrompt='';
+function copyPromptToClipboard(){
+  if(!_lastPrompt){alert('Fill in the form first, then click this button.');return;}
+  navigator.clipboard.writeText(_lastPrompt).then(()=>{
+    document.getElementById('pasteResponseWrap').style.display='block';
+    alert('✅ Prompt copied! Now paste it into claude.ai, get the response, and paste it back here.');
+  }).catch(()=>{
+    // fallback
+    const ta=document.createElement('textarea');ta.value=_lastPrompt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    document.getElementById('pasteResponseWrap').style.display='block';
+    alert('✅ Prompt copied! Paste into claude.ai, then paste the response back here.');
+  });
+}
 </script>
 
 <nav>
@@ -281,8 +332,20 @@ Respond ONLY with a JSON object (no markdown, no backticks):
   "novelty": "1-2 sentences on what makes this novel"
 }`;
 
+  _lastPrompt = prompt;
+
+  // Claude.ai mode
+  if(getMode()==='claude'){
+    setMode('claude');
+    document.getElementById('pasteResponseWrap').style.display='block';
+    document.getElementById('apiBanner').style.display='block';
+    showErr('Prompt ready — click "Copy Prompt" in the banner above, paste into claude.ai, then paste the response back.');
+    btn.classList.remove('loading');btn.disabled=false;
+    return;
+  }
+
   const apiKey=getKey();
-  if(!apiKey){showErr('Please enter your Anthropic API key in the banner above. Get one free at console.anthropic.com');return;}
+  if(!apiKey){showErr('Enter your Anthropic API key in the banner, or switch to "Use Claude.ai" mode.');return;}
   try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true','x-api-key':getKey()},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
     const data=await res.json();
