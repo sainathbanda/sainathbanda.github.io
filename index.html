@@ -173,6 +173,68 @@
     footer { padding: 20px; }
   }
 </style>
+
+<style>
+/* ── MOBILE NAV: horizontal scroll ── */
+@media (max-width: 768px) {
+  nav {
+    padding: 0 !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    overflow: hidden !important;
+  }
+  .nav-logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 12px 14px;
+    border-right: 1px solid var(--border);
+    font-size: 0.95rem !important;
+    white-space: nowrap;
+  }
+  .nav-links {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0 !important;
+    padding: 0 4px;
+    align-items: center;
+    flex: 1;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links > li {
+    flex-shrink: 0;
+  }
+  .nav-links > li > a,
+  .nav-links > li > button.theme-btn {
+    display: flex;
+    align-items: center;
+    padding: 14px 12px !important;
+    font-size: 0.68rem !important;
+    white-space: nowrap;
+  }
+  /* Dropdown on mobile: position below the trigger */
+  .nav-dropdown .dropdown-menu {
+    top: 100% !important;
+    left: 0 !important;
+    transform: none !important;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  /* Back-to-top and theme btn compact */
+  .theme-btn {
+    border-radius: 0 !important;
+    border: none !important;
+    border-left: 1px solid var(--border) !important;
+    padding: 14px 10px !important;
+    font-size: 0.65rem !important;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -221,7 +283,7 @@
       <div class="hero-title">Agricultural Economist · ICAR-RCER, Patna</div>
       <p class="hero-bio">Agricultural economist specializing in environmental economics, ecosystem services, carbon farming &amp; carbon credits, and livestock economics. Currently working on Carbon Credits in Smallholder Agriculture at ICAR Research Complex for Eastern Region, Patna, Bihar.</p>
       <div class="hero-links">
-        <a href="mailto:sainathbanda4@gmail.com" class="btn btn-primary">✉ Contact Me</a>
+        <a href="/cdn-cgi/l/email-protection#3546545c5b54415d57545b515401755258545c591b565a58" class="btn btn-primary">✉ Contact Me</a>
         <a href="https://scholar.google.com/citations?hl=en&user=gn7DyzAAAAAJ" target="_blank" class="btn btn-outline">Google Scholar</a>
         <a href="https://www.researchgate.net/profile/Banda-Sainath" target="_blank" class="btn btn-outline">ResearchGate</a>
         <a href="https://www.linkedin.com/in/banda-sainath-ars-agrileconomist-" target="_blank" class="btn btn-outline">LinkedIn</a>
@@ -376,8 +438,8 @@
     <h2 class="section-title" style="margin-bottom:12px;">Let's Connect</h2>
     <p style="color:var(--muted);max-width:480px;margin:0 auto 32px;font-size:0.95rem;">Interested in collaborations on carbon markets, environmental economics, or agricultural policy? I'd love to hear from you.</p>
     <div class="contact-links">
-      <a href="mailto:sainathbanda4@gmail.com" class="btn btn-primary">✉ sainathbanda4@gmail.com</a>
-      <a href="mailto:sainath.banda@icar.gov.in" class="btn btn-outline">sainath.banda@icar.gov.in</a>
+      <a href="/cdn-cgi/l/email-protection#1d6e7c74737c69757f7c73797c295d7a707c7471337e7270" class="btn btn-primary">✉ <span class="__cf_email__" data-cfemail="5221333b3c33263a30333c36336612353f333b3e7c313d3f">[email&#160;protected]</span></a>
+      <a href="/cdn-cgi/l/email-protection#2754464e4946534f094546494346674e44465509404851094e49" class="btn btn-outline"><span class="__cf_email__" data-cfemail="cebdafa7a0afbaa6e0acafa0aaaf8ea7adafbce0a9a1b8e0a7a0">[email&#160;protected]</span></a>
     </div>
     <div class="contact-links" style="margin-top:16px;">
       <a href="https://scholar.google.com/citations?hl=en&user=gn7DyzAAAAAJ" target="_blank" class="btn btn-outline">🎓 Google Scholar</a>
@@ -400,7 +462,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Scroll fade-in observer
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -416,18 +478,4 @@
     });
   }
 
-  // Theme toggle
-  function toggleTheme() {
-    document.body.classList.toggle('light');
-    var b = document.querySelector('.theme-btn');
-    if (b) b.textContent = document.body.classList.contains('light') ? '🌙 Dark' : '☀️ Light';
-  }
-
-  // Back to top
-  window.addEventListener('scroll', function() {
-    var bt = document.getElementById('backTop');
-    if (bt) bt.classList.toggle('show', window.scrollY > 300);
-  });
-</script>
-</body>
-</html>
+  // Theme t

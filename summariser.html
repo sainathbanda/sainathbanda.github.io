@@ -159,7 +159,7 @@
 
   @media (max-width: 768px) {
     nav { padding: 16px 20px; }
-    .nav-links { display: none; }
+    
     .page-wrap { padding: 90px 20px 60px; }
   }
 
@@ -171,6 +171,68 @@
   .back-top{position:fixed;bottom:32px;right:32px;z-index:99;width:44px;height:44px;background:var(--accent);color:#0d1117;border:none;border-radius:50%;font-size:1.1rem;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(63,185,80,0.35);transition:all 0.2s;}
   .back-top:hover{transform:translateY(-3px);}
   .back-top.show{display:flex;}
+</style>
+
+<style>
+/* ── MOBILE NAV: horizontal scroll ── */
+@media (max-width: 768px) {
+  nav {
+    padding: 0 !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    overflow: hidden !important;
+  }
+  .nav-logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 12px 14px;
+    border-right: 1px solid var(--border);
+    font-size: 0.95rem !important;
+    white-space: nowrap;
+  }
+  .nav-links {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0 !important;
+    padding: 0 4px;
+    align-items: center;
+    flex: 1;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links > li {
+    flex-shrink: 0;
+  }
+  .nav-links > li > a,
+  .nav-links > li > button.theme-btn {
+    display: flex;
+    align-items: center;
+    padding: 14px 12px !important;
+    font-size: 0.68rem !important;
+    white-space: nowrap;
+  }
+  /* Dropdown on mobile: position below the trigger */
+  .nav-dropdown .dropdown-menu {
+    top: 100% !important;
+    left: 0 !important;
+    transform: none !important;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  /* Back-to-top and theme btn compact */
+  .theme-btn {
+    border-radius: 0 !important;
+    border: none !important;
+    border-left: 1px solid var(--border) !important;
+    padding: 14px 10px !important;
+    font-size: 0.65rem !important;
+  }
+}
 </style>
 </head>
 <body>
