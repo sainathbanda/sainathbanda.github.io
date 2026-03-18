@@ -237,6 +237,28 @@
 </head>
 <body>
 
+<!-- API KEY BANNER -->
+<div id="apiBanner" style="background:rgba(212,168,67,0.08);border-bottom:1px solid rgba(212,168,67,0.3);padding:12px 32px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:68px;z-index:90;">
+  <span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:#d4a843;letter-spacing:0.08em;white-space:nowrap;">🔑 ANTHROPIC API KEY</span>
+  <input id="apiKeyInput" type="password" placeholder="sk-ant-api03-…  (stored in browser session only, never sent elsewhere)"
+    style="flex:1;min-width:240px;max-width:520px;background:#0d1117;border:1px solid rgba(212,168,67,0.4);border-radius:6px;padding:7px 12px;color:#e6edf3;font-family:'DM Mono',monospace;font-size:0.78rem;outline:none;"
+    oninput="saveKey(this.value)">
+  <button onclick="toggleKeyVisibility()" style="background:transparent;border:1px solid rgba(212,168,67,0.3);border-radius:5px;color:#d4a843;font-family:'DM Mono',monospace;font-size:0.7rem;padding:6px 12px;cursor:pointer;white-space:nowrap;">👁 Show/Hide</button>
+  <a href="https://console.anthropic.com/keys" target="_blank" style="font-family:'DM Mono',monospace;font-size:0.68rem;color:#58a6ff;white-space:nowrap;text-decoration:none;">Get API key ↗</a>
+  <button onclick="dismissBanner()" style="background:transparent;border:none;color:#8b949e;font-size:1rem;cursor:pointer;padding:0 4px;line-height:1;" title="Dismiss">✕</button>
+</div>
+<script>
+(function(){
+  const saved = sessionStorage.getItem('anthropicKey');
+  if(saved){ document.getElementById('apiKeyInput').value=saved; }
+})();
+function saveKey(v){ sessionStorage.setItem('anthropicKey', v.trim()); }
+function getKey(){ return (document.getElementById('apiKeyInput').value || sessionStorage.getItem('anthropicKey') || '').trim(); }
+function toggleKeyVisibility(){ const i=document.getElementById('apiKeyInput'); i.type=i.type==='password'?'text':'password'; }
+function dismissBanner(){ document.getElementById('apiBanner').style.display='none'; }
+</script>
+
+
 <nav>
   <a href="index.html" class="nav-logo">Banda Sainath</a>
   <ul class="nav-links">
@@ -465,10 +487,12 @@ ${trimmed}`;
     btn.disabled = true;
     document.getElementById('outputSection').classList.remove('visible');
 
+    const apiKey = getKey();
+    if(!apiKey){ showError('Please enter your Anthropic API key in the banner above. Get one free at console.anthropic.com'); return; }
     try {
       const response = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+        headers: { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true', 'x-api-key': getKey() },
         body: JSON.stringify({
           model: 'claude-sonnet-4-6',
           max_tokens: 1000,
