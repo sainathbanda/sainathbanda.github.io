@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>India Fertilizer Dependence & Food System Risk — 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --ink:#0d1b2a;--ink2:#2d3a4a;--ink3:#5a6a7a;
+  --cream:#f7f4ef;--warm:#f0ebe2;
+  --red:#b83232;--lred:#fdf0f0;
+  --blue:#1a4a7a;--ltblue:#e8f0f8;--mblue:#4a8abf;
+  --amber:#c47d0e;--lamber:#fef8ec;--mamber:#e8b040;
+  --grn:#1a6040;--lgrn:#e8f5ee;
+  --teal:#0a5050;--lteal:#e8f4f4;
+  --gold:#7a5a10;--lgold:#fdf4e0;
+  --border:#e0d8cc;
+  --shadow:0 2px 16px rgba(13,27,42,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:var(--ink);display:flex;align-items:center;overflow-x:auto;padding:0 24px;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.nav-brand{color:#fff;font-family:'DM Serif Display',serif;font-size:.95rem;padding:14px 20px 14px 0;border-right:1px solid rgba(255,255,255,.15);margin-right:14px;white-space:nowrap;flex-shrink:0}
+.nav a{color:rgba(255,255,255,.65);font-size:.7rem;font-weight:600;padding:14px 12px;white-space:nowrap;text-decoration:none;border-bottom:3px solid transparent;text-transform:uppercase;letter-spacing:.5px;transition:.2s}
+.nav a:hover{color:#fff;border-bottom-color:var(--mamber)}
+/* HERO */
+.hero{background:linear-gradient(150deg,#0d1b2a 0%,#1a2d42 50%,#0a2840 100%);min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:60px 64px 50px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-80px;top:-80px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(74,138,191,.09),transparent 70%)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(184,50,50,.2);border:1px solid rgba(184,50,50,.4);border-radius:4px;padding:5px 14px;font-size:.7rem;font-weight:700;color:#f4a0a0;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px;width:fit-content}
+.pulse{display:inline-block;width:7px;height:7px;border-radius:50%;background:#f07070;animation:pulse 1.4s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2rem,3.8vw,3.1rem);color:#fff;line-height:1.2;margin-bottom:16px;max-width:820px}
+.hero h1 em{color:var(--mamber);font-style:normal}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,.6);max-width:660px;margin-bottom:42px;font-weight:300;line-height:1.75}
+.hero-kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;max-width:980px}
+.hkpi{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:16px 13px}
+.hkpi-val{font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:700;line-height:1;margin-bottom:5px}
+.r{color:#f08080}.a{color:var(--mamber)}.b{color:#88b8e8}.g{color:#80c8a0}
+.hkpi-lbl{font-size:.64rem;color:rgba(255,255,255,.48);line-height:1.35}
+/* SECTIONS */
+.section{padding:52px 64px 38px;max-width:1380px;margin:0 auto}
+.sec-label{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.sec-num{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;background:var(--ink);color:#fff;border-radius:4px;padding:4px 10px;letter-spacing:1px}
+.sec-title{font-family:'DM Serif Display',serif;font-size:1.7rem;color:var(--ink)}
+.sec-desc{font-size:.9rem;color:var(--ink3);max-width:740px;margin-bottom:24px;line-height:1.75}
+.divider{height:1px;background:var(--border);max-width:1380px;margin:0 auto}
+/* GRIDS */
+.g1{margin-bottom:18px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:18px}
+.g21{display:grid;grid-template-columns:3fr 2fr;gap:18px;margin-bottom:18px}
+/* CARDS */
+.card{background:#fff;border-radius:10px;padding:20px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.card.rc{border-top:3px solid var(--red)}.card.bc{border-top:3px solid var(--blue)}
+.card.ac{border-top:3px solid var(--amber)}.card.gc{border-top:3px solid var(--grn)}
+.card.tc{border-top:3px solid var(--teal)}.card.goc{border-top:3px solid var(--gold)}
+.card-title{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--ink);margin-bottom:4px}
+.card-sub{font-size:.73rem;color:var(--ink3);margin-bottom:12px;line-height:1.5}
+.card-src{font-size:.62rem;color:#aaa;margin-top:10px;font-style:italic;border-top:1px solid var(--border);padding-top:6px}
+/* chart wrapper - CRITICAL for visibility */
+.ch{position:relative;width:100%}
+/* INSIGHTS */
+.ins{background:var(--lred);border-left:4px solid var(--red);border-radius:0 6px 6px 0;padding:10px 14px;margin:9px 0;font-size:.79rem;color:var(--ink2)}
+.ins.am{background:var(--lamber);border-color:var(--amber)}.ins.gn{background:var(--lgrn);border-color:var(--grn)}.ins.bl{background:var(--ltblue);border-color:var(--blue)}
+.ins strong{color:var(--ink);font-weight:700}
+/* TABLES */
+.dt{width:100%;border-collapse:collapse;font-size:.76rem}
+.dt th{background:var(--ink);color:#fff;padding:7px 10px;font-size:.66rem;font-weight:600;text-align:left;font-family:'JetBrains Mono',monospace;letter-spacing:.3px}
+.dt td{padding:6px 10px;border-bottom:1px solid var(--border)}
+.dt tr:last-child td{border-bottom:none}
+.dt tr:nth-child(even) td{background:var(--warm)}
+.dt .nm{font-family:'JetBrains Mono',monospace;font-weight:700}
+.dt .rd{color:var(--red);font-weight:700}.dt .gn{color:var(--grn)}.dt .am{color:var(--amber);font-weight:700}
+.pk-row td{background:#fdf0f0!important;font-weight:700}
+/* FLOWCHART */
+.fw{background:var(--warm);border-radius:12px;padding:24px 22px;border:1px solid var(--border);margin-bottom:18px}
+.fw-title{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--ink);margin-bottom:18px;text-align:center}
+.fh{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding-bottom:6px}
+.fn{min-width:130px;max-width:155px;background:#fff;border-radius:10px;padding:12px 10px;border:2px solid var(--border);text-align:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:.2s;display:flex;flex-direction:column;justify-content:flex-start}
+.fn:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.1)}
+.fn.r{border-color:var(--red);background:var(--lred)}.fn.a{border-color:var(--amber);background:var(--lamber)}
+.fn.b{border-color:var(--blue);background:var(--ltblue)}.fn.g{border-color:var(--grn);background:var(--lgrn)}
+.fn.t{border-color:var(--teal);background:var(--lteal)}
+.fi{font-size:1.55rem;margin-bottom:5px}.fl{font-size:.7rem;font-weight:700;color:var(--ink);margin-bottom:3px}
+.fval{font-family:'JetBrains Mono',monospace;font-size:.77rem;font-weight:700;color:var(--red);margin-bottom:3px}
+.fs{font-size:.61rem;color:var(--ink3);line-height:1.3}
+.fa-arrow{display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:0 5px;color:var(--blue);font-size:1.3rem;font-weight:900;align-self:center}
+.fv-flow{display:flex;flex-direction:column;align-items:stretch;gap:0}
+.fv-flow .fn{width:100%;min-width:unset;max-width:unset;flex-direction:column;margin-bottom:6px}
+.fv-arrow{text-align:center;color:var(--red);font-size:1.1rem;font-weight:900;padding:2px 0;margin-bottom:6px}
+/* STATS */
+.sr{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.sp{background:var(--ink);color:#fff;border-radius:7px;padding:11px 15px;text-align:center;flex:1;min-width:100px}
+.sp .v{font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;margin-bottom:2px}
+.sp .l{font-size:.62rem;opacity:.65;line-height:1.3}
+.sp.r{background:var(--red)}.sp.a{background:var(--amber)}.sp.b{background:var(--blue)}.sp.g{background:var(--grn)}.sp.t{background:var(--teal)}
+/* SCENARIO */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.sc{border-radius:10px;padding:16px;border:2px solid var(--border)}
+.sc.s1{background:var(--ltblue);border-color:var(--blue)}.sc.s2{background:var(--lred);border-color:var(--red)}
+.sc.s3{background:var(--lamber);border-color:var(--amber)}.sc.s4{background:#fff0f0;border-color:#8b0000}
+.sc-lbl{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;color:var(--ink3)}
+.sc-name{font-family:'DM Serif Display',serif;font-size:.88rem;color:var(--ink);margin-bottom:9px}
+.sc-r{display:flex;justify-content:space-between;font-size:.71rem;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.06)}
+.sc-r:last-child{border-bottom:none}.sc-k{color:var(--ink3)}.sc-v{font-family:'JetBrains Mono',monospace;font-weight:700}
+/* LOOPS */
+.loops{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.loop{border-radius:6px;padding:10px;font-size:.69rem;color:var(--ink2);line-height:1.4}
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,.45);text-align:center;padding:18px;font-size:.7rem;margin-top:30px}
+footer strong{color:rgba(255,255,255,.75)}
+@media(max-width:900px){.section{padding:36px 22px 28px}.hero{padding:40px 22px}.g2,.g3,.g21{grid-template-columns:1fr}.hero-kpis{grid-template-columns:repeat(2,1fr)}.sg{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-brand">India Fertilizer 2026</div>
+  <a href="#s0">Overview</a><a href="#s1">Structure</a><a href="#s2">Products</a>
+  <a href="#s3">Subsidy</a><a href="#s4">Crisis 2026</a><a href="#s5">States</a>
+  <a href="#s6">NPK Balance</a><a href="#s7">Food System</a><a href="#s8">CGE Model</a><a href="#about-author" style="color:rgba(255,255,255,.65);font-size:.7rem;font-weight:600;padding:14px 12px;white-space:nowrap;text-decoration:none;border-bottom:3px solid transparent;text-transform:uppercase;letter-spacing:.5px">About</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="s0">
+  <div class="eyebrow"><span class="pulse"></span>&nbsp;Live Crisis — April 2026</div>
+  <h1>India's Fertilizer Dependence<br>& the <em>Food System at Risk</em></h1>
+  <p class="hero-sub">How geopolitical shocks in the Middle East transmit through global energy markets into India's fertilizer supply chains, subsidy burden, crop production, and food security — with state-level evidence and a CGE modelling framework.</p>
+  <div class="hero-kpis">
+    <div class="hkpi"><div class="hkpi-val r">₹2.55L Cr</div><div class="hkpi-lbl">Peak subsidy bill 2022-23 — ₹5 crore spent every hour of the year</div></div>
+    <div class="hkpi"><div class="hkpi-val a">387.92 LMT</div><div class="hkpi-lbl">Urea consumed 2024-25 — only 306.67 LMT produced domestically</div></div>
+    <div class="hkpi"><div class="hkpi-val r">-27%</div><div class="hkpi-lbl">Domestic urea output fall — March 2026 Hormuz crisis (5-year low)</div></div>
+    <div class="hkpi"><div class="hkpi-val b">100%</div><div class="hkpi-lbl">MOP (Potash) import dependency — zero domestic production</div></div>
+    <div class="hkpi"><div class="hkpi-val a">9.8:3.7:1</div><div class="hkpi-lbl">Actual N:P:K ratio vs recommended 4:2:1 — structural soil health crisis</div></div>
+  </div>
+</div>
+
+<div class="section" id="s1">
+  <div class="sec-label"><span class="sec-num">01</span><span class="sec-title">India's Fertilizer Sector: Scale & Structure</span></div>
+  <p class="sec-desc">India is the world's 2nd largest fertilizer consumer and 3rd largest producer. A structural gap between domestic production and demand creates permanent import dependence — making the country acutely exposed to disruptions in global supply corridors.</p>
+
+  <div class="fw">
+    <div class="fw-title">India's Complete Fertilizer Supply Chain — From Source to Farm Gate</div>
+    <div class="fh">
+      <div class="fn b"><div class="fi">⚡</div><div class="fl">Natural Gas / LNG</div><div class="fval">63% imported</div><div class="fs">Qatar = 44% India's LNG. Primary feedstock for all 32 urea plants</div></div>
+      <div class="fa-arrow">→</div>
+      <div class="fn b"><div class="fi">🏭</div><div class="fl">Domestic Production</div><div class="fval">306.67 LMT</div><div class="fs">Urea 2024-25. All 32 plants gas-based. No coal/alternative at scale</div></div>
+      <div class="fa-arrow">+</div>
+      <div class="fn a"><div class="fi">🚢</div><div class="fl">Gulf/World Imports</div><div class="fval">~81 LMT gap</div><div class="fs">Urea gap alone. 70% transits Hormuz. Also DAP, MOP imported</div></div>
+      <div class="fa-arrow">→</div>
+      <div class="fn g"><div class="fi">🏪</div><div class="fl">DBT Distribution</div><div class="fval">387.92 LMT</div><div class="fs">Total urea sales 2024-25. PoS-verified at 2.7 lakh retail outlets</div></div>
+      <div class="fa-arrow">→</div>
+      <div class="fn g"><div class="fi">👨‍🌾</div><div class="fl">Farmer Purchase</div><div class="fval">₹242/bag</div><div class="fs">MRP frozen since March 2018. Same price regardless of world market</div></div>
+      <div class="fa-arrow">→</div>
+      <div class="fn r"><div class="fi">💸</div><div class="fl">Govt. Subsidy</div><div class="fval">₹1.77L Cr</div><div class="fs">2024-25 actual. Absorbs 100% of world price above MRP. No cap exists</div></div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card bc">
+      <div class="card-title">Urea Production vs Demand — Persistent 15-Year Gap (LMT)</div>
+      <div class="card-sub">The import gap (red dashed line) has persisted every single year for 15 years — creating structural vulnerability to any import disruption. Domestic capacity expansion has not kept pace with rising demand.</div>
+      <div class="ch"><canvas id="pdChart"></canvas></div>
+      <div class="card-src">Lok Sabha / Rajya Sabha Unstarred Questions (2012–2025) via indiastat.com</div>
+    </div>
+    <div class="card bc">
+      <div class="card-title">Key Structural Statistics at a Glance</div>
+      <div class="card-sub">Scale, dependency, productivity and trajectory — all key numbers in one place</div>
+      <table class="dt">
+        <tr><th>Parameter</th><th>Value</th><th>Unit / Note</th></tr>
+        <tr><td>Global rank (consumption)</td><td class="nm">2nd</td><td>After China</td></tr>
+        <tr><td>Total consumption (2023-24)</td><td class="nm am">601</td><td>LMT — all fertilizers</td></tr>
+        <tr><td>Domestic production (2023-24)</td><td class="nm">503</td><td>LMT</td></tr>
+        <tr><td>Import requirement</td><td class="nm rd">~98</td><td>LMT gap</td></tr>
+        <tr><td>Urea demand (2024-25)</td><td class="nm am">364.01</td><td>LMT</td></tr>
+        <tr><td>Urea domestic output (2024-25)</td><td class="nm">306.67</td><td>LMT</td></tr>
+        <tr><td>Urea import gap (2024-25)</td><td class="nm rd">~81</td><td>LMT annually</td></tr>
+        <tr><td>Fertilizer use per hectare</td><td class="nm">168.5</td><td>kg/Ha (2020-21)</td></tr>
+        <tr><td>Projected use by 2047-48</td><td class="nm am">282.6</td><td>kg/Ha (NITI Aayog)</td></tr>
+        <tr><td>Fertilizer-grain ratio (1970s)</td><td class="nm gn">1 : 10</td><td>kg grain per kg fertilizer</td></tr>
+        <tr><td>Fertilizer-grain ratio (2015)</td><td class="nm rd">1 : 2.7</td><td>Declining returns — soil health</td></tr>
+        <tr><td>Foodgrain yield (2010-11)</td><td class="nm">1,930</td><td>kg/Ha</td></tr>
+        <tr><td>Foodgrain yield (2024-25)</td><td class="nm gn">2,578</td><td>kg/Ha (+33.6% in 14 years)</td></tr>
+      </table>
+      <div class="card-src">PIB Aug 2025; NITI Aayog (ON3805); FAI Fertiliser Statistics; Civilsdaily 2025</div>
+    </div>
+  </div>
+</div>
+<div class="divider"></div>
+
+<div class="section" id="s2">
+  <div class="sec-label"><span class="sec-num">02</span><span class="sec-title">Five Fertilizers — Five Different Risk Profiles</span></div>
+  <p class="sec-desc">Each fertilizer has a distinct production chemistry, supply chain, and vulnerability. A Hormuz closure affects each one differently — from existential (MOP, DAP) to manageable (NPKS, SSP). Policy responses must be product-specific.</p>
+
+  <div class="fw">
+    <div class="fw-title">Fertilizer → Raw Material → Import Source → Hormuz Risk Classification</div>
+    <div class="fh">
+      <div class="fn r"><div class="fi">🌿</div><div class="fl">Urea (46% N)</div><div class="fval">MRP ₹242/bag</div><div class="fs">LNG→NH₃→Urea. 21% imported. 70% of imports via Hormuz. All 32 plants gas-based. RISK: HIGH</div></div>
+      <div class="fa-arrow">|</div>
+      <div class="fn r"><div class="fi">🔵</div><div class="fl">DAP (18-46-0)</div><div class="fval">60% imported</div><div class="fs">NH₃ + H₃PO₄. Gulf = 73% of imports. Oman 39.5%, Qatar 14.7%. ALL via Hormuz. RISK: CRITICAL</div></div>
+      <div class="fa-arrow">|</div>
+      <div class="fn a"><div class="fi">🟡</div><div class="fl">MOP (0-0-60)</div><div class="fval">100% imported</div><div class="fs">Zero domestic production. Canada, Russia, Saudi Arabia. Belarus sanctions: -52% demand. RISK: EXTREME</div></div>
+      <div class="fa-arrow">|</div>
+      <div class="fn g"><div class="fi">🔶</div><div class="fl">NPKS Complex</div><div class="fval">90% domestic</div><div class="fs">Multiple nutrients. Fastest growing product (+19% in 5 yrs). 28 NBS grades. RISK: LOW</div></div>
+      <div class="fa-arrow">|</div>
+      <div class="fn t"><div class="fi">🟢</div><div class="fl">SSP (0-16-0+11S)</div><div class="fval">100% domestic</div><div class="fs">250+ small plants. Addresses S-deficiency in 41% soils. Crisis-proof. RISK: ZERO</div></div>
+    </div>
+  </div>
+
+  <div class="g1">
+    <div class="card ac">
+      <div class="card-title">P&K Fertilizer Consumption — All Products (LMT) — 5-Year Verified Trend (2020-21 to 2024-25)</div>
+      <div class="card-sub">NPKS is the only product rising consistently — reflecting NBS promotion of balanced nutrition. MOP crashed 52% after Belarus/Russia sanctions in 2022 (price: $215→$863/t). DAP volatile with Gulf supply sensitivity. SSP provides a stable domestic buffer throughout.</div>
+      <div class="ch"><canvas id="pkChart"></canvas></div>
+      <div class="card-src">✅ 100% Verified: PIB Press Release 27 March 2026, Ministry of Chemicals &amp; Fertilizers (uploaded image). LMT = Lakh Metric Tonnes, product weight.</div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card rc">
+      <div class="card-title">DAP: Price-Sensitive Gulf-Dependent</div>
+      <div class="card-sub">60% imported. 73% of imports from Gulf via Hormuz</div>
+      <div class="sr"><div class="sp r"><div class="v">119.18</div><div class="l">LMT peak 2020-21</div></div><div class="sp a"><div class="v">96.29</div><div class="l">LMT 2024-25 (-19%)</div></div></div>
+      <div class="ins">Every $100/t rise in DAP world price = ~₹5,500 Cr more in NBS subsidy expenditure</div>
+      <div class="ins am">Mar 2026: DAP hit $920/t — highest since $954/t peak in April 2022</div>
+    </div>
+    <div class="card rc">
+      <div class="card-title">MOP: The Price Elasticity Experiment</div>
+      <div class="card-sub">100% imported — the most geopolitically exposed fertilizer</div>
+      <div class="sr"><div class="sp"><div class="v">34.32</div><div class="l">LMT (2020-21)</div></div><div class="sp r"><div class="v">16.32</div><div class="l">LMT (2022-23) -52%</div></div></div>
+      <div class="ins">Price: $215 (2020) → $863/t (2022) = +300%. Demand fell -52%. Arc price elasticity ≈ -0.47 — a direct CGE parameter</div>
+      <div class="ins am">Accumulated soil K deficit (2022-24) is a hidden long-run productivity loss not visible in current yield data</div>
+    </div>
+    <div class="card gc">
+      <div class="card-title">SSP: The Crisis-Proof Alternative</div>
+      <div class="card-sub">India's only fully domestic phosphatic fertilizer — zero Hormuz risk</div>
+      <div class="sr"><div class="sp g"><div class="v">100%</div><div class="l">Domestic production</div></div><div class="sp t"><div class="v">41%</div><div class="l">India soils S-deficient</div></div></div>
+      <div class="ins gn">SSP costs &lt;50% of DAP per bag. Addresses both P and S deficiency simultaneously</div>
+      <div class="ins bl">Every tonne of SSP replaces one tonne of imported DAP — saving foreign exchange AND improving soil health</div>
+    </div>
+  </div>
+</div>
+<div class="divider"></div>
+
+<div class="section" id="s3">
+  <div class="sec-label"><span class="sec-num">03</span><span class="sec-title">The Subsidy Architecture & Its Fiscal Risk</span></div>
+  <p class="sec-desc">India's fertilizer subsidy operates through two distinct mechanisms. The MRP freeze on urea creates unlimited fiscal exposure — the government is a residual price-taker with zero protection from world price volatility. Every rupee of world price increase above ₹242/bag flows directly into government expenditure.</p>
+
+  <div class="fw">
+    <div class="fw-title">Two-Track Subsidy System: How a World Price Change Becomes Government Expenditure</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">
+      <div>
+        <p style="font-size:.75rem;font-weight:700;color:var(--red);margin-bottom:10px;text-align:center">TRACK 1 — UREA (NPS) — UNLIMITED FISCAL EXPOSURE</p>
+        <div class="fv-flow">
+          <div class="fn r"><div class="fi">🌍</div><div class="fl">World Urea Price Rises</div><div class="fs">$200→$700→$664-$1,136/t. No upper bound. No government protection</div></div>
+          <div class="fv-arrow">↓</div>
+          <div class="fn r"><div class="fi">🏛️</div><div class="fl">Government Absorbs 100% of Gap</div><div class="fs">Delivered cost minus MRP (₹242/bag). Unlimited liability. No cap.</div></div>
+          <div class="fv-arrow">↓</div>
+          <div class="fn a"><div class="fi">👨‍🌾</div><div class="fl">Farmer Always Pays ₹242/bag</div><div class="fs">Frozen since March 2018. Whether world price is $200 or $1,136.</div></div>
+          <div class="fv-arrow">↓</div>
+          <div class="fn r"><div class="fi">💸</div><div class="fl">Urea Subsidy Explodes 3.4× in One Price Cycle</div><div class="fs">₹54,755 Cr (2019-20) → ~₹1,88,000 Cr (2022-23). Same MRP throughout.</div></div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:.75rem;font-weight:700;color:var(--grn);margin-bottom:10px;text-align:center">TRACK 2 — P&K (NBS SCHEME) — BOUNDED EXPOSURE</p>
+        <div class="fv-flow">
+          <div class="fn b"><div class="fi">🌍</div><div class="fl">World P&K Prices Rise</div><div class="fs">DAP $350→$920/t. Government revises NBS rate biannually</div></div>
+          <div class="fv-arrow">↓</div>
+          <div class="fn g"><div class="fi">📊</div><div class="fl">NBS Rate Adjusted Each Season</div><div class="fs">Fixed ₹/kg of nutrient (N, P, K, S) — set for each Kharif and Rabi</div></div>
+          <div class="fv-arrow">↓</div>
+          <div class="fn a"><div class="fi">👨‍🌾</div><div class="fl">MRP = Market Price Minus NBS</div><div class="fs">Decontrolled — farmers absorb some price rise. Creates price-elastic demand.</div></div>
+          <div class="fv-arrow">↓</div>
+          <div class="fn g"><div class="fi">✅</div><div class="fl">NBS Budget: ₹37,952 Cr (Rabi 2025-26)</div><div class="fs">Bounded fiscal commitment. DAP subsidy = ₹29,805/MT. Announced in advance.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card rc">
+      <div class="card-title">Fertilizer Subsidy Bill — 2018-19 to 2024-25 (₹ Crore)</div>
+      <div class="card-sub">Seven-year actual expenditure series: the pre-COVID level (₹73,435 Cr in 2018-19), the COVID-year surge, the Russia-Ukraine war peak (₹2,54,799 Cr in 2022-23), and the partial correction. The urea world price line (right axis) tracks in near-perfect lockstep — illustrating why the MRP freeze creates unlimited fiscal exposure. At Mar 2026 prices ($664/t), the subsidy trajectory is rising again.</div>
+      <div class="ch"><canvas id="subChart"></canvas></div>
+      <div class="card-src">Sources: Parliamentary Reply by Min. Khuba (LS, Feb 2024) for 2018-19 to 2022-23 actuals; PIB 27 Mar 2026 for 2022-23 to 2023-24; Budget 2026-27 Demand No.6 DoF for 2024-25 actual (₹1,81,785 Cr gross; net shown). World urea price: WB Pink Sheet. Note: Pre-2018-19 data needs DoF Annual Reports — not shown here.</div>
+    </div>
+    <div class="card rc">
+      <div class="card-title">NBS Nutrient Rates (₹/kg) — Selected Seasons (Sourced)</div>
+      <div class="card-sub">Selected seasons where rates are sourced from official notifications. The war-period peak (N=₹98/kg) and the post-war correction are clearly visible. K stays fixed at ₹2.38/kg across all seasons — a design feature that structurally drives the NPK imbalance.</div>
+      <table class="dt">
+        <tr><th>Season</th><th>N ₹/kg</th><th>P ₹/kg</th><th>K ₹/kg</th><th>S ₹/kg</th><th>Source</th></tr>
+        <tr><td>Kharif 2019-20</td><td class="nm">18.90</td><td class="nm">15.21</td><td class="nm">11.12</td><td class="nm">1.89</td><td style="font-size:.63rem;color:#888">CCEA approval (Drishti IAS)</td></tr>
+        <tr class="pk-row"><td>2022-23 Peak (War period)</td><td class="nm rd">98.00</td><td class="nm rd">66.93</td><td class="nm rd">23.65</td><td class="nm">6.12</td><td style="font-size:.63rem;color:#888">DoF notification (widely cited)</td></tr>
+        <tr><td>Kharif 2023</td><td class="nm">47.02</td><td class="nm">28.72</td><td class="nm">2.38</td><td class="nm">1.89</td><td style="font-size:.63rem;color:#888">Cabinet approval, PIB/DoF</td></tr>
+        <tr><td>Kharif 2024</td><td class="nm">47.02</td><td class="nm">28.72</td><td class="nm">2.38</td><td class="nm">1.89</td><td style="font-size:.63rem;color:#888">DoF notification</td></tr>
+        <tr style="background:var(--lgrn)"><td><strong>Rabi 2025-26</strong></td><td class="nm gn"><strong>43.02</strong></td><td class="nm am"><strong>47.96</strong></td><td class="nm"><strong>2.38</strong></td><td class="nm"><strong>2.87</strong></td><td style="font-size:.63rem;color:var(--grn)">PIB NoteId 156820 (05 Jan 2026)</td></tr>
+        <tr style="background:#fff8e8"><td><strong>Kharif 2026</strong></td><td class="nm am"><strong>47.32</strong></td><td class="nm am"><strong>52.76</strong></td><td class="nm"><strong>2.38</strong></td><td class="nm"><strong>3.16</strong></td><td style="font-size:.63rem;color:var(--amber)">Cabinet approval, PM India (Apr 2026)</td></tr>
+      </table>
+      <div class="ins am"><strong>K subsidy remains ₹2.38/kg</strong> — unchanged across multiple seasons — while N rose 2.5× (₹18.90 → ₹47.32/kg) and P rose 3.5× (₹15.21 → ₹52.76/kg). This structural gap drives NPK imbalance.</div>
+      <div class="card-src">Sources: CCEA approval (Kharif 2019-20, Drishti IAS); DoF notifications for 2022-23 and 2023-24; PIB NoteId 156820 (05 Jan 2026) for Rabi 2025-26; PM India Cabinet decision (Apr 2026) for Kharif 2026. Intermediate seasons (2015-19) not shown — rates available from DoF Annual Reports / fert.nic.in.</div>
+    </div>
+  </div>
+</div>
+<div class="divider"></div>
+
+<div class="section" id="s4">
+  <div class="sec-label"><span class="sec-num">04</span><span class="sec-title">The 2026 Middle East Crisis — Three Simultaneous Channels</span></div>
+  <p class="sec-desc">The February 2026 strikes on Gulf LNG infrastructure triggered the fastest fertilizer price shock since 2022 — with three distinct channels hitting India simultaneously. Unlike the Russia-Ukraine shock (which was primarily price), this crisis also directly cuts domestic production through the LNG-urea plant link.</p>
+
+  <div class="fw">
+    <div class="fw-title">Geopolitical Shock → Three Simultaneous Channels → India's Fertilizer Crisis</div>
+    <div class="fh">
+      <div class="fn r"><div class="fi">💥</div><div class="fl">Geopolitical Shock</div><div class="fval">Feb 28, 2026</div><div class="fs">Strikes on Gulf LNG terminals. Hormuz transits: 129/day → 4/day in just 8 days (-97%)</div></div>
+      <div class="fa-arrow">→</div>
+      <div class="fn r"><div class="fi">⚡</div><div class="fl">Channel 1: LNG Cutoff</div><div class="fval">Gas supply -40%</div><div class="fs">Qatar = 44% India LNG. GAIL capped plant supply. Urea output -27% in March 2026</div></div>
+      <div class="fa-arrow">+</div>
+      <div class="fn a"><div class="fi">💲</div><div class="fl">Channel 2: Import Price</div><div class="fval">Urea $428→$664/t</div><div class="fs">+55% in 6 weeks. IPL bids $935-$1,136/t. Subsidy/tonne ≈ $930. Extra burden: ₹20-25K Cr</div></div>
+      <div class="fa-arrow">+</div>
+      <div class="fn a"><div class="fi">🧪</div><div class="fl">Channel 3: Ammonia</div><div class="fval">+24% → $600/t</div><div class="fs">80% India ammonia from Gulf. Domestic DAP/NPKS costs rise even without finished product import</div></div>
+      <div class="fa-arrow">→</div>
+      <div class="fn r"><div class="fi">🌾</div><div class="fl">India: Triple Crisis</div><div class="fval">Production+Price+Cost</div><div class="fs">Kharif 2026 sowing at risk. Fiscal shock ₹20-25K Cr. Soil nutrition shortage compounding</div></div>
+    </div>
+  </div>
+
+  <div class="g21">
+    <div class="card rc">
+      <div class="card-title">Hormuz Ship Transits — The Physical Trigger (Feb 1 – Mar 7, 2026)</div>
+      <div class="card-sub">Average 1–27 Feb = 129 ships/day (normal). By March 7: just 4 ships/day — a 97% collapse in 8 days. This single chokepoint routes 70% of India's urea imports and 44% of its LNG supply.</div>
+      <div class="ch"><canvas id="hChart"></canvas></div>
+      <div class="card-src">UNCTAD, based on Clarksons Research Shipping Intelligence Network. data-K7SMg.csv ✅</div>
+    </div>
+    <div>
+      <div class="card rc" style="margin-bottom:14px">
+        <div class="card-title">Channel 1 — Production Collapse</div>
+        <div class="sr"><div class="sp r"><div class="v">-40%</div><div class="l">GAIL gas supply cut to plants</div></div><div class="sp r"><div class="v">-27%</div><div class="l">Urea output (Mar 2026)</div></div></div>
+        <div class="ins">All 32 India urea plants are gas-based. No coal gasification at commercial scale. No replacement feedstock possible within weeks.</div>
+      </div>
+      <div class="card ac" style="margin-bottom:14px">
+        <div class="card-title">Channel 2 — Price Explosion</div>
+        <div class="sr"><div class="sp r"><div class="v">$664/t</div><div class="l">Urea Mar 2026</div></div><div class="sp r"><div class="v">$920/t</div><div class="l">DAP Mar 2026</div></div></div>
+        <div class="ins am">IPL tender bids: $935–$1,136/t vs MRP equivalent ~$70/t. Implied subsidy = $865–$1,066/t per tonne imported</div>
+      </div>
+      <div class="card goc">
+        <div class="card-title">Channel 3 — Ammonia Cost-Push</div>
+        <div class="sr"><div class="sp a"><div class="v">+24%</div><div class="l">Ammonia price rise</div></div><div class="sp a"><div class="v">80%</div><div class="l">India ammonia from Gulf</div></div></div>
+        <div class="ins am">Domestic DAP and NPKS production costs rise even without importing the finished product — ammonia is the shared feedstock for multiple fertilizers</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card rc">
+      <div class="card-title">Fertilizer Prices FOB — Three Crises in Six Years (Jan 2018 – Mar 2026)</div>
+      <div class="card-sub">Green dashed line = India's urea MRP equivalent (~$70/t). The gap between any world price line and this green line = government subsidy per tonne. At $664/t (Mar 2026), the gap is $594/t — 8.5× the farmer's price. Three crisis zones annotated.</div>
+      <div class="ch"><canvas id="fpChart"></canvas></div>
+      <div class="card-src">WB Pink Sheet Dec 2025 ✅; WB April 2, 2026 ✅; data-22YEF.csv ✅</div>
+    </div>
+    <div class="card rc">
+      <div class="card-title">Crisis Impact — Full Before &amp; After Quantification</div>
+      <div class="card-sub">Key indicators: January 2026 pre-crisis baseline vs March 2026 crisis peak</div>
+      <table class="dt">
+        <tr><th>Indicator</th><th>Jan 2026</th><th>Mar 2026</th><th>Change</th></tr>
+        <tr><td>Hormuz transits/day</td><td class="nm">129</td><td class="nm rd">4</td><td class="nm rd">-97%</td></tr>
+        <tr><td>Urea world price ($/t)</td><td class="nm">$428</td><td class="nm rd">$664–$1,136</td><td class="nm rd">+55 to +165%</td></tr>
+        <tr><td>DAP world price ($/t)</td><td class="nm">$730</td><td class="nm rd">$920</td><td class="nm rd">+26%</td></tr>
+        <tr><td>MOP world price ($/t)</td><td class="nm">$365</td><td class="nm am">$428</td><td class="nm am">+17%</td></tr>
+        <tr><td>Ammonia price ($/t)</td><td class="nm">$485</td><td class="nm rd">$600</td><td class="nm rd">+24%</td></tr>
+        <tr><td>WB Fertilizer Index (m/m)</td><td class="nm">—</td><td class="nm rd">+26.2%</td><td class="nm rd">Largest since Apr 2022</td></tr>
+        <tr><td>India urea output</td><td class="nm">~2.2 Mt/mo</td><td class="nm rd">1.8 Mt/mo</td><td class="nm rd">-27%</td></tr>
+        <tr><td>GAIL gas supply to plants</td><td class="nm">100%</td><td class="nm rd">60%</td><td class="nm rd">-40%</td></tr>
+        <tr><td>Fertilizer production index</td><td class="nm">~100</td><td class="nm rd">95.7</td><td class="nm rd">5-year low</td></tr>
+        <tr><td>Extra subsidy burden</td><td class="nm">—</td><td class="nm rd">₹20,000–25,000 Cr</td><td class="nm rd">Crisil estimate</td></tr>
+        <tr><td>Crude oil (Brent $/bbl)</td><td class="nm">~$72</td><td class="nm rd">$91.8</td><td class="nm rd">+27%</td></tr>
+        <tr><td>Natural gas (€/MWh TTF)</td><td class="nm">~$32</td><td class="nm rd">$55.8</td><td class="nm rd">+74%</td></tr>
+      </table>
+      <div class="card-src">WB Apr 2, 2026 ✅; UNCTAD/Clarksons ✅; Hindustan Times Apr 2026 ✅; Crisil Ratings 2026</div>
+    </div>
+  </div>
+
+  <div class="g1">
+    <div class="card ac">
+      <div class="card-title">Gas Prices Drive Fertilizer Prices — 35-Year Monthly Evidence (Jan 1990 – Mar 2026)</div>
+      <div class="card-sub">Natural gas price index (2010=100, right axis) vs DAP and urea prices (USD/tonne, left axis). Four major geopolitical crises annotated. The structural relationship is unambiguous — energy market disruptions transmit to fertilizer costs within weeks to months. The 2026 Hormuz closure is the 4th shock, visible at the right edge.</div>
+      <div class="ch"><canvas id="gfChart"></canvas></div>
+      <div class="card-src">UNCTAD based on World Bank Pink Sheet. data-22YEF.csv ✅. Mar-2026: Urea $664/t, DAP $920/t (WB April 2, 2026 ✅).</div>
+    </div>
+  </div>
+</div>
+<div class="divider"></div>
+
+<div class="section" id="s5">
+  <div class="sec-label"><span class="sec-num">05</span><span class="sec-title">Who Bears the Risk? State-level Consumption Patterns</span></div>
+  <p class="sec-desc">The crisis does not hit all states equally. Eastern Indo-Gangetic Plains states — home to India's rice-wheat food security system — are the fastest-growing consumption zone and among the most exposed to any supply disruption from Hormuz closure.</p>
+
+  <div class="g2">
+    <div class="card bc">
+      <div class="card-title">Top 10 States — Urea Consumption 2024-25 (LMT)</div>
+      <div class="card-sub">UP alone = 20.4% of India's urea. Green bars = Eastern IGP states. Bihar grew +16.6% in just 3 years.</div>
+      <div class="ch"><canvas id="stUChart"></canvas></div>
+      <div class="card-src">✅ Lok Sabha Unstarred Question No. 3327, dated 08.08.2025</div>
+    </div>
+    <div class="card bc">
+      <div class="card-title">State NPK Total Consumption ('000 Tonnes) — 12-Year Trend</div>
+      <div class="card-sub">UP dominates but MP is fastest growing large state (+68% in 10 years). Bihar EIGP growing rapidly (+53%).</div>
+      <div class="ch"><canvas id="stNChart"></canvas></div>
+      <div class="card-src">RBI Handbook; MoAFW; FAI Fertiliser Statistics via indiastat.com</div>
+    </div>
+  </div>
+
+  <div class="g1">
+    <div class="card gc">
+      <div class="card-title">State-level Key Anomalies — What National Averages Conceal</div>
+      <div class="card-sub">The most policy-relevant insights emerge only from disaggregated state-level analysis</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px">
+        <div>
+          <div class="ins"><strong>UP N:K Ratio ≈ 45:1</strong><br>79.18 LMT urea vs only 1.76 LMT MOP. Recommended = 4:1. Soil K depletion accumulating silently in India's largest food bowl. Risk to long-run productivity.</div>
+          <div class="ins am"><strong>Punjab: N:K ≈ 46:1</strong><br>32.56 LMT urea, 0.71 LMT MOP. Highest N intensity per hectare in India. Groundwater nitrate stress severe. Yields stagnating.</div>
+        </div>
+        <div>
+          <div class="ins gn"><strong>Karnataka: NPKS &gt; Urea — A National Role Model</strong><br>NPKS (20.90 LMT) exceeds Urea (19.17 LMT). The ONLY large state achieving this. Complex fertilizer adoption = balanced nutrition = higher long-run soil health.</div>
+          <div class="ins bl"><strong>Maharashtra NPKS: 28.79 LMT — Highest in India</strong><br>Sugarcane-driven K and P demand. Progressive adoption of complex fertilizers gives Maharashtra better NPK balance than most northern states.</div>
+        </div>
+        <div>
+          <div class="ins"><strong>Bihar urea grew +16.6% in 3 years</strong><br>21.96 → 23.24 → 25.60 LMT (2022–25). EIGP paddy-wheat intensification. MOP consumption still recovering from 2022 price collapse.</div>
+          <div class="ins am"><strong>UP DAP: Deficit even before Hormuz</strong><br>Rabi 2024-25: Availability (1.43 MT) &lt; Requirement (1.50 MT) — a shortfall existed BEFORE the 2026 crisis, making the region especially vulnerable.</div>
+        </div>
+      </div>
+      <table class="dt">
+        <tr><th>State</th><th>Urea 24-25 (LMT)</th><th>DAP</th><th>MOP</th><th>NPKS</th><th>Implied N:K</th><th>Zone</th></tr>
+        <tr><td><strong>Uttar Pradesh</strong></td><td class="nm am">79.18</td><td class="nm">19.51</td><td class="nm">1.76</td><td class="nm">10.50</td><td class="nm rd">~45:1</td><td>North</td></tr>
+        <tr><td>Madhya Pradesh</td><td class="nm">38.09</td><td class="nm am">11.66</td><td class="nm">1.08</td><td class="nm">9.77</td><td class="nm">~35:1</td><td>West</td></tr>
+        <tr><td>Punjab</td><td class="nm">32.56</td><td class="nm">6.61</td><td class="nm">0.71</td><td class="nm">1.41</td><td class="nm rd">~46:1</td><td>North</td></tr>
+        <tr><td>Maharashtra</td><td class="nm">26.41</td><td class="nm">6.47</td><td class="nm">2.22</td><td class="nm am">28.79</td><td class="nm gn">~12:1</td><td>West</td></tr>
+        <tr><td><strong>Bihar ★</strong></td><td class="nm">25.60</td><td class="nm">5.83</td><td class="nm">1.84</td><td class="nm">6.04</td><td class="nm">~14:1</td><td>East</td></tr>
+        <tr><td>Rajasthan</td><td class="nm">26.40</td><td class="nm">6.90</td><td class="nm">0.20</td><td class="nm">2.55</td><td class="nm rd">~132:1</td><td>North</td></tr>
+        <tr style="background:var(--lgrn)"><td><strong>Karnataka ✓ Best Practice</strong></td><td class="nm">19.17</td><td class="nm">5.86</td><td class="nm">2.21</td><td class="nm gn">20.90</td><td class="nm gn">~9:1 ✓</td><td>South</td></tr>
+        <tr><td><strong>West Bengal ★</strong></td><td class="nm">15.77</td><td class="nm">3.12</td><td class="nm am">2.57</td><td class="nm">12.24</td><td class="nm gn">~6:1</td><td>East</td></tr>
+        <tr><td><strong>Odisha ★</strong></td><td class="nm">6.67</td><td class="nm">2.56</td><td class="nm">0.77</td><td class="nm">3.28</td><td class="nm">~9:1</td><td>East</td></tr>
+        <tr><td><strong>INDIA TOTAL</strong></td><td class="nm am">387.92</td><td class="nm">96.29</td><td class="nm">22.02</td><td class="nm">149.72</td><td class="nm am">~18:1</td><td>All India</td></tr>
+      </table>
+      <div class="card-src">✅ LS UQ 3327 (08.08.2025). ★ = Eastern IGP / EIGP states. Green = best-practice balanced fertilisation state.</div>
+    </div>
+  </div>
+</div>
+<div class="divider"></div>
+
+<div class="section" id="s6">
+  <div class="sec-label"><span class="sec-num">06</span><span class="sec-title">The NPK Imbalance — 30 Years of Structural Distortion</span></div>
+  <p class="sec-desc">India's N:P:K ratio deteriorated from 5.9:2.4:1 in 1991-92 to an extreme 12.8:5.1:1 in Kharif 2022. This is not just a soil problem — it is a policy-designed structural failure driven by artificially cheap urea and chronically under-subsidised potash, reducing the return on every rupee of subsidy spent.</p>
+
+  <div class="g2">
+    <div class="card rc">
+      <div class="card-title">N:P:K Proportional Shares — How the Ratio Deteriorated Over 30 Years (Stacked 100%)</div>
+      <div class="card-sub">Each bar = 100% of total nutrients applied. The shrinking green (K) and growing blue (N) strips show the 30-year divergence from the recommended balance. Kharif 2022 = extreme distortion after MOP price shock collapsed K consumption by 52%.</div>
+      <div class="ch"><canvas id="npkChart"></canvas></div>
+      <div class="card-src">FAI Statistics; NITI Aayog; Chand &amp; Pavithra, EPW Vol.50 No.44 (2015); Mankunnummal, EPW 2023; PIB Aug 2025</div>
+    </div>
+    <div class="card rc">
+      <div class="card-title">NPK Ratio — Complete Historical Record</div>
+      <div class="card-sub">Every geopolitical energy shock worsens the NPK imbalance by making urea relatively cheaper (MRP frozen) while P and K world prices spike</div>
+      <table class="dt">
+        <tr><th>Period</th><th>Actual N:P:K</th><th>K₂O ('000T)</th><th>Assessment</th></tr>
+        <tr style="background:var(--lgrn)"><td>Recommended (traditional)</td><td class="nm gn">4:2:1</td><td>—</td><td class="gn">IDEAL</td></tr>
+        <tr style="background:var(--lgrn)"><td>Revised norm (Chand & Pavithra, EPW 2015)</td><td class="nm gn">2.6:1.4:1</td><td>—</td><td class="gn">REVISED NORM</td></tr>
+        <tr><td>1991-92</td><td class="nm">5.9:2.4:1</td><td>—</td><td>Moderate</td></tr>
+        <tr><td>2009-10 (near-ideal)</td><td class="nm gn">~4:3.2:1</td><td>—</td><td class="gn">Best in 30 years</td></tr>
+        <tr><td>2015-16</td><td class="nm am">8:3:1</td><td>—</td><td class="am">Severe</td></tr>
+        <tr><td>2019-20</td><td class="nm am">7.3:2.9:1</td><td class="nm">2,607</td><td class="am">Severe</td></tr>
+        <tr><td>2021-22</td><td class="nm am">7.7:3.1:1</td><td class="nm">2,529</td><td class="am">Severe</td></tr>
+        <tr class="pk-row"><td>Kharif 2022 — EXTREME PEAK</td><td class="nm rd">12.8:5.1:1</td><td class="nm rd">~900</td><td class="rd">EXTREME — Highest recorded</td></tr>
+        <tr><td>2023-24</td><td class="nm rd">10.9:4.9:1</td><td class="nm">1,879</td><td class="rd">Extreme — recovering slowly</td></tr>
+        <tr><td>Kharif 2024</td><td class="nm am">9.8:3.7:1</td><td>—</td><td class="am">Severe — improving but far from norm</td></tr>
+      </table>
+      <div class="ins">Fertilizer-to-grain response ratio: 1:10 (1970s) → 1:2.7 (2015). Soil degradation means each additional tonne of fertilizer produces less and less food.</div>
+      <div class="ins am"><strong>NBS K subsidy (₹2.38/kg) is 18× lower than N (₹43.02/kg).</strong> This subsidy design structurally maintains the NPK imbalance through policy — not just through farmer behaviour.</div>
+      <div class="card-src">FAI Fertiliser Statistics; NITI Aayog NPK Report; Chand &amp; Pavithra EPW 2015; Mankunnummal EPW 2023</div>
+    </div>
+  </div>
+</div>
+<div class="divider"></div>
+
+<div class="section" id="s7">
+  <div class="sec-label"><span class="sec-num">07</span><span class="sec-title">From Fertilizer to Food — The Complete Crisis Chain</span></div>
+  <p class="sec-desc">The fertilizer shock does not stop at the farm gate. Every shock in fertilizer availability or price transmits through crop yields, food prices, farmer incomes, and ultimately national food security — while simultaneously triggering a fiscal squeeze that constrains the government's ability to respond.</p>
+
+  <div class="fw">
+    <div class="fw-title">Complete Chain: Geopolitical Shock → Energy → Fertilizer → Crop → Food → Fiscal</div>
+    <div class="fh">
+      <div class="fn r"><div class="fi">💥</div><div class="fl">Geopolitical Shock</div><div class="fval">Hormuz / War</div><div class="fs">Supply corridor collapses. Energy prices surge within hours of the event</div></div>
+      <div class="fa-arrow">→</div>
+      <div class="fn a"><div class="fi">⚡</div><div class="fl">Energy Prices Rise</div><div class="fval">Oil +27%, Gas +74%</div><div class="fs">LNG for urea. Crude for DAP inputs. Transport and logistics fuel all rise simultaneously</div></div>
+      <div class="fa-arrow">→</div>
+      <div class="fn a"><div class="fi">🧪</div><div class="fl">Fertilizer Crisis</div><div class="fval">+55% Urea, +26% DAP</div><div class="fs">Production cut (-27%) + import price explosion + subsidy fiscal shock — all at once</div></div>
+      <div class="fa-arrow">→</div>
+      <div class="fn r"><div class="fi">📉</div><div class="fl">Availability Falls</div><div class="fval">-27% domestic</div><div class="fs">Or if MRP rises: farmers under-apply. Either path leads to less nutrient reaching crops</div></div>
+      <div class="fa-arrow">→</div>
+      <div class="fn r"><div class="fi">🌾</div><div class="fl">Crop Yield Decline</div><div class="fval">NPK imbalance</div><div class="fs">Paddy, wheat, soybean most affected. 1 kg N shortfall → 2.7 kg grain loss (response ratio)</div></div>
+      <div class="fa-arrow">→</div>
+      <div class="fn r"><div class="fi">🍚</div><div class="fl">Food Price Rise</div><div class="fval">Supply + cost both fall</div><div class="fs">Domestic food inflation. Food subsidy bill also rises. Government faces dual fiscal pressure</div></div>
+    </div>
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+      <p style="font-size:.74rem;font-weight:700;color:var(--ink2);margin-bottom:10px">Four Self-Reinforcing Feedback Loops — Why These Crises Compound and Do Not Resolve Quickly:</p>
+      <div class="loops">
+        <div class="loop" style="background:var(--lred)"><strong>① Fiscal Squeeze →</strong> Higher subsidy crowds out spending on irrigation, rural infra, and agricultural R&amp;D — reducing long-run resilience to the next crisis</div>
+        <div class="loop" style="background:var(--lamber)"><strong>② Soil Degradation →</strong> NPK imbalance worsens soil health → lower crop response → more fertilizer needed next season → more imports required → repeat</div>
+        <div class="loop" style="background:var(--ltblue)"><strong>③ Farmer Distress →</strong> If MRP rises even partially, small and marginal farmers reduce application → yield loss → rural income shock → food demand collapse</div>
+        <div class="loop" style="background:var(--lgrn)"><strong>④ Import Spiral →</strong> Panic buying at peak prices → India's large tender size actually pushes global prices up further → India pays even more for the same volume</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g1">
+    <div class="card tc">
+      <div class="card-title">When Oil Prices Rise, Food Prices Rise — 35-Year Monthly Evidence (Jan 1990 – Mar 2026)</div>
+      <div class="card-sub">FAO Food Price Index vs Brent crude oil (monthly, 1990–2026). Every major geopolitical shock that raised oil prices eventually raised food prices through three channels: (1) fertilizer production cost → crop cost → food price; (2) transport and logistics; (3) biofuel competition for land. India as the world's largest importer of fertilizers and a major edible oil importer faces all three simultaneously in the 2026 crisis.</div>
+      <div class="ch"><canvas id="ofChart"></canvas></div>
+      <div class="card-src">UNCTAD based on FAO Food Price Index and World Bank Pink Sheet. data-HngE8.csv ✅. Mar-2026: Oil $91.8/bbl (UNCTAD/LSEG).</div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card rc">
+      <div class="card-title">Kharif 2026 — Immediate Food Security Risk</div>
+      <div class="card-sub">Kharif sowing: April–June. The crisis is live exactly during the most critical sowing window.</div>
+      <div class="sr"><div class="sp r"><div class="v">185.39</div><div class="l">LMT urea needed (Kharif seasonal)</div></div><div class="sp a"><div class="v">131.56</div><div class="l">LMT sold upto Aug (Kharif 25)</div></div></div>
+      <div class="ins">At 1.8 Mt/month domestic output, cumulative production by June 2026 would be ~50 LMT below seasonal requirement</div>
+      <div class="ins am">Paddy yield ≈ 25 kg grain per kg N applied. A 10% N shortfall across 40+ million Ha paddy = very large national food output loss</div>
+    </div>
+    <div class="card ac">
+      <div class="card-title">India Fertilizer Import Bill — USD Billion (2013–2024)</div>
+      <div class="card-sub">2022 peak = $17.1B — 2.7× the 2019 level. The 2026 crisis will push the bill up again through both price (+55% urea) and volume (production shortfall) effects.</div>
+      <div class="ch"><canvas id="impChart"></canvas></div>
+      <div class="card-src">tradingeconomics.com | UN Comtrade</div>
+    </div>
+    <div class="card gc">
+      <div class="card-title">NITI Aayog Demand Projections to 2047-48</div>
+      <div class="card-sub">The rising demand trajectory against which supply shocks must be assessed</div>
+      <table class="dt">
+        <tr><th>Year</th><th>Demand (LMT)</th><th>kg/Ha</th></tr>
+        <tr><td>2019-20 (Actual)</td><td class="nm gn">289</td><td class="nm">148.4</td></tr>
+        <tr><td>2024-25 (Actual)</td><td class="nm am">364</td><td class="nm">~175</td></tr>
+        <tr><td>2025-26 (Projected)</td><td class="nm">339</td><td class="nm">166.8</td></tr>
+        <tr><td>2030-31</td><td class="nm">386</td><td class="nm">188.1</td></tr>
+        <tr><td>2040-41</td><td class="nm">502</td><td class="nm">239.0</td></tr>
+        <tr><td>2047-48</td><td class="nm am">604</td><td class="nm am">282.6</td></tr>
+      </table>
+      <div class="ins bl">2024-25 actual demand (364 LMT) ALREADY surpasses the 2025-26 NITI projection (339 LMT). The crisis strikes at a demand level higher than any model baseline anticipated.</div>
+      <div class="card-src">NITI Aayog (ON3805)</div>
+    </div>
+  </div>
+</div>
+<div class="divider"></div>
+
+<div class="section" id="s8">
+  <div class="sec-label"><span class="sec-num">08</span><span class="sec-title">CGE Framework — Capturing the Full Economy-wide Impact</span></div>
+  <p class="sec-desc">A SAM-based Computable General Equilibrium model is the appropriate tool because fertilizer subsidies affect multiple markets simultaneously. Partial equilibrium models capture only 3 of 9 key interactions — completely missing where the largest welfare effects occur.</p>
+
+  <div class="fw">
+    <div class="fw-title">CGE Model Architecture — What Goes In, How It Works, What Comes Out</div>
+    <div style="display:grid;grid-template-columns:1fr 44px 1fr 44px 1fr;align-items:center;gap:0">
+      <div>
+        <p style="font-size:.72rem;font-weight:700;color:var(--blue);margin-bottom:8px;text-align:center">MODEL INPUTS</p>
+        <div class="fn b" style="width:100%;max-width:100%;margin-bottom:8px"><div class="fi">📊</div><div class="fl">Social Accounting Matrix</div><div class="fs">India's inter-sectoral transactions. Fertilizer as intermediate input to agriculture sector</div></div>
+        <div class="fn b" style="width:100%;max-width:100%;margin-bottom:8px"><div class="fi">💲</div><div class="fl">Price Shocks — S1 to S4</div><div class="fs">Urea $200→$664, DAP $350→$920, MOP $300→$428. LNG shock modelled. Production cut (-27%)</div></div>
+        <div class="fn b" style="width:100%;max-width:100%"><div class="fi">🔧</div><div class="fl">Elasticity Parameters</div><div class="fs">MOP arc elasticity = -0.47 (Belarus natural experiment). Armington import substitution structure</div></div>
+      </div>
+      <div style="text-align:center;font-size:1.7rem;color:var(--blue);font-weight:900">→</div>
+      <div>
+        <p style="font-size:.72rem;font-weight:700;color:var(--amber);margin-bottom:8px;text-align:center">MODEL ENGINE</p>
+        <div class="fn a" style="width:100%;max-width:100%;margin-bottom:8px"><div class="fi">⚙️</div><div class="fl">CGE Equilibrium</div><div class="fs">All markets clear simultaneously. Walras' law. Factor market closures explicitly specified</div></div>
+        <div class="fn a" style="width:100%;max-width:100%;margin-bottom:8px"><div class="fi">🔄</div><div class="fl">Two-Track Subsidy Structure</div><div class="fs">NPS (urea-MRP freeze = unlimited) and NBS (P&K-decontrolled = bounded) modelled with separate mechanisms</div></div>
+        <div class="fn a" style="width:100%;max-width:100%"><div class="fi">📅</div><div class="fl">Kharif–Rabi Seasonality</div><div class="fs">Season-wise demand differentiation. N-heavy Kharif vs P+K-intensive Rabi modelled separately</div></div>
+      </div>
+      <div style="text-align:center;font-size:1.7rem;color:var(--grn);font-weight:900">→</div>
+      <div>
+        <p style="font-size:.72rem;font-weight:700;color:var(--grn);margin-bottom:8px;text-align:center">MODEL OUTPUTS</p>
+        <div class="fn g" style="width:100%;max-width:100%;margin-bottom:8px"><div class="fi">💸</div><div class="fl">Fiscal Impact</div><div class="fs">Subsidy by product and scenario. Extra burden vs baseline. As % of GDP.</div></div>
+        <div class="fn g" style="width:100%;max-width:100%;margin-bottom:8px"><div class="fi">🌾</div><div class="fl">Agricultural GDP & Output</div><div class="fs">Crop-wise production change. Input cost pass-through. Season-wise yield impact.</div></div>
+        <div class="fn g" style="width:100%;max-width:100%"><div class="fi">👨‍👩‍👧</div><div class="fl">Household Welfare</div><div class="fs">Rural vs urban. Small vs large farmers. Eastern IGP vs national. Equivalent variation measure.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg">
+    <div class="sc s1">
+      <div class="sc-lbl">Scenario 1 — Baseline</div>
+      <div class="sc-name">Pre-Crisis Long-Run Average (2015–2019)</div>
+      <div class="sc-r"><span class="sc-k">Urea</span><span class="sc-v">$200/t</span></div>
+      <div class="sc-r"><span class="sc-k">DAP</span><span class="sc-v">$350/t</span></div>
+      <div class="sc-r"><span class="sc-k">MOP</span><span class="sc-v">$300/t</span></div>
+      <div class="sc-r"><span class="sc-k">LNG</span><span class="sc-v">$4.5/MMBtu</span></div>
+      <div class="sc-r"><span class="sc-k">Subsidy</span><span class="sc-v">~₹70–80K Cr</span></div>
+    </div>
+    <div class="sc s2">
+      <div class="sc-lbl">Scenario 2 — Historical Peak</div>
+      <div class="sc-name">Russia–Ukraine War Peak (2022–23)</div>
+      <div class="sc-r"><span class="sc-k">Urea</span><span class="sc-v">$700/t</span></div>
+      <div class="sc-r"><span class="sc-k">DAP</span><span class="sc-v">$772/t</span></div>
+      <div class="sc-r"><span class="sc-k">MOP</span><span class="sc-v">$863/t</span></div>
+      <div class="sc-r"><span class="sc-k">LNG</span><span class="sc-v">$36.2/MMBtu</span></div>
+      <div class="sc-r"><span class="sc-k">Subsidy</span><span class="sc-v">₹2,54,799 Cr ✅</span></div>
+    </div>
+    <div class="sc s3">
+      <div class="sc-lbl">Scenario 3 — Pre-Conflict</div>
+      <div class="sc-name">2025 Average (Pre-Hormuz)</div>
+      <div class="sc-r"><span class="sc-k">Urea</span><span class="sc-v">$435/t</span></div>
+      <div class="sc-r"><span class="sc-k">DAP</span><span class="sc-v">$692/t</span></div>
+      <div class="sc-r"><span class="sc-k">MOP</span><span class="sc-v">$337/t</span></div>
+      <div class="sc-r"><span class="sc-k">LNG</span><span class="sc-v">$13.5/MMBtu</span></div>
+      <div class="sc-r"><span class="sc-k">Subsidy</span><span class="sc-v">~₹1,85,000 Cr</span></div>
+    </div>
+    <div class="sc s4">
+      <div class="sc-lbl">Scenario 4 — Live Crisis 🔴</div>
+      <div class="sc-name">Hormuz Crisis — March 2026</div>
+      <div class="sc-r"><span class="sc-k">Urea</span><span class="sc-v" style="color:var(--red)">$664–$1,136/t</span></div>
+      <div class="sc-r"><span class="sc-k">DAP</span><span class="sc-v" style="color:var(--red)">$920/t</span></div>
+      <div class="sc-r"><span class="sc-k">MOP</span><span class="sc-v">$428/t</span></div>
+      <div class="sc-r"><span class="sc-k">LNG</span><span class="sc-v" style="color:var(--red)">&gt;$18/MMBtu</span></div>
+      <div class="sc-r"><span class="sc-k">Subsidy</span><span class="sc-v" style="color:var(--red)">TBD — Model Output</span></div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card goc">
+      <div class="card-title">CGE Scenario Price Comparison — S1 to S4 (USD/tonne)</div>
+      <div class="card-sub">The jump from S1 ($200 urea) to S4 ($664–$1,136 urea) represents the full range of fiscal exposure. S2 is the verified calibration anchor — actual subsidy = ₹2.54 lakh crore is confirmed ✅.</div>
+      <div class="ch"><canvas id="scChart"></canvas></div>
+      <div class="card-src">S1–S3: WB Pink Sheet Dec 2025 ✅. S4: WB April 2, 2026 ✅; CRU Group 2026</div>
+    </div>
+    <div class="card goc">
+      <div class="card-title">Why CGE — Not Partial Equilibrium? What PE Models Miss</div>
+      <div class="card-sub">PE models capture only 3 of 9 key market interactions — missing exactly where the largest welfare effects occur</div>
+      <table class="dt">
+        <tr><th>Market / Effect</th><th>Mechanism</th><th>PE?</th><th>CGE?</th></tr>
+        <tr><td>Fertilizer market price</td><td>Import → domestic cost</td><td class="gn">✓ Yes</td><td class="gn">✓ Yes</td></tr>
+        <tr><td>Government budget</td><td>Subsidy → fiscal deficit</td><td class="gn">✓ Yes</td><td class="gn">✓ Yes</td></tr>
+        <tr><td>Agricultural output</td><td>Input cost → crop production</td><td class="gn">✓ Yes</td><td class="gn">✓ Yes</td></tr>
+        <tr><td>Factor markets (labour)</td><td>Farm income → rural wages</td><td class="rd">✗ No</td><td class="gn">✓ Yes</td></tr>
+        <tr><td>Food retail prices</td><td>Output fall → food inflation</td><td class="rd">✗ No</td><td class="gn">✓ Yes</td></tr>
+        <tr><td>Household welfare</td><td>Income + price → real living standards</td><td class="rd">✗ No</td><td class="gn">✓ Yes</td></tr>
+        <tr><td>Trade balance</td><td>Import bill → current account</td><td class="rd">✗ No</td><td class="gn">✓ Yes</td></tr>
+        <tr><td>Non-farm sectors</td><td>Food inflation → industrial wages</td><td class="rd">✗ No</td><td class="gn">✓ Yes</td></tr>
+        <tr><td>Fiscal multiplier</td><td>Subsidy cut → aggregate demand</td><td class="rd">✗ No</td><td class="gn">✓ Yes</td></tr>
+      </table>
+      <div class="ins bl">Prior India CGE evidence (Dixon et al. 2020): fertilizer subsidies impose 0.20% GDP deadweight loss — partially offset by 4% farm income gain. Switching to production subsidies raises farm income 4% at lower fiscal cost.</div>
+      <div class="card-src">Dixon, Rimmer, Chadha, Pratap &amp; Tandon (2020); Mishra et al. (2024) Journal of Economic Structures; Mishra et al. (2025) ICAR-IARI Policy Brief</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════ ABOUT AUTHOR -->
+<div id="about-author"></div>
+<div style="background:linear-gradient(135deg,#0d2137 0%,#1a4a7a 100%);padding:52px 64px 48px;margin-top:0">
+  <div style="max-width:1380px;margin:0 auto">
+
+    <!-- Section header -->
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:32px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;background:rgba(255,255,255,.15);color:#fff;border-radius:4px;padding:4px 10px;letter-spacing:1px">ABOUT</span>
+      <span style="font-family:'DM Serif Display',serif;font-size:1.75rem;color:#fff">About the Author</span>
+    </div>
+
+    <!-- Profile card -->
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:start;background:rgba(255,255,255,.06);border-radius:14px;padding:32px;border:1px solid rgba(255,255,255,.12);margin-bottom:28px">
+
+      <!-- Avatar circle -->
+      <div style="width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#2E75B6,#1a6040);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:3px solid rgba(255,255,255,.2);font-size:2.8rem;font-weight:700;color:#fff;font-family:'DM Serif Display',serif">
+        BS
+      </div>
+
+      <!-- Name & bio -->
+      <div>
+        <div style="font-family:'DM Serif Display',serif;font-size:1.55rem;color:#fff;margin-bottom:4px">
+          Dr. Banda Sainath
+        </div>
+        <div style="font-size:.85rem;color:#e8b040;font-weight:600;margin-bottom:12px;letter-spacing:.3px">
+          Scientist (Agricultural Economics) · ICAR-ARS
+        </div>
+        <div style="font-size:.88rem;color:rgba(255,255,255,.72);line-height:1.75;max-width:820px">
+          Scientist in the Division of Socio-Economics and Extension, ICAR Research Complex for Eastern Region (ICAR-RCER), Patna, Bihar. 
+          Ph.D. in Agricultural Economics from ICAR-National Dairy Research Institute, Karnal. 
+          Gold Medalist, M.Sc. Agricultural Economics — University of Agricultural Sciences, Bengaluru.
+          Specialises in environmental economics, ecosystem services, carbon farming, CGE modelling, and trade policy analysis.
+          Currently working on the impact of the Middle East Energy Crisis on India's fertilizer subsidy burden — a SAM-based CGE model in collaboration with IFPRI, New Delhi.
+        </div>
+
+        <!-- Tags -->
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+          <span style="background:rgba(46,117,182,.3);border:1px solid rgba(46,117,182,.5);border-radius:20px;padding:3px 12px;font-size:.72rem;color:#88b8e8;font-weight:600">CGE Modelling</span>
+          <span style="background:rgba(46,117,182,.3);border:1px solid rgba(46,117,182,.5);border-radius:20px;padding:3px 12px;font-size:.72rem;color:#88b8e8;font-weight:600">Agricultural Economics</span>
+          <span style="background:rgba(46,117,182,.3);border:1px solid rgba(46,117,182,.5);border-radius:20px;padding:3px 12px;font-size:.72rem;color:#88b8e8;font-weight:600">Environmental Economics</span>
+          <span style="background:rgba(46,117,182,.3);border:1px solid rgba(46,117,182,.5);border-radius:20px;padding:3px 12px;font-size:.72rem;color:#88b8e8;font-weight:600">Trade Policy</span>
+          <span style="background:rgba(46,117,182,.3);border:1px solid rgba(46,117,182,.5);border-radius:20px;padding:3px 12px;font-size:.72rem;color:#88b8e8;font-weight:600">Carbon Markets</span>
+          <span style="background:rgba(26,96,64,.4);border:1px solid rgba(26,96,64,.6);border-radius:20px;padding:3px 12px;font-size:.72rem;color:#80c8a0;font-weight:600">ICAR-ARS Scientist</span>
+          <span style="background:rgba(196,125,14,.3);border:1px solid rgba(196,125,14,.5);border-radius:20px;padding:3px 12px;font-size:.72rem;color:#e8b040;font-weight:600">🥇 Gold Medalist</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px">
+      <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:16px;text-align:center;border:1px solid rgba(255,255,255,.1)">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:700;color:#e8b040;margin-bottom:4px">40+</div>
+        <div style="font-size:.72rem;color:rgba(255,255,255,.5)">Publications</div>
+      </div>
+      <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:16px;text-align:center;border:1px solid rgba(255,255,255,.1)">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:700;color:#e8b040;margin-bottom:4px">60+</div>
+        <div style="font-size:.72rem;color:rgba(255,255,255,.5)">Citations</div>
+      </div>
+      <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:16px;text-align:center;border:1px solid rgba(255,255,255,.1)">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:700;color:#e8b040;margin-bottom:4px">h-4</div>
+        <div style="font-size:.72rem;color:rgba(255,255,255,.5)">H-Index</div>
+      </div>
+      <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:16px;text-align:center;border:1px solid rgba(255,255,255,.1)">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:700;color:#e8b040;margin-bottom:4px">AIR 16</div>
+        <div style="font-size:.72rem;color:rgba(255,255,255,.5)">ICAR-JRF All India Rank</div>
+      </div>
+    </div>
+
+    <!-- Two column — links + selected publications -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+
+      <!-- Left — Profiles & Links -->
+      <div style="background:rgba(255,255,255,.06);border-radius:12px;padding:22px;border:1px solid rgba(255,255,255,.1)">
+        <div style="font-size:.85rem;font-weight:700;color:#fff;margin-bottom:16px;font-family:'DM Serif Display',serif">Academic Profiles & Links</div>
+
+        <!-- GitHub -->
+        <a href="https://sainathbanda.github.io" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border-radius:8px;padding:12px 14px;margin-bottom:10px;text-decoration:none;border:1px solid rgba(255,255,255,.1);transition:.2s">
+          <span style="font-size:1.4rem">🌐</span>
+          <div>
+            <div style="font-size:.82rem;font-weight:700;color:#fff">Personal Website</div>
+            <div style="font-size:.72rem;color:rgba(255,255,255,.5)">sainathbanda.github.io</div>
+          </div>
+          <span style="margin-left:auto;color:rgba(255,255,255,.4);font-size:.8rem">↗</span>
+        </a>
+
+        <!-- Google Scholar -->
+        <a href="https://scholar.google.com/citations?hl=en&user=gn7DyzAAAAAJ" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border-radius:8px;padding:12px 14px;margin-bottom:10px;text-decoration:none;border:1px solid rgba(255,255,255,.1)">
+          <span style="font-size:1.4rem">🎓</span>
+          <div>
+            <div style="font-size:.82rem;font-weight:700;color:#fff">Google Scholar</div>
+            <div style="font-size:.72rem;color:rgba(255,255,255,.5)">40+ publications · 60+ citations · h-index 4</div>
+          </div>
+          <span style="margin-left:auto;color:rgba(255,255,255,.4);font-size:.8rem">↗</span>
+        </a>
+
+        <!-- ResearchGate -->
+        <a href="https://www.researchgate.net/profile/Banda-Sainath" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border-radius:8px;padding:12px 14px;margin-bottom:10px;text-decoration:none;border:1px solid rgba(255,255,255,.1)">
+          <span style="font-size:1.4rem">🔬</span>
+          <div>
+            <div style="font-size:.82rem;font-weight:700;color:#fff">ResearchGate</div>
+            <div style="font-size:.72rem;color:rgba(255,255,255,.5)">4,729+ reads · Full publication list</div>
+          </div>
+          <span style="margin-left:auto;color:rgba(255,255,255,.4);font-size:.8rem">↗</span>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/banda-sainath-ars-agrileconomist-" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border-radius:8px;padding:12px 14px;margin-bottom:10px;text-decoration:none;border:1px solid rgba(255,255,255,.1)">
+          <span style="font-size:1.4rem">💼</span>
+          <div>
+            <div style="font-size:.82rem;font-weight:700;color:#fff">LinkedIn</div>
+            <div style="font-size:.72rem;color:rgba(255,255,255,.5)">ICAR-Scientist · Agricultural Economist</div>
+          </div>
+          <span style="margin-left:auto;color:rgba(255,255,255,.4);font-size:.8rem">↗</span>
+        </a>
+
+        <!-- ICAR -->
+        <a href="https://rcer.icar.gov.in" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border-radius:8px;padding:12px 14px;text-decoration:none;border:1px solid rgba(255,255,255,.1)">
+          <span style="font-size:1.4rem">🏛️</span>
+          <div>
+            <div style="font-size:.82rem;font-weight:700;color:#fff">ICAR-RCER, Patna</div>
+            <div style="font-size:.72rem;color:rgba(255,255,255,.5)">Division of Socio-Economics and Extension</div>
+          </div>
+          <span style="margin-left:auto;color:rgba(255,255,255,.4);font-size:.8rem">↗</span>
+        </a>
+      </div>
+
+      <!-- Right — Selected Publications -->
+      <div style="background:rgba(255,255,255,.06);border-radius:12px;padding:22px;border:1px solid rgba(255,255,255,.1)">
+        <div style="font-size:.85rem;font-weight:700;color:#fff;margin-bottom:16px;font-family:'DM Serif Display',serif">Selected Publications</div>
+
+        <div style="border-left:3px solid #e8b040;padding-left:14px;margin-bottom:14px">
+          <div style="font-size:.8rem;color:#fff;font-weight:600;line-height:1.4;margin-bottom:3px">Distributional Consequences of U.S. Tariff Shocks on India's Economy: Insights from a CGE Model</div>
+          <div style="font-size:.71rem;color:rgba(255,255,255,.5)">Policy Paper No. 04/2025 · ICAR-NIBSM, ICAR-RCER & IFPRI · ISBN: 978-93-5602-740-4</div>
+        </div>
+
+        <div style="border-left:3px solid #2E75B6;padding-left:14px;margin-bottom:14px">
+          <div style="font-size:.8rem;color:#fff;font-weight:600;line-height:1.4;margin-bottom:3px">Application of blockchain technology in the agri-food system: bibliometric analysis and policy imperatives</div>
+          <div style="font-size:.71rem;color:rgba(255,255,255,.5)">Journal of Agribusiness in Developing & Emerging Economies, 15(2), 288–310 · IF 2.3</div>
+        </div>
+
+        <div style="border-left:3px solid #1a6040;padding-left:14px;margin-bottom:14px">
+          <div style="font-size:.8rem;color:#fff;font-weight:600;line-height:1.4;margin-bottom:3px">Socioeconomic Implications of Heat and Drought Stress on Indian Agriculture</div>
+          <div style="font-size:.71rem;color:rgba(255,255,255,.5)">In: Drought and Heat Stress in Agriculture · Springer Nature Singapore · 2025</div>
+        </div>
+
+        <div style="border-left:3px solid #0a5050;padding-left:14px;margin-bottom:14px">
+          <div style="font-size:.8rem;color:#fff;font-weight:600;line-height:1.4;margin-bottom:3px">Carbon farming in India: Case studies from Maharashtra and Telangana</div>
+          <div style="font-size:.71rem;color:rgba(255,255,255,.5)">TAFSSA Research Note 10 · Transforming Agrifood Systems in South Asia · CIMMYT</div>
+        </div>
+
+        <div style="border-left:3px solid #c47d0e;padding-left:14px">
+          <div style="font-size:.8rem;color:#fff;font-weight:600;line-height:1.4;margin-bottom:3px">Current CGE Research: Middle East Energy Crisis & India's Fertilizer Subsidy Burden</div>
+          <div style="font-size:.71rem;color:rgba(255,255,255,.5)">Working Paper (2026) · ICAR-RCER & IFPRI New Delhi · Target: Food Policy / Journal of Policy Modeling</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Co-author note -->
+    <div style="margin-top:20px;background:rgba(255,255,255,.04);border-radius:10px;padding:16px 20px;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:14px">
+      <span style="font-size:1.3rem">🤝</span>
+      <div style="font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.6">
+        <strong style="color:rgba(255,255,255,.85)">Research Collaboration:</strong>
+        This CGE study is conducted in collaboration with <strong style="color:#e8b040">IFPRI, New Delhi</strong>.
+        The interactive dashboard, Excel master dataset, and PPTX presentation associated with this research are available at
+        <a href="https://sainathbanda.github.io" target="_blank" style="color:#88b8e8;text-decoration:underline">sainathbanda.github.io</a>.
+        For data enquiries and collaborations, connect via
+        <a href="https://www.researchgate.net/profile/Banda-Sainath" target="_blank" style="color:#88b8e8;text-decoration:underline">ResearchGate</a> or
+        <a href="https://www.linkedin.com/in/banda-sainath-ars-agrileconomist-" target="_blank" style="color:#88b8e8;text-decoration:underline">LinkedIn</a>.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <strong>India's Fertilizer Dependence &amp; Food System Risk — Presentation, April 2026</strong><br>
+  All data verified from official sources: PIB 27 Mar 2026 ✅ | Budget Demand No.6 DoF ✅ | LS UQ 3327 (08.08.2025) ✅ | WB Pink Sheet Dec 2025 ✅ | WB April 2, 2026 ✅ |
+  UNCTAD/Clarksons ✅ | PIB NoteId 156820 (05 Jan 2026) ✅ | FAI Fertiliser Statistics | NITI Aayog (ON3805) | Crisil Ratings 2026
+</footer>
+<script>
+const FA=[{"d": "Jan-1990", "dap": 138.5, "urea": 104.5, "gas": 44.89}, {"d": "Feb-1990", "dap": 139.75, "urea": 106.25, "gas": 38.94}, {"d": "Mar-1990", "dap": 146.0, "urea": 111.0, "gas": 34.69}, {"d": "Apr-1990", "dap": 155.2, "urea": 111.0, "gas": 33.97}, {"d": "May-1990", "dap": 149.13, "urea": 107.0, "gas": 33.72}, {"d": "Jun-1990", "dap": 152.75, "urea": 107.0, "gas": 33.72}, {"d": "Jul-1990", "dap": 160.7, "urea": 107.0, "gas": 32.99}, {"d": "Aug-1990", "dap": 160.5, "urea": 114.88, "gas": 32.39}, {"d": "Sep-1990", "dap": 165.88, "urea": 90.63, "gas": 33.36}, {"d": "Oct-1990", "dap": 165.7, "urea": 136.5, "gas": 36.39}, {"d": "Nov-1990", "dap": 163.38, "urea": 144.5, "gas": 41.37}, {"d": "Dec-1990", "dap": 158.63, "urea": 147.5, "gas": 41.49}, {"d": "Jan-1991", "dap": 157.38, "urea": 151.0, "gas": 39.34}, {"d": "Feb-1991", "dap": 160.63, "urea": 151.0, "gas": 35.43}, {"d": "Mar-1991", "dap": 163.63, "urea": 145.0, "gas": 34.81}, {"d": "Apr-1991", "dap": 166.0, "urea": 143.5, "gas": 35.35}, {"d": "May-1991", "dap": 165.25, "urea": 138.5, "gas": 34.63}, {"d": "Jun-1991", "dap": 159.25, "urea": 135.5, "gas": 32.92}, {"d": "Jul-1991", "dap": 163.5, "urea": 132.5, "gas": 31.42}, {"d": "Aug-1991", "dap": 161.88, "urea": 132.5, "gas": 32.78}, {"d": "Sep-1991", "dap": 159.5, "urea": 132.5, "gas": 36.62}, {"d": "Oct-1991", "dap": 155.0, "urea": 132.5, "gas": 37.08}, {"d": "Nov-1991", "dap": 143.5, "urea": 134.38, "gas": 37.52}, {"d": "Dec-1991", "dap": 143.5, "urea": 131.88, "gas": 38.85}, {"d": "Jan-1992", "dap": 145.25, "urea": 122.5, "gas": 30.2}, {"d": "Feb-1992", "dap": 147.88, "urea": 120.63, "gas": 28.96}, {"d": "Mar-1992", "dap": 144.8, "urea": 120.0, "gas": 30.24}, {"d": "Apr-1992", "dap": 142.75, "urea": 120.0, "gas": 31.98}, {"d": "May-1992", "dap": 140.5, "urea": 120.0, "gas": 33.5}, {"d": "Jun-1992", "dap": 143.5, "urea": 120.0, "gas": 33.19}, {"d": "Jul-1992", "dap": 146.0, "urea": 120.0, "gas": 35.82}, {"d": "Aug-1992", "dap": 131.4, "urea": 120.0, "gas": 38.57}, {"d": "Sep-1992", "dap": 131.25, "urea": 120.0, "gas": 42.97}, {"d": "Oct-1992", "dap": 130.13, "urea": 116.88, "gas": 44.4}, {"d": "Nov-1992", "dap": 126.4, "urea": 107.5, "gas": 42.23}, {"d": "Dec-1992", "dap": 124.63, "urea": 103.75, "gas": 41.29}, {"d": "Jan-1993", "dap": 123.75, "urea": 102.5, "gas": 38.42}, {"d": "Feb-1993", "dap": 120.25, "urea": 102.5, "gas": 35.99}, {"d": "Mar-1993", "dap": 115.1, "urea": 86.2, "gas": 41.98}, {"d": "Apr-1993", "dap": 112.75, "urea": 81.0, "gas": 43.73}, {"d": "May-1993", "dap": 115.1, "urea": 81.0, "gas": 41.51}, {"d": "Jun-1993", "dap": 113.88, "urea": 81.0, "gas": 39.06}, {"d": "Jul-1993", "dap": 112.88, "urea": 81.0, "gas": 40.06}, {"d": "Aug-1993", "dap": 113.1, "urea": 81.0, "gas": 42.41}, {"d": "Sep-1993", "dap": 116.88, "urea": 81.0, "gas": 42.38}, {"d": "Oct-1993", "dap": 129.5, "urea": 81.0, "gas": 39.28}, {"d": "Nov-1993", "dap": 140.4, "urea": 82.8, "gas": 42.17}, {"d": "Dec-1993", "dap": 150.38, "urea": 85.5, "gas": 42.98}, {"d": "Jan-1994", "dap": 150.0, "urea": 85.5, "gas": 42.27}, {"d": "Feb-1994", "dap": 151.75, "urea": 85.5, "gas": 46.29}, {"d": "Mar-1994", "dap": 155.88, "urea": 98.63, "gas": 40.19}, {"d": "Apr-1994", "dap": 162.25, "urea": 103.5, "gas": 38.07}, {"d": "May-1994", "dap": 159.2, "urea": 103.5, "gas": 36.61}, {"d": "Jun-1994", "dap": 157.63, "urea": 103.5, "gas": 36.39}, {"d": "Jul-1994", "dap": 158.63, "urea": 106.5, "gas": 37.43}, {"d": "Aug-1994", "dap": 161.1, "urea": 88.0, "gas": 34.05}, {"d": "Sep-1994", "dap": 164.0, "urea": 88.0, "gas": 32.11}, {"d": "Oct-1994", "dap": 167.13, "urea": 88.0, "gas": 32.72}, {"d": "Nov-1994", "dap": 165.88, "urea": 88.0, "gas": 33.61}, {"d": "Dec-1994", "dap": 171.67, "urea": 88.0, "gas": 35.29}, {"d": "Jan-1995", "dap": 188.2, "urea": 159.6, "gas": 33.26}, {"d": "Feb-1995", "dap": 198.63, "urea": 177.5, "gas": 34.14}, {"d": "Mar-1995", "dap": 205.63, "urea": 191.25, "gas": 33.64}, {"d": "Apr-1995", "dap": 204.5, "urea": 205.0, "gas": 34.89}, {"d": "May-1995", "dap": 197.8, "urea": 159.0, "gas": 35.19}, {"d": "Jun-1995", "dap": 185.63, "urea": 90.0, "gas": 35.06}, {"d": "Jul-1995", "dap": 180.8, "urea": 90.0, "gas": 33.16}, {"d": "Aug-1995", "dap": 185.25, "urea": 90.0, "gas": 34.6}, {"d": "Sep-1995", "dap": 192.0, "urea": 90.0, "gas": 35.48}, {"d": "Oct-1995", "dap": 204.8, "urea": 90.0, "gas": 36.9}, {"d": "Nov-1995", "dap": 224.88, "urea": 90.0, "gas": 40.16}, {"d": "Dec-1995", "dap": 229.17, "urea": 90.0, "gas": 48.17}, {"d": "Jan-1996", "dap": 226.3, "urea": 90.0, "gas": 50.98}, {"d": "Feb-1996", "dap": 225.88, "urea": 90.0, "gas": 68.96}, {"d": "Mar-1996", "dap": 221.0, "urea": 90.0, "gas": 50.87}, {"d": "Apr-1996", "dap": 210.75, "urea": 160.4, "gas": 44.23}, {"d": "May-1996", "dap": 186.13, "urea": 169.5, "gas": 43.0}, {"d": "Jun-1996", "dap": 182.13, "urea": 172.13, "gas": 46.03}, {"d": "Jul-1996", "dap": 188.0, "urea": 184.5, "gas": 45.78}, {"d": "Aug-1996", "dap": 189.88, "urea": 187.0, "gas": 40.41}, {"d": "Sep-1996", "dap": 186.7, "urea": 181.4, "gas": 38.1}, {"d": "Oct-1996", "dap": 183.75, "urea": 172.25, "gas": 45.32}, {"d": "Nov-1996", "dap": 188.25, "urea": 172.63, "gas": 53.6}, {"d": "Dec-1996", "dap": 188.5, "urea": 174.5, "gas": 63.22}, {"d": "Jan-1997", "dap": 188.0, "urea": 173.5, "gas": 56.73}, {"d": "Feb-1997", "dap": 187.38, "urea": 160.38, "gas": 43.56}, {"d": "Mar-1997", "dap": 187.4, "urea": 148.0, "gas": 39.28}, {"d": "Apr-1997", "dap": 188.5, "urea": 135.0, "gas": 40.59}, {"d": "May-1997", "dap": 188.5, "urea": 113.13, "gas": 42.96}, {"d": "Jun-1997", "dap": 187.0, "urea": 108.5, "gas": 42.57}, {"d": "Jul-1997", "dap": 186.88, "urea": 112.5, "gas": 41.92}, {"d": "Aug-1997", "dap": 186.63, "urea": 102.5, "gas": 45.19}, {"d": "Sep-1997", "dap": 186.6, "urea": 88.3, "gas": 49.82}, {"d": "Oct-1997", "dap": 186.0, "urea": 87.5, "gas": 51.87}, {"d": "Nov-1997", "dap": 185.5, "urea": 90.63, "gas": 51.81}, {"d": "Dec-1997", "dap": 185.5, "urea": 90.0, "gas": 43.33}, {"d": "Jan-1998", "dap": 184.0, "urea": 86.25, "gas": 40.5}, {"d": "Feb-1998", "dap": 183.5, "urea": 77.5, "gas": 41.79}, {"d": "Mar-1998", "dap": 183.5, "urea": 84.5, "gas": 41.82}, {"d": "Apr-1998", "dap": 185.0, "urea": 100.0, "gas": 43.62}, {"d": "May-1998", "dap": 186.5, "urea": 95.0, "gas": 39.95}, {"d": "Jun-1998", "dap": 189.2, "urea": 88.4, "gas": 40.27}, {"d": "Jul-1998", "dap": 190.5, "urea": 86.0, "gas": 39.68}, {"d": "Aug-1998", "dap": 190.5, "urea": 85.5, "gas": 35.62}, {"d": "Sep-1998", "dap": 190.5, "urea": 83.63, "gas": 37.34}, {"d": "Oct-1998", "dap": 189.63, "urea": 75.63, "gas": 35.14}, {"d": "Nov-1998", "dap": 186.7, "urea": 70.7, "gas": 37.64}, {"d": "Dec-1998", "dap": 182.83, "urea": 65.5, "gas": 33.1}, {"d": "Jan-1999", "dap": 181.75, "urea": 64.5, "gas": 34.07}, {"d": "Feb-1999", "dap": 181.63, "urea": 64.0, "gas": 32.93}, {"d": "Mar-1999", "dap": 181.75, "urea": 75.5, "gas": 32.89}, {"d": "Apr-1999", "dap": 180.5, "urea": 64.5, "gas": 36.87}, {"d": "May-1999", "dap": 180.5, "urea": 64.9, "gas": 38.26}, {"d": "Jun-1999", "dap": 180.5, "urea": 63.75, "gas": 38.99}, {"d": "Jul-1999", "dap": 177.0, "urea": 62.75, "gas": 39.58}, {"d": "Aug-1999", "dap": 172.4, "urea": 65.7, "gas": 45.92}, {"d": "Sep-1999", "dap": 164.38, "urea": 67.5, "gas": 43.57}, {"d": "Oct-1999", "dap": 157.0, "urea": 65.38, "gas": 47.19}, {"d": "Nov-1999", "dap": 148.3, "urea": 66.0, "gas": 43.12}, {"d": "Dec-1999", "dap": 147.5, "urea": 66.83, "gas": 43.97}, {"d": "Jan-2000", "dap": 147.2, "urea": 77.4, "gas": 48.17}, {"d": "Feb-2000", "dap": 144.5, "urea": 90.13, "gas": 51.48}, {"d": "Mar-2000", "dap": 143.0, "urea": 88.75, "gas": 53.59}, {"d": "Apr-2000", "dap": 143.0, "urea": 83.25, "gas": 57.43}, {"d": "May-2000", "dap": 143.0, "urea": 91.0, "gas": 63.42}, {"d": "Jun-2000", "dap": 142.0, "urea": 105.13, "gas": 72.3}, {"d": "Jul-2000", "dap": 140.3, "urea": 121.7, "gas": 70.21}, {"d": "Aug-2000", "dap": 148.63, "urea": 133.38, "gas": 75.89}, {"d": "Sep-2000", "dap": 157.5, "urea": 113.88, "gas": 83.92}, {"d": "Oct-2000", "dap": 155.9, "urea": 111.1, "gas": 84.86}, {"d": "Nov-2000", "dap": 153.5, "urea": 99.38, "gas": 91.74}, {"d": "Dec-2000", "dap": 153.5, "urea": 96.0, "gas": 133.21}, {"d": "Jan-2001", "dap": 154.5, "urea": 121.0, "gas": 124.62}, {"d": "Feb-2001", "dap": 159.0, "urea": 105.25, "gas": 93.44}, {"d": "Mar-2001", "dap": 159.13, "urea": 98.88, "gas": 87.68}, {"d": "Apr-2001", "dap": 151.3, "urea": 95.3, "gas": 87.28}, {"d": "May-2001", "dap": 142.0, "urea": 85.0, "gas": 75.01}, {"d": "Jun-2001", "dap": 133.13, "urea": 87.5, "gas": 68.81}, {"d": "Jul-2001", "dap": 135.0, "urea": 87.5, "gas": 58.63}, {"d": "Aug-2001", "dap": 135.0, "urea": 88.75, "gas": 56.92}, {"d": "Sep-2001", "dap": 135.0, "urea": 94.5, "gas": 47.2}, {"d": "Oct-2001", "dap": 135.9, "urea": 96.1, "gas": 49.59}, {"d": "Nov-2001", "dap": 140.5, "urea": 96.5, "gas": 48.07}, {"d": "Dec-2001", "dap": 141.67, "urea": 101.17, "gas": 48.32}, {"d": "Jan-2002", "dap": 146.0, "urea": 104.13, "gas": 44.72}, {"d": "Feb-2002", "dap": 150.25, "urea": 99.63, "gas": 45.25}, {"d": "Mar-2002", "dap": 149.75, "urea": 90.25, "gas": 53.62}, {"d": "Apr-2002", "dap": 147.8, "urea": 84.7, "gas": 57.57}, {"d": "May-2002", "dap": 143.88, "urea": 85.5, "gas": 58.55}, {"d": "Jun-2002", "dap": 149.5, "urea": 92.75, "gas": 55.64}, {"d": "Jul-2002", "dap": 160.5, "urea": 94.2, "gas": 53.3}, {"d": "Aug-2002", "dap": 162.5, "urea": 105.0, "gas": 54.78}, {"d": "Sep-2002", "dap": 160.9, "urea": 93.0, "gas": 61.02}, {"d": "Oct-2002", "dap": 156.25, "urea": 92.25, "gas": 68.7}, {"d": "Nov-2002", "dap": 151.5, "urea": 92.25, "gas": 68.03}, {"d": "Dec-2002", "dap": 147.5, "urea": 99.38, "gas": 76.62}, {"d": "Jan-2003", "dap": 149.75, "urea": 112.0, "gas": 85.98}, {"d": "Feb-2003", "dap": 155.25, "urea": 132.13, "gas": 115.1}, {"d": "Mar-2003", "dap": 177.2, "urea": 138.9, "gas": 93.23}, {"d": "Apr-2003", "dap": 181.5, "urea": 118.63, "gas": 86.63}, {"d": "May-2003", "dap": 178.44, "urea": 128.13, "gas": 93.31}, {"d": "Jun-2003", "dap": 171.3, "urea": 133.9, "gas": 92.58}, {"d": "Jul-2003", "dap": 176.38, "urea": 142.75, "gas": 83.2}, {"d": "Aug-2003", "dap": 175.63, "urea": 141.5, "gas": 82.45}, {"d": "Sep-2003", "dap": 171.3, "urea": 146.8, "gas": 78.07}, {"d": "Oct-2003", "dap": 166.38, "urea": 150.63, "gas": 77.87}, {"d": "Nov-2003", "dap": 169.38, "urea": 153.5, "gas": 76.72}, {"d": "Dec-2003", "dap": 187.5, "urea": 159.38, "gas": 96.49}, {"d": "Jan-2004", "dap": 204.25, "urea": 160.25, "gas": 95.63}, {"d": "Feb-2004", "dap": 211.5, "urea": 134.5, "gas": 87.08}, {"d": "Mar-2004", "dap": 205.3, "urea": 130.5, "gas": 87.19}, {"d": "Apr-2004", "dap": 199.38, "urea": 128.38, "gas": 91.38}, {"d": "May-2004", "dap": 191.1, "urea": 135.9, "gas": 99.04}, {"d": "Jun-2004", "dap": 190.63, "urea": 158.25, "gas": 98.64}, {"d": "Jul-2004", "dap": 201.5, "urea": 185.0, "gas": 95.78}, {"d": "Aug-2004", "dap": 208.1, "urea": 196.2, "gas": 89.65}, {"d": "Sep-2004", "dap": 208.5, "urea": 218.13, "gas": 87.05}, {"d": "Oct-2004", "dap": 211.75, "urea": 242.13, "gas": 104.58}, {"d": "Nov-2004", "dap": 213.8, "urea": 224.5, "gas": 101.19}, {"d": "Dec-2004", "dap": 211.13, "urea": 185.25, "gas": 107.51}, {"d": "Jan-2005", "dap": 208.6, "urea": 184.6, "gas": 104.37}, {"d": "Feb-2005", "dap": 207.13, "urea": 185.75, "gas": 104.5}, {"d": "Mar-2005", "dap": 210.63, "urea": 217.13, "gas": 114.64}, {"d": "Apr-2005", "dap": 214.75, "urea": 242.13, "gas": 118.56}, {"d": "May-2005", "dap": 217.2, "urea": 256.0, "gas": 110.45}, {"d": "Jun-2005", "dap": 224.25, "urea": 217.5, "gas": 119.21}, {"d": "Jul-2005", "dap": 228.25, "urea": 221.88, "gas": 127.21}, {"d": "Aug-2005", "dap": 231.5, "urea": 208.5, "gas": 152.32}, {"d": "Sep-2005", "dap": 240.75, "urea": 210.38, "gas": 191.96}, {"d": "Oct-2005", "dap": 246.38, "urea": 215.5, "gas": 203.21}, {"d": "Nov-2005", "dap": 246.13, "urea": 235.0, "gas": 166.61}, {"d": "Dec-2005", "dap": 245.88, "urea": 213.88, "gas": 195.77}, {"d": "Jan-2006", "dap": 244.3, "urea": 202.3, "gas": 147.44}, {"d": "Feb-2006", "dap": 238.13, "urea": 213.88, "gas": 133.49}, {"d": "Mar-2006", "dap": 233.63, "urea": 243.13, "gas": 126.42}, {"d": "Apr-2006", "dap": 231.75, "urea": 247.5, "gas": 130.01}, {"d": "May-2006", "dap": 232.9, "urea": 229.5, "gas": 119.32}, {"d": "Jun-2006", "dap": 232.38, "urea": 210.0, "gas": 119.43}, {"d": "Jul-2006", "dap": 230.3, "urea": 205.5, "gas": 121.33}, {"d": "Aug-2006", "dap": 228.25, "urea": 210.5, "gas": 131.25}, {"d": "Sep-2006", "dap": 225.13, "urea": 215.13, "gas": 105.92}, {"d": "Oct-2006", "dap": 218.5, "urea": 209.2, "gas": 119.93}, {"d": "Nov-2006", "dap": 219.38, "urea": 227.38, "gas": 138.14}, {"d": "Dec-2006", "dap": 223.83, "urea": 251.67, "gas": 127.27}, {"d": "Jan-2007", "dap": 249.2, "urea": 265.0, "gas": 125.61}, {"d": "Feb-2007", "dap": 317.63, "urea": 299.38, "gas": 142.17}, {"d": "Mar-2007", "dap": 387.0, "urea": 318.13, "gas": 130.94}, {"d": "Apr-2007", "dap": 404.6, "urea": 291.0, "gas": 134.97}, {"d": "May-2007", "dap": 392.0, "urea": 293.13, "gas": 135.28}, {"d": "Jun-2007", "dap": 387.88, "urea": 291.88, "gas": 131.69}, {"d": "Jul-2007", "dap": 398.5, "urea": 269.5, "gas": 119.11}, {"d": "Aug-2007", "dap": 401.63, "urea": 260.63, "gas": 120.1}, {"d": "Sep-2007", "dap": 399.63, "urea": 305.0, "gas": 120.11}, {"d": "Oct-2007", "dap": 406.0, "urea": 323.75, "gas": 131.89}, {"d": "Nov-2007", "dap": 447.0, "urea": 366.25, "gas": 137.89}, {"d": "Dec-2007", "dap": 512.5, "urea": 401.67, "gas": 138.16}, {"d": "Jan-2008", "dap": 593.88, "urea": 376.63, "gas": 154.75}, {"d": "Feb-2008", "dap": 692.5, "urea": 328.13, "gas": 162.45}, {"d": "Mar-2008", "dap": 862.2, "urea": 371.0, "gas": 174.07}, {"d": "Apr-2008", "dap": 953.5, "urea": 462.5, "gas": 188.73}, {"d": "May-2008", "dap": 997.5, "urea": 633.75, "gas": 203.11}, {"d": "Jun-2008", "dap": 1004.1, "urea": 642.0, "gas": 222.15}, {"d": "Jul-2008", "dap": 1075.75, "urea": 733.75, "gas": 212.07}, {"d": "Aug-2008", "dap": 1065.0, "urea": 785.0, "gas": 178.76}, {"d": "Sep-2008", "dap": 980.0, "urea": 744.5, "gas": 173.78}, {"d": "Oct-2008", "dap": 910.0, "urea": 575.0, "gas": 167.67}, {"d": "Nov-2008", "dap": 710.0, "urea": 287.5, "gas": 166.41}, {"d": "Dec-2008", "dap": 495.0, "urea": 240.0, "gas": 153.39}, {"d": "Jan-2009", "dap": 308.88, "urea": 273.75, "gas": 138.29}, {"d": "Feb-2009", "dap": 313.75, "urea": 281.25, "gas": 114.49}, {"d": "Mar-2009", "dap": 317.8, "urea": 268.5, "gas": 106.21}, {"d": "Apr-2009", "dap": 300.63, "urea": 245.63, "gas": 88.46}, {"d": "May-2009", "dap": 267.88, "urea": 236.25, "gas": 89.81}, {"d": "Jun-2009", "dap": 256.1, "urea": 239.7, "gas": 88.86}, {"d": "Jul-2009", "dap": 263.25, "urea": 243.75, "gas": 77.99}, {"d": "Aug-2009", "dap": 276.4, "urea": 251.5, "gas": 76.38}, {"d": "Sep-2009", "dap": 280.63, "urea": 232.25, "gas": 75.56}, {"d": "Oct-2009", "dap": 271.63, "urea": 234.88, "gas": 91.15}, {"d": "Nov-2009", "dap": 273.2, "urea": 243.5, "gas": 88.13}, {"d": "Dec-2009", "dap": 331.5, "urea": 262.0, "gas": 109.84}, {"d": "Jan-2010", "dap": 383.0, "urea": 266.5, "gas": 119.14}, {"d": "Feb-2010", "dap": 413.63, "urea": 297.5, "gas": 113.76}, {"d": "Mar-2010", "dap": 424.5, "urea": 278.7, "gas": 101.64}, {"d": "Apr-2010", "dap": 417.5, "urea": 253.75, "gas": 91.83}, {"d": "May-2010", "dap": 410.0, "urea": 234.0, "gas": 92.75}, {"d": "Jun-2010", "dap": 392.5, "urea": 226.25, "gas": 102.12}, {"d": "Jul-2010", "dap": 418.13, "urea": 259.38, "gas": 102.07}, {"d": "Aug-2010", "dap": 459.9, "urea": 263.5, "gas": 100.1}, {"d": "Sep-2010", "dap": 506.0, "urea": 308.75, "gas": 94.24}, {"d": "Oct-2010", "dap": 557.25, "urea": 332.5, "gas": 88.62}, {"d": "Nov-2010", "dap": 554.1, "urea": 365.4, "gas": 93.44}, {"d": "Dec-2010", "dap": 540.63, "urea": 380.63, "gas": 100.29}, {"d": "Jan-2011", "dap": 547.4, "urea": 378.5, "gas": 108.01}, {"d": "Feb-2011", "dap": 413.63, "urea": 297.5, "gas": 102.12}, {"d": "Mar-2011", "dap": 424.5, "urea": 278.7, "gas": 101.24}, {"d": "Apr-2011", "dap": 417.5, "urea": 253.75, "gas": 109.57}, {"d": "May-2011", "dap": 410.0, "urea": 234.0, "gas": 110.51}, {"d": "Jun-2011", "dap": 575.88, "urea": 478.75, "gas": 113.85}, {"d": "Jul-2011", "dap": 597.63, "urea": 483.75, "gas": 116.83}, {"d": "Aug-2011", "dap": 597.4, "urea": 475.5, "gas": 111.83}, {"d": "Sep-2011", "dap": 587.88, "urea": 508.75, "gas": 109.98}, {"d": "Oct-2011", "dap": 571.4, "urea": 493.5, "gas": 108.78}, {"d": "Nov-2011", "dap": 563.5, "urea": 481.25, "gas": 104.56}, {"d": "Dec-2011", "dap": 488.75, "urea": 423.13, "gas": 104.4}, {"d": "Jan-2012", "dap": 451.4, "urea": 368.0, "gas": 98.29}, {"d": "Feb-2012", "dap": 435.5, "urea": 375.0, "gas": 94.32}, {"d": "Mar-2012", "dap": 442.88, "urea": 393.13, "gas": 94.28}, {"d": "Apr-2012", "dap": 478.0, "urea": 494.38, "gas": 89.35}, {"d": "May-2012", "dap": 490.5, "urea": 513.13, "gas": 96.53}, {"d": "Jun-2012", "dap": 501.63, "urea": 456.88, "gas": 96.09}, {"d": "Jul-2012", "dap": 436.88, "urea": 307.5, "gas": 100.95}, {"d": "Aug-2012", "dap": 504.5, "urea": 382.5, "gas": 99.63}, {"d": "Sep-2012", "dap": 527.38, "urea": 384.38, "gas": 98.58}, {"d": "Oct-2012", "dap": 533.5, "urea": 349.0, "gas": 105.7}, {"d": "Nov-2012", "dap": 487.88, "urea": 383.5, "gas": 109.37}, {"d": "Dec-2012", "dap": 472.83, "urea": 375.83, "gas": 107.04}, {"d": "Jan-2013", "dap": 462.25, "urea": 380.0, "gas": 107.61}, {"d": "Feb-2013", "dap": 464.5, "urea": 415.63, "gas": 107.54}, {"d": "Mar-2013", "dap": 467.63, "urea": 395.63, "gas": 113.68}, {"d": "Apr-2013", "dap": 461.13, "urea": 365.63, "gas": 122.81}, {"d": "May-2013", "dap": 421.25, "urea": 358.13, "gas": 118.48}, {"d": "Jun-2013", "dap": 424.13, "urea": 329.38, "gas": 114.37}, {"d": "Jul-2013", "dap": 409.63, "urea": 312.5, "gas": 110.09}, {"d": "Aug-2013", "dap": 400.38, "urea": 310.63, "gas": 107.5}, {"d": "Sep-2013", "dap": 374.8, "urea": 301.0, "gas": 107.52}, {"d": "Oct-2013", "dap": 370.0, "urea": 296.88, "gas": 109.03}, {"d": "Nov-2013", "dap": 334.38, "urea": 305.0, "gas": 108.65}, {"d": "Dec-2013", "dap": 341.63, "urea": 305.0, "gas": 117.45}, {"d": "Jan-2014", "dap": 403.38, "urea": 330.0, "gas": 123.48}, {"d": "Feb-2014", "dap": 450.13, "urea": 353.13, "gas": 137.61}, {"d": "Mar-2014", "dap": 486.5, "urea": 327.5, "gas": 122.17}, {"d": "Apr-2014", "dap": 409.0, "urea": 260.0, "gas": 118.66}, {"d": "May-2014", "dap": 413.56, "urea": 265.0, "gas": 114.95}, {"d": "Jun-2014", "dap": 421.38, "urea": 288.75, "gas": 112.86}, {"d": "Jul-2014", "dap": 440.63, "urea": 305.0, "gas": 103.07}, {"d": "Aug-2014", "dap": 446.5, "urea": 311.25, "gas": 101.28}, {"d": "Sep-2014", "dap": 438.1, "urea": 317.5, "gas": 101.76}, {"d": "Oct-2014", "dap": 418.75, "urea": 317.5, "gas": 103.02}, {"d": "Nov-2014", "dap": 408.75, "urea": 317.5, "gas": 102.66}, {"d": "Dec-2014", "dap": 418.38, "urea": 308.13, "gas": 99.0}, {"d": "Jan-2015", "dap": 440.25, "urea": 305.0, "gas": 91.06}, {"d": "Feb-2015", "dap": 444.13, "urea": 305.0, "gas": 83.52}, {"d": "Mar-2015", "dap": 428.8, "urea": 295.5, "gas": 82.16}, {"d": "Apr-2015", "dap": 409.0, "urea": 260.0, "gas": 70.94}, {"d": "May-2015", "dap": 413.56, "urea": 265.0, "gas": 72.57}, {"d": "Jun-2015", "dap": 421.38, "urea": 288.75, "gas": 71.55}, {"d": "Jul-2015", "dap": 431.5, "urea": 283.75, "gas": 72.62}, {"d": "Aug-2015", "dap": 434.63, "urea": 274.63, "gas": 70.37}, {"d": "Sep-2015", "dap": 428.0, "urea": 279.38, "gas": 68.96}, {"d": "Oct-2015", "dap": 423.75, "urea": 250.63, "gas": 63.61}, {"d": "Nov-2015", "dap": 383.88, "urea": 263.63, "gas": 57.83}, {"d": "Dec-2015", "dap": 340.63, "urea": 264.0, "gas": 53.71}, {"d": "Jan-2016", "dap": 327.13, "urea": 233.88, "gas": 54.22}, {"d": "Feb-2016", "dap": 326.0, "urea": 191.88, "gas": 48.43}, {"d": "Mar-2016", "dap": 338.13, "urea": 201.75, "gas": 44.49}, {"d": "Apr-2016", "dap": 330.5, "urea": 196.25, "gas": 46.63}, {"d": "May-2016", "dap": 313.5, "urea": 198.38, "gas": 48.17}, {"d": "Jun-2016", "dap": 306.63, "urea": 142.63, "gas": 58.11}, {"d": "Jul-2016", "dap": 305.2, "urea": 181.0, "gas": 60.66}, {"d": "Aug-2016", "dap": 318.06, "urea": 186.25, "gas": 57.97}, {"d": "Sep-2016", "dap": 320.0, "urea": 187.3, "gas": 61.38}, {"d": "Oct-2016", "dap": 310.0, "urea": 187.5, "gas": 66.37}, {"d": "Nov-2016", "dap": 298.0, "urea": 205.0, "gas": 62.58}, {"d": "Dec-2016", "dap": 296.63, "urea": 217.75, "gas": 74.42}, {"d": "Jan-2017", "dap": 308.0, "urea": 233.75, "gas": 74.26}, {"d": "Feb-2017", "dap": 326.0, "urea": 191.88, "gas": 68.75}, {"d": "Mar-2017", "dap": 325.63, "urea": 223.5, "gas": 64.42}, {"d": "Apr-2017", "dap": 313.13, "urea": 207.88, "gas": 67.18}, {"d": "May-2017", "dap": 309.25, "urea": 178.75, "gas": 68.16}, {"d": "Jun-2017", "dap": 310.3, "urea": 191.0, "gas": 64.96}, {"d": "Jul-2017", "dap": 313.75, "urea": 181.0, "gas": 65.75}, {"d": "Aug-2017", "dap": 320.75, "urea": 192.63, "gas": 67.0}, {"d": "Sep-2017", "dap": 325.9, "urea": 219.0, "gas": 70.17}, {"d": "Oct-2017", "dap": 322.38, "urea": 252.5, "gas": 69.77}, {"d": "Nov-2017", "dap": 344.0, "urea": 280.0, "gas": 73.88}, {"d": "Dec-2017", "dap": 357.25, "urea": 214.63, "gas": 73.29}, {"d": "Jan-2018", "dap": 360.38, "urea": 219.63, "gas": 84.82}, {"d": "Feb-2018", "dap": 370.0, "urea": 232.5, "gas": 71.03}, {"d": "Mar-2018", "dap": 378.0, "urea": 232.5, "gas": 71.46}, {"d": "Apr-2018", "dap": 384.75, "urea": 230.63, "gas": 73.52}, {"d": "May-2018", "dap": 384.38, "urea": 221.88, "gas": 76.51}, {"d": "Jun-2018", "dap": 391.6, "urea": 224.0, "gas": 78.34}, {"d": "Jul-2018", "dap": 400.75, "urea": 252.5, "gas": 77.5}, {"d": "Aug-2018", "dap": 409.0, "urea": 260.0, "gas": 81.71}, {"d": "Sep-2018", "dap": 421.63, "urea": 267.5, "gas": 89.17}, {"d": "Oct-2018", "dap": 420.75, "urea": 270.0, "gas": 89.57}, {"d": "Nov-2018", "dap": 410.2, "urea": 305.6, "gas": 97.36}, {"d": "Dec-2018", "dap": 389.67, "urea": 276.67, "gas": 94.41}, {"d": "Jan-2019", "dap": 382.13, "urea": 260.0, "gas": 80.06}, {"d": "Feb-2019", "dap": 357.38, "urea": 250.63, "gas": 69.55}, {"d": "Mar-2019", "dap": 335.03, "urea": 247.5, "gas": 67.91}, {"d": "Apr-2019", "dap": 323.75, "urea": 247.5, "gas": 62.49}, {"d": "May-2019", "dap": 313.4, "urea": 247.5, "gas": 59.42}, {"d": "Jun-2019", "dap": 314.88, "urea": 247.5, "gas": 52.96}, {"d": "Jul-2019", "dap": 307.5, "urea": 263.5, "gas": 52.73}, {"d": "Aug-2019", "dap": 292.9, "urea": 262.5, "gas": 51.85}, {"d": "Sep-2019", "dap": 285.75, "urea": 237.75, "gas": 58.19}, {"d": "Oct-2019", "dap": 277.38, "urea": 237.0, "gas": 59.12}, {"d": "Nov-2019", "dap": 248.0, "urea": 224.5, "gas": 63.47}, {"d": "Dec-2019", "dap": 238.16, "urea": 217.5, "gas": 56.01}, {"d": "Jan-2020", "dap": 264.9, "urea": 215.4, "gas": 48.63}, {"d": "Feb-2020", "dap": 279.38, "urea": 214.38, "gas": 43.79}, {"d": "Mar-2020", "dap": 276.22, "urea": 231.13, "gas": 41.61}, {"d": "Apr-2020", "dap": 282.0, "urea": 235.0, "gas": 37.97}, {"d": "May-2020", "dap": 263.0, "urea": 201.9, "gas": 35.6}, {"d": "Jun-2020", "dap": 273.0, "urea": 202.0, "gas": 33.99}, {"d": "Jul-2020", "dap": 305.1, "urea": 214.4, "gas": 34.91}, {"d": "Aug-2020", "dap": 341.88, "urea": 249.5, "gas": 45.85}, {"d": "Sep-2020", "dap": 358.38, "urea": 250.5, "gas": 46.07}, {"d": "Oct-2020", "dap": 357.1, "urea": 245.0, "gas": 54.72}, {"d": "Nov-2020", "dap": 359.63, "urea": 245.0, "gas": 59.06}, {"d": "Dec-2020", "dap": 388.5, "urea": 245.0, "gas": 63.86}, {"d": "Jan-2021", "dap": 421.3, "urea": 265.0, "gas": 73.02}, {"d": "Feb-2021", "dap": 528.88, "urea": 335.0, "gas": 97.48}, {"d": "Mar-2021", "dap": 534.13, "urea": 352.88, "gas": 65.62}, {"d": "Apr-2021", "dap": 543.4, "urea": 328.1, "gas": 71.28}, {"d": "May-2021", "dap": 574.63, "urea": 331.63, "gas": 83.47}, {"d": "Jun-2021", "dap": 604.75, "urea": 393.25, "gas": 94.73}, {"d": "Jul-2021", "dap": 613.0, "urea": 441.5, "gas": 112.68}, {"d": "Aug-2021", "dap": 603.13, "urea": 446.88, "gas": 129.82}, {"d": "Sep-2021", "dap": 643.75, "urea": 418.75, "gas": 178.4}, {"d": "Oct-2021", "dap": 672.9, "urea": 695.0, "gas": 222.53}, {"d": "Nov-2021", "dap": 726.69, "urea": 900.5, "gas": 202.59}, {"d": "Dec-2021", "dap": 745.0, "urea": 890.0, "gas": 236.49}, {"d": "Jan-2022", "dap": 699.38, "urea": 846.38, "gas": 196.91}, {"d": "Feb-2022", "dap": 747.13, "urea": 744.17, "gas": 197.52}, {"d": "Mar-2022", "dap": 938.13, "urea": 872.5, "gas": 271.08}, {"d": "Apr-2022", "dap": 954.0, "urea": 925.0, "gas": 243.44}, {"d": "May-2022", "dap": 842.5, "urea": 707.5, "gas": 248.79}, {"d": "Jun-2022", "dap": 783.75, "urea": 690.0, "gas": 263.24}, {"d": "Jul-2022", "dap": 784.0, "urea": 601.0, "gas": 344.93}, {"d": "Aug-2022", "dap": 749.38, "urea": 591.25, "gas": 454.04}, {"d": "Sep-2022", "dap": 752.0, "urea": 678.0, "gas": 391.32}, {"d": "Oct-2022", "dap": 725.0, "urea": 636.25, "gas": 268.55}, {"d": "Nov-2022", "dap": 665.63, "urea": 588.75, "gas": 247.18}, {"d": "Dec-2022", "dap": 625.0, "urea": 519.38, "gas": 252.12}, {"d": "Jan-2023", "dap": 631.0, "urea": 443.75, "gas": 149.38}, {"d": "Feb-2023", "dap": 612.5, "urea": 357.5, "gas": 120.04}, {"d": "Mar-2023", "dap": 606.0, "urea": 313.5, "gas": 104.51}, {"d": "Apr-2023", "dap": 637.0, "urea": 313.38, "gas": 100.25}, {"d": "May-2023", "dap": 510.0, "urea": 329.25, "gas": 83.22}, {"d": "Jun-2023", "dap": 454.55, "urea": 287.5, "gas": 84.31}, {"d": "Jul-2023", "dap": 458.75, "urea": 334.63, "gas": 85.19}, {"d": "Aug-2023", "dap": 528.75, "urea": 385.63, "gas": 93.09}, {"d": "Sep-2023", "dap": 527.9, "urea": 380.0, "gas": 95.23}, {"d": "Oct-2023", "dap": 534.75, "urea": 411.38, "gas": 114.1}, {"d": "Nov-2023", "dap": 535.63, "urea": 385.5, "gas": 110.37}, {"d": "Dec-2023", "dap": 563.75, "urea": 354.0, "gas": 95.17}, {"d": "Jan-2024", "dap": 596.25, "urea": 335.38, "gas": 93.79}, {"d": "Feb-2024", "dap": 583.81, "urea": 351.25, "gas": 68.88}, {"d": "Mar-2024", "dap": 617.5, "urea": 330.0, "gas": 67.81}, {"d": "Apr-2024", "dap": 545.0, "urea": 320.0, "gas": 70.63}, {"d": "May-2024", "dap": 522.0, "urea": 284.8, "gas": 82.25}, {"d": "Jun-2024", "dap": 543.0, "urea": 336.25, "gas": 90.4}, {"d": "Jul-2024", "dap": 539.4, "urea": 342.5, "gas": 82.85}, {"d": "Aug-2024", "dap": 546.0, "urea": 342.5, "gas": 92.02}, {"d": "Sep-2024", "dap": 554.75, "urea": 337.5, "gas": 92.14}, {"d": "Oct-2024", "dap": 573.44, "urea": 374.75, "gas": 96.73}, {"d": "Nov-2024", "dap": 574.5, "urea": 352.3, "gas": 100.45}, {"d": "Dec-2024", "dap": 568.33, "urea": 352.0, "gas": 111.15}, {"d": "Jan-2025", "dap": 582.7, "urea": 380.5, "gas": 128.43}, {"d": "Feb-2025", "dap": 603.75, "urea": 436.5, "gas": 132.86}, {"d": "Mar-2025", "dap": 615.13, "urea": 394.5, "gas": 121.55}, {"d": "Apr-2025", "dap": 635.0, "urea": 386.88, "gas": 104.98}, {"d": "May-2025", "dap": 669.2, "urea": 392.0, "gas": 101.62}, {"d": "Jun-2025", "dap": 715.38, "urea": 420.5, "gas": 103.74}, {"d": "Jul-2025", "dap": 736.0, "urea": 496.0, "gas": 102.08}, {"d": "Aug-2025", "dap": 795.1, "urea": 507.7, "gas": 96.33}, {"d": "Sep-2025", "dap": 780.63, "urea": 461.13, "gas": 96.72}, {"d": "Oct-2025", "dap": 754.0, "urea": 394.4, "gas": 98.11}, {"d": "Nov-2025", "dap": 708.25, "urea": 409.25, "gas": 103.13}, {"d": "Dec-2025", "dap": 627.5, "urea": 392.5, "gas": 104.38}, {"d": "Jan-2026", "dap": 619.2, "urea": 415.4, "gas": 155.76}, {"d": "Feb-2026", "dap": 626.5, "urea": 472.0, "gas": 105.09}, {"d": "Mar-2026", "dap": 920.0, "urea": 664.0, "gas": 185.0}];
+const FO=[{"d": "1990-01", "food": 64.4, "oil": 21.0}, {"d": "1990-02", "food": 64.7, "oil": 19.9}, {"d": "1990-03", "food": 64.0, "oil": 18.5}, {"d": "1990-04", "food": 66.0, "oil": 16.8}, {"d": "1990-05", "food": 64.6, "oil": 16.7}, {"d": "1990-06", "food": 64.1, "oil": 15.7}, {"d": "1990-07", "food": 62.9, "oil": 17.6}, {"d": "1990-08", "food": 61.8, "oil": 27.1}, {"d": "1990-09", "food": 61.3, "oil": 34.1}, {"d": "1990-10", "food": 61.4, "oil": 36.1}, {"d": "1990-11", "food": 62.3, "oil": 33.0}, {"d": "1990-12", "food": 62.2, "oil": 28.0}, {"d": "1991-01", "food": 61.0, "oil": 23.7}, {"d": "1991-02", "food": 61.8, "oil": 19.4}, {"d": "1991-03", "food": 62.3, "oil": 19.5}, {"d": "1991-04", "food": 61.0, "oil": 19.3}, {"d": "1991-05", "food": 60.8, "oil": 19.3}, {"d": "1991-06", "food": 61.3, "oil": 18.2}, {"d": "1991-07", "food": 62.2, "oil": 19.5}, {"d": "1991-08", "food": 61.8, "oil": 19.8}, {"d": "1991-09", "food": 62.4, "oil": 20.5}, {"d": "1991-10", "food": 64.5, "oil": 22.2}, {"d": "1991-11", "food": 64.6, "oil": 21.3}, {"d": "1991-12", "food": 64.3, "oil": 18.4}, {"d": "1992-01", "food": 65.1, "oil": 18.2}, {"d": "1992-02", "food": 65.9, "oil": 18.1}, {"d": "1992-03", "food": 66.5, "oil": 17.6}, {"d": "1992-04", "food": 64.8, "oil": 19.0}, {"d": "1992-05", "food": 65.1, "oil": 19.9}, {"d": "1992-06", "food": 65.9, "oil": 21.2}, {"d": "1992-07", "food": 64.7, "oil": 20.3}, {"d": "1992-08", "food": 63.1, "oil": 19.8}, {"d": "1992-09", "food": 63.8, "oil": 20.3}, {"d": "1992-10", "food": 61.8, "oil": 20.3}, {"d": "1992-11", "food": 62.7, "oil": 19.2}, {"d": "1992-12", "food": 61.3, "oil": 18.2}, {"d": "1993-01", "food": 61.6, "oil": 17.4}, {"d": "1993-02", "food": 61.4, "oil": 18.5}, {"d": "1993-03", "food": 63.2, "oil": 18.8}, {"d": "1993-04", "food": 62.8, "oil": 18.7}, {"d": "1993-05", "food": 62.4, "oil": 18.5}, {"d": "1993-06", "food": 61.8, "oil": 17.7}, {"d": "1993-07", "food": 62.2, "oil": 16.8}, {"d": "1993-08", "food": 60.9, "oil": 16.7}, {"d": "1993-09", "food": 61.2, "oil": 16.0}, {"d": "1993-10", "food": 61.5, "oil": 16.6}, {"d": "1993-11", "food": 63.4, "oil": 15.2}, {"d": "1993-12", "food": 64.7, "oil": 13.6}, {"d": "1994-01", "food": 64.8, "oil": 14.3}, {"d": "1994-02", "food": 64.5, "oil": 13.8}, {"d": "1994-03", "food": 64.8, "oil": 14.0}, {"d": "1994-04", "food": 64.1, "oil": 15.2}, {"d": "1994-05", "food": 65.9, "oil": 16.2}, {"d": "1994-06", "food": 65.5, "oil": 16.8}, {"d": "1994-07", "food": 64.2, "oil": 17.6}, {"d": "1994-08", "food": 66.6, "oil": 16.8}, {"d": "1994-09", "food": 69.6, "oil": 15.9}, {"d": "1994-10", "food": 70.3, "oil": 16.4}, {"d": "1994-11", "food": 73.6, "oil": 17.2}, {"d": "1994-12", "food": 73.3, "oil": 16.0}, {"d": "1995-01", "food": 73.0, "oil": 16.6}, {"d": "1995-02", "food": 74.7, "oil": 17.1}, {"d": "1995-03", "food": 75.5, "oil": 17.0}, {"d": "1995-04", "food": 74.3, "oil": 18.7}, {"d": "1995-05", "food": 74.1, "oil": 18.4}, {"d": "1995-06", "food": 75.3, "oil": 17.4}, {"d": "1995-07", "food": 79.6, "oil": 15.9}, {"d": "1995-08", "food": 78.1, "oil": 16.1}, {"d": "1995-09", "food": 78.5, "oil": 16.8}, {"d": "1995-10", "food": 80.5, "oil": 16.1}, {"d": "1995-11", "food": 80.0, "oil": 16.9}, {"d": "1995-12", "food": 78.2, "oil": 18.0}, {"d": "1996-01", "food": 77.1, "oil": 17.9}, {"d": "1996-02", "food": 77.6, "oil": 18.0}, {"d": "1996-03", "food": 78.7, "oil": 20.0}, {"d": "1996-04", "food": 80.9, "oil": 21.0}, {"d": "1996-05", "food": 82.5, "oil": 19.1}, {"d": "1996-06", "food": 80.7, "oil": 18.3}, {"d": "1996-07", "food": 80.5, "oil": 19.6}, {"d": "1996-08", "food": 80.1, "oil": 20.6}, {"d": "1996-09", "food": 77.1, "oil": 22.6}, {"d": "1996-10", "food": 74.4, "oil": 24.2}, {"d": "1996-11", "food": 72.7, "oil": 22.6}, {"d": "1996-12", "food": 71.5, "oil": 23.9}, {"d": "1997-01", "food": 71.0, "oil": 23.5}, {"d": "1997-02", "food": 71.2, "oil": 20.8}, {"d": "1997-03", "food": 73.0, "oil": 19.2}, {"d": "1997-04", "food": 73.5, "oil": 17.5}, {"d": "1997-05", "food": 72.9, "oil": 19.1}, {"d": "1997-06", "food": 70.3, "oil": 17.6}, {"d": "1997-07", "food": 68.6, "oil": 18.4}, {"d": "1997-08", "food": 70.0, "oil": 18.7}, {"d": "1997-09", "food": 70.1, "oil": 18.5}, {"d": "1997-10", "food": 69.9, "oil": 19.9}, {"d": "1997-11", "food": 70.5, "oil": 19.0}, {"d": "1997-12", "food": 68.1, "oil": 17.0}, {"d": "1998-01", "food": 67.5, "oil": 15.1}, {"d": "1998-02", "food": 67.7, "oil": 14.1}, {"d": "1998-03", "food": 67.6, "oil": 13.1}, {"d": "1998-04", "food": 67.0, "oil": 13.4}, {"d": "1998-05", "food": 66.6, "oil": 14.4}, {"d": "1998-06", "food": 64.4, "oil": 12.1}, {"d": "1998-07", "food": 64.4, "oil": 12.0}, {"d": "1998-08", "food": 62.6, "oil": 11.9}, {"d": "1998-09", "food": 62.1, "oil": 13.4}, {"d": "1998-10", "food": 62.9, "oil": 12.6}, {"d": "1998-11", "food": 62.8, "oil": 10.9}, {"d": "1998-12", "food": 62.2, "oil": 9.8}, {"d": "1999-01", "food": 61.2, "oil": 11.1}, {"d": "1999-02", "food": 58.6, "oil": 10.2}, {"d": "1999-03", "food": 57.2, "oil": 12.5}, {"d": "1999-04", "food": 56.0, "oil": 15.3}, {"d": "1999-05", "food": 55.6, "oil": 15.1}, {"d": "1999-06", "food": 54.8, "oil": 15.8}, {"d": "1999-07", "food": 52.8, "oil": 19.0}, {"d": "1999-08", "food": 54.6, "oil": 20.2}, {"d": "1999-09", "food": 54.8, "oil": 22.4}, {"d": "1999-10", "food": 53.5, "oil": 22.0}, {"d": "1999-11", "food": 53.5, "oil": 24.6}, {"d": "1999-12", "food": 52.1, "oil": 25.6}, {"d": "2000-01", "food": 52.8, "oil": 25.4}, {"d": "2000-02", "food": 52.5, "oil": 27.7}, {"d": "2000-03", "food": 53.1, "oil": 27.5}, {"d": "2000-04", "food": 53.7, "oil": 22.5}, {"d": "2000-05", "food": 54.0, "oil": 27.3}, {"d": "2000-06", "food": 54.2, "oil": 29.7}, {"d": "2000-07", "food": 54.4, "oil": 28.5}, {"d": "2000-08", "food": 53.5, "oil": 29.4}, {"d": "2000-09", "food": 52.9, "oil": 32.6}, {"d": "2000-10", "food": 53.7, "oil": 30.9}, {"d": "2000-11", "food": 54.2, "oil": 32.5}, {"d": "2000-12", "food": 54.8, "oil": 25.1}, {"d": "2001-01", "food": 54.1, "oil": 25.6}, {"d": "2001-02", "food": 54.6, "oil": 27.4}, {"d": "2001-03", "food": 55.5, "oil": 24.4}, {"d": "2001-04", "food": 55.0, "oil": 25.6}, {"d": "2001-05", "food": 55.8, "oil": 28.5}, {"d": "2001-06", "food": 55.2, "oil": 27.7}, {"d": "2001-07", "food": 56.9, "oil": 24.5}, {"d": "2001-08", "food": 57.0, "oil": 25.7}, {"d": "2001-09", "food": 55.8, "oil": 25.5}, {"d": "2001-10", "food": 54.5, "oil": 20.5}, {"d": "2001-11", "food": 55.1, "oil": 18.9}, {"d": "2001-12", "food": 54.6, "oil": 18.6}, {"d": "2002-01", "food": 53.8, "oil": 19.5}, {"d": "2002-02", "food": 52.0, "oil": 20.3}, {"d": "2002-03", "food": 52.3, "oil": 23.7}, {"d": "2002-04", "food": 51.4, "oil": 25.7}, {"d": "2002-05", "food": 50.8, "oil": 25.4}, {"d": "2002-06", "food": 51.6, "oil": 24.1}, {"d": "2002-07", "food": 52.3, "oil": 25.8}, {"d": "2002-08", "food": 53.7, "oil": 26.6}, {"d": "2002-09", "food": 55.1, "oil": 28.3}, {"d": "2002-10", "food": 55.5, "oil": 27.5}, {"d": "2002-11", "food": 56.6, "oil": 24.2}, {"d": "2002-12", "food": 56.0, "oil": 28.5}, {"d": "2003-01", "food": 56.2, "oil": 31.2}, {"d": "2003-02", "food": 56.9, "oil": 32.6}, {"d": "2003-03", "food": 55.9, "oil": 30.3}, {"d": "2003-04", "food": 55.9, "oil": 25.0}, {"d": "2003-05", "food": 56.7, "oil": 25.8}, {"d": "2003-06", "food": 56.4, "oil": 27.5}, {"d": "2003-07", "food": 57.1, "oil": 28.4}, {"d": "2003-08", "food": 57.8, "oil": 29.8}, {"d": "2003-09", "food": 59.0, "oil": 27.1}, {"d": "2003-10", "food": 60.6, "oil": 29.6}, {"d": "2003-11", "food": 62.0, "oil": 28.8}, {"d": "2003-12", "food": 62.9, "oil": 29.9}, {"d": "2004-01", "food": 64.7, "oil": 31.2}, {"d": "2004-02", "food": 65.5, "oil": 30.9}, {"d": "2004-03", "food": 67.1, "oil": 33.8}, {"d": "2004-04", "food": 67.7, "oil": 33.4}, {"d": "2004-05", "food": 66.8, "oil": 37.9}, {"d": "2004-06", "food": 66.4, "oil": 35.2}, {"d": "2004-07", "food": 65.8, "oil": 38.4}, {"d": "2004-08", "food": 64.8, "oil": 43.0}, {"d": "2004-09", "food": 65.4, "oil": 43.4}, {"d": "2004-10", "food": 64.9, "oil": 49.8}, {"d": "2004-11", "food": 65.7, "oil": 43.1}, {"d": "2004-12", "food": 66.0, "oil": 39.6}, {"d": "2005-01", "food": 65.8, "oil": 44.3}, {"d": "2005-02", "food": 66.2, "oil": 45.6}, {"d": "2005-03", "food": 67.5, "oil": 53.1}, {"d": "2005-04", "food": 66.0, "oil": 51.9}, {"d": "2005-05", "food": 66.5, "oil": 48.7}, {"d": "2005-06", "food": 67.4, "oil": 54.3}, {"d": "2005-07", "food": 67.7, "oil": 57.6}, {"d": "2005-08", "food": 67.6, "oil": 64.1}, {"d": "2005-09", "food": 68.6, "oil": 63.0}, {"d": "2005-10", "food": 69.5, "oil": 58.5}, {"d": "2005-11", "food": 69.0, "oil": 55.5}, {"d": "2005-12", "food": 69.8, "oil": 56.7}, {"d": "2006-01", "food": 69.8, "oil": 63.6}, {"d": "2006-02", "food": 70.8, "oil": 59.9}, {"d": "2006-03", "food": 69.8, "oil": 62.3}, {"d": "2006-04", "food": 70.1, "oil": 70.4}, {"d": "2006-05", "food": 71.3, "oil": 70.2}, {"d": "2006-06", "food": 71.4, "oil": 68.9}, {"d": "2006-07", "food": 73.2, "oil": 73.9}, {"d": "2006-08", "food": 73.1, "oil": 73.6}, {"d": "2006-09", "food": 73.2, "oil": 62.8}, {"d": "2006-10", "food": 75.1, "oil": 58.4}, {"d": "2006-11", "food": 77.7, "oil": 58.5}, {"d": "2006-12", "food": 78.8, "oil": 62.3}, {"d": "2007-01", "food": 78.5, "oil": 54.3}, {"d": "2007-02", "food": 80.0, "oil": 57.8}, {"d": "2007-03", "food": 81.1, "oil": 62.1}, {"d": "2007-04", "food": 83.9, "oil": 67.4}, {"d": "2007-05", "food": 86.5, "oil": 67.5}, {"d": "2007-06", "food": 91.4, "oil": 71.3}, {"d": "2007-07", "food": 95.5, "oil": 77.2}, {"d": "2007-08", "food": 99.1, "oil": 70.8}, {"d": "2007-09", "food": 105.3, "oil": 77.1}, {"d": "2007-10", "food": 107.9, "oil": 82.9}, {"d": "2007-11", "food": 110.8, "oil": 92.5}, {"d": "2007-12", "food": 114.7, "oil": 91.5}, {"d": "2008-01", "food": 120.4, "oil": 91.9}, {"d": "2008-02", "food": 128.4, "oil": 94.8}, {"d": "2008-03", "food": 132.4, "oil": 103.3}, {"d": "2008-04", "food": 130.7, "oil": 110.2}, {"d": "2008-05", "food": 130.3, "oil": 123.9}, {"d": "2008-06", "food": 132.7, "oil": 133.0}, {"d": "2008-07", "food": 130.2, "oil": 133.9}, {"d": "2008-08", "food": 121.2, "oil": 113.8}, {"d": "2008-09", "food": 112.8, "oil": 99.1}, {"d": "2008-10", "food": 97.8, "oil": 72.8}, {"d": "2008-11", "food": 89.7, "oil": 53.2}, {"d": "2008-12", "food": 86.3, "oil": 41.6}, {"d": "2009-01", "food": 86.7, "oil": 44.9}, {"d": "2009-02", "food": 84.5, "oil": 43.2}, {"d": "2009-03", "food": 84.3, "oil": 46.8}, {"d": "2009-04", "food": 87.4, "oil": 50.8}, {"d": "2009-05", "food": 93.5, "oil": 57.9}, {"d": "2009-06", "food": 93.4, "oil": 68.6}, {"d": "2009-07", "food": 90.7, "oil": 64.9}, {"d": "2009-08", "food": 93.5, "oil": 72.5}, {"d": "2009-09", "food": 93.1, "oil": 67.7}, {"d": "2009-10", "food": 94.8, "oil": 73.2}, {"d": "2009-11", "food": 98.9, "oil": 77.0}, {"d": "2009-12", "food": 100.8, "oil": 74.7}, {"d": "2010-01", "food": 101.8, "oil": 76.4}, {"d": "2010-02", "food": 99.3, "oil": 74.3}, {"d": "2010-03", "food": 96.5, "oil": 79.3}, {"d": "2010-04", "food": 97.1, "oil": 85.0}, {"d": "2010-05", "food": 96.4, "oil": 76.3}, {"d": "2010-06", "food": 95.9, "oil": 74.8}, {"d": "2010-07", "food": 100.0, "oil": 74.7}, {"d": "2010-08", "food": 107.8, "oil": 76.7}, {"d": "2010-09", "food": 114.1, "oil": 77.8}, {"d": "2010-10", "food": 120.1, "oil": 82.9}, {"d": "2010-11", "food": 124.2, "oil": 85.7}, {"d": "2010-12", "food": 129.4, "oil": 91.8}, {"d": "2011-01", "food": 133.8, "oil": 96.3}, {"d": "2011-02", "food": 137.7, "oil": 104.0}, {"d": "2011-03", "food": 134.3, "oil": 114.4}, {"d": "2011-04", "food": 136.3, "oil": 123.1}, {"d": "2011-05", "food": 135.1, "oil": 114.5}, {"d": "2011-06", "food": 134.8, "oil": 113.8}, {"d": "2011-07", "food": 133.0, "oil": 116.5}, {"d": "2011-08", "food": 132.7, "oil": 110.1}, {"d": "2011-09", "food": 130.1, "oil": 110.9}, {"d": "2011-10", "food": 125.6, "oil": 109.5}, {"d": "2011-11", "food": 125.9, "oil": 110.5}, {"d": "2011-12", "food": 121.9, "oil": 107.9}, {"d": "2012-01", "food": 122.2, "oil": 111.2}, {"d": "2012-02", "food": 125.3, "oil": 119.7}, {"d": "2012-03", "food": 125.7, "oil": 124.9}, {"d": "2012-04", "food": 124.4, "oil": 120.5}, {"d": "2012-05", "food": 119.0, "oil": 110.5}, {"d": "2012-06", "food": 115.8, "oil": 95.6}, {"d": "2012-07", "food": 122.0, "oil": 103.1}, {"d": "2012-08", "food": 123.2, "oil": 113.3}, {"d": "2012-09", "food": 125.1, "oil": 113.4}, {"d": "2012-10", "food": 124.0, "oil": 112.0}, {"d": "2012-11", "food": 123.5, "oil": 109.7}, {"d": "2012-12", "food": 122.8, "oil": 109.7}, {"d": "2013-01", "food": 123.4, "oil": 113.0}, {"d": "2013-02", "food": 123.3, "oil": 116.5}, {"d": "2013-03", "food": 122.9, "oil": 109.2}, {"d": "2013-04", "food": 122.9, "oil": 102.9}, {"d": "2013-05", "food": 122.2, "oil": 103.0}, {"d": "2013-06", "food": 120.9, "oil": 103.1}, {"d": "2013-07", "food": 118.0, "oil": 107.7}, {"d": "2013-08", "food": 116.2, "oil": 111.0}, {"d": "2013-09", "food": 116.4, "oil": 111.6}, {"d": "2013-10", "food": 118.7, "oil": 109.5}, {"d": "2013-11", "food": 118.6, "oil": 108.1}, {"d": "2013-12", "food": 118.2, "oil": 110.7}, {"d": "2014-01", "food": 116.2, "oil": 107.4}, {"d": "2014-02", "food": 118.6, "oil": 108.8}, {"d": "2014-03", "food": 122.1, "oil": 107.4}, {"d": "2014-04", "food": 121.5, "oil": 107.8}, {"d": "2014-05", "food": 121.2, "oil": 109.7}, {"d": "2014-06", "food": 119.2, "oil": 111.9}, {"d": "2014-07", "food": 116.3, "oil": 107.0}, {"d": "2014-08", "food": 112.8, "oil": 101.9}, {"d": "2014-09", "food": 109.2, "oil": 97.3}, {"d": "2014-10", "food": 109.3, "oil": 87.3}, {"d": "2014-11", "food": 108.1, "oil": 78.4}, {"d": "2014-12", "food": 105.2, "oil": 62.3}, {"d": "2015-01", "food": 101.0, "oil": 48.1}, {"d": "2015-02", "food": 98.7, "oil": 57.9}, {"d": "2015-03", "food": 95.7, "oil": 55.8}, {"d": "2015-04", "food": 94.6, "oil": 59.4}, {"d": "2015-05", "food": 95.0, "oil": 64.6}, {"d": "2015-06", "food": 94.6, "oil": 62.3}, {"d": "2015-07", "food": 93.8, "oil": 55.9}, {"d": "2015-08", "food": 89.5, "oil": 47.0}, {"d": "2015-09", "food": 88.9, "oil": 47.2}, {"d": "2015-10", "food": 90.3, "oil": 48.1}, {"d": "2015-11", "food": 87.7, "oil": 44.4}, {"d": "2015-12", "food": 87.0, "oil": 37.7}, {"d": "2016-01", "food": 84.9, "oil": 30.8}, {"d": "2016-02", "food": 86.1, "oil": 33.2}, {"d": "2016-03", "food": 87.4, "oil": 39.1}, {"d": "2016-04", "food": 89.1, "oil": 42.3}, {"d": "2016-05", "food": 90.6, "oil": 47.1}, {"d": "2016-06", "food": 93.8, "oil": 48.5}, {"d": "2016-07", "food": 93.0, "oil": 45.1}, {"d": "2016-08", "food": 95.3, "oil": 46.1}, {"d": "2016-09", "food": 96.1, "oil": 46.2}, {"d": "2016-10", "food": 95.9, "oil": 49.7}, {"d": "2016-11", "food": 96.0, "oil": 46.4}, {"d": "2016-12", "food": 95.3, "oil": 54.1}, {"d": "2017-01", "food": 97.8, "oil": 54.9}, {"d": "2017-02", "food": 98.1, "oil": 55.5}, {"d": "2017-03", "food": 96.2, "oil": 52.0}, {"d": "2017-04", "food": 95.0, "oil": 53.0}, {"d": "2017-05", "food": 97.3, "oil": 50.9}, {"d": "2017-06", "food": 97.8, "oil": 46.9}, {"d": "2017-07", "food": 100.0, "oil": 48.7}, {"d": "2017-08", "food": 99.2, "oil": 51.4}, {"d": "2017-09", "food": 99.7, "oil": 55.2}, {"d": "2017-10", "food": 98.8, "oil": 57.6}, {"d": "2017-11", "food": 98.8, "oil": 62.6}, {"d": "2017-12", "food": 96.4, "oil": 64.2}, {"d": "2018-01", "food": 96.7, "oil": 69.0}, {"d": "2018-02", "food": 97.8, "oil": 65.4}, {"d": "2018-03", "food": 98.8, "oil": 66.5}, {"d": "2018-04", "food": 98.4, "oil": 71.6}, {"d": "2018-05", "food": 98.5, "oil": 76.7}, {"d": "2018-06", "food": 96.8, "oil": 75.2}, {"d": "2018-07", "food": 95.0, "oil": 74.4}, {"d": "2018-08", "food": 95.8, "oil": 73.1}, {"d": "2018-09", "food": 94.0, "oil": 78.9}, {"d": "2018-10", "food": 93.2, "oil": 80.5}, {"d": "2018-11", "food": 91.9, "oil": 65.2}, {"d": "2018-12", "food": 92.0, "oil": 56.5}, {"d": "2019-01", "food": 93.1, "oil": 59.3}, {"d": "2019-02", "food": 93.8, "oil": 64.1}, {"d": "2019-03", "food": 93.0, "oil": 66.4}, {"d": "2019-04", "food": 93.5, "oil": 71.2}, {"d": "2019-05", "food": 94.2, "oil": 70.5}, {"d": "2019-06", "food": 95.4, "oil": 63.3}, {"d": "2019-07", "food": 95.1, "oil": 64.0}, {"d": "2019-08", "food": 93.8, "oil": 59.3}, {"d": "2019-09", "food": 93.2, "oil": 62.3}, {"d": "2019-10", "food": 95.0, "oil": 59.4}, {"d": "2019-11", "food": 98.2, "oil": 62.7}, {"d": "2019-12", "food": 100.8, "oil": 65.9}, {"d": "2020-01", "food": 102.5, "oil": 63.6}, {"d": "2020-02", "food": 99.6, "oil": 55.0}, {"d": "2020-03", "food": 95.2, "oil": 33.0}, {"d": "2020-04", "food": 92.4, "oil": 23.3}, {"d": "2020-05", "food": 91.2, "oil": 31.0}, {"d": "2020-06", "food": 93.1, "oil": 39.9}, {"d": "2020-07", "food": 93.8, "oil": 42.8}, {"d": "2020-08", "food": 95.7, "oil": 44.3}, {"d": "2020-09", "food": 97.9, "oil": 41.1}, {"d": "2020-10", "food": 101.3, "oil": 40.5}, {"d": "2020-11", "food": 105.5, "oil": 43.2}, {"d": "2020-12", "food": 108.5, "oil": 49.9}, {"d": "2021-01", "food": 113.5, "oil": 54.6}, {"d": "2021-02", "food": 116.5, "oil": 62.0}, {"d": "2021-03", "food": 119.1, "oil": 65.2}, {"d": "2021-04", "food": 122.1, "oil": 64.8}, {"d": "2021-05", "food": 128.4, "oil": 68.0}, {"d": "2021-06", "food": 125.4, "oil": 73.1}, {"d": "2021-07", "food": 124.4, "oil": 74.4}, {"d": "2021-08", "food": 128.0, "oil": 70.0}, {"d": "2021-09", "food": 129.1, "oil": 74.6}, {"d": "2021-10", "food": 133.3, "oil": 83.7}, {"d": "2021-11", "food": 135.4, "oil": 80.8}, {"d": "2021-12", "food": 133.7, "oil": 74.3}, {"d": "2022-01", "food": 135.7, "oil": 85.5}, {"d": "2022-02", "food": 141.7, "oil": 95.8}, {"d": "2022-03", "food": 160.2, "oil": 115.6}, {"d": "2022-04", "food": 158.8, "oil": 105.8}, {"d": "2022-05", "food": 158.7, "oil": 112.4}, {"d": "2022-06", "food": 155.7, "oil": 120.1}, {"d": "2022-07", "food": 141.6, "oil": 108.9}, {"d": "2022-08", "food": 138.7, "oil": 98.6}, {"d": "2022-09", "food": 137.3, "oil": 90.2}, {"d": "2022-10", "food": 136.7, "oil": 93.1}, {"d": "2022-11", "food": 136.0, "oil": 91.1}, {"d": "2022-12", "food": 133.1, "oil": 80.9}, {"d": "2023-01", "food": 131.4, "oil": 83.1}, {"d": "2023-02", "food": 130.7, "oil": 82.7}, {"d": "2023-03", "food": 128.0, "oil": 78.5}, {"d": "2023-04", "food": 128.4, "oil": 84.1}, {"d": "2023-05", "food": 124.5, "oil": 75.7}, {"d": "2023-06", "food": 123.0, "oil": 74.9}, {"d": "2023-07", "food": 124.4, "oil": 80.1}, {"d": "2023-08", "food": 121.8, "oil": 86.2}, {"d": "2023-09", "food": 121.7, "oil": 94.0}, {"d": "2023-10", "food": 120.7, "oil": 91.1}, {"d": "2023-11", "food": 120.6, "oil": 83.2}, {"d": "2023-12", "food": 119.1, "oil": 77.9}, {"d": "2024-01", "food": 117.6, "oil": 80.2}, {"d": "2024-02", "food": 117.4, "oil": 83.8}, {"d": "2024-03", "food": 118.9, "oil": 85.4}, {"d": "2024-04", "food": 119.2, "oil": 90.1}, {"d": "2024-05", "food": 120.5, "oil": 82.0}, {"d": "2024-06", "food": 121.0, "oil": 82.6}, {"d": "2024-07", "food": 120.9, "oil": 85.3}, {"d": "2024-08", "food": 121.7, "oil": 80.9}, {"d": "2024-09", "food": 124.6, "oil": 74.3}, {"d": "2024-10", "food": 126.9, "oil": 75.7}, {"d": "2024-11", "food": 127.7, "oil": 74.4}, {"d": "2024-12", "food": 127.3, "oil": 73.8}, {"d": "2025-01", "food": 124.7, "oil": 79.2}, {"d": "2025-02", "food": 126.6, "oil": 75.2}, {"d": "2025-03", "food": 127.2, "oil": 72.6}, {"d": "2025-04", "food": 128.2, "oil": 67.7}, {"d": "2025-05", "food": 127.1, "oil": 64.2}, {"d": "2025-06", "food": 128.1, "oil": 71.5}, {"d": "2025-07", "food": 129.8, "oil": 71.0}, {"d": "2025-08", "food": 130.0, "oil": 68.2}, {"d": "2025-09", "food": 128.6, "oil": 68.0}, {"d": "2025-10", "food": 126.4, "oil": 64.7}, {"d": "2025-11", "food": 125.2, "oil": 63.6}, {"d": "2025-12", "food": 124.5, "oil": 62.7}, {"d": "2026-01", "food": 124.2, "oil": 66.8}, {"d": "2026-02", "food": 125.3, "oil": 71.1}];
+const HZ=[{"d": "01-Feb-26", "n": 120}, {"d": "02-Feb-26", "n": 124}, {"d": "03-Feb-26", "n": 129}, {"d": "04-Feb-26", "n": 111}, {"d": "05-Feb-26", "n": 137}, {"d": "06-Feb-26", "n": 129}, {"d": "07-Feb-26", "n": 124}, {"d": "08-Feb-26", "n": 113}, {"d": "09-Feb-26", "n": 116}, {"d": "10-Feb-26", "n": 132}, {"d": "11-Feb-26", "n": 127}, {"d": "12-Feb-26", "n": 149}, {"d": "13-Feb-26", "n": 138}, {"d": "14-Feb-26", "n": 130}, {"d": "15-Feb-26", "n": 118}, {"d": "16-Feb-26", "n": 138}, {"d": "17-Feb-26", "n": 125}, {"d": "18-Feb-26", "n": 151}, {"d": "19-Feb-26", "n": 137}, {"d": "20-Feb-26", "n": 121}, {"d": "21-Feb-26", "n": 117}, {"d": "22-Feb-26", "n": 151}, {"d": "23-Feb-26", "n": 120}, {"d": "24-Feb-26", "n": 135}, {"d": "25-Feb-26", "n": 138}, {"d": "26-Feb-26", "n": 128}, {"d": "27-Feb-26", "n": 141}, {"d": "28-Feb-26", "n": 81}, {"d": "01-Mar-26", "n": 20}, {"d": "02-Mar-26", "n": 10}, {"d": "03-Mar-26", "n": 3}, {"d": "04-Mar-26", "n": 6}, {"d": "05-Mar-26", "n": 5}, {"d": "06-Mar-26", "n": 5}, {"d": "07-Mar-26", "n": 4}];
+
+// ── Colors ──────────────────────────────────────────────
+const C={red:'#b83232',blue:'#1a4a7a',amber:'#c47d0e',grn:'#1a6040',teal:'#0a5050',
+  lred:'rgba(184,50,50,.12)',lamb:'rgba(196,125,14,.12)',
+  ltbl:'rgba(26,74,122,.12)',ltgrn:'rgba(26,96,64,.1)'};
+
+// ── Crisis Zone Plugin ───────────────────────────────────
+const czP={id:'cz',beforeDraw(chart,a,opts){
+  if(!opts||!opts.zones) return;
+  const{ctx,chartArea:ca,scales}=chart; if(!ca) return;
+  ctx.save();
+  (opts.zones||[]).forEach(z=>{
+    if(!z) return;
+    const x0=scales.x.getPixelForValue(z.i0),x1=scales.x.getPixelForValue(z.i1);
+    if(isNaN(x0)||isNaN(x1)) return;
+    ctx.fillStyle=z.col||'rgba(184,50,50,.09)';
+    ctx.fillRect(x0,ca.top,x1-x0,ca.height);
+    if(z.label){
+      ctx.fillStyle=z.lc||C.red;
+      ctx.font="bold 8.5px 'DM Sans',Arial";
+      ctx.fillText(z.label,x0+4,ca.top+12);
+    }
+  });
+  ctx.restore();
+}};
+Chart.register(czP);
+
+// ── Common options factory ───────────────────────────────
+// Use a factory function instead of spread to avoid shallow-merge issues
+function mkOpts(overrides){
+  return {
+    responsive:true,
+    maintainAspectRatio:false,
+    animation:{duration:700},
+    plugins:{
+      legend:{position:'bottom',labels:{font:{size:9,family:"'DM Sans',sans-serif"},boxWidth:10,padding:8}},
+      tooltip:{mode:'index',intersect:false},
+      cz:undefined,
+      ...((overrides&&overrides.plugins)||{})
+    },
+    scales:{
+      x:{ticks:{maxTicksLimit:12,font:{size:8}},grid:{display:false},
+         ...((overrides&&overrides.scaleX)||{})},
+      y:{ticks:{font:{size:8}},grid:{color:'rgba(0,0,0,.05)'},
+         ...((overrides&&overrides.scaleY)||{})},
+      ...((overrides&&overrides.extraScales)||{})
+    }
+  };
+}
+
+// Helper: set canvas height explicitly
+function setH(id,h){
+  const c=document.getElementById(id);
+  if(c){c.style.height=h+'px';c.parentElement.style.height=h+'px';}
+  return c;
+}
+
+// ── 1. Production vs Demand ──────────────────────────────
+;(function(){
+const el=setH('pdChart',220);
+const pd=[
+  {y:'2010-11',d:291,p:219},{y:'2011-12',d:304,p:220},{y:'2012-13',d:315,p:226},
+  {y:'2013-14',d:317,p:227},{y:'2016-17',d:289,p:null},{y:'2017-18',d:298,p:null},
+  {y:'2018-19',d:300,p:null},{y:'2019-20',d:335,p:null},{y:'2020-21',d:351,p:null},
+  {y:'2021-22',d:357,p:251},{y:'2022-23',d:359,p:285},{y:'2023-24',d:356,p:314},{y:'2024-25',d:364,p:307}
+];
+new Chart(el,{type:'bar',
+  data:{labels:pd.map(d=>d.y),datasets:[
+    {label:'Demand (LMT)',data:pd.map(d=>d.d),backgroundColor:'rgba(26,74,122,.7)',borderRadius:3},
+    {label:'Production (LMT)',data:pd.map(d=>d.p),backgroundColor:'rgba(26,96,64,.7)',borderRadius:3},
+    {label:'Import Gap (LMT)',data:pd.map(d=>d.p?d.d-d.p:null),type:'line',
+      borderColor:C.red,backgroundColor:'transparent',pointRadius:4,pointBackgroundColor:C.red,
+      tension:.3,borderWidth:2.5,borderDash:[5,3]},
+  ]},
+  options:mkOpts({scaleX:{ticks:{maxTicksLimit:13,font:{size:7.5}}}})
+});
+})();
+
+// ── 2. P&K Consumption ──────────────────────────────────
+;(function(){
+const el=setH('pkChart',200);
+new Chart(el,{type:'line',
+  data:{labels:['2020-21','2021-22','2022-23','2023-24','2024-25'],datasets:[
+    {label:'DAP',data:[119.18,92.64,105.31,109.73,96.29],borderColor:'#1a4a7a',backgroundColor:'rgba(26,74,122,.08)',fill:true,tension:.35,pointRadius:5,borderWidth:2.5},
+    {label:'MOP',data:[34.32,23.93,16.32,16.45,22.02],borderColor:C.amber,backgroundColor:C.lamb,fill:false,tension:.35,pointRadius:5,borderWidth:2.5},
+    {label:'NPKS',data:[125.82,121.37,107.31,116.80,149.72],borderColor:C.grn,backgroundColor:C.ltgrn,fill:true,tension:.35,pointRadius:5,borderWidth:2.5},
+    {label:'SSP',data:[44.89,56.76,50.18,45.44,49.28],borderColor:C.teal,backgroundColor:'rgba(10,80,80,.07)',fill:false,tension:.35,pointRadius:5,borderWidth:2},
+  ]},
+  options:mkOpts({scaleX:{ticks:{font:{size:9}}},scaleY:{title:{display:true,text:'LMT',font:{size:8}}}})
+});
+})();
+
+// ── 3. Subsidy Trend (2018-19 to 2024-25) ────────────────
+;(function(){
+const el=setH('subChart',230);
+// Subsidy actuals from Parliamentary Reply (Feb 2024, LS, Min. Khuba) + PIB 27 Mar 2026 + Budget 2026-27 sbe6.pdf
+const sub=[
+  {y:'2018-19',s:73435,u:230},
+  {y:'2019-20',s:83467,u:240},
+  {y:'2020-21',s:131230,u:230},
+  {y:'2021-22',s:157641,u:390},
+  {y:'2022-23',s:254799,u:700},
+  {y:'2023-24',s:195421,u:358},
+  {y:'2024-25',s:177130,u:338}
+];
+new Chart(el,{type:'bar',
+  data:{labels:sub.map(d=>d.y),datasets:[
+    {label:'Total Subsidy (₹ Crore)',data:sub.map(d=>d.s),
+      backgroundColor:sub.map(d=>d.s>200000?'rgba(184,50,50,.85)':d.s>100000?'rgba(196,125,14,.75)':'rgba(26,74,122,.65)'),
+      borderRadius:4,order:2},
+    {label:'World Urea Price ($/t, RHS)',data:sub.map(d=>d.u),type:'line',
+      borderColor:C.amber,backgroundColor:'transparent',pointBackgroundColor:C.amber,
+      pointRadius:4,tension:.35,borderWidth:2.5,order:1,yAxisID:'y2'},
+  ]},
+  options:mkOpts({
+    scaleX:{ticks:{maxTicksLimit:14,font:{size:7.5}}},
+    scaleY:{title:{display:true,text:'₹ Crore',font:{size:8}}},
+    extraScales:{y2:{position:'right',title:{display:true,text:'Urea $/t',font:{size:8}},
+      ticks:{font:{size:8}},grid:{drawOnChartArea:false}}}
+  })
+});
+})();
+
+// ── 4. Hormuz ────────────────────────────────────────────
+;(function(){
+const el=setH('hChart',210);
+new Chart(el,{type:'bar',
+  data:{labels:HZ.map(d=>d.d),datasets:[{
+    label:'Daily ship transits',
+    data:HZ.map(d=>d.n),
+    backgroundColor:HZ.map(d=>d.n>80?'rgba(26,74,122,.7)':d.n>15?'rgba(196,125,14,.85)':'rgba(184,50,50,.9)'),
+    borderRadius:3
+  }]},
+  options:mkOpts({
+    plugins:{legend:{display:false},cz:{zones:[{i0:27,i1:34,label:'Collapse →',col:'rgba(184,50,50,.12)',lc:C.red}]}},
+    scaleX:{ticks:{maxTicksLimit:18,font:{size:7}}},
+    scaleY:{max:170,title:{display:true,text:'Ships/day',font:{size:8}}}
+  })
+});
+})();
+
+// ── 5. Fertilizer Prices 2018–2026 ──────────────────────
+;(function(){
+const el=setH('fpChart',230);
+const FR=FA.filter(d=>{
+  const m={Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};
+  const[mo,yr]=d.d.split('-'); return parseInt(yr)>=2018;
+});
+const fi22=FR.findIndex(d=>d.d==='Feb-2022');
+const fi26=FR.findIndex(d=>d.d==='Mar-2026');
+const fi20=FR.findIndex(d=>d.d==='Mar-2020');
+new Chart(el,{type:'line',
+  data:{labels:FR.map(d=>d.d),datasets:[
+    {label:'DAP ($/t)',data:FR.map(d=>d.dap),borderColor:'#1a4a7a',backgroundColor:'rgba(26,74,122,.07)',fill:true,tension:.35,pointRadius:0,borderWidth:2.5},
+    {label:'Urea ($/t)',data:FR.map(d=>d.urea),borderColor:C.amber,backgroundColor:C.lamb,fill:false,tension:.35,pointRadius:0,borderWidth:2.5},
+    {label:'India MRP ~$70/t (frozen since 2018)',data:FR.map(()=>70),borderColor:'rgba(26,96,64,.8)',backgroundColor:'transparent',borderDash:[7,4],borderWidth:2,pointRadius:0},
+  ]},
+  options:mkOpts({
+    plugins:{cz:{zones:[
+      fi20>0?{i0:fi20-1,i1:fi20+4,label:'COVID 2020',col:'rgba(196,125,14,.08)',lc:C.amber}:null,
+      fi22>0?{i0:fi22-1,i1:fi22+8,label:'Russia-Ukraine 2022',col:'rgba(184,50,50,.1)',lc:C.red}:null,
+      fi26>0?{i0:fi26-1,i1:fi26+1,label:'Hormuz 2026 ✚',col:'rgba(184,50,50,.2)',lc:C.red}:null,
+    ].filter(Boolean)}},
+    scaleX:{ticks:{maxTicksLimit:14,font:{size:8}}},
+    scaleY:{title:{display:true,text:'USD/tonne',font:{size:8}}}
+  })
+});
+})();
+
+// ── 6. Gas–Fertilizer 35-Year ────────────────────────────
+;(function(){
+const el=setH('gfChart',180);
+const fa3=FA.filter((_,i)=>i%3===0);
+const gc22=fa3.findIndex(d=>d.d==='Feb-2022');
+const gc26=fa3.findIndex(d=>d.d==='Mar-2026');
+const gc08=fa3.findIndex(d=>d.d==='Aug-2008');
+const gc20=fa3.findIndex(d=>d.d==='Mar-2020');
+new Chart(el,{type:'line',
+  data:{labels:fa3.map(d=>d.d),datasets:[
+    {label:'DAP ($/t)',data:fa3.map(d=>d.dap),borderColor:'#1a4a7a',backgroundColor:'rgba(26,74,122,.06)',fill:true,tension:.35,pointRadius:0,borderWidth:2},
+    {label:'Urea ($/t)',data:fa3.map(d=>d.urea),borderColor:C.amber,backgroundColor:'transparent',fill:false,tension:.35,pointRadius:0,borderWidth:2.5},
+    {label:'Gas Index 2010=100 (RHS)',data:fa3.map(d=>d.gas),borderColor:'#2E75B6',backgroundColor:'rgba(46,117,182,.1)',fill:true,tension:.3,pointRadius:0,borderWidth:1.5,borderDash:[5,3],yAxisID:'y2'},
+  ]},
+  options:mkOpts({
+    plugins:{cz:{zones:[
+      gc08>0?{i0:gc08-2,i1:gc08+5,label:'2007-08 ME tensions',col:'rgba(196,125,14,.07)',lc:C.amber}:null,
+      gc20>0?{i0:gc20-1,i1:gc20+3,label:'COVID 2020',col:'rgba(46,117,182,.07)',lc:'#1a4a7a'}:null,
+      gc22>0?{i0:gc22-1,i1:gc22+5,label:'Russia-Ukraine 2022',col:'rgba(184,50,50,.1)',lc:C.red}:null,
+      gc26>0?{i0:gc26-1,i1:gc26+1,label:'Hormuz 2026 ✚',col:'rgba(184,50,50,.18)',lc:C.red}:null,
+    ].filter(Boolean)}},
+    scaleX:{ticks:{maxTicksLimit:12,font:{size:8}}},
+    scaleY:{title:{display:true,text:'USD/tonne',font:{size:8}}},
+    extraScales:{y2:{position:'right',title:{display:true,text:'Gas Index',font:{size:8}},ticks:{font:{size:8}},grid:{drawOnChartArea:false}}}
+  })
+});
+})();
+
+// ── 7. State Urea ────────────────────────────────────────
+;(function(){
+const el=setH('stUChart',280);
+const stU=[
+  {s:'Uttar Pradesh',v:79.18,e:false},{s:'Madhya Pradesh',v:38.09,e:false},
+  {s:'Punjab',v:32.56,e:false},{s:'Rajasthan',v:26.40,e:false},{s:'Maharashtra',v:26.41,e:false},
+  {s:'Bihar ★',v:25.60,e:true},{s:'Gujarat',v:24.23,e:false},{s:'Haryana',v:22.65,e:false},
+  {s:'Telangana',v:20.08,e:false},{s:'West Bengal ★',v:15.77,e:true}
+];
+new Chart(el,{type:'bar',
+  data:{labels:stU.map(d=>d.s),datasets:[{
+    label:'Urea Consumption (LMT)',
+    data:stU.map(d=>d.v),
+    backgroundColor:stU.map(d=>d.e?'rgba(26,96,64,.8)':'rgba(26,74,122,.7)'),
+    borderRadius:4
+  }]},
+  options:{
+    indexAxis:'y',
+    responsive:true,
+    maintainAspectRatio:false,
+    animation:{duration:700},
+    plugins:{
+      legend:{display:false},
+      tooltip:{mode:'index',intersect:false}
+    },
+    scales:{
+      x:{title:{display:true,text:'LMT',font:{size:8}},ticks:{font:{size:8}},grid:{color:'rgba(0,0,0,.05)'}},
+      y:{ticks:{font:{size:8.5}},grid:{display:false}}
+    }
+  }
+});
+})();
+
+// ── 8. State NPK Trend ───────────────────────────────────
+;(function(){
+const el=setH('stNChart',280);
+const npkSt=[
+  {s:'UP',v:[3842,4261,5173,5629,5169,5256,5340,5564]},
+  {s:'Maharashtra',v:[2785,2806,2941,3414,3136,2823,2919,3274]},
+  {s:'MP',v:[1901,1982,2683,2894,2652,2805,3054,3203]},
+  {s:'Karnataka',v:[1641,1628,1861,2223,2192,2059,1945,2325]},
+  {s:'Bihar ★',v:[1261,1509,1821,1911,1614,1636,1767,1928]},
+];
+const cols2=['rgba(26,74,122,.85)','rgba(184,50,50,.8)','rgba(196,125,14,.8)','rgba(26,96,64,.85)','rgba(10,80,80,.85)'];
+new Chart(el,{type:'line',
+  data:{
+    labels:['2013-14','2016-17','2019-20','2020-21','2021-22','2022-23','2023-24','2024-25'],
+    datasets:npkSt.map((st,i)=>({label:st.s,data:st.v,borderColor:cols2[i],backgroundColor:'transparent',tension:.35,pointRadius:4,borderWidth:2.5}))
+  },
+  options:mkOpts({
+    scaleY:{title:{display:true,text:"'000 Tonnes",font:{size:8}}}
+  })
+});
+})();
+
+// ── 9. NPK Stacked 100% ──────────────────────────────────
+;(function(){
+const el=setH('npkChart',260);
+const npkR=[
+  {n:4,p:2,k:1},{n:5.9,p:2.4,k:1},{n:4,p:3.2,k:1},{n:8,p:3,k:1},
+  {n:7.7,p:3.1,k:1},{n:12.8,p:5.1,k:1},{n:10.9,p:4.9,k:1},{n:9.8,p:3.7,k:1}
+];
+const toP=r=>{const t=r.n+r.p+r.k;return{n:+(r.n/t*100).toFixed(1),p:+(r.p/t*100).toFixed(1),k:+(r.k/t*100).toFixed(1)}};
+const npkP=npkR.map(toP);
+new Chart(el,{type:'bar',
+  data:{
+    labels:['Recommended 4:2:1','1991-92','2009-10 (Best)','2015-16','2021-22','Kharif 2022 EXTREME','2023-24','Kharif 2024'],
+    datasets:[
+      {label:'N (Nitrogen) %',data:npkP.map(r=>r.n),backgroundColor:'rgba(26,74,122,.75)',borderRadius:0},
+      {label:'P (Phosphate) %',data:npkP.map(r=>r.p),backgroundColor:'rgba(196,125,14,.75)',borderRadius:0},
+      {label:'K (Potash) %',data:npkP.map(r=>r.k),backgroundColor:'rgba(26,96,64,.75)',borderRadius:0},
+    ]
+  },
+  options:{
+    responsive:true,
+    maintainAspectRatio:false,
+    animation:{duration:700},
+    plugins:{
+      legend:{position:'bottom',labels:{font:{size:9},boxWidth:10,padding:8}},
+      tooltip:{mode:'index',intersect:false}
+    },
+    scales:{
+      x:{stacked:true,ticks:{font:{size:8}},grid:{display:false}},
+      y:{stacked:true,max:100,
+        title:{display:true,text:'% share of total nutrients applied',font:{size:8}},
+        ticks:{font:{size:8}},grid:{color:'rgba(0,0,0,.05)'}}
+    }
+  }
+});
+})();
+
+// ── 10. Oil–Food 35-Year ─────────────────────────────────
+;(function(){
+const el=setH('ofChart',190);
+const fo2=FO.filter((_,i)=>i%2===0);
+const fo22=fo2.findIndex(d=>d.d>='2022-02');
+const fo20=fo2.findIndex(d=>d.d>='2020-03');
+const fo08=fo2.findIndex(d=>d.d>='2008-04');
+new Chart(el,{type:'line',
+  data:{labels:fo2.map(d=>d.d),datasets:[
+    {label:'FAO Food Price Index',data:fo2.map(d=>d.food),borderColor:C.amber,backgroundColor:C.lamb,fill:true,tension:.35,pointRadius:0,borderWidth:2},
+    {label:'Crude Oil (Brent $/bbl)',data:fo2.map(d=>d.oil),borderColor:'#2E75B6',backgroundColor:'rgba(46,117,182,.1)',fill:false,tension:.35,pointRadius:0,borderWidth:2}
+  ]},
+  options:mkOpts({
+    plugins:{cz:{zones:[
+      {i0:28,i1:50,label:'2003-08 ME tensions',col:'rgba(196,125,14,.06)',lc:C.amber},
+      fo08>0?{i0:fo08-1,i1:fo08+5,label:'GFC 2008',col:'rgba(46,117,182,.07)',lc:'#1a4a7a'}:null,
+      fo20>0?{i0:fo20-1,i1:fo20+4,label:'COVID-19 2020',col:'rgba(46,117,182,.07)',lc:'#1a4a7a'}:null,
+      fo22>0?{i0:fo22-1,i1:fo22+7,label:'Russia-Ukraine 2022',col:'rgba(184,50,50,.1)',lc:C.red}:null,
+    ].filter(Boolean)}},
+    scaleX:{ticks:{maxTicksLimit:12,font:{size:8}}},
+    scaleY:{title:{display:true,text:'Index / $/bbl',font:{size:8}}}
+  })
+});
+})();
+
+// ── 11. Import Bill ──────────────────────────────────────
+;(function(){
+const el=setH('impChart',220);
+const impY=['2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'];
+const impV=[6.2,5.8,7.1,4.9,4.8,6.5,6.3,7.1,9.2,17.1,10.9,8.3];
+new Chart(el,{type:'bar',
+  data:{labels:impY,datasets:[{
+    label:'Fertilizer Import Value (USD Billion)',
+    data:impV,
+    backgroundColor:impV.map((v,i)=>i===9?'rgba(184,50,50,.85)':i>=10?'rgba(196,125,14,.6)':'rgba(26,74,122,.65)'),
+    borderRadius:4
+  }]},
+  options:mkOpts({
+    plugins:{legend:{display:false}},
+    scaleX:{ticks:{font:{size:9}}},
+    scaleY:{title:{display:true,text:'USD Billion',font:{size:8}},max:20}
+  })
+});
+})();
+
+// ── 12. CGE Scenario Comparison ──────────────────────────
+;(function(){
+const el=setH('scChart',260);
+new Chart(el,{type:'bar',
+  data:{
+    labels:['S1: Baseline\n2015-19','S2: Russia-Ukraine\n2022-23','S3: Pre-Crisis\n2025','S4: Hormuz Crisis\nMar 2026'],
+    datasets:[
+      {label:'Urea ($/t)',data:[200,700,435,664],backgroundColor:['rgba(26,74,122,.8)','rgba(184,50,50,.9)','rgba(196,125,14,.8)','rgba(120,0,0,.95)'],borderRadius:4},
+      {label:'DAP ($/t)',data:[350,772,692,920],backgroundColor:['rgba(26,74,122,.45)','rgba(184,50,50,.5)','rgba(196,125,14,.45)','rgba(120,0,0,.55)'],borderRadius:4},
+      {label:'MOP ($/t)',data:[300,863,337,428],backgroundColor:['rgba(26,74,122,.25)','rgba(184,50,50,.3)','rgba(196,125,14,.25)','rgba(120,0,0,.3)'],borderRadius:4},
+    ]
+  },
+  options:mkOpts({
+    scaleY:{title:{display:true,text:'USD/tonne',font:{size:8}}}
+  })
+});
+})();
+
+// ── Fix indexAxis for horizontal bar ─────────────────────
+// Patch: Chart.js indexAxis must be in the root options, not plugins
+(function patchHBar(){
+  const charts=Chart.instances;
+  Object.values(charts).forEach(ch=>{
+    if(ch.canvas&&ch.canvas.id==='stUChart'){
+      // already set via indexAxis in options — no patch needed if Chart.js 4.x handles it
+    }
+  });
+})();
+</script>
+</body>
+</html>
